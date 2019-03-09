@@ -31,7 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libRNSpotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSpotify.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libRNSpotifyRemote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSpotifyRemote.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2592D73B223391B100AE6186 /* RNSpotifyRemoteLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteLib.h; sourceTree = "<group>"; };
 		A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyConvert.m; sourceTree = "<group>"; };
 		A00A83BD1FB5188A00394AF0 /* RNSpotifyConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSpotifyConvert.h; sourceTree = "<group>"; };
 		A0C233702036800A0063A745 /* RNSpotifyCompletion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyCompletion.h; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		D67AF676216EC15000859404 /* RNSpotifyItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyItem.h; sourceTree = "<group>"; };
 		D67AF677216F9D7D00859404 /* NSArrayExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayExtensions.h; sourceTree = "<group>"; };
 		D67AF678216F9D8C00859404 /* NSArrayExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSArrayExtensions.m; sourceTree = "<group>"; };
-		D6B12178218A54670017FD2F /* RNSpotify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotify.h; sourceTree = "<group>"; };
 		D6F24B822165372200D58B82 /* RNSpotifyRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemote.h; sourceTree = "<group>"; };
 		D6F24B832165372500D58B82 /* RNSpotifyRemote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemote.m; sourceTree = "<group>"; };
 		D6F24BC221665F4A00D58B82 /* RNSpotifyError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyError.m; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libRNSpotify.a */,
+				134814201AA4EA6300B7C361 /* libRNSpotifyRemote.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,7 +76,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				D6B12178218A54670017FD2F /* RNSpotify.h */,
+				2592D73B223391B100AE6186 /* RNSpotifyRemoteLib.h */,
 				D67AF678216F9D8C00859404 /* NSArrayExtensions.m */,
 				D67AF677216F9D7D00859404 /* NSArrayExtensions.h */,
 				D64EA981218375B0001B053B /* RNSpotifyAuth.h */,
@@ -110,9 +110,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* RNSpotify */ = {
+		58B511DA1A9E6C8500147676 /* RNSpotifyRemote */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNSpotify" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNSpotifyRemote" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -122,9 +122,9 @@
 			);
 			dependencies = (
 			);
-			name = RNSpotify;
+			name = RNSpotifyRemote;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libRNSpotify.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRNSpotifyRemote.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* RNSpotify */,
+				58B511DA1A9E6C8500147676 /* RNSpotifyRemote */,
 			);
 		};
 /* End PBXProject section */
@@ -295,7 +295,7 @@
 					"$(PROJECT_DIR)/external/SpotifySDK/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNSpotify;
+				PRODUCT_NAME = RNSpotifyRemote;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -321,7 +321,7 @@
 					"$(PROJECT_DIR)/external/SpotifySDK/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNSpotify;
+				PRODUCT_NAME = RNSpotifyRemote;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -338,7 +338,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNSpotify" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNSpotifyRemote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
