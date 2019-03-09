@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_native_1 = require("react-native");
 var react_native_events_1 = __importDefault(require("react-native-events"));
 // Remote module
-var SpotifyRemote = react_native_1.NativeModules.RNSpotifyRemote;
+var SpotifyRemote = react_native_1.NativeModules.RNSpotifyRemoteAppRemote;
 react_native_events_1.default.register(SpotifyRemote);
 react_native_events_1.default.conform(SpotifyRemote);
 // Example of Javascript only api method

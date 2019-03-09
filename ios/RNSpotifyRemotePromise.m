@@ -1,25 +1,25 @@
 //
-//  RNSpotifyCompletion.m
+//  RNSpotifyRemotePromise.m
 //  RNSpotify
 //
 //  Created by Luis Finke on 2/15/18.
 //  Copyright © 2018 Facebook. All rights reserved.
 //
 
-#import "RNSpotifyCompletion.h"
+#import "RNSpotifyRemotePromise.h"
 
-@interface RNSpotifyCompletion()
+@interface RNSpotifyRemotePromise()
 {
     BOOL _responded;
     void(^_resolver)(id);
-    void(^_rejector)(RNSpotifyError*);
-    void(^_completion)(id, RNSpotifyError*);
+    void(^_rejector)(RNSpotifyRemoteError*);
+    void(^_completion)(id, RNSpotifyRemoteError*);
 }
 @end
 
-@implementation RNSpotifyCompletion
+@implementation RNSpotifyRemotePromise
 
--(id)initWithOnResolve:(void(^)(id))resolver onReject:(void(^)(RNSpotifyError*))rejector
+-(id)initWithOnResolve:(void(^)(id))resolver onReject:(void(^)(RNSpotifyRemoteError*))rejector
 {
     if(self = [super init])
     {
@@ -31,7 +31,7 @@
     return self;
 }
 
--(id)initWithOnComplete:(void(^)(id,RNSpotifyError*))completion
+-(id)initWithOnComplete:(void(^)(id,RNSpotifyRemoteError*))completion
 {
     if(self = [super init])
     {
@@ -60,7 +60,7 @@
     }
 }
 
--(void)reject:(RNSpotifyError*)error
+-(void)reject:(RNSpotifyRemoteError*)error
 {
     if(_responded)
     {
@@ -77,38 +77,38 @@
     }
 }
 
-+(RNSpotifyCompletion*)onResolve:(void(^)(id))onResolve onReject:(void(^)(RNSpotifyError*))onReject
++(RNSpotifyRemotePromise*)onResolve:(void(^)(id))onResolve onReject:(void(^)(RNSpotifyRemoteError*))onReject
 {
     return [[self alloc] initWithOnResolve:onResolve onReject:onReject];
 }
 
-+(RNSpotifyCompletion*)onReject:(void(^)(RNSpotifyError*))onReject onResolve:(void(^)(id))onResolve
++(RNSpotifyRemotePromise*)onReject:(void(^)(RNSpotifyRemoteError*))onReject onResolve:(void(^)(id))onResolve
 {
     return [[self alloc] initWithOnResolve:onResolve onReject:onReject];
 }
 
-+(RNSpotifyCompletion*)onComplete:(void(^)(id,RNSpotifyError*))onComplete
++(RNSpotifyRemotePromise*)onComplete:(void(^)(id,RNSpotifyRemoteError*))onComplete
 {
     return [[self alloc] initWithOnComplete:onComplete];
 }
 
-+ (NSArray<RNSpotifyCompletion*>*)popCompletionCallbacks:(NSMutableArray<RNSpotifyCompletion*>*)callbackArray{
-    NSArray<RNSpotifyCompletion*>* callbacks = [NSArray arrayWithArray:callbackArray];
++ (NSArray<RNSpotifyRemotePromise*>*)popCompletionCallbacks:(NSMutableArray<RNSpotifyRemotePromise*>*)callbackArray{
+    NSArray<RNSpotifyRemotePromise*>* callbacks = [NSArray arrayWithArray:callbackArray];
     [callbackArray removeAllObjects];
     return callbacks;
 }
 
-+ (void)rejectCompletions:(NSMutableArray<RNSpotifyCompletion*>*)callbacks error:(RNSpotifyError*) error{
-    NSArray<RNSpotifyCompletion*>* completions = [RNSpotifyCompletion popCompletionCallbacks:callbacks];
-    for(RNSpotifyCompletion* completion in completions)
++ (void)rejectCompletions:(NSMutableArray<RNSpotifyRemotePromise*>*)callbacks error:(RNSpotifyRemoteError*) error{
+    NSArray<RNSpotifyRemotePromise*>* completions = [RNSpotifyRemotePromise popCompletionCallbacks:callbacks];
+    for(RNSpotifyRemotePromise* completion in completions)
     {
         [completion reject:error];
     }
 }
 
-+ (void)resolveCompletions:(NSMutableArray<RNSpotifyCompletion*>*)callbacks result:(id) result{
-    NSArray<RNSpotifyCompletion*>* completions = [RNSpotifyCompletion popCompletionCallbacks:callbacks];
-    for(RNSpotifyCompletion* completion in completions)
++ (void)resolveCompletions:(NSMutableArray<RNSpotifyRemotePromise*>*)callbacks result:(id) result{
+    NSArray<RNSpotifyRemotePromise*>* completions = [RNSpotifyRemotePromise popCompletionCallbacks:callbacks];
+    for(RNSpotifyRemotePromise* completion in completions)
     {
         [completion resolve:result];
     }

@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D64EA9822183767C001B053B /* RNSpotifyAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D64EA980218375B0001B053B /* RNSpotifyAuth.m */; };
+		D64EA9822183767C001B053B /* RNSpotifyRemoteAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */; };
 		D658F0DF2164059C004649AB /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D658F0DE2164059C004649AB /* SpotifyiOS.framework */; };
 		D67AF66E216D18E900859404 /* RNSpotifyConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */; };
-		D67AF673216E725000859404 /* RNSpotifySubscriptionCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF672216E725000859404 /* RNSpotifySubscriptionCallback.m */; };
+		D67AF673216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */; };
 		D67AF675216EC14700859404 /* RNSpotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF674216EC14700859404 /* RNSpotifyItem.m */; };
 		D67AF679216F9D8C00859404 /* NSArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF678216F9D8C00859404 /* NSArrayExtensions.m */; };
-		D6F24B8421653FAC00D58B82 /* RNSpotifyRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F24B832165372500D58B82 /* RNSpotifyRemote.m */; };
-		D6F24BC421665F4A00D58B82 /* RNSpotifyError.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F24BC221665F4A00D58B82 /* RNSpotifyError.m */; };
-		D6F24BD5216685B000D58B82 /* RNSpotifyCompletion.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C233712036800A0063A745 /* RNSpotifyCompletion.m */; };
+		D6F24B8421653FAC00D58B82 /* RNSpotifyRemoteAppRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F24B832165372500D58B82 /* RNSpotifyRemoteAppRemote.m */; };
+		D6F24BC421665F4A00D58B82 /* RNSpotifyRemoteError.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F24BC221665F4A00D58B82 /* RNSpotifyRemoteError.m */; };
+		D6F24BD5216685B000D58B82 /* RNSpotifyRemotePromise.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,24 +32,24 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNSpotifyRemote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSpotifyRemote.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2592D73B223391B100AE6186 /* RNSpotifyRemoteLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteLib.h; sourceTree = "<group>"; };
+		2592D73B223391B100AE6186 /* RNSpotifyRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemote.h; sourceTree = "<group>"; };
 		A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyConvert.m; sourceTree = "<group>"; };
 		A00A83BD1FB5188A00394AF0 /* RNSpotifyConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSpotifyConvert.h; sourceTree = "<group>"; };
-		A0C233702036800A0063A745 /* RNSpotifyCompletion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyCompletion.h; sourceTree = "<group>"; };
-		A0C233712036800A0063A745 /* RNSpotifyCompletion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyCompletion.m; sourceTree = "<group>"; };
-		D64EA980218375B0001B053B /* RNSpotifyAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyAuth.m; sourceTree = "<group>"; };
-		D64EA981218375B0001B053B /* RNSpotifyAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyAuth.h; sourceTree = "<group>"; };
+		A0C233702036800A0063A745 /* RNSpotifyRemotePromise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemotePromise.h; sourceTree = "<group>"; };
+		A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemotePromise.m; sourceTree = "<group>"; };
+		D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteAuth.m; sourceTree = "<group>"; };
+		D64EA981218375B0001B053B /* RNSpotifyRemoteAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteAuth.h; sourceTree = "<group>"; };
 		D658F0DE2164059C004649AB /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = external/SpotifySDK/SpotifyiOS.framework; sourceTree = "<group>"; };
-		D67AF671216E722E00859404 /* RNSpotifySubscriptionCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifySubscriptionCallback.h; sourceTree = "<group>"; };
-		D67AF672216E725000859404 /* RNSpotifySubscriptionCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifySubscriptionCallback.m; sourceTree = "<group>"; };
+		D67AF671216E722E00859404 /* RNSpotifyRemoteSubscriptionCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteSubscriptionCallback.h; sourceTree = "<group>"; };
+		D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteSubscriptionCallback.m; sourceTree = "<group>"; };
 		D67AF674216EC14700859404 /* RNSpotifyItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyItem.m; sourceTree = "<group>"; };
 		D67AF676216EC15000859404 /* RNSpotifyItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyItem.h; sourceTree = "<group>"; };
 		D67AF677216F9D7D00859404 /* NSArrayExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayExtensions.h; sourceTree = "<group>"; };
 		D67AF678216F9D8C00859404 /* NSArrayExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSArrayExtensions.m; sourceTree = "<group>"; };
-		D6F24B822165372200D58B82 /* RNSpotifyRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemote.h; sourceTree = "<group>"; };
-		D6F24B832165372500D58B82 /* RNSpotifyRemote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemote.m; sourceTree = "<group>"; };
-		D6F24BC221665F4A00D58B82 /* RNSpotifyError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyError.m; sourceTree = "<group>"; };
-		D6F24BC321665F4A00D58B82 /* RNSpotifyError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyError.h; sourceTree = "<group>"; };
+		D6F24B822165372200D58B82 /* RNSpotifyRemoteAppRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteAppRemote.h; sourceTree = "<group>"; };
+		D6F24B832165372500D58B82 /* RNSpotifyRemoteAppRemote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteAppRemote.m; sourceTree = "<group>"; };
+		D6F24BC221665F4A00D58B82 /* RNSpotifyRemoteError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteError.m; sourceTree = "<group>"; };
+		D6F24BC321665F4A00D58B82 /* RNSpotifyRemoteError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteError.h; sourceTree = "<group>"; };
 		D6F24BD621689F1F00D58B82 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,22 +76,22 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				2592D73B223391B100AE6186 /* RNSpotifyRemoteLib.h */,
+				2592D73B223391B100AE6186 /* RNSpotifyRemote.h */,
 				D67AF678216F9D8C00859404 /* NSArrayExtensions.m */,
 				D67AF677216F9D7D00859404 /* NSArrayExtensions.h */,
-				D64EA981218375B0001B053B /* RNSpotifyAuth.h */,
-				D64EA980218375B0001B053B /* RNSpotifyAuth.m */,
+				D64EA981218375B0001B053B /* RNSpotifyRemoteAuth.h */,
+				D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */,
 				D67AF676216EC15000859404 /* RNSpotifyItem.h */,
 				D67AF674216EC14700859404 /* RNSpotifyItem.m */,
-				D67AF671216E722E00859404 /* RNSpotifySubscriptionCallback.h */,
-				D67AF672216E725000859404 /* RNSpotifySubscriptionCallback.m */,
+				D67AF671216E722E00859404 /* RNSpotifyRemoteSubscriptionCallback.h */,
+				D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */,
 				D6F24BD621689F1F00D58B82 /* Macros.h */,
-				D6F24B822165372200D58B82 /* RNSpotifyRemote.h */,
-				D6F24B832165372500D58B82 /* RNSpotifyRemote.m */,
-				D6F24BC321665F4A00D58B82 /* RNSpotifyError.h */,
-				D6F24BC221665F4A00D58B82 /* RNSpotifyError.m */,
-				A0C233702036800A0063A745 /* RNSpotifyCompletion.h */,
-				A0C233712036800A0063A745 /* RNSpotifyCompletion.m */,
+				D6F24B822165372200D58B82 /* RNSpotifyRemoteAppRemote.h */,
+				D6F24B832165372500D58B82 /* RNSpotifyRemoteAppRemote.m */,
+				D6F24BC321665F4A00D58B82 /* RNSpotifyRemoteError.h */,
+				D6F24BC221665F4A00D58B82 /* RNSpotifyRemoteError.m */,
+				A0C233702036800A0063A745 /* RNSpotifyRemotePromise.h */,
+				A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */,
 				A00A83BD1FB5188A00394AF0 /* RNSpotifyConvert.h */,
 				A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */,
 				A0A434191FAE254F0073DAB9 /* Frameworks */,
@@ -164,11 +164,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D67AF66E216D18E900859404 /* RNSpotifyConvert.m in Sources */,
-				D6F24BD5216685B000D58B82 /* RNSpotifyCompletion.m in Sources */,
-				D64EA9822183767C001B053B /* RNSpotifyAuth.m in Sources */,
-				D6F24B8421653FAC00D58B82 /* RNSpotifyRemote.m in Sources */,
-				D6F24BC421665F4A00D58B82 /* RNSpotifyError.m in Sources */,
-				D67AF673216E725000859404 /* RNSpotifySubscriptionCallback.m in Sources */,
+				D6F24BD5216685B000D58B82 /* RNSpotifyRemotePromise.m in Sources */,
+				D64EA9822183767C001B053B /* RNSpotifyRemoteAuth.m in Sources */,
+				D6F24B8421653FAC00D58B82 /* RNSpotifyRemoteAppRemote.m in Sources */,
+				D6F24BC421665F4A00D58B82 /* RNSpotifyRemoteError.m in Sources */,
+				D67AF673216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m in Sources */,
 				D67AF679216F9D8C00859404 /* NSArrayExtensions.m in Sources */,
 				D67AF675216EC14700859404 /* RNSpotifyItem.m in Sources */,
 			);
@@ -225,6 +225,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = RNSpotifyRemote;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -269,6 +270,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RNSpotifyRemote;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

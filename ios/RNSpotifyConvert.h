@@ -4,12 +4,12 @@
 //#import <SpotifyMetadata/SpotifyMetadata.h>
 //#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import <SpotifyiOS.h>
-#import "RNSpotifyError.h"
+#import "RNSpotifyRemoteError.h"
 
 @interface RNSpotifyConvert : NSObject
 
 +(id)ID:(id)obj;
-+(id)RNSpotifyError:(RNSpotifyError*)error;
++(id)RNSpotifyError:(RNSpotifyRemoteError*)error;
 +(id)NSError:(NSError*)error;
 +(id)SPTAppRemotePlayerState:(NSObject<SPTAppRemotePlayerState>*) state;
 +(id)SPTAppRemotePlaybackRestrictions:(NSObject<SPTAppRemotePlaybackRestrictions>*) restrictions;

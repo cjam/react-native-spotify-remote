@@ -2,14 +2,14 @@
 //  RNSubscriptionCallback.m
 //  RNSpotify
 //
-//  Created by Rough Draft on 2018-10-10.
+//  Created by Colter McQuay on 2018-10-10.
 //  Copyright © 2018 Facebook. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "./RNSpotifySubscriptionCallback.h"
+#import "./RNSpotifyRemoteSubscriptionCallback.h"
 
-@interface RNSpotifySubscriptionCallback()
+@interface RNSpotifyRemoteSubscriptionCallback()
 {
     BOOL _isSubscribed;
     void(^_subscriber)(void);
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation RNSpotifySubscriptionCallback
+@implementation RNSpotifyRemoteSubscriptionCallback
 
 - (id)initWithCallbacks:(void (^)(void))subscriber unsubscriber:(void (^)(void))unsubscriber{
     if(self = [super init])
@@ -44,11 +44,11 @@
     }
 }
 
-+(RNSpotifySubscriptionCallback*)subscriber:(void(^)(void))subscriber unsubscriber:(void(^)(void))unsubscriber{
++(RNSpotifyRemoteSubscriptionCallback*)subscriber:(void(^)(void))subscriber unsubscriber:(void(^)(void))unsubscriber{
     return [[self alloc] initWithCallbacks:subscriber unsubscriber:unsubscriber];
 }
 
-+(RNSpotifySubscriptionCallback*)unsubscriber:(void(^)(void))unsubscriber subscriber:(void(^)(void))subscriber{
++(RNSpotifyRemoteSubscriptionCallback*)unsubscriber:(void(^)(void))unsubscriber subscriber:(void(^)(void))subscriber{
     return [[self alloc] initWithCallbacks:subscriber unsubscriber:unsubscriber];
 }
 

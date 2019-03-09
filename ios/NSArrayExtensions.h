@@ -2,7 +2,7 @@
 //  NSArrayExtensions.h
 //  RNSpotify
 //
-//  Created by Rough Draft on 2018-10-11.
+//  Created by Colter McQuay on 2018-10-11.
 //  Copyright © 2018 Facebook. All rights reserved.
 //
 

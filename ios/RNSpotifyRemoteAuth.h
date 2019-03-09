@@ -5,9 +5,9 @@
 #else
 #import <React/RCTBridgeModule.h>
 #endif
-#import "RNSpotifyCompletion.h"
+#import "RNSpotifyRemotePromise.h"
 
-@interface RNSpotifyAuth : NSObject<RCTBridgeModule>
+@interface RNSpotifyRemoteAuth : NSObject<RCTBridgeModule>
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options;
 

@@ -1,7 +1,9 @@
 
-# Spotify for React Native
+# Spotify App Remote for React Native
 
-A react native module for the Spotify SDK
+A react native module for the Spotify Remote SDK
+
+>## Currently Only Implemented for iOS
 
 ## Contributing / Opening Issues
 

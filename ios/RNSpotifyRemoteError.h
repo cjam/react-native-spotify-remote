@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RNSpotifyErrorCode : NSObject
+@interface RNSpotifyRemoteErrorCode : NSObject
 
 @property (readonly) NSString* name;
 @property (readonly) NSString* code;
@@ -16,7 +16,7 @@
 @property (readonly) NSDictionary* reactObject;
 
 #define DECLARE_SPOTIFY_ERROR_CODE(errorName) \
-    @property (class, readonly) RNSpotifyErrorCode* errorName;
+    @property (class, readonly) RNSpotifyRemoteErrorCode* errorName;
 
 DECLARE_SPOTIFY_ERROR_CODE(IsInitializing)
 DECLARE_SPOTIFY_ERROR_CODE(AlreadyInitialized)
@@ -39,18 +39,18 @@ DECLARE_SPOTIFY_ERROR_CODE(InvalidParameter)
 
 
 
-@interface RNSpotifyError : NSObject
+@interface RNSpotifyRemoteError : NSObject
 
 -(id)initWithCode:(NSString*)code message:(NSString*)message;
 -(id)initWithCode:(NSString*)code error:(NSError*)error;
--(id)initWithCodeObj:(RNSpotifyErrorCode*)code;
--(id)initWithCodeObj:(RNSpotifyErrorCode*)code message:(NSString*)message;
+-(id)initWithCodeObj:(RNSpotifyRemoteErrorCode*)code;
+-(id)initWithCodeObj:(RNSpotifyRemoteErrorCode*)code message:(NSString*)message;
 -(id)initWithNSError:(NSError*)error;
 
 +(instancetype)errorWithCode:(NSString*)code message:(NSString*)message;
 +(instancetype)errorWithCode:(NSString*)code error:(NSError*)error;
-+(instancetype)errorWithCodeObj:(RNSpotifyErrorCode*)code;
-+(instancetype)errorWithCodeObj:(RNSpotifyErrorCode*)code message:(NSString*)message;
++(instancetype)errorWithCodeObj:(RNSpotifyRemoteErrorCode*)code;
++(instancetype)errorWithCodeObj:(RNSpotifyRemoteErrorCode*)code message:(NSString*)message;
 +(instancetype)errorWithNSError:(NSError*)error;
 
 -(void)reject:(void(^)(NSString*,NSString*,NSError*))promiseRejector;
@@ -59,9 +59,9 @@ DECLARE_SPOTIFY_ERROR_CODE(InvalidParameter)
 @property (readonly) NSString* message;
 @property (readonly) NSDictionary* reactObject;
 
-+(RNSpotifyError*)nullParameterErrorForName:(NSString*)paramName;
-+(RNSpotifyError*)missingOptionErrorForName:(NSString*)optionName;
-+(RNSpotifyError*)httpErrorForStatusCode:(NSInteger)statusCode;
-+(RNSpotifyError*)httpErrorForStatusCode:(NSInteger)statusCode message:(NSString*)message;
++(RNSpotifyRemoteError*)nullParameterErrorForName:(NSString*)paramName;
++(RNSpotifyRemoteError*)missingOptionErrorForName:(NSString*)optionName;
++(RNSpotifyRemoteError*)httpErrorForStatusCode:(NSInteger)statusCode;
++(RNSpotifyRemoteError*)httpErrorForStatusCode:(NSInteger)statusCode message:(NSString*)message;
 
 @end

@@ -88,7 +88,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
 }
 
 // Remote module
-const SpotifyRemote = NativeModules.RNSpotifyRemote as SpotifyRemoteApi;
+const SpotifyRemote = NativeModules.RNSpotifyRemoteAppRemote as SpotifyRemoteApi;
 RNEvents.register(SpotifyRemote);
 RNEvents.conform(SpotifyRemote);
 

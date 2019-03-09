@@ -14,7 +14,7 @@
     return obj;
 }
 
-+(id)RNSpotifyError:(RNSpotifyError*)error
++(id)RNSpotifyError:(RNSpotifyRemoteError*)error
 {
     if(error==nil)
     {
@@ -29,7 +29,7 @@
     {
         return [NSNull null];
     }
-    return [self RNSpotifyError:[RNSpotifyError errorWithNSError:error]];
+    return [self RNSpotifyError:[RNSpotifyRemoteError errorWithNSError:error]];
 }
 
 +(id)SPTAppRemotePlayerState:(NSObject<SPTAppRemotePlayerState>*) state{

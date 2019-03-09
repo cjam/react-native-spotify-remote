@@ -3,27 +3,26 @@
 //  RNSpotify
 //
 //  Created by Luis Finke on 2/15/18.
-//  Copyright © 2018 Facebook. All rights reserved.
+//  Copyright © 2018. All rights reserved.
 //
 
-#import "RNSpotifyError.h"
+#import "RNSpotifyRemoteError.h"
 #import <SpotifyiOS.h>
-//#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 
 
-@interface RNSpotifyErrorCode()
+@interface RNSpotifyRemoteErrorCode()
 -(id)initWithName:(NSString*)name message:(NSString*)message;
 +(instancetype)codeWithName:(NSString*)name message:(NSString*)message;
 @end
 
-@implementation RNSpotifyErrorCode
+@implementation RNSpotifyRemoteErrorCode
 
 #define DEFINE_SPOTIFY_ERROR_CODE(errorName, messageStr) \
-    static RNSpotifyErrorCode* _RNSpotifyErrorCode##errorName = nil; \
-    +(RNSpotifyErrorCode*)errorName { \
-        if(_RNSpotifyErrorCode##errorName == nil) { \
-            _RNSpotifyErrorCode##errorName = [RNSpotifyErrorCode codeWithName:@#errorName message:messageStr]; } \
-        return _RNSpotifyErrorCode##errorName; } \
+    static RNSpotifyRemoteErrorCode* _RNSpotifyRemoteErrorCode##errorName = nil; \
+    +(RNSpotifyRemoteErrorCode*)errorName { \
+        if(_RNSpotifyRemoteErrorCode##errorName == nil) { \
+            _RNSpotifyRemoteErrorCode##errorName = [RNSpotifyRemoteErrorCode codeWithName:@#errorName message:messageStr]; } \
+        return _RNSpotifyRemoteErrorCode##errorName; } \
 
 DEFINE_SPOTIFY_ERROR_CODE(IsInitializing, @"Spotify connection is initializing")
 DEFINE_SPOTIFY_ERROR_CODE(AlreadyInitialized, @"Spotify has already been initialized")
@@ -77,7 +76,7 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
 
 
 
-@interface RNSpotifyError()
+@interface RNSpotifyRemoteError()
 {
     NSError* _error;
 }
@@ -85,7 +84,7 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
 +(NSString*)getSDKErrorCode:(SPTErrorCode)enumVal;
 @end
 
-@implementation RNSpotifyError
+@implementation RNSpotifyRemoteError
 
 @synthesize code = _code;
 @synthesize message = _message;
@@ -120,12 +119,12 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
     return self;
 }
 
--(id)initWithCodeObj:(RNSpotifyErrorCode*)code
+-(id)initWithCodeObj:(RNSpotifyRemoteErrorCode*)code
 {
     return [self initWithCodeObj:code message:code.message];
 }
 
--(id)initWithCodeObj:(RNSpotifyErrorCode*)code message:(NSString*)message
+-(id)initWithCodeObj:(RNSpotifyRemoteErrorCode*)code message:(NSString*)message
 {
     if(self = [super init])
     {
@@ -174,12 +173,12 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
     return [[self alloc] initWithCode:code error:error];
 }
 
-+(instancetype)errorWithCodeObj:(RNSpotifyErrorCode*)code
++(instancetype)errorWithCodeObj:(RNSpotifyRemoteErrorCode*)code
 {
     return [[self alloc] initWithCodeObj:code];
 }
 
-+(instancetype)errorWithCodeObj:(RNSpotifyErrorCode*)code message:(NSString*)message
++(instancetype)errorWithCodeObj:(RNSpotifyRemoteErrorCode*)code message:(NSString*)message
 {
     return [[self alloc] initWithCodeObj:code message:message];
 }
@@ -199,36 +198,36 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
     return @{ @"code":_code, @"message":_message };
 }
 
-+(RNSpotifyError*)nullParameterErrorForName:(NSString*)paramName
++(RNSpotifyRemoteError*)nullParameterErrorForName:(NSString*)paramName
 {
-    return [RNSpotifyError errorWithCodeObj:RNSpotifyErrorCode.NullParameter
+    return [RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.NullParameter
                                      message:[NSString stringWithFormat:@"%@ cannot be null", paramName]];
 }
 
-+(RNSpotifyError*)missingOptionErrorForName:(NSString*)optionName
++(RNSpotifyRemoteError*)missingOptionErrorForName:(NSString*)optionName
 {
-    return [RNSpotifyError errorWithCodeObj:RNSpotifyErrorCode.MissingOption
+    return [RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.MissingOption
                                      message:[NSString stringWithFormat:@"Missing required option %@", optionName]];
 }
 
-+(RNSpotifyError*)httpErrorForStatusCode:(NSInteger)statusCode
++(RNSpotifyRemoteError*)httpErrorForStatusCode:(NSInteger)statusCode
 {
     if(statusCode <= 0)
     {
-        return [RNSpotifyError errorWithCode:@"HTTPRequestFailed" message:@"Unable to send request"];
+        return [RNSpotifyRemoteError errorWithCode:@"HTTPRequestFailed" message:@"Unable to send request"];
     }
-    return [RNSpotifyError errorWithCode:[NSString stringWithFormat:@"HTTP%ld", statusCode]
+    return [RNSpotifyRemoteError errorWithCode:[NSString stringWithFormat:@"HTTP%ld", statusCode]
                                   message:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]];
 }
 
-+(RNSpotifyError*)httpErrorForStatusCode:(NSInteger)statusCode message:(NSString*)message
++(RNSpotifyRemoteError*)httpErrorForStatusCode:(NSInteger)statusCode message:(NSString*)message
 {
     NSString* code = [NSString stringWithFormat:@"HTTP%ld", statusCode];
     if(statusCode <= 0)
     {
         code = @"HTTPRequestFailed";
     }
-    return [RNSpotifyError errorWithCode:code message:message];
+    return [RNSpotifyRemoteError errorWithCode:code message:message];
 }
 
 

@@ -1,38 +1,38 @@
 
-#import "RNSpotifyAuth.h"
+#import "RNSpotifyRemoteAuth.h"
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTConvert.h>
 #import <SpotifyiOS.h>
 #import "RNSpotifyConvert.h"
 #import "RNSpotifyItem.h"
-#import "RNSpotifyError.h"
-#import "RNSpotifyCompletion.h"
-#import "RNSpotifySubscriptionCallback.h"
+#import "RNSpotifyRemoteError.h"
+#import "RNSpotifyRemotePromise.h"
+#import "RNSpotifyRemoteSubscriptionCallback.h"
 #define SPOTIFY_API_BASE_URL @"https://api.spotify.com/"
 #define SPOTIFY_API_URL(endpoint) [NSURL URLWithString:NSString_concat(SPOTIFY_API_BASE_URL, endpoint)]
 
 // Static Singleton instance
-static RNSpotifyAuth *sharedInstance = nil;
+static RNSpotifyRemoteAuth *sharedInstance = nil;
 
-@interface RNSpotifyAuth() <SPTSessionManagerDelegate>
+@interface RNSpotifyRemoteAuth() <SPTSessionManagerDelegate>
 {
     BOOL _initialized;
     BOOL _isInitializing;
     BOOL _isRemoteConnected;
     NSDictionary* _options;
     
-    NSMutableArray<RNSpotifyCompletion*>* _sessionManagerCallbacks;
-    NSMutableArray<RNSpotifyCompletion*>* _appRemoteCallbacks;
+    NSMutableArray<RNSpotifyRemotePromise*>* _sessionManagerCallbacks;
+    NSMutableArray<RNSpotifyRemotePromise*>* _appRemoteCallbacks;
     NSMutableDictionary<NSString*,NSNumber*>* _eventSubscriptions;
-    NSDictionary<NSString*,RNSpotifySubscriptionCallback*>* _eventSubscriptionCallbacks;
+    NSDictionary<NSString*,RNSpotifyRemoteSubscriptionCallback*>* _eventSubscriptionCallbacks;
     
     SPTConfiguration* _apiConfiguration;
     SPTSessionManager* _sessionManager;
 }
-- (void)initializeSessionManager:(NSDictionary*)options completionCallback:(RNSpotifyCompletion*)completion;
+- (void)initializeSessionManager:(NSDictionary*)options completionCallback:(RNSpotifyRemotePromise*)completion;
 @end
 
-@implementation RNSpotifyAuth
+@implementation RNSpotifyRemoteAuth
 
 -(NSString*) accessToken{
     return _sessionManager.session.accessToken;
@@ -105,19 +105,19 @@ static RNSpotifyAuth *sharedInstance = nil;
 
 - (void)sessionManager:(SPTSessionManager *)manager didInitiateSession:(SPTSession *)session
 {
-    [RNSpotifyCompletion resolveCompletions:_sessionManagerCallbacks result:session];
+    [RNSpotifyRemotePromise resolveCompletions:_sessionManagerCallbacks result:session];
     NSLog(@"Session Initiated");
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error
 {
-    [RNSpotifyCompletion rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyError errorWithNSError:error]];
+    [RNSpotifyRemotePromise rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyRemoteError errorWithNSError:error]];
     NSLog(@"Session Manager Failed");
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didRenewSession:(SPTSession *)session
 {
-    [RNSpotifyCompletion resolveCompletions:_sessionManagerCallbacks result:session];
+    [RNSpotifyRemotePromise resolveCompletions:_sessionManagerCallbacks result:session];
     NSLog(@"Session Renewed");
 }
 
@@ -128,9 +128,9 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     // Wrap our promise callbacks in a completion
-    RNSpotifyCompletion<NSString*>* completion = [RNSpotifyCompletion<NSString*> onResolve:^(NSString *result) {
+    RNSpotifyRemotePromise<NSString*>* completion = [RNSpotifyRemotePromise<NSString*> onResolve:^(NSString *result) {
         resolve(result);
-    } onReject:^(RNSpotifyError *error) {
+    } onReject:^(RNSpotifyRemoteError *error) {
         [error reject:reject];
     }];
     
@@ -149,16 +149,16 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
     // ensure options is not null or missing fields
     if(options == nil)
     {
-        [completion reject: [RNSpotifyError nullParameterErrorForName:@"options"]];
+        [completion reject: [RNSpotifyRemoteError nullParameterErrorForName:@"options"]];
         return;
     }
     else if(options[@"clientID"] == nil)
     {
-        [completion reject: [RNSpotifyError nullParameterErrorForName:@"clientID"]];
+        [completion reject: [RNSpotifyRemoteError nullParameterErrorForName:@"clientID"]];
         return;
     }else if(options[@"redirectURL"] == nil)
     {
-         [completion reject: [RNSpotifyError nullParameterErrorForName:@"redirectURL"]];
+         [completion reject: [RNSpotifyRemoteError nullParameterErrorForName:@"redirectURL"]];
         return;
     }
 
@@ -166,13 +166,13 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
     _options = options;
     [self initializeSessionManager:options completionCallback:
      [
-      RNSpotifyCompletion
+      RNSpotifyRemotePromise
       onResolve:^(SPTSession* session) {
           self->_isInitializing = NO;
           self->_initialized = YES;
           [completion resolve:session.accessToken];
       }
-      onReject:^(RNSpotifyError *error) {
+      onReject:^(RNSpotifyRemoteError *error) {
           self->_isInitializing=NO;
           [completion reject:error];
       }
@@ -180,7 +180,7 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
    ];
 }
 
-- (void)initializeSessionManager:(NSDictionary*)options completionCallback:(RNSpotifyCompletion*)completion{
+- (void)initializeSessionManager:(NSDictionary*)options completionCallback:(RNSpotifyRemotePromise*)completion{
     // Create our configuration object
     _apiConfiguration = [SPTConfiguration configurationWithClientID:options[@"clientID"] redirectURL:[NSURL URLWithString:options[@"redirectURL"]]];
     // Add swap and refresh urls to config if present

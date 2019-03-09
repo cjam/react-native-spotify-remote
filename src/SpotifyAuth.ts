@@ -19,5 +19,5 @@ export interface SpotifyNativeAuth{
     initialize(config: SpotifyApiConfig): Promise<string>;
 }
 
-const SpotifyNativeAuth = NativeModules.RNSpotifyAuth as SpotifyNativeAuth;
+const SpotifyNativeAuth = NativeModules.RNSpotifyRemoteAuth as SpotifyNativeAuth;
 export default SpotifyNativeAuth;
