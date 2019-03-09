@@ -1,0 +1,56 @@
+
+docs/
+dist/
+
+# OSX
+#
+.DS_Store
+.goutputstream*
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ideally these artificats would get built and packaged up by a CI system, but for now
+# So that we can install this package from the repo we will commit them
+# dist  
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+      
+
+# Android/IntelliJ
+#
+/android/gradle/
+gradlew
+gradlew.bat
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
