@@ -3,8 +3,6 @@
 
 A react native module for the Spotify Remote SDK
 
-
-
 >## ⚠️ Work In Progress ⚠️
 
 >## Currently Only Implemented for iOS 
