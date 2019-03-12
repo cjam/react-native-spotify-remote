@@ -1,11 +1,11 @@
 {
-  "name": "rn-spotify-remote",
+  "name": "react-native-spotify-remote",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cjam/rn-spotify-remote.git"
+    "url": "https://github.com/cjam/react-native-spotify-remote.git"
   },
   "bugs": {
-    "url": "https://github.com/cjam/rn-spotify-remote/issues"
+    "url": "https://github.com/cjam/react-native-spotify-remote/issues"
   },
   "version": "0.0.2",
   "description": "React Native wrapper around the Spotify Remote SDK",

@@ -13,10 +13,10 @@ Please do not open issues about getting the module to work unless you have tried
 
 ## Install
 
-To add the Spotify SDK to your project, cd into your project directory and run the following commands:
+To add the Spotify Remote SDK to your project, cd into your project directory and run the following commands:
 ```bash
-npm install --save rn-spotify-sdk
-react-native link rn-spotify-sdk
+npm install --save react-native-spotify-remote
+react-native link react-native-spotify-remote
 react-native link react-native-events
 ```
 
@@ -26,6 +26,21 @@ Next, do the manual setup for each platform:
 Manually add the frameworks from `node_modules/rn-spotify-sdk/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. Then add `../node_modules/rn-spotify-sdk/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings.
 
 #### Android
+
+1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+  - Add `import com.reactlibrary.RNSpotifyRemotePackage;` to the imports at the top of the file
+  - Add `new RNSpotifyRemotePackage()` to the list returned by the `getPackages()` method
+2. Append the following lines to `android/settings.gradle`:
+  	```
+  	include ':react-native-spotify-remote'
+  	project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-spotify-remote/android')
+  	```
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+  	```
+      compile project(':react-native-spotify-remote')
+  	```
+
+
 
 Edit `android/build.gradle` and add `flatDir`
 
