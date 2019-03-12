@@ -289,7 +289,6 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../react-native-events/ios",
-					"$(SRCROOT)/../../../react-native-events/ios",
 					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.framework/Headers",
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -315,7 +314,6 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../react-native-events/ios",
-					"$(SRCROOT)/../../../react-native-events/ios",
 					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.framework/Headers",
 				);
 				LIBRARY_SEARCH_PATHS = (
