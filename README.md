@@ -29,8 +29,9 @@ react-native link react-native-events
 Next, do the manual setup for each platform:
 
 #### iOS
-Manually add the frameworks from `node_modules/rn-spotify-sdk/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. Then add `../node_modules/rn-spotify-sdk/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings.
+Manually add the frameworks from `node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. Then add `../node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings.
 
+<!-- 
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
@@ -46,8 +47,6 @@ Manually add the frameworks from `node_modules/rn-spotify-sdk/ios/external/Spoti
       compile project(':react-native-spotify-remote')
   	```
 
-
-
 Edit `android/build.gradle` and add `flatDir`
 
 ```
@@ -61,7 +60,7 @@ allprojects {
 			url "$rootDir/../node_modules/react-native/android"
 		}
 		flatDir {
-			dirs project(':rn-spotify-sdk').file('libs'), 'libs'
+			dirs project(':react-native-spotify-remote').file('libs'), 'libs'
 		}
 	}
 }
@@ -85,7 +84,7 @@ packagingOptions {
 ...
 ```
 
-If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced.
+If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
 
 
 ## Additional notes
