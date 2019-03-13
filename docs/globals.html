@@ -1060,6 +1060,8 @@ If you have issues linking the module, please check that gradle is updated to th
     ApiScope, 
     ApiConfig
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-spotify-remote'</span>;
+
+<span class="hljs-comment">// Api Config object, replace with your own applications client id and urls</span>
 <span class="hljs-keyword">const</span> spotifyConfig: ApiConfig = {
     clientID: <span class="hljs-string">"SPOTIFY_CLIENT_ID"</span>,
     redirectURL: <span class="hljs-string">"SPOTIFY_REDIRECT_URL"</span>,
@@ -1067,6 +1069,9 @@ If you have issues linking the module, please check that gradle is updated to th
     tokenSwapURL: <span class="hljs-string">"SPOTIFY_TOKEN_SWAP_URL"</span>,
     scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
 }
+
+<span class="hljs-comment">// Initialize the library and connect the Remote</span>
+<span class="hljs-comment">// then play an epic song</span>
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">playEpicSong</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">try</span>{
         <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">await</span> SpotifyAuth.initialize(spotifyConfig);
@@ -1130,7 +1135,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;_auth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/43bf8c3/src/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/34d2ba1/src/index.ts#L24">index.ts:24</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1146,7 +1151,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> =&nbsp;_remote</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/43bf8c3/src/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/34d2ba1/src/index.ts#L32">index.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

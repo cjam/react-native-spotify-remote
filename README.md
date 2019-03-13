@@ -114,6 +114,8 @@ import {
 	ApiScope, 
 	ApiConfig
 } from 'react-native-spotify-remote';
+
+// Api Config object, replace with your own applications client id and urls
 const spotifyConfig: ApiConfig = {
 	clientID: "SPOTIFY_CLIENT_ID",
 	redirectURL: "SPOTIFY_REDIRECT_URL",
@@ -121,6 +123,9 @@ const spotifyConfig: ApiConfig = {
 	tokenSwapURL: "SPOTIFY_TOKEN_SWAP_URL",
 	scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
 }
+
+// Initialize the library and connect the Remote
+// then play an epic song
 async function playEpicSong(){
 	try{
 		const token = await SpotifyAuth.initialize(spotifyConfig);
