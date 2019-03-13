@@ -1,4 +1,4 @@
-export default interface Arist {
+export default interface Artist {
     /**
      * The name of the artist.
      *

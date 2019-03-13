@@ -1,1 +1,1 @@
-{"version":3,"file":"SpotifyAuth.js","sourceRoot":"./src/","sources":["SpotifyAuth.ts"],"names":[],"mappings":";;AAAA,6CAA6C;AAqB7C,IAAM,iBAAiB,GAAG,4BAAa,CAAC,mBAAwC,CAAC;AACjF,kBAAe,iBAAiB,CAAC"}
+{"version":3,"file":"SpotifyAuth.js","sourceRoot":"./src/","sources":["SpotifyAuth.ts"],"names":[],"mappings":";;AAAA,6CAA6C;AAwC7C,IAAM,WAAW,GAAG,4BAAa,CAAC,mBAAkC,CAAC;AACrE,kBAAe,WAAW,CAAC"}

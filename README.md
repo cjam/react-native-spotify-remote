@@ -29,6 +29,25 @@ Next, do the manual setup for each platform:
 #### iOS
 Manually add the frameworks from `node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. Then add `../node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings.
 
+In order to support the callback that you will get from the Spotify App you will need to add a url handler to your `AppDelegate.m`:
+
+```objective-c
+#import "AppDelegate.h"
+
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
+#import <RNSpotifyRemote.h>
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [[RNSpotifyRemoteAuth sharedInstance] application:application openURL:URL options:options];
+}
+
+@end
+```
+
 <!-- 
 #### Android
 
@@ -84,7 +103,15 @@ packagingOptions {
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
 
+## Token Swap & Refresh
+
+In order to support the OAuth flow, you need to have a server to support the calls for token `swap` and `refresh`.  I have used the same server setup defined in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh) repo while developing this package.
+
 
 ## Additional notes
 
 This module only works for Spotify Premium users.
+
+## Acknowledgements
+
+Big thanks to [@luisfinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration & coding patterns for this package.

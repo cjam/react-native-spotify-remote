@@ -7,20 +7,43 @@ import ContentType from './ContentType';
 import ContentItem from './ContentItem';
 
 /**
- * Events supported by the SpotifyRemoteApi
+ * Events supported by the [[SpotifyRemoteApi]]
  *
  * @interface SpotifyRemoteEvents
  */
 interface SpotifyRemoteEvents {
+
+    /**
+     * Fired when the state of the Spotify Player changes
+     *
+     * @type {PlayerState}
+     * @memberof SpotifyRemoteEvents
+     */
     "playerStateChanged": PlayerState;
+
+
+    /**
+     * Fired when the Spotify Remote is disconnected from the Spotify App
+     *
+     * @type {void}
+     * @memberof SpotifyRemoteEvents
+     */
     "remoteDisconnected": void;
+
+    
+    /**
+     * Fired when the Spotify Remote Connection is established with the Spotify App
+     *
+     * @type {void}
+     * @memberof SpotifyRemoteEvents
+     */
     "remoteConnected": void;
 }
 
 
 /**
  * Interface describes Javascript only extensions to the native api
- *
+ * @ignore
  * @interface SpotifyRemoteApiExtensions
  */
 interface SpotifyRemoteApiExtensions {
@@ -36,6 +59,8 @@ interface SpotifyRemoteApiExtensions {
 /**
  * The Spotify Remote Api allows remote control of Spotify Application
  *
+ * See the example shown for [[SpotifyAuth]]
+ * 
  * @export
  * @interface SpotifyRemoteApi
  */
@@ -87,7 +112,9 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>): Promise<ContentItem[]>;
 }
 
-// Remote module
+/**
+ * @ignore
+ */
 const SpotifyRemote = NativeModules.RNSpotifyRemoteAppRemote as SpotifyRemoteApi;
 RNEvents.register(SpotifyRemote);
 RNEvents.conform(SpotifyRemote);
@@ -100,19 +127,29 @@ SpotifyRemote.setPlaying = (playing: boolean) => {
     return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
 }
 
-// The events produced by the eventEmitter implementation around 
-// when new event listeners are added and removed
+
+/**
+ * @ignore
+ * The events produced by the eventEmitter implementation around 
+ * when new event listeners are added and removed
+ */
 const metaEvents = {
     newListener: 'newListener',
     removeListener: 'removeListener'
 };
 
-// Want to ignore the metaEvents when sending our subscription events
+
+/**
+* @ignore
+* Want to ignore the metaEvents when sending our subscription events
+*/
 const ignoredEvents = Object.keys(metaEvents);
 
-
-// The following allows us to lazily subscribe to events instead of having a single
-// subscription all the time regardless which is less efficient
+/**  
+ * @ignore
+ * The following allows us to lazily subscribe to events instead of having a single
+ * subscription all the time regardless which is less efficient
+*/
 (SpotifyRemote as any).on(metaEvents.newListener, (type: string) => {
     if (ignoredEvents.indexOf(type) === -1) {
         const listenerCount = SpotifyRemote.listenerCount(type as any);
@@ -130,4 +167,7 @@ const ignoredEvents = Object.keys(metaEvents);
     }
 });
 
+/**
+ * @ignore
+ */
 export default SpotifyRemote;

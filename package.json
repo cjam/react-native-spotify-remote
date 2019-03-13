@@ -25,10 +25,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "rebuild":"yarn build && yarn docs",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && ./node_modules/.bin/tsc",
     "watch": "yarn build --watch",
-    "docs": "typedoc --out ./docs/ --mode file --ignoreCompilerErrors --theme minimal",
+    "docs": "typedoc --options typedoc.json --excludeExternals",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "git submodule update --init --recursive"
   },

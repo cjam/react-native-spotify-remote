@@ -1,0 +1,6 @@
+{
+    "mode":"file",
+    "out":"docs",
+    "ignoreCompilerErrors":true,
+    "theme": "minimal"
+}

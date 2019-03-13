@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_native_1 = require("react-native");
 var react_native_events_1 = __importDefault(require("react-native-events"));
-// Remote module
+/**
+ * @ignore
+ */
 var SpotifyRemote = react_native_1.NativeModules.RNSpotifyRemoteAppRemote;
 react_native_events_1.default.register(SpotifyRemote);
 react_native_events_1.default.conform(SpotifyRemote);
@@ -16,16 +18,25 @@ SpotifyRemote.setPlaying = function (playing) {
     // worry about it here
     return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
 };
-// The events produced by the eventEmitter implementation around 
-// when new event listeners are added and removed
+/**
+ * @ignore
+ * The events produced by the eventEmitter implementation around
+ * when new event listeners are added and removed
+ */
 var metaEvents = {
     newListener: 'newListener',
     removeListener: 'removeListener'
 };
-// Want to ignore the metaEvents when sending our subscription events
+/**
+* @ignore
+* Want to ignore the metaEvents when sending our subscription events
+*/
 var ignoredEvents = Object.keys(metaEvents);
-// The following allows us to lazily subscribe to events instead of having a single
-// subscription all the time regardless which is less efficient
+/**
+ * @ignore
+ * The following allows us to lazily subscribe to events instead of having a single
+ * subscription all the time regardless which is less efficient
+*/
 SpotifyRemote.on(metaEvents.newListener, function (type) {
     if (ignoredEvents.indexOf(type) === -1) {
         var listenerCount = SpotifyRemote.listenerCount(type);
@@ -42,5 +53,8 @@ SpotifyRemote.on(metaEvents.newListener, function (type) {
         }
     }
 });
+/**
+ * @ignore
+ */
 exports.default = SpotifyRemote;
 //# sourceMappingURL=SpotifyRemote.js.map

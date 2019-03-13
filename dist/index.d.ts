@@ -7,5 +7,19 @@ export { default as Artist } from './Artist';
 export { default as Album } from './Album';
 export { default as ContentType } from './ContentType';
 export { default as ContentItem } from './ContentItem';
-export { default as auth } from './SpotifyAuth';
-export { default as remote, SpotifyRemoteApi } from './SpotifyRemote';
+export { SpotifyAuth } from './SpotifyAuth';
+export { SpotifyRemoteApi } from './SpotifyRemote';
+/**
+ * Singleton Instance of [[SpotifyAuth]]
+ * ```typescript
+ * import {auth} from 'react-native-spotify-remote'
+ * ```
+*/
+export declare const auth: import("./SpotifyAuth").SpotifyAuth;
+/**
+ * Singleton Instance of [[SpotifyRemoteApi]]
+ * ```typescript
+ * import {remote} from 'react-native-spotify-remote'
+ * ```
+*/
+export declare const remote: import("./SpotifyRemote").SpotifyRemoteApi;
