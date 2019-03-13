@@ -1052,6 +1052,30 @@ packagingOptions {
 ```
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
+			<h2 id="usage">Usage</h2>
+			<p>Here&#39;s how you would use this library with Typescript (though the same mostly applies to Javascript) and the <code>async</code>/<code>await</code> syntax for promises (Just cuz I like em).</p>
+			<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
+    auth <span class="hljs-keyword">as</span> SpotifyAuth, 
+    remote <span class="hljs-keyword">as</span> SpotifyRemote, 
+    ApiScope, 
+    ApiConfig
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-spotify-remote'</span>;
+<span class="hljs-keyword">const</span> spotifyConfig: ApiConfig = {
+    clientID: <span class="hljs-string">"SPOTIFY_CLIENT_ID"</span>,
+    redirectURL: <span class="hljs-string">"SPOTIFY_REDIRECT_URL"</span>,
+    tokenRefreshURL: <span class="hljs-string">"SPOTIFY_TOKEN_REFRESH_URL"</span>,
+    tokenSwapURL: <span class="hljs-string">"SPOTIFY_TOKEN_SWAP_URL"</span>,
+    scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
+}
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">playEpicSong</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">try</span>{
+        <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">await</span> SpotifyAuth.initialize(spotifyConfig);
+        <span class="hljs-keyword">await</span> SpotifyRemote.connect(token);
+        SpotifyRemote.playUri(<span class="hljs-string">"spotify:track:6IA8E2Q5ttcpbuahIejO74#0:38"</span>);
+    }<span class="hljs-keyword">catch</span>(err){
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"Couldn't authorize with or connect to Spotify"</span>,err);
+    }   
+}</code></pre>
 			<h2 id="token-swap-refresh">Token Swap &amp; Refresh</h2>
 			<p>In order to support the OAuth flow, you need to have a server to support the calls for token <code>swap</code> and <code>refresh</code>.  I have used the same server setup defined in the <a href="https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh">react-native-spotify</a> repo while developing this package.</p>
 			<h2 id="additional-notes">Additional notes</h2>
@@ -1106,7 +1130,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;_auth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/b94d75a/src/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/43bf8c3/src/index.ts#L24">index.ts:24</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1122,7 +1146,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> =&nbsp;_remote</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/b94d75a/src/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/43bf8c3/src/index.ts#L32">index.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
