@@ -983,6 +983,21 @@ react-native link react-native-events</code></pre>
 			<p>Next, do the manual setup for each platform:</p>
 			<h4 id="ios">iOS</h4>
 			<p>Manually add the frameworks from <code>node_modules/react-native-spotify-remote/ios/external/SpotifySDK</code> to <em>Linked Frameworks and Libraries</em> in your project settings. Then add <code>../node_modules/react-native-spotify-remote/ios/external/SpotifySDK</code> to <em>Framework Search Paths</em> in your project settings.</p>
+			<p>In order to support the callback that you will get from the Spotify App you will need to add a url handler to your <code>AppDelegate.m</code>:</p>
+			<pre><code class="language-objective-c">#import &quot;AppDelegate.h&quot;
+
+#import &lt;React/RCTBundleURLProvider.h&gt;
+#import &lt;React/RCTRootView.h&gt;
+#import &lt;RNSpotifyRemote.h&gt;
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options
+{
+  return [[RNSpotifyRemoteAuth sharedInstance] application:application openURL:URL options:options];
+}
+
+@end</code></pre>
 			<!--
 #### Android
 
@@ -1037,8 +1052,12 @@ packagingOptions {
 ```
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
+			<h2 id="token-swap-refresh">Token Swap &amp; Refresh</h2>
+			<p>In order to support the OAuth flow, you need to have a server to support the calls for token <code>swap</code> and <code>refresh</code>.  I have used the same server setup defined in the <a href="https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh">react-native-spotify</a> repo while developing this package.</p>
 			<h2 id="additional-notes">Additional notes</h2>
 			<p>This module only works for Spotify Premium users.</p>
+			<h2 id="acknowledgements">Acknowledgements</h2>
+			<p>Big thanks to <a href="https://github.com/lufinkey">@luisfinkey</a> and all of the great work that he has done in the <a href="https://github.com/lufinkey/react-native-spotify">react-native-spotify</a> repo which was the original source of inspiration &amp; coding patterns for this package.</p>
 		</div>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
@@ -1087,7 +1106,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;_auth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/1905734/src/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/b94d75a/src/index.ts#L24">index.ts:24</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1103,7 +1122,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> =&nbsp;_remote</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/1905734/src/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/b94d75a/src/index.ts#L32">index.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
