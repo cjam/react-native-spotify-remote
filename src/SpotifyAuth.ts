@@ -7,7 +7,7 @@ import SpotifyApiConfig from './ApiConfig';
  * *Used for managing Spotify Session*
  * 
  * ```typescript
- * import { auth as SpotifyAuth, remote as SpotifyRemote, ApiScope, ApiConfig, PlayerState, SpotifyRemoteApi } from 'react-native-spotify-remote';
+ * import { auth as SpotifyAuth, remote as SpotifyRemote, ApiScope, ApiConfig } from 'react-native-spotify-remote';
  * const spotifyConfig: ApiConfig = {
  *     clientID: "SPOTIFY_CLIENT_ID",
  *     redirectURL: "SPOTIFY_REDIRECT_URL",

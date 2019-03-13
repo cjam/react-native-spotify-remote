@@ -103,6 +103,35 @@ packagingOptions {
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
 
+## Usage
+
+Here's how you would use this library with Typescript (though the same mostly applies to Javascript) and the `async`/`await` syntax for promises (Just cuz I like em).
+
+```typescript
+import { 
+	auth as SpotifyAuth, 
+	remote as SpotifyRemote, 
+	ApiScope, 
+	ApiConfig
+} from 'react-native-spotify-remote';
+const spotifyConfig: ApiConfig = {
+	clientID: "SPOTIFY_CLIENT_ID",
+	redirectURL: "SPOTIFY_REDIRECT_URL",
+	tokenRefreshURL: "SPOTIFY_TOKEN_REFRESH_URL",
+	tokenSwapURL: "SPOTIFY_TOKEN_SWAP_URL",
+	scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
+}
+async function playEpicSong(){
+	try{
+		const token = await SpotifyAuth.initialize(spotifyConfig);
+		await SpotifyRemote.connect(token);
+		SpotifyRemote.playUri("spotify:track:6IA8E2Q5ttcpbuahIejO74#0:38");
+	}catch(err){
+		console.error("Couldn't authorize with or connect to Spotify",err);
+	}   
+}
+```
+
 ## Token Swap & Refresh
 
 In order to support the OAuth flow, you need to have a server to support the calls for token `swap` and `refresh`.  I have used the same server setup defined in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh) repo while developing this package.
