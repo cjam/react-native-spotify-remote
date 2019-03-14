@@ -18,7 +18,8 @@ SPOTIFY_CLIENT_CALLBACK="callback_registered_in_spotify_dashboard"
 ENCRYPTION_SECRET="THISWILLBEABIGSECRET"
 ENCRYPTION_METHOD="aes-256-ctr"
 ```
-> Optionally this can be done on the command line as well.
+Can also specify `PORT` if you want to run it on something other than 3000.
+> Optionally this can be done on the command line as well when starting up the server via node
 
 3. Run server using: `yarn start`
 4. In your react-native app set `tokenSwapURL` to `http://<SERVER_URL>:<PORT>/swap` and `tokenRefreshURL` to `http://<SERVER_URL>:<PORT>/refresh`, replacing `<SERVER_URL>` and `<PORT>` with your server URL and port.
