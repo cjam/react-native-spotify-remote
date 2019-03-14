@@ -4,14 +4,21 @@ An example server capable of swapping and refreshing tokens provided by Spotify 
 
 ## Usage
 
-1. Install dependencies using: `$ yarn`
-2. Set the following environment variables:
+1. Install dependencies using: 
+```sh
+yarn   # or npm install
+```
+2. Create a `.env` file in the root of this directory with the following entries acquired from [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications) :
+> ⚠️ Don't commit the `.env` file to your repo ⚠️
 
-* `SPOTIFY_CLIENT_ID` - your spotify app id
-* `SPOTIFY_CLIENT_SECRET` - your spotify app secret
-* `SPOTIFY_CLIENT_CALLBACK` - your spotify app redirect URL
-* `ENCRYPTION_SECRET` - any arbitrary string to use to encrypt/decrypt refresh tokens
-* `PORT` - (*optional*) The port to run the server on. Default is 3000
+```env
+SPOTIFY_CLIENT_ID="client_id_from_spotify_dashboard"
+SPOTIFY_CLIENT_SECRET="client_secret_from_spotify_dashboard"
+SPOTIFY_CLIENT_CALLBACK="callback_registered_in_spotify_dashboard"
+ENCRYPTION_SECRET="THISWILLBEABIGSECRET"
+ENCRYPTION_METHOD="aes-256-ctr"
+```
+> Optionally this can be done on the command line as well.
 
 3. Run server using: `yarn start`
 4. In your react-native app set `tokenSwapURL` to `http://<SERVER_URL>:<PORT>/swap` and `tokenRefreshURL` to `http://<SERVER_URL>:<PORT>/refresh`, replacing `<SERVER_URL>` and `<PORT>` with your server URL and port.
