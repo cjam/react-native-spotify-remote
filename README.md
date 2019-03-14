@@ -139,8 +139,11 @@ async function playEpicSong(){
 
 ## Token Swap & Refresh
 
-In order to support the OAuth flow, you need to have a server to support the calls for token `swap` and `refresh`.  I have used the same server setup defined in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh) repo while developing this package.
+> A server must be running for with endpoints that allow Spotify to authenticate your app.
 
+In order to support the OAuth flow, you need to have a server to support the calls for token `swap` and `refresh`.  I have included  the same server setup defined in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh) repo as it does exactly what you need.
+
+See the [Server Readme](./example-server/README.md) for further instructions.
 
 ## Additional notes
 
