@@ -27,7 +27,14 @@ react-native link react-native-events
 Next, do the manual setup for each platform:
 
 #### iOS
-Manually add the frameworks from `node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. Then add `../node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings.
+1. Manually add the frameworks from `node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. 
+
+![iOS Framework Search paths](.screenshots/ios-add-framework.png);
+
+2. Then add `../node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Framework Search Paths* in your project settings see the screenshot below. (By default it won't show the options in XCode so you may need to check `all`)
+
+![iOS Framework Search paths](.screenshots/ios-framework-searchpaths.png);
+
 
 In order to support the callback that you will get from the Spotify App you will need to add a url handler to your `AppDelegate.m`:
 
