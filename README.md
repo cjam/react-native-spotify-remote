@@ -112,6 +112,14 @@ If you have issues linking the module, please check that gradle is updated to th
 
 ## Usage
 
+### Example Application
+
+This repo contains an [Example App](./example/Readme.md) which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they're pretty cool) and is using a few of the remote API calls.  (Will be looking to show use of all of the api calls in the near future).
+
+### In Code
+
+Again, I recommend looking at the example app.  If you specifically want to see some code that actually does stuff take a look at the [App.tsx](./example/App.tsx).
+
 Here's how you would use this library with Typescript (though the same mostly applies to Javascript) and the `async`/`await` syntax for promises (Just cuz I like em).
 
 ```typescript
@@ -158,4 +166,4 @@ This module only works for Spotify Premium users.
 
 ## Acknowledgements
 
-Big thanks to [@luisfinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration & coding patterns for this package.
+Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration & coding patterns for this package.
