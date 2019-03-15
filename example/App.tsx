@@ -10,6 +10,12 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import {
+    SPOTIFY_CLIENT_ID,
+    SPOTIFY_REDIRECT_URL,
+    SPOTIFY_TOKEN_REFRESH_URL,
+    SPOTIFY_TOKEN_SWAP_URL
+} from 'react-native-dotenv';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -24,7 +30,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.tsx</Text>
+        <Text style={styles.instructions}>{SPOTIFY_TOKEN_REFRESH_URL}</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
