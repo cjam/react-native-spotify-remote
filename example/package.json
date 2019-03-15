@@ -28,7 +28,7 @@
   },
   "jest": {
     "preset": "react-native",
-    "coveragePathIgnorePatterns":[
+    "coveragePathIgnorePatterns": [
       "/node_modules/",
       ".env"
     ]

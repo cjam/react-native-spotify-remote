@@ -4969,6 +4969,11 @@ react-native-events@^1.0.9:
   dependencies:
     react-native-events "^1.0.9"
 
+"react-native-spotify-remote@file:../":
+  version "0.0.1"
+  dependencies:
+    react-native-events "^1.0.9"
+
 react-native@^0.59.1:
   version "0.59.1"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.1.tgz#3274dcc0f9558799bd41c8092acac2a79bd627ce"
