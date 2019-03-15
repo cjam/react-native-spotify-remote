@@ -8,6 +8,7 @@
     "postinstall": "rm -rf node_modules/react-native-spotify-remote/node_modules && rm -rf node_modules/react-native-spotify-remote/example*"
   },
   "dependencies": {
+    "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "^0.59.1",
     "react-native-spotify-remote": "file:../"
