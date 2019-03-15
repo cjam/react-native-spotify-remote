@@ -85,14 +85,16 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
     BOOL returnVal = NO;
     if(_sessionManager != nil){
         NSLog(@"Setting application openURL and options on session manager");
-        returnVal = [_sessionManager application:application openURL:URL options:options];
-        NSDictionary *params = [[SPTAppRemote alloc] authorizationParametersFromURL:URL];
-        NSString *errorDescription = params[SPTAppRemoteErrorDescriptionKey];
-        // If there was an error we should reject our SpotifyCompletion
+        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:TRUE];
+        NSURLQueryItem * errorDescription = [[[urlComponents queryItems] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", SPTAppRemoteErrorDescriptionKey]] firstObject];
+        NSURLQueryItem * errorType = [[[urlComponents queryItems] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@",@"error"]] firstObject];
+        
+        // If there was an error we should reject our pending Promise
         if(errorDescription){
-//            [self rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyError errorWithNSError:[SPTError errorWithCode:SPTAuthorizationFailedErrorCode description: errorDescription]]];
+            [RNSpotifyRemotePromise rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyRemoteError errorWithCode:errorType.value message:errorDescription.value]];
             returnVal = NO;
         }
+        returnVal = [_sessionManager application:application openURL:URL options:options];
     }
     if(returnVal){
 //        [self resolveCompletions:_sessionManagerCallbacks result:nil];
