@@ -8,12 +8,8 @@ A react native module for the Spotify Remote SDK.
 >## Currently Only Implemented for iOS 
 
 [Documentation](https://cjam.github.io/react-native-spotify-remote/index.html)
-
-## Contributing / Opening Issues
-
-Contributions are welcome in any form.  Fork the repo and issue a PR.  Don't have a formal contribution guide at the moment but perhaps in the near future.  It's a pretty lean team at the moment so I'm focusing on code over documentation.
-
-Please do not open issues about getting the module to work unless you have tried using both the example app and the example token swap server. Please make sure you have tried running on the latest react-native version before submitting a bug.
+[Change Log](./CHANGELOG.md)
+[Contributing](./CONTRIBUTING.md)
 
 ## Install
 
@@ -191,6 +187,10 @@ See the [Server Readme](./example-server/README.md) for further instructions.
 ## Additional notes
 
 Nothing has been special to deal with Spotify *Free* Users but this module _should_ still work.
+
+## Opening Issues
+
+Please do not open issues about getting the module to work unless you have tried using both the example app and the example token swap server. Please make sure you have tried running on the latest react-native version before submitting a bug.
 
 ## Acknowledgements
 
