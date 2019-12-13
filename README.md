@@ -7,9 +7,9 @@ A react native module for the Spotify Remote SDK.
 
 >## Currently Only Implemented for iOS 
 
-[Documentation](https://cjam.github.io/react-native-spotify-remote/index.html)
-[Change Log](./CHANGELOG.md)
-[Contributing](./CONTRIBUTING.md)
+- [Documentation](https://cjam.github.io/react-native-spotify-remote/index.html)
+- [Change Log](./CHANGELOG.md)
+- [Contributing](./CONTRIBUTING.md)
 
 ## Install
 
