@@ -125,9 +125,11 @@ const App: React.FunctionComponent<AppProps> = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
+      <Text style={styles.welcome}>Welcome to RN Spotify SDK Example!</Text>
       <Text style={styles.instructions}>{instructions}</Text>
-      <Text style={styles.instructions}>{SPOTIFY_REDIRECT_URL}</Text>
+      <Text style={styles.instructions}>Auth Redirect Url: {SPOTIFY_REDIRECT_URL}</Text>
+      <Text style={styles.instructions}>Token Refresh URL: {SPOTIFY_TOKEN_REFRESH_URL}</Text>
+      <Text style={styles.instructions}>Token Swap Url: {SPOTIFY_TOKEN_SWAP_URL}</Text>
       <SpotifyStatus isConnected={isConnected} />
       <SpotifyControls isConnected={isConnected} onError={(err)=>setError(err.message)} />
       {error && (
