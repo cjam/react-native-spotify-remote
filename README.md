@@ -33,7 +33,7 @@ By far the easiest way to integrate into your project.  In your `ios/PodFile` ad
 
 ```rb
 	pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
-	pod 'RNSpotifyRemote', :path => '../node_modules/RNSpotifyRemote.podspec'
+	pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
 ```
 
 See the [`Example App PodFile`](./example/ios/PodFile) for a full example.

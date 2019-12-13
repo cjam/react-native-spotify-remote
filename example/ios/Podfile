@@ -37,7 +37,7 @@ target 'example' do
 	pod 'Folly', :podspec => "#{node_modules_path}/react-native/third-party-podspecs/Folly.podspec"
 
 	pod 'RNEventEmitter', :path => "#{node_modules_path}/react-native-events"
-	pod 'RNSpotifyRemote', :path => '../../RNSpotifyRemote.podspec'
+	pod 'RNSpotifyRemote', :path => '../../'
 
 	use_native_modules!
 end
