@@ -35,4 +35,3 @@ You will need to have the [Example Server](../example-server/README.md) running 
 ### 3:  Start XCode Build
 Open up the `project.pbxproj` in XCode and build it for your phone (note you will need to have Spotify installed on your phone). 
 > This should also start the react native packager as part of the build process if it isn't already running
-

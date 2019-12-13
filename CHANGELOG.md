@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 2019-12-13
+### Added
+- Cocoapod support
+- RN >= 0.60 support
+
 ## [0.0.5] - 2019-03-16
 ### Fixed
 - Usage in README as it did not work

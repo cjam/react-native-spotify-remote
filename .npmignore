@@ -3,4 +3,12 @@
 /example-server
 /ios/external/SpotifySDK/docs
 /ios/external/SpotifySDK/DemoProjects
-/ios/external/img
+/ios/external/SpotifySDK/img
+/android/gradle/
+gradlew
+gradlew.bat
+build/
+.idea
+.gradle
+local.properties
+*.iml
