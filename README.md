@@ -11,22 +11,43 @@ A react native module for the Spotify Remote SDK.
 
 ## Contributing / Opening Issues
 
-If you would like to make a pull request, fork from and merge into the *dev* branch (or a feature branch) only.
+Contributions are welcome in any form.  Fork the repo and issue a PR.  Don't have a formal contribution guide at the moment but perhaps in the near future.  It's a pretty lean team at the moment so I'm focusing on code over documentation.
 
 Please do not open issues about getting the module to work unless you have tried using both the example app and the example token swap server. Please make sure you have tried running on the latest react-native version before submitting a bug.
 
 ## Install
 
-To add the Spotify Remote SDK to your project, cd into your project directory and run the following commands:
 ```bash
-npm install --save react-native-spotify-remote
-react-native link react-native-spotify-remote
-react-native link react-native-events
+yarn add react-native-spotify-remote
 ```
 
-Next, do the manual setup for each platform:
+or
 
-#### iOS
+```bash
+npm install --save react-native-spotify-remote
+```
+
+## Linking
+
+### iOS
+
+#### Cocoapods (Recommended)
+
+By far the easiest way to integrate into your project.  In your `ios/PodFile` add the following lines to your projects target:
+
+```rb
+	pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
+	pod 'RNSpotifyRemote', :path => '../node_modules/RNSpotifyRemote.podspec'
+```
+
+See the [`Example App PodFile`](./example/ios/PodFile) for a full example.
+
+I have only tested this against RN > 0.60 in the example app.  So if you have issues with a RN version < 0.60 that might be a place to start troubleshooting.
+
+#### Manual
+
+Manual linking is needed for projects that don't use Cocoapods.
+
 1. Manually add the frameworks from `node_modules/react-native-spotify-remote/ios/external/SpotifySDK` to *Linked Frameworks and Libraries* in your project settings. 
 
 ![iOS Framework Search paths](.screenshots/ios-add-framework.png);
@@ -36,7 +57,13 @@ Next, do the manual setup for each platform:
 ![iOS Framework Search paths](.screenshots/ios-framework-searchpaths.png);
 
 
-In order to support the callback that you will get from the Spotify App you will need to add a url handler to your `AppDelegate.m`:
+## Auth Callback
+
+In order to support the callback that you will get from the Spotify App you will need to add a url handler to your app.
+
+### iOS
+
+Modifications are needed for the `AppDelegate.m`:
 
 ```objective-c
 #import "AppDelegate.h"
@@ -163,7 +190,7 @@ See the [Server Readme](./example-server/README.md) for further instructions.
 
 ## Additional notes
 
-This module only works for Spotify Premium users.
+Nothing has been special to deal with Spotify *Free* Users but this module _should_ still work.
 
 ## Acknowledgements
 
