@@ -36,7 +36,6 @@ target 'example' do
 	pod 'glog', :podspec => "#{node_modules_path}/react-native/third-party-podspecs/glog.podspec"
 	pod 'Folly', :podspec => "#{node_modules_path}/react-native/third-party-podspecs/Folly.podspec"
 
-	# pod 'SpotifyRemoteSDK', :path => '../../SpotifyRemoteSDK.podspec'
 	pod 'RNEventEmitter', :path => "#{node_modules_path}/react-native-events"
 	pod 'RNSpotifyRemote', :path => '../../RNSpotifyRemote.podspec'
 
