@@ -2,5 +2,6 @@
     "mode":"file",
     "out":"docs",
     "ignoreCompilerErrors":true,
-    "theme": "minimal"
+    "theme": "minimal",
+    "gitRevision": "master"
 }

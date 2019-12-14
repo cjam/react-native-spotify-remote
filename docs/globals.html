@@ -2480,6 +2480,10 @@ img {
 				<li>Then add <code>../node_modules/react-native-spotify-remote/ios/external/SpotifySDK</code> to <em>Framework Search Paths</em> in your project settings see the screenshot below. (By default it won&#39;t show the options in XCode so you may need to check <code>all</code>)</li>
 			</ol>
 			<p><img src=".screenshots/ios-framework-searchpaths.png" alt="iOS Framework Search paths">;</p>
+			<a href="#troubleshooting" id="troubleshooting" style="color: inherit; text-decoration: none;">
+				<h5>Troubleshooting</h5>
+			</a>
+			<p><code>&#39;React/RCTConvert.h&#39; file not found</code> might be due to a build dependency issue where <code>RNSpotifyRemote</code> is being built <em>before</em> <code>React</code>.  Try adding <code>React</code> as an explicit dependency of the <code>RNSpotifyRemote</code> target/project in XCode.  Otherwise, Cocoapods should solve this for you.</p>
 			<a href="#auth-callback" id="auth-callback" style="color: inherit; text-decoration: none;">
 				<h2>Auth Callback</h2>
 			</a>
@@ -2665,7 +2669,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">Spotify<wbr>Auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;NativeModules.RNSpotifyRemoteAuth as SpotifyAuth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/162cd64/src/SpotifyAuth.ts#L41">SpotifyAuth.ts:41</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L41">SpotifyAuth.ts:41</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2675,7 +2679,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;_auth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/162cd64/src/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L24">index.ts:24</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2691,7 +2695,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> =&nbsp;_remote</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/162cd64/src/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L32">index.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
