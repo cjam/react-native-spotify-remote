@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed 
+- #12: 'React/RCTConvert.h' file not found
+### Added
+- Troubleshooting section to readme
+
+## [0.0.7] - 2019-12-13
+### Fixed
+- Error in Cocoapod install docs
 
 ## [0.0.6] - 2019-12-13
 ### Added
