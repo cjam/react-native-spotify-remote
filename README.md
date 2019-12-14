@@ -53,6 +53,11 @@ Manual linking is needed for projects that don't use Cocoapods.
 ![iOS Framework Search paths](.screenshots/ios-framework-searchpaths.png);
 
 
+##### Troubleshooting
+
+`'React/RCTConvert.h' file not found` might be due to a build dependency issue where `RNSpotifyRemote` is being built *before* `React`.  Try adding `React` as an explicit dependency of the `RNSpotifyRemote` target/project in XCode.  Otherwise, Cocoapods should solve this for you.
+
+
 ## Auth Callback
 
 In order to support the callback that you will get from the Spotify App you will need to add a url handler to your app.
