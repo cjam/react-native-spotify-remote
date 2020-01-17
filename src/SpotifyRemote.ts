@@ -3,7 +3,6 @@ import RNEvents from 'react-native-events';
 import TypedEventEmitter from './TypedEventEmitter';
 import RepeatMode from './RepeatMode';
 import PlayerState from './PlayerState';
-import ContentType from './ContentType';
 import ContentItem from './ContentItem';
 
 /**
@@ -30,7 +29,7 @@ interface SpotifyRemoteEvents {
      */
     "remoteDisconnected": void;
 
-    
+
     /**
      * Fired when the Spotify Remote Connection is established with the Spotify App
      *
@@ -72,7 +71,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      * @memberof SpotifyNativeApi
      */
     isConnectedAsync(): Promise<boolean>;
-    
+
     /**
      * Connect to Spotify Application via the access token
      *
@@ -80,7 +79,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      * @returns {Promise<void>}
      * @memberof SpotifyRemoteApi
      */
-    connect(accessToken:string): Promise<void>;
+    connect(accessToken: string): Promise<void>;
 
     /**
      * Play a track, album, playlist or artist via spotifyUri
@@ -108,8 +107,9 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     setShuffling(shuffling: boolean): Promise<void>;
     setRepeatMode(mode: RepeatMode): Promise<void>;
     getPlayerState(): Promise<PlayerState>;
-    getRecommendedContentItems(type: ContentType): Promise<ContentItem[]>;
+    getRecommendedContentItems(options: { type?: string, flatten?: boolean }): Promise<ContentItem[]>;
     getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>): Promise<ContentItem[]>;
+    getContentItemForUri(uri: string): Promise<ContentItem>;
 }
 
 /**
@@ -126,6 +126,9 @@ SpotifyRemote.setPlaying = (playing: boolean) => {
     // worry about it here
     return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
 }
+
+
+
 
 
 /**

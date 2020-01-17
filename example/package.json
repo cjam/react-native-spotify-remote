@@ -8,9 +8,12 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "postinstall": "node ./scripts/examples_postinstall.js"
+    "postinstall": "node ./scripts/examples_postinstall.js",
+    "refresh": "rimraf ./node_modules/react-native-spotify-remote && yarn add file:.."
   },
   "dependencies": {
+    "@react-native-community/slider": "^2.0.8",
+    "luxon": "^1.21.3",
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.5",
@@ -21,6 +24,7 @@
     "@babel/runtime": "^7.7.6",
     "@react-native-community/eslint-config": "^0.0.5",
     "@types/jest": "^24.0.23",
+    "@types/luxon": "^1.21.0",
     "@types/react": "^16.9.16",
     "@types/react-native": "^0.60.25",
     "@types/react-test-renderer": "^16.9.1",

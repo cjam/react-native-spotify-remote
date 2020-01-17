@@ -145,19 +145,38 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
         }
         _error = error;
         
+        
+        // Get the Error code based on error domain
         if([_error.domain isEqualToString:@"com.spotify.sdk.login"])
         {
             _code = [self.class getSDKErrorCode:_error.code];
-            _message = _error.localizedDescription;
         }else if([_error.domain isEqualToString:@"com.spotify.ios-sdk.playback"])
         {
             _code = [self.class getSDKErrorCode:_error.code];
-            _message = _error.localizedDescription;
         }
         else
         {
             _code = [NSString stringWithFormat:@"%@:%ld", _error.domain, _error.code];
-            _message = _error.localizedDescription;
+        }
+        
+        
+        // Errors will typically have nested underlyingErrors, unwrap them grabbing
+        // each message along the way, concatenate them for more descriptive errors
+        NSError * underlyingError = _error;
+        NSMutableArray* messageParts = [NSMutableArray array];
+        while(underlyingError != nil )
+        {
+            NSString* errMessage = [underlyingError localizedDescription];
+            if(errMessage != nil){
+                [messageParts addObject:errMessage];
+            }
+            underlyingError = underlyingError.userInfo[@"NSUnderlyingError"];
+        }
+        
+        if([messageParts count] > 0){
+            _message = [messageParts componentsJoinedByString:@"\r\n"];
+        }else{
+            _message = @"No error information";
         }
     }
     return self;

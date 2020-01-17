@@ -7,7 +7,10 @@ export default interface Track{
     duration:number;
     artist:Artist;
     album:Album;
-    
+    saved:boolean;
+    episode:boolean;
+    podcast:boolean;
+        
     // Android
     // ImageUri
     // artists

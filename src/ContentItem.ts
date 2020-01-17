@@ -29,7 +29,15 @@ export default interface ContentItem{
     uri:string;
     
     /**
-     * Returns YES if the item is directly playable, otherwise NO.
+     * true if the item is available offline, or if it has any child that is available offline, otherwise false.
+     *
+     * @type {boolean}
+     * @memberof SpotifyContentItem
+     */
+    availableOffline:boolean;
+
+    /**
+     * Returns true if the item is directly playable, otherwise false.
      *
      * @type {boolean}
      * @memberof SpotifyContentItem
@@ -37,10 +45,20 @@ export default interface ContentItem{
     playable:boolean;
 
     /**
-     * Returns YES if the item is expected to contain children, otherwise NO.
+     * Returns true if the item is expected to contain children, otherwise false.
      *
      * @type {boolean}
      * @memberof SpotifyContentItem
      */
     container:boolean;
+
+    /**
+     * A list of the content item’s children.
+     * 
+     * *Note: This is not populated for all container items as some of them are fetched lazily.*
+     * 
+     * @type {ContentItem[]}
+     * @memberof ContentItem
+     */
+    children:ContentItem[]
 }

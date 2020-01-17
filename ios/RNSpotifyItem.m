@@ -19,6 +19,7 @@
 @synthesize subtitle;
 @synthesize title;
 @synthesize URI;
+@synthesize children;
 
 -(id)initWithJson:(NSDictionary *)json{
     if(self = [super init])
@@ -26,11 +27,12 @@
         availableOffline = [NSNull null];
         container = [json[@"container"] boolValue];
         identifier = json[@"id"] != nil ? json[@"id"] : [NSNull null];
-        imageIdentifier = [NSNull null];
+        imageIdentifier = nil;
         playable = [json[@"playable"] boolValue];
         subtitle = json[@"subtitle"] != nil ? json[@"subtitle"] : [NSNull null];
         title = json[@"title"] != nil ? json[@"title"] : [NSNull null];
         URI = json[@"uri"] != nil ? json[@"uri"] : [NSNull null];
+        children = nil;
     }
     return self;
 }

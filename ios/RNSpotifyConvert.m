@@ -81,7 +81,10 @@
              @"uri":track.URI,
              @"duration":[NSNumber numberWithUnsignedInteger:track.duration],
              @"artist":[RNSpotifyConvert SPTAppRemoteArtist:track.artist],
-             @"album":[RNSpotifyConvert SPTAppRemoteAlbum:track.album]
+             @"album":[RNSpotifyConvert SPTAppRemoteAlbum:track.album],
+             @"saved":[NSNumber numberWithBool:track.saved],
+             @"episode":[NSNumber numberWithBool:track.episode],
+             @"podcast":[NSNumber numberWithBool:track.podcast],
     };
 }
 
@@ -110,13 +113,16 @@
     if(item == nil){
         return [NSNull null];
     }
+    
     return @{
              @"title":item.title,
              @"subtitle":item.subtitle,
              @"id":item.identifier,
              @"uri":item.URI,
+             @"availableOffline":[NSNumber numberWithBool:item.availableOffline],
              @"playable":[NSNumber numberWithBool:item.playable],
-             @"container":[NSNumber numberWithBool:item.container]
+             @"container":[NSNumber numberWithBool:item.container],
+             @"children":[RNSpotifyConvert SPTAppRemoteContentItems:item.children]
     };
 }
 

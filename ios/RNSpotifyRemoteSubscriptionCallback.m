@@ -12,15 +12,15 @@
 @interface RNSpotifyRemoteSubscriptionCallback()
 {
     BOOL _isSubscribed;
-    void(^_subscriber)(void);
-    void(^_unsubscriber)(void);
+    void(^_subscriber)(void(^)(void));
+    void(^_unsubscriber)(void(^)(void));
 }
 
 @end
 
 @implementation RNSpotifyRemoteSubscriptionCallback
 
-- (id)initWithCallbacks:(void (^)(void))subscriber unsubscriber:(void (^)(void))unsubscriber{
+- (id)initWithCallbacks:(CallBack)subscriber unsubscriber:(CallBack)unsubscriber{
     if(self = [super init])
     {
         _isSubscribed = NO;
@@ -32,23 +32,29 @@
 
 -(void)subscribe{
     if(_isSubscribed == NO){
-        _subscriber();
-        _isSubscribed = YES;
+        _subscriber(^{
+            self->_isSubscribed = YES;
+        });
     }
 }
 
 -(void)unSubscribe{
     if(_isSubscribed == YES){
-        _unsubscriber();
-        _isSubscribed = NO;
+        _unsubscriber(^{
+            self->_isSubscribed = NO;
+        });
     }
 }
 
-+(RNSpotifyRemoteSubscriptionCallback*)subscriber:(void(^)(void))subscriber unsubscriber:(void(^)(void))unsubscriber{
+-(void)reset{
+    self->_isSubscribed = NO;
+}
+
++(RNSpotifyRemoteSubscriptionCallback*)subscriber:(CallBack)subscriber unsubscriber:(CallBack)unsubscriber{
     return [[self alloc] initWithCallbacks:subscriber unsubscriber:unsubscriber];
 }
 
-+(RNSpotifyRemoteSubscriptionCallback*)unsubscriber:(void(^)(void))unsubscriber subscriber:(void(^)(void))subscriber{
++(RNSpotifyRemoteSubscriptionCallback*)unsubscriber:(CallBack)unsubscriber subscriber:(CallBack)subscriber{
     return [[self alloc] initWithCallbacks:subscriber unsubscriber:unsubscriber];
 }
 

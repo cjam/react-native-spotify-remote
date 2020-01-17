@@ -9,15 +9,20 @@
 #ifndef RNSpotifySubscriptionCallback_h
 #define RNSpotifySubscriptionCallback_h
 
+// This just defines a callback that takes a void callback as an argument
+// This is so that we can pass an onSuccess callback to the subscriber
+#define CallBack void(^)(void(^)(void))
+
 @interface RNSpotifyRemoteSubscriptionCallback : NSObject
 
--(id)initWithCallbacks:(void(^)(void))subscriber unsubscriber:(void(^)(void))unsubscriber;
+-(id)initWithCallbacks:(CallBack)subscriber unsubscriber:(CallBack)unsubscriber;
 -(void)subscribe;
 -(void)unSubscribe;
+-(void)reset;
 
-+(RNSpotifyRemoteSubscriptionCallback*)subscriber:(void(^)(void))subscriber unsubscriber:(void(^)(void))unsubscriber;
++(RNSpotifyRemoteSubscriptionCallback*)subscriber:(CallBack)subscriber unsubscriber:(CallBack)unsubscriber;
 
-+(RNSpotifyRemoteSubscriptionCallback*)unsubscriber:(void(^)(void))unsubscriber subscriber:(void(^)(void))subscriber;
++(RNSpotifyRemoteSubscriptionCallback*)unsubscriber:(CallBack)unsubscriber subscriber:(CallBack)subscriber;
 
 @end
 
