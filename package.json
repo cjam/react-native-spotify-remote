@@ -32,7 +32,8 @@
     "docs": "typedoc --options typedoc.json --excludeExternals",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "yarn submodules && yarn rebuild",
-    "submodules":"git submodule update --init --recursive"
+    "submodules": "git submodule update --init --recursive",
+    "example": "concurrently -n \"server,packager\" -c \"yellow,cyan\" \"cd example-server && yarn start\" \"cd example && yarn start\""
   },
   "peerDependencies": {
     "react-native": "^0.53.3"
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/react-native": "^0.57.0",
+    "concurrently": "^5.0.2",
     "typedoc": "^0.15.4",
     "typescript": "^3.7.3"
   }

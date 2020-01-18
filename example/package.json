@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "postinstall": "node ./scripts/examples_postinstall.js",
-    "refresh": "rimraf ./node_modules/react-native-spotify-remote && yarn add file:.."
+    "update-package": "pushd ../; yarn build && popd && rimraf ./node_modules/react-native-spotify-remote && yarn add file:.."
   },
   "dependencies": {
     "@react-native-community/slider": "^2.0.8",
