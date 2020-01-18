@@ -144,20 +144,17 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 
 - (void)appRemote:(nonnull SPTAppRemote *)appRemote didDisconnectWithError:(nullable NSError *)error {
     [RNSpotifyRemotePromise rejectCompletions:_appRemoteCallbacks error:[RNSpotifyRemoteError errorWithNSError:error]];
-    NSLog(@"App Remote disconnected");
     [self resetEventSubscriptions];
     [self sendEvent:EventNameRemoteDisconnected args:@[]];
 }
 
 - (void)appRemote:(nonnull SPTAppRemote *)appRemote didFailConnectionAttemptWithError:(nullable NSError *)error {
     [RNSpotifyRemotePromise rejectCompletions:_appRemoteCallbacks error:[RNSpotifyRemoteError errorWithNSError:error]];
-    NSLog(@"App Failed To Connect to Spotify");
 }
 
 - (void)appRemoteDidEstablishConnection:(nonnull SPTAppRemote *)connectedRemote {
     [RNSpotifyRemotePromise resolveCompletions:_appRemoteCallbacks result:_appRemote];
     [self handleEventSubscriptions];
-    NSLog(@"App Remote Connection Initiated");
     [self sendEvent:EventNameRemoteConnected args:@[]];
 }
 
@@ -354,7 +351,6 @@ RCT_EXPORT_METHOD(getCrossfadeState:(RCTPromiseResolveBlock)resolve reject:(RCTP
                     [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.BadResponse message:@"Couldn't parse returned crossfade state"] reject:reject];
                 }
             }
-            
         }];
     });
 }
