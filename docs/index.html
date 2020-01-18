@@ -2374,9 +2374,6 @@ img {
 			<a href="enums/apiscope.html" class="tsd-kind-icon">Api<wbr>Scope</a>
 		</li>
 		<li class=" tsd-kind-enum">
-			<a href="enums/contenttype.html" class="tsd-kind-icon">Content<wbr>Type</a>
-		</li>
-		<li class=" tsd-kind-enum">
 			<a href="enums/repeatmode.html" class="tsd-kind-icon">Repeat<wbr>Mode</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2389,6 +2386,9 @@ img {
 			<a href="interfaces/contentitem.html" class="tsd-kind-icon">Content<wbr>Item</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="interfaces/crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="interfaces/playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2396,6 +2396,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="interfaces/playerstate.html" class="tsd-kind-icon">Player<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="interfaces/recommendedcontentoptions.html" class="tsd-kind-icon">Recommended<wbr>Content<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="interfaces/spotifyapiconfig.html" class="tsd-kind-icon">Spotify<wbr>Api<wbr>Config</a>
@@ -2414,6 +2417,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="interfaces/typedeventemitter.html" class="tsd-kind-icon">Typed<wbr>Event<wbr>Emitter</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="globals.html#contenttype" class="tsd-kind-icon">Content<wbr>Type</a>
 		</li>
 		<li class=" tsd-kind-variable">
 			<a href="globals.html#spotifyauth" class="tsd-kind-icon">Spotify<wbr>Auth</a>
@@ -2630,7 +2636,6 @@ If you have issues linking the module, please check that gradle is updated to th
 						<h3>Enumerations</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-enum"><a href="enums/apiscope.html" class="tsd-kind-icon">Api<wbr>Scope</a></li>
-							<li class="tsd-kind-enum"><a href="enums/contenttype.html" class="tsd-kind-icon">Content<wbr>Type</a></li>
 							<li class="tsd-kind-enum"><a href="enums/repeatmode.html" class="tsd-kind-icon">Repeat<wbr>Mode</a></li>
 						</ul>
 					</section>
@@ -2640,15 +2645,23 @@ If you have issues linking the module, please check that gradle is updated to th
 							<li class="tsd-kind-interface"><a href="interfaces/album.html" class="tsd-kind-icon">Album</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/artist.html" class="tsd-kind-icon">Artist</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/contentitem.html" class="tsd-kind-icon">Content<wbr>Item</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackrestrictions.html" class="tsd-kind-icon">Playback<wbr>Restrictions</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playerstate.html" class="tsd-kind-icon">Player<wbr>State</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/recommendedcontentoptions.html" class="tsd-kind-icon">Recommended<wbr>Content<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyapiconfig.html" class="tsd-kind-icon">Spotify<wbr>Api<wbr>Config</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyauth.html" class="tsd-kind-icon">Spotify<wbr>Auth</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyremoteapi.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Api</a></li>
 							<li class="tsd-kind-interface tsd-is-not-exported"><a href="interfaces/spotifyremoteevents.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Events</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/track.html" class="tsd-kind-icon">Track</a></li>
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/typedeventemitter.html" class="tsd-kind-icon">Typed<wbr>Event<wbr>Emitter</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Type aliases</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-type-alias"><a href="globals.html#contenttype" class="tsd-kind-icon">Content<wbr>Type</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -2660,6 +2673,19 @@ If you have issues linking the module, please check that gradle is updated to th
 						</ul>
 					</section>
 				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Type aliases</h2>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="contenttype" class="tsd-anchor"></a>
+				<h3>Content<wbr>Type</h3>
+				<div class="tsd-signature tsd-kind-icon">Content<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"fitness"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"navigation"</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentType.ts#L2">ContentType.ts:2</a></li>
+					</ul>
+				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -2680,7 +2706,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;_auth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L25">index.ts:25</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2696,7 +2722,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> =&nbsp;_remote</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L33">index.ts:33</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

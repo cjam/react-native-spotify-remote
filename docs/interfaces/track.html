@@ -2374,9 +2374,6 @@ img {
 			<a href="../enums/apiscope.html" class="tsd-kind-icon">Api<wbr>Scope</a>
 		</li>
 		<li class=" tsd-kind-enum">
-			<a href="../enums/contenttype.html" class="tsd-kind-icon">Content<wbr>Type</a>
-		</li>
-		<li class=" tsd-kind-enum">
 			<a href="../enums/repeatmode.html" class="tsd-kind-icon">Repeat<wbr>Mode</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2389,6 +2386,9 @@ img {
 			<a href="contentitem.html" class="tsd-kind-icon">Content<wbr>Item</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2396,6 +2396,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="playerstate.html" class="tsd-kind-icon">Player<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="recommendedcontentoptions.html" class="tsd-kind-icon">Recommended<wbr>Content<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="spotifyapiconfig.html" class="tsd-kind-icon">Spotify<wbr>Api<wbr>Config</a>
@@ -2422,7 +2425,16 @@ img {
 					<a href="track.html#duration" class="tsd-kind-icon">duration</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="track.html#episode" class="tsd-kind-icon">episode</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="track.html#name" class="tsd-kind-icon">name</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="track.html#podcast" class="tsd-kind-icon">podcast</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="track.html#saved" class="tsd-kind-icon">saved</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="track.html#uri" class="tsd-kind-icon">uri</a>
@@ -2431,6 +2443,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="typedeventemitter.html" class="tsd-kind-icon">Typed<wbr>Event<wbr>Emitter</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../globals.html#contenttype" class="tsd-kind-icon">Content<wbr>Type</a>
 		</li>
 		<li class=" tsd-kind-variable">
 			<a href="../globals.html#spotifyauth" class="tsd-kind-icon">Spotify<wbr>Auth</a>
@@ -2463,7 +2478,10 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#album" class="tsd-kind-icon">album</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#artist" class="tsd-kind-icon">artist</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#duration" class="tsd-kind-icon">duration</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#episode" class="tsd-kind-icon">episode</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#name" class="tsd-kind-icon">name</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#podcast" class="tsd-kind-icon">podcast</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#saved" class="tsd-kind-icon">saved</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="track.html#uri" class="tsd-kind-icon">uri</a></li>
 						</ul>
 					</section>
@@ -2503,12 +2521,42 @@ img {
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="episode" class="tsd-anchor"></a>
+				<h3>episode</h3>
+				<div class="tsd-signature tsd-kind-icon">episode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/Track.ts#L11">Track.ts:11</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="name" class="tsd-anchor"></a>
 				<h3>name</h3>
 				<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
 						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/Track.ts#L5">Track.ts:5</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="podcast" class="tsd-anchor"></a>
+				<h3>podcast</h3>
+				<div class="tsd-signature tsd-kind-icon">podcast<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/Track.ts#L12">Track.ts:12</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="saved" class="tsd-anchor"></a>
+				<h3>saved</h3>
+				<div class="tsd-signature tsd-kind-icon">saved<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/Track.ts#L10">Track.ts:10</a></li>
 					</ul>
 				</aside>
 			</section>
