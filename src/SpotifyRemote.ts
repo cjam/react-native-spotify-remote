@@ -3,8 +3,10 @@ import RNEvents from 'react-native-events';
 import TypedEventEmitter from './TypedEventEmitter';
 import RepeatMode from './RepeatMode';
 import PlayerState from './PlayerState';
-import ContentType from './ContentType';
 import ContentItem from './ContentItem';
+import CrossfadeState from './CrossfadeState';
+import RecommendedContentOptions from './RecommendedContentOptions';
+import ContentType from './ContentType';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -30,7 +32,7 @@ interface SpotifyRemoteEvents {
      */
     "remoteDisconnected": void;
 
-    
+
     /**
      * Fired when the Spotify Remote Connection is established with the Spotify App
      *
@@ -72,7 +74,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      * @memberof SpotifyNativeApi
      */
     isConnectedAsync(): Promise<boolean>;
-    
+
     /**
      * Connect to Spotify Application via the access token
      *
@@ -80,7 +82,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      * @returns {Promise<void>}
      * @memberof SpotifyRemoteApi
      */
-    connect(accessToken:string): Promise<void>;
+    connect(accessToken: string): Promise<void>;
 
     /**
      * Play a track, album, playlist or artist via spotifyUri
@@ -92,6 +94,25 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     playUri(spotifyUri: string): Promise<void>;
 
     /**
+     * Plays a content item
+     *
+     * @param {ContentItem} item
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
+    playItem(item: ContentItem): Promise<void>;
+
+    /**
+     * Plays an item (like a playlist), skipping to a particular track inside
+     *
+     * @param {ContentItem} item - item to play (usually a playlist)
+     * @param {number} skipToTrackIndex - track in playlist to skip to
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
+    playItemWithIndex(item: ContentItem, skipToTrackIndex: number): Promise<void>;
+
+    /**
      * Queues the track given by spotifyUri in Spotify
      * example: spotify:track:<id>
      * @param {string} spotifyUri
@@ -100,16 +121,117 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      */
     queueUri(spotifyUri: string): Promise<void>;
 
+    /**
+     * Seeks to a position within a song
+     *
+     * @param {number} positionMs - Position in milliseconds
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     seek(positionMs: number): Promise<void>;
+
+    /**
+     * Resumes playing
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     resume(): Promise<void>;
+
+    /**
+     * Pauses Playback
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     pause(): Promise<void>;
+
+    /**
+     * Skips to next item in context
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     skipToNext(): Promise<void>;
+
+    /**
+     * Skips to previous item in context
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     skipToPrevious(): Promise<void>;
+
+    /**
+     * Sets shuffling
+     *
+     * @param {boolean} shuffling
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     setShuffling(shuffling: boolean): Promise<void>;
+
+    /**
+     * Sets repeat mode of player
+     *
+     * @param {RepeatMode} mode
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     setRepeatMode(mode: RepeatMode): Promise<void>;
+
+    /**
+     * Gets the current state of the player
+     *
+     * @returns {Promise<PlayerState>}
+     * @memberof SpotifyRemoteApi
+     */
     getPlayerState(): Promise<PlayerState>;
-    getRecommendedContentItems(type: ContentType): Promise<ContentItem[]>;
+
+    /**
+     * Retrieves the root content items for a given type.
+     *
+     * @param {ContentType} [type]
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
+    getRootContentItems(type?: ContentType): Promise<ContentItem[]>;
+
+    /**
+     * Gets the recommended content items for type
+     *
+     * @param {RecommendedContentOptions} options
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
+    getRecommendedContentItems(options: RecommendedContentOptions): Promise<ContentItem[]>;
+
+    /**
+     * Gets the children of a given item
+     *
+     * @param {ContentItem} item
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
     getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>): Promise<ContentItem[]>;
+
+
+    /**
+     * Gets a ContentItem from a uri
+     *
+     * @param {string} uri
+     * @returns {Promise<ContentItem>}
+     * @memberof SpotifyRemoteApi
+     */
+    getContentItemForUri(uri: string): Promise<ContentItem>;
+
+    /**
+     * Retrieves the current crossfade state of the player.
+     *
+     * @returns {Promise<CrossfadeState>}
+     * @memberof SpotifyRemoteApi
+     */
+    getCrossfadeState(): Promise<CrossfadeState>;
 }
 
 /**
@@ -126,6 +248,9 @@ SpotifyRemote.setPlaying = (playing: boolean) => {
     // worry about it here
     return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
 }
+
+
+
 
 
 /**

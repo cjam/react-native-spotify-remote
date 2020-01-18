@@ -12,9 +12,8 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# Ideally these artificats would get built and packaged up by a CI system, but for now
-# So that we can install this package from the repo we will commit them
-# dist  
+
+dist/
 
 # Xcode
 #

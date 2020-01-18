@@ -2374,9 +2374,6 @@ img {
 			<a href="../enums/apiscope.html" class="tsd-kind-icon">Api<wbr>Scope</a>
 		</li>
 		<li class=" tsd-kind-enum">
-			<a href="../enums/contenttype.html" class="tsd-kind-icon">Content<wbr>Type</a>
-		</li>
-		<li class=" tsd-kind-enum">
 			<a href="../enums/repeatmode.html" class="tsd-kind-icon">Repeat<wbr>Mode</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2388,6 +2385,12 @@ img {
 		<li class="current tsd-kind-interface">
 			<a href="contentitem.html" class="tsd-kind-icon">Content<wbr>Item</a>
 			<ul>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="contentitem.html#availableoffline" class="tsd-kind-icon">available<wbr>Offline</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="contentitem.html#children" class="tsd-kind-icon">children</a>
+				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="contentitem.html#container" class="tsd-kind-icon">container</a>
 				</li>
@@ -2409,6 +2412,9 @@ img {
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2416,6 +2422,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="playerstate.html" class="tsd-kind-icon">Player<wbr>State</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="recommendedcontentoptions.html" class="tsd-kind-icon">Recommended<wbr>Content<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="spotifyapiconfig.html" class="tsd-kind-icon">Spotify<wbr>Api<wbr>Config</a>
@@ -2434,6 +2443,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="typedeventemitter.html" class="tsd-kind-icon">Typed<wbr>Event<wbr>Emitter</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../globals.html#contenttype" class="tsd-kind-icon">Content<wbr>Type</a>
 		</li>
 		<li class=" tsd-kind-variable">
 			<a href="../globals.html#spotifyauth" class="tsd-kind-icon">Spotify<wbr>Auth</a>
@@ -2463,6 +2475,8 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="contentitem.html#availableoffline" class="tsd-kind-icon">available<wbr>Offline</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="contentitem.html#children" class="tsd-kind-icon">children</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="contentitem.html#container" class="tsd-kind-icon">container</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="contentitem.html#id" class="tsd-kind-icon">id</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="contentitem.html#playable" class="tsd-kind-icon">playable</a></li>
@@ -2477,17 +2491,64 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="availableoffline" class="tsd-anchor"></a>
+				<h3>available<wbr>Offline</h3>
+				<div class="tsd-signature tsd-kind-icon">available<wbr>Offline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L37">ContentItem.ts:37</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>true if the item is available offline, or if it has any child that is available offline, otherwise false.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{boolean}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyContentItem</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="children" class="tsd-anchor"></a>
+				<h3>children</h3>
+				<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L63">ContentItem.ts:63</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A list of the content item’s children.</p>
+					</div>
+					<p><em>Note: This is not populated for all container items as some of them are fetched lazily.</em></p>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{ContentItem[]}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>ContentItem</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="container" class="tsd-anchor"></a>
 				<h3>container</h3>
 				<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L45">ContentItem.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L53">ContentItem.ts:53</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Returns YES if the item is expected to contain children, otherwise NO.</p>
+						<p>Returns true if the item is expected to contain children, otherwise false.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>type</dt>
@@ -2528,12 +2589,12 @@ img {
 				<div class="tsd-signature tsd-kind-icon">playable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L37">ContentItem.ts:37</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ContentItem.ts#L45">ContentItem.ts:45</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Returns YES if the item is directly playable, otherwise NO.</p>
+						<p>Returns true if the item is directly playable, otherwise false.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>type</dt>
