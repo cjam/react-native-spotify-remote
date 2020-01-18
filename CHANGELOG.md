@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2020-01-17
+### Changed
+- `getRecommendedContentItems` now takes `options` object instead of `ContentType`
+- Example app to more fully exercise exposed functionality [#20](https://github.com/cjam/react-native-spotify-remote/issues/20)
+### Fixed
+- playerStateChanged event not triggered [#14](https://github.com/cjam/react-native-spotify-remote/issues/14)
+### Added
+- `playItem`
+- `playItemWithIndex` for [#15](https://github.com/cjam/react-native-spotify-remote/issues/15)
+- `getRootContentItems`
+- `getContentItemForUri`
+- `getCrossfadeState`
+- `Track` Properties
+    - `saved`
+    - `episode`
+    - `podcast`
+- `ContentItem` Properties
+    - `availableOffline`
+    - `children`
+
 ## [0.0.8] - 2019-12-14
 ### Fixed 
 - #12: 'React/RCTConvert.h' file not found
