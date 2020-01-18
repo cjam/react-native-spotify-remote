@@ -5,6 +5,8 @@ import RepeatMode from './RepeatMode';
 import PlayerState from './PlayerState';
 import ContentItem from './ContentItem';
 import CrossfadeState from './CrossfadeState';
+import RecommendedContentOptions from './RecommendedContentOptions';
+import ContentType from './ContentType';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -160,7 +162,6 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      */
     skipToPrevious(): Promise<void>;
 
-
     /**
      * Sets shuffling
      *
@@ -187,26 +188,23 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      */
     getPlayerState(): Promise<PlayerState>;
 
-
     /**
-     * Retreives the root content items of the user
+     * Retrieves the root content items for a given type.
      *
-     * @param {string} [type] - can be *default*, *fitness* or *navigation*
+     * @param {ContentType} [type]
      * @returns {Promise<ContentItem[]>}
      * @memberof SpotifyRemoteApi
      */
-    getRootContentItems(type?: string): Promise<ContentItem[]>;
+    getRootContentItems(type?: ContentType): Promise<ContentItem[]>;
 
     /**
-     * Gets the recomended content items
+     * Gets the recommended content items for type
      *
-     * @param {{ type?: string, flatten?: boolean }} options -
-     * - **type** : can be *default*, *fitness* or *navigation*
-     * - **flatten** : Flattens all of the containers into a single list 
+     * @param {RecommendedContentOptions} options
      * @returns {Promise<ContentItem[]>}
      * @memberof SpotifyRemoteApi
      */
-    getRecommendedContentItems(options: { type?: string, flatten?: boolean }): Promise<ContentItem[]>;
+    getRecommendedContentItems(options: RecommendedContentOptions): Promise<ContentItem[]>;
 
     /**
      * Gets the children of a given item
