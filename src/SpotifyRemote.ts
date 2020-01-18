@@ -191,7 +191,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     /**
      * Retreives the root content items of the user
      *
-     * @param {string} [type]
+     * @param {string} [type] - can be *default*, *fitness* or *navigation*
      * @returns {Promise<ContentItem[]>}
      * @memberof SpotifyRemoteApi
      */
@@ -200,7 +200,9 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     /**
      * Gets the recomended content items
      *
-     * @param {{ type?: string, flatten?: boolean }} options
+     * @param {{ type?: string, flatten?: boolean }} options -
+     * - **type** : can be *default*, *fitness* or *navigation*
+     * - **flatten** : Flattens all of the containers into a single list 
      * @returns {Promise<ContentItem[]>}
      * @memberof SpotifyRemoteApi
      */
