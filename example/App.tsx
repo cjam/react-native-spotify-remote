@@ -28,38 +28,21 @@ export function displayDuration(durationMs: number) {
     : d.toFormat("m:ss");
 }
 
-const SpotifyStatus = (props: { isConnected: boolean }) => {
-  const { isConnected } = props;
-  return isConnected ? (
-    <Text style={styles.connected}>Connected to Spotify!</Text>
-  )
-    : (
-      <Text style={styles.disconnected}>Not Connected to Spotify!</Text>
-    )
-}
-
-const ContentItemList: React.SFC = (props) => {
-
-  return (
-    <FlatList
-      data={['hello']}
-      renderItem={({ item, index }) => (
-        <ListItem>
-          <Text key={index}>{item}</Text>
-        </ListItem>
-      )}
-    />
-  )
-
-}
-
 const EnvVars: React.SFC = (props) => {
+  const [show, setShow] = useState(false);
   return (
     <View>
-      <Text style={styles.welcome}>App .env Variables</Text>
-      <Text style={styles.instructions}>Auth Redirect Url: {SPOTIFY_REDIRECT_URL}</Text>
-      <Text style={styles.instructions}>Token Refresh URL: {SPOTIFY_TOKEN_REFRESH_URL}</Text>
-      <Text style={styles.instructions}>Token Swap Url: {SPOTIFY_TOKEN_SWAP_URL}</Text>
+      <Button onPress={() => setShow(!show)}>
+        <Text>Environment Variables</Text>
+      </Button>
+      {show && (
+        <View>
+          <Text style={styles.welcome}>App .env Variables</Text>
+          <Text style={styles.instructions}>Auth Redirect Url: {SPOTIFY_REDIRECT_URL}</Text>
+          <Text style={styles.instructions}>Token Refresh URL: {SPOTIFY_TOKEN_REFRESH_URL}</Text>
+          <Text style={styles.instructions}>Token Swap Url: {SPOTIFY_TOKEN_SWAP_URL}</Text>
+        </View>
+      )}
     </View>
   )
 }
@@ -129,10 +112,9 @@ const SpotifyContentListItem: React.SFC<{ onPress?: (item: ContentItem) => void,
   )
 }
 
-
-
 const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) => void }> = ({ isConnected, onError }) => {
   const [parentItems, setParentItems] = useState<ContentItem[]>([]);
+  const [recommended, setRecommended] = useState<boolean>(true);
 
   // The current parent is the last parent if there are any
   const currentItem = parentItems[parentItems.length - 1];
@@ -164,9 +146,15 @@ const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) =>
     }
   }, [parentItems])
 
-  const fetchRecommendedItems = async () => {
+  const fetchItems = async () => {
     try {
-      const retrieved = await remote.getRecommendedContentItems({ type: "default", flatten: false });
+      let retrieved: ContentItem[] = [];
+      if (recommended) {
+        retrieved = await remote.getRecommendedContentItems({ type: "default", flatten: false });
+      } else {
+        retrieved = await remote.getRootContentItems("default");
+      }
+
       const rootItem: ContentItem = {
         title: "",
         availableOffline: false,
@@ -221,15 +209,29 @@ const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) =>
 
   useEffect(() => {
     if (isConnected) {
-      fetchRecommendedItems();
+      fetchItems();
     }
-  }, [isConnected]);
+  }, [isConnected, recommended]);
 
   return (
     <View>
       {currentItem && (
         <View style={{ display: 'flex', flexDirection: 'column' }}>
-          <View style={{ height: "91%" }}>
+          <View style={{ borderBottomColor: "gray", borderBottomWidth: 1, height: "9%" }}>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <Button
+                disabled={parentItems.length === 1}
+                bordered
+                small
+                style={{ margin: 5 }}
+                onPress={() => back()}
+              >
+                <Text>Back</Text>
+              </Button>
+              <Text style={{ flex: 1, fontSize: 20 }}>{currentItem.title}</Text>
+            </View>
+          </View>
+          <View style={{ height: "84%" }}>
             <FlatList
               data={currentItem.children}
               renderItem={({ item }) => <SpotifyContentListItem
@@ -243,18 +245,13 @@ const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) =>
               />}
             />
           </View>
-          <View style={{ borderTopColor: "gray", borderTopWidth: 1, height: "9%", display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <Button
-              disabled={parentItems.length === 1}
-              bordered
-              small
-              style={{ margin: 5 }}
-              onPress={() => back()}
-            >
-              <Text>Back</Text>
+          <View style={{ display: 'flex', height: "7%", flexDirection: 'row', alignContent: "stretch" }}>
+            <Button dark style={{ flex: 1, height: "100%" }} full bordered={!recommended} onPress={() => setRecommended(true)}>
+              <Text>Recommended</Text>
             </Button>
-            <Text style={{ flex: 1, fontSize: 20 }}>{currentItem.title}</Text>
-            <Text style={{ color: "gray" }}>({currentItem.children.length})</Text>
+            <Button dark style={{ flex: 1, height: "100%" }} full bordered={recommended} onPress={() => setRecommended(false)}>
+              <Text>Root</Text>
+            </Button>
           </View>
         </View>
       )}
@@ -262,7 +259,7 @@ const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) =>
   )
 }
 
-const TransportControls: React.SFC<{ playerState?: PlayerState }> = ({
+const TransportControls: React.SFC<{ playerState?: PlayerState, onError: (err: Error) => void }> = ({
   playerState: {
     paused = false,
     playbackOptions: {
@@ -277,27 +274,28 @@ const TransportControls: React.SFC<{ playerState?: PlayerState }> = ({
         name: artistName = ""
       } = {}
     } = {}
-  } = {}
+  } = {},
+  onError
 }) => {
   const buttons = [
     {
-      name: 'Previous',
+      name: '⏮',
       action: async () => await remote.skipToPrevious(),
     },
     {
-      name: 'Next',
+      name: '⏭',
       action: async () => await remote.skipToNext(),
     }
   ];
   // Put play/pause into the middle of the array
-  buttons.splice(1, 0, paused ?
+  buttons.splice(buttons.length / 2, 0, paused ?
     {
-      name: "Play",
+      name: "▶️",
       action: async () => await remote.resume()
     }
     :
     {
-      name: "Pause",
+      name: "⏸",
       action: async () => await remote.pause()
     }
   );
@@ -328,16 +326,16 @@ const TransportControls: React.SFC<{ playerState?: PlayerState }> = ({
           {buttons.map(({ name, action }, index) => (
             <Button
               key={`${index}`}
-              onPress={() => action()}
+              onPress={() => action().catch(onError)}
               transparent
               style={{
-                width: "33%",
+                width: `${(100 / buttons.length)}%`,
                 height: 60,
                 backgroundColor: "#FFF",
                 borderLeftWidth: index === 0 ? 1 : 0,
               }}
             >
-              <Text style={{ fontSize: 20, textAlign: "center", width: "100%" }}>{name}</Text>
+              <Text style={{ fontSize: 40, textAlign: "center", width: "100%" }}>{name}</Text>
             </Button>
           ))}
         </Segment>
@@ -394,6 +392,74 @@ const TransportControls: React.SFC<{ playerState?: PlayerState }> = ({
   )
 }
 
+const Miscelaneous: React.SFC<{ onError: (err: Error) => void }> = ({ onError }) => {
+  const [item, setItem] = useState<ContentItem>();
+
+  const getContentItemForUri = useCallback(async () => {
+    const retrievedItem = await remote.getContentItemForUri("spotify:playlist:37i9dQZF1DWXLeA8Omikj7");
+    setItem(retrievedItem);
+  }, []);
+
+  const playItem = useCallback(async () => {
+    if (item != undefined) {
+      await remote.playItem(item);
+    }
+  }, [item])
+
+  const playTrackInItem = useCallback(async (index: number) => {
+    if (item != undefined) {
+      await remote.playItemWithIndex(item, index);
+    }
+  }, [item]);
+
+  const getUserItem = useCallback(async () => {
+    const userItem = await remote.getContentItemForUri("spotify:user:thecjam");
+    console.log(userItem);
+  }, []);
+
+  const getCrossfadeState = useCallback(async () => {
+    try {
+      const cfstate = await remote.getCrossfadeState();
+      Alert.alert("Crossfade State", `
+      Enabled: ${cfstate.enabled ? "Yes" : "No"}
+      Duration: ${cfstate.duration} ms
+      `
+      )
+    } catch (err) {
+      onError(err);
+    }
+  }, [])
+
+  return (
+    <View style={{ padding: 30 }}>
+      {item == undefined ?
+        (
+          <Button onPress={() => getContentItemForUri()}>
+            <Text>Get Content Item For Uri</Text>
+          </Button>
+        )
+        :
+        (
+          <View style={{ display: 'flex', flexDirection: 'column', height: 220, justifyContent: 'space-around', borderColor: "gray", borderWidth: 1, padding: 5 }}>
+            <Text>{item.title}</Text>
+            <Text>{item.subtitle}</Text>
+            <Text>{item.uri}</Text>
+            <Button disabled={item == undefined} onPress={() => playItem()}>
+              <Text>Play {item.title}</Text>
+            </Button>
+            <Button disabled={item == undefined} onPress={() => playTrackInItem(5)}>
+              <Text>Play {item.title} (skip to 6th song) </Text>
+            </Button>
+          </View>
+        )
+      }
+      <Button style={{ marginVertical: 30 }} onPress={() => getCrossfadeState()}>
+        <Text>Get Crossfade State</Text>
+      </Button>
+      <EnvVars />
+    </View >
+  )
+}
 
 interface AppProps {
 }
@@ -476,7 +542,7 @@ const App: React.FunctionComponent<AppProps> = (props) => {
           <ConnectButton isConnected={isConnected} token={token} />
           <Tabs initialPage={1}>
             <Tab heading="Now Playing" tabStyle={{ padding: 10 }}>
-              <TransportControls playerState={playerState} />
+              <TransportControls onError={handleError} playerState={playerState} />
             </Tab>
             <Tab heading="Songs">
               <SpotifyContent
@@ -484,12 +550,12 @@ const App: React.FunctionComponent<AppProps> = (props) => {
                 onError={handleError}
               />
             </Tab>
-            <Tab heading=".env">
-              <EnvVars />
+            <Tab heading="Misc">
+              <Miscelaneous onError={handleError} />
             </Tab>
           </Tabs>
           {error && (
-            <Text onPress={()=>setError(undefined)} style={styles.error}>{error}</Text>
+            <Text onPress={() => setError(undefined)} style={styles.error}>{error}</Text>
           )}
         </View>
       </Root>
