@@ -32,6 +32,17 @@
     return [self RNSpotifyError:[RNSpotifyRemoteError errorWithNSError:error]];
 }
 
++(id)SPTAppRemoteCrossfadeState:(NSObject<SPTAppRemoteCrossfadeState> *)state{
+    if(state == nil)
+    {
+        return [NSNull null];
+    }
+    return @{
+        @"duration": [NSNumber numberWithInteger:state.duration],
+        @"enabled": [NSNumber numberWithBool:state.enabled],
+    };
+}
+
 +(id)SPTAppRemotePlayerState:(NSObject<SPTAppRemotePlayerState>*) state{
     if(state == nil)
     {

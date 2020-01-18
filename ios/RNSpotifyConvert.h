@@ -12,6 +12,7 @@
 +(id)RNSpotifyError:(RNSpotifyRemoteError*)error;
 +(id)NSError:(NSError*)error;
 +(id)SPTAppRemotePlayerState:(NSObject<SPTAppRemotePlayerState>*) state;
++(id)SPTAppRemoteCrossfadeState:(NSObject<SPTAppRemoteCrossfadeState>*) state;
 +(id)SPTAppRemotePlaybackRestrictions:(NSObject<SPTAppRemotePlaybackRestrictions>*) restrictions;
 +(id)SPTAppRemotePlaybackOptions:(NSObject<SPTAppRemotePlaybackOptions>*) options;
 +(id)SPTAppRemoteTrack:(NSObject<SPTAppRemoteTrack> *) track;

@@ -8,6 +8,7 @@ export { default as Artist } from './Artist';
 export { default as Album } from './Album';
 export { default as ContentType } from './ContentType';
 export { default as ContentItem } from './ContentItem';
+export { default as CrossfadeState } from './CrossfadeState';
 export { SpotifyAuth } from './SpotifyAuth';
 export { SpotifyRemoteApi } from './SpotifyRemote';
 

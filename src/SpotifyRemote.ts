@@ -4,6 +4,7 @@ import TypedEventEmitter from './TypedEventEmitter';
 import RepeatMode from './RepeatMode';
 import PlayerState from './PlayerState';
 import ContentItem from './ContentItem';
+import CrossfadeState from './CrossfadeState';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -91,6 +92,25 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     playUri(spotifyUri: string): Promise<void>;
 
     /**
+     * Plays a content item
+     *
+     * @param {ContentItem} item
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
+    playItem(item: ContentItem): Promise<void>;
+
+    /**
+     * Plays an item (like a playlist), skipping to a particular track inside
+     *
+     * @param {ContentItem} item - item to play (usually a playlist)
+     * @param {number} skipToTrackIndex - track in playlist to skip to
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
+    playItemWithIndex(item: ContentItem, skipToTrackIndex: number): Promise<void>;
+
+    /**
      * Queues the track given by spotifyUri in Spotify
      * example: spotify:track:<id>
      * @param {string} spotifyUri
@@ -99,17 +119,119 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
      */
     queueUri(spotifyUri: string): Promise<void>;
 
+    /**
+     * Seeks to a position within a song
+     *
+     * @param {number} positionMs - Position in milliseconds
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     seek(positionMs: number): Promise<void>;
+
+    /**
+     * Resumes playing
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     resume(): Promise<void>;
+
+    /**
+     * Pauses Playback
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     pause(): Promise<void>;
+
+    /**
+     * Skips to next item in context
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     skipToNext(): Promise<void>;
+
+    /**
+     * Skips to previous item in context
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     skipToPrevious(): Promise<void>;
+
+
+    /**
+     * Sets shuffling
+     *
+     * @param {boolean} shuffling
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     setShuffling(shuffling: boolean): Promise<void>;
+
+    /**
+     * Sets repeat mode of player
+     *
+     * @param {RepeatMode} mode
+     * @returns {Promise<void>}
+     * @memberof SpotifyRemoteApi
+     */
     setRepeatMode(mode: RepeatMode): Promise<void>;
+
+    /**
+     * Gets the current state of the player
+     *
+     * @returns {Promise<PlayerState>}
+     * @memberof SpotifyRemoteApi
+     */
     getPlayerState(): Promise<PlayerState>;
+
+
+    /**
+     * Retreives the root content items of the user
+     *
+     * @param {string} [type]
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
+    getRootContentItems(type?: string): Promise<ContentItem[]>;
+
+    /**
+     * Gets the recomended content items
+     *
+     * @param {{ type?: string, flatten?: boolean }} options
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
     getRecommendedContentItems(options: { type?: string, flatten?: boolean }): Promise<ContentItem[]>;
+
+    /**
+     * Gets the children of a given item
+     *
+     * @param {ContentItem} item
+     * @returns {Promise<ContentItem[]>}
+     * @memberof SpotifyRemoteApi
+     */
     getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>): Promise<ContentItem[]>;
+
+
+    /**
+     * Gets a ContentItem from a uri
+     *
+     * @param {string} uri
+     * @returns {Promise<ContentItem>}
+     * @memberof SpotifyRemoteApi
+     */
     getContentItemForUri(uri: string): Promise<ContentItem>;
+
+    /**
+     * Retrieves the current crossfade state of the player.
+     *
+     * @returns {Promise<CrossfadeState>}
+     * @memberof SpotifyRemoteApi
+     */
+    getCrossfadeState(): Promise<CrossfadeState>;
 }
 
 /**
