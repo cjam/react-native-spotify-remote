@@ -7,7 +7,7 @@
   "bugs": {
     "url": "https://github.com/cjam/react-native-spotify-remote/issues"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Native wrapper around the Spotify Remote SDK",
   "author": {
     "name": "Colter McQuay"
@@ -31,8 +31,11 @@
     "watch": "yarn build --watch",
     "docs": "typedoc --options typedoc.json --excludeExternals",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "yarn submodules && yarn rebuild",
-    "submodules": "git submodule update --init --recursive",
+    "prepublishOnly": "yarn rebuild",
+    "prepack": "yarn submodules && yarn cleanup:ios",
+    "postpack": "yarn submodules",
+    "cleanup:ios": "pushd ios/external/SpotifySDK/SpotifyiOS.framework; rm SpotifyiOS Headers; mv Versions/Current/* .; popd",
+    "submodules": "rm -rf ios/external/* && git submodule update --init --recursive",
     "example": "concurrently -n \"server,packager\" -c \"yellow,cyan\" \"cd example-server && yarn start\" \"cd example && yarn start\""
   },
   "peerDependencies": {
