@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2020-01-21
+### Fixed
+- Missing SpotifyiOS headers / Framework [#25](https://github.com/cjam/react-native-spotify-remote/issues/20)
+
 ## [0.1.0] - 2020-01-17
 ### Changed
 - `getRecommendedContentItems` now takes `options` object instead of `ContentType`
