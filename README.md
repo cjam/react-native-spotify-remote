@@ -27,6 +27,8 @@ npm install --save react-native-spotify-remote
 
 ### iOS
 
+>This library requires being built with **XCode 11** for reasons given [here](https://github.com/spotify/ios-sdk/issues/179#issuecomment-581032275).
+
 #### Cocoapods (Recommended)
 
 By far the easiest way to integrate into your project.  In your `ios/PodFile` add the following lines to your projects target:
