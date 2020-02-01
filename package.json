@@ -36,7 +36,8 @@
     "postpack": "yarn submodules",
     "cleanup:ios": "pushd ios/external/SpotifySDK/SpotifyiOS.framework; rm SpotifyiOS Headers; mv Versions/Current/* .; popd",
     "submodules": "rm -rf ios/external/* && git submodule update --init --recursive",
-    "example": "concurrently -n \"server,packager\" -c \"yellow,cyan\" \"cd example-server && yarn start\" \"cd example && yarn start\""
+    "example": "concurrently -n \"server,packager\" -c \"yellow,cyan\" \"cd example-server && yarn start\" \"cd example && yarn start\"",
+    "xcode": "open example/ios/example.xcworkspace"
   },
   "peerDependencies": {
     "react-native": "^0.53.3"
