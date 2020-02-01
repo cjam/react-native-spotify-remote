@@ -200,7 +200,7 @@ const SpotifyContent: React.SFC<{ isConnected: boolean, onError: (err: Error) =>
   }, []);
 
   const selectContentItem = useCallback(async (item: ContentItem) => {
-    if (item.container || item.id.toLowerCase().includes("spotify:playlist")) {
+    if (item.container || !item.uri.toLowerCase().includes(":track:")) {
       await pushParent(item);
     } else if (item.playable) {
       await showItemActions(item);
@@ -412,9 +412,24 @@ const Miscelaneous: React.SFC<{ onError: (err: Error) => void }> = ({ onError })
     }
   }, [item]);
 
-  const getUserItem = useCallback(async () => {
-    const userItem = await remote.getContentItemForUri("spotify:user:thecjam");
-    console.log(userItem);
+
+  const queueManyTracks = useCallback(async () => {
+    const tracks = [
+      "spotify:track:2dlEdDEmuQsrcXaAL3Znzi",
+      "spotify:track:7Cuk8jsPPoNYQWXK9XRFvG",
+      "spotify:track:0ofHAoxe9vBkTCp2UQIavz",
+      "spotify:track:7ejK5qMqXciqGgMIqj0rFr",
+      "spotify:track:5LYJ631w9ps5h9tdvac7yP",
+      "spotify:track:5dRQUolXAVX3BbCiIxmSsf",
+      "spotify:track:76798uYU1DhBRVWxSo1bhY",
+      "spotify:track:7Ar4G7Ci11gpt6sfH9Cgz5",
+      "spotify:track:5IMtdHjJ1OtkxbGe4zfUxQ"
+    ];
+
+    // Need to queue each track serially
+    for(const track of tracks){
+      await remote.queueUri(track);
+    }
   }, []);
 
   const getCrossfadeState = useCallback(async () => {
@@ -455,6 +470,9 @@ const Miscelaneous: React.SFC<{ onError: (err: Error) => void }> = ({ onError })
       }
       <Button style={{ marginVertical: 30 }} onPress={() => getCrossfadeState()}>
         <Text>Get Crossfade State</Text>
+      </Button>
+      <Button style={{ marginBottom: 30 }} onPress={() => queueManyTracks()}>
+        <Text>Queue Many Tracks</Text>
       </Button>
       <EnvVars />
     </View >
