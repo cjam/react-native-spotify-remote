@@ -42,6 +42,13 @@ This will build the package and reinstall it in the example app.
 
 > NOTE: When doing this, it's very likely that you will need to restart the `example` packager/server.
 
+### Updating Spotify iOS SDK
+
+```sh
+cd ./ios/external/SpotifySDK/ && git checkout v<tagged_version>
+```
+Then commit the change to the `SpotifySDK` folder.
+
 ### Publishing
 Unfortunately, this package doesn't yet have Continuous Deployment setup:
 

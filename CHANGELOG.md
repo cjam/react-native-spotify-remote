@@ -3,9 +3,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [Unreleased]
+
+## [0.2.0] - 2020-02-19
+### Changed
+- Spotify SDK from 1.2.0 to 1.2.2
+- Example App to use an App Context so that components could be factored to separate files
 ### Added
+- `ApiConfig` (Used to authenticate and initialize session with `SpotifyAuth`)
+    - `PlayURI` - URI to play when authorizing
+    - `showDialog` - Whether or not to show the auth dialog
+- `SpotifyAuth`
+    - `endSession()` - Ends current session
+    - `getSession()` - Gets the current session object
+- `SpotifySession` - Session Object Definition
+- `SpotifyRemote`
+    - `disconnect()` - Disconnects the Remote from Spotify
+- [Feature Matrix](./README.md#Features) to Readme (Docs)
 - Example of queuing many tracks
 - Requirement of XCode 11
 
