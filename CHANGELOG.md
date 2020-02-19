@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Example App to use an App Context so that components could be factored to separate files
 ### Added
 - `ApiConfig` (Used to authenticate and initialize session with `SpotifyAuth`)
-    - `PlayURI` - URI to play when authorizing
+    - `PlayURI` - URI to play when authorizing ([Issue #29](https://github.com/cjam/react-native-spotify-remote/issues/29))
     - `showDialog` - Whether or not to show the auth dialog
 - `SpotifyAuth`
     - `endSession()` - Ends current session
@@ -25,17 +25,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] - 2020-01-21
 ### Fixed
-- Missing SpotifyiOS headers / Framework [#25](https://github.com/cjam/react-native-spotify-remote/issues/20)
+- Missing SpotifyiOS headers / Framework [Issue #25](https://github.com/cjam/react-native-spotify-remote/issues/25)
 
 ## [0.1.0] - 2020-01-17
 ### Changed
 - `getRecommendedContentItems` now takes `options` object instead of `ContentType`
-- Example app to more fully exercise exposed functionality [#20](https://github.com/cjam/react-native-spotify-remote/issues/20)
+- Example app to more fully exercise exposed functionality [Issue #20](https://github.com/cjam/react-native-spotify-remote/issues/20)
 ### Fixed
-- playerStateChanged event not triggered [#14](https://github.com/cjam/react-native-spotify-remote/issues/14)
+- playerStateChanged event not triggered [Issue #14](https://github.com/cjam/react-native-spotify-remote/issues/14)
 ### Added
 - `playItem`
-- `playItemWithIndex` for [#15](https://github.com/cjam/react-native-spotify-remote/issues/15)
+- `playItemWithIndex` for [Issue #15](https://github.com/cjam/react-native-spotify-remote/issues/15)
 - `getRootContentItems`
 - `getContentItemForUri`
 - `getCrossfadeState`
