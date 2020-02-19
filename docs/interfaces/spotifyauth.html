@@ -2407,6 +2407,12 @@ img {
 			<a href="spotifyauth.html" class="tsd-kind-icon">Spotify<wbr>Auth</a>
 			<ul>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="spotifyauth.html#endsession" class="tsd-kind-icon">end<wbr>Session</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="spotifyauth.html#getsession" class="tsd-kind-icon">get<wbr>Session</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyauth.html#initialize" class="tsd-kind-icon">initialize</a>
 				</li>
 			</ul>
@@ -2416,6 +2422,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface tsd-is-not-exported">
 			<a href="spotifyremoteevents.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Events</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="spotifysession.html" class="tsd-kind-icon">Spotify<wbr>Session</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="track.html" class="tsd-kind-icon">Track</a>
@@ -2479,6 +2488,8 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#endsession" class="tsd-kind-icon">end<wbr>Session</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#getsession" class="tsd-kind-icon">get<wbr>Session</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#initialize" class="tsd-kind-icon">initialize</a></li>
 						</ul>
 					</section>
@@ -2487,6 +2498,60 @@ img {
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="endsession" class="tsd-anchor"></a>
+				<h3>end<wbr>Session</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">end<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L47">SpotifyAuth.ts:47</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Ends the current Session and cleans up any resources</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>SpotifyAuth</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="getsession" class="tsd-anchor"></a>
+				<h3>get<wbr>Session</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifysession.html" class="tsd-signature-type">SpotifySession</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L55">SpotifyAuth.ts:55</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the current session or <code>undefined</code> if a session hasn&#39;t been started</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>SpotifyAuth</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifysession.html" class="tsd-signature-type">SpotifySession</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="initialize" class="tsd-anchor"></a>
 				<h3>initialize</h3>
@@ -2497,7 +2562,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L38">SpotifyAuth.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L39">SpotifyAuth.ts:39</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

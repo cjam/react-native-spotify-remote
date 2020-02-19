@@ -37,7 +37,11 @@ export default interface SpotifyApiConfig {
 
     /**
      * URI of Spotify item to play upon authorization. `""` will 
-     * attempt to resume playback from where it was
+     * attempt to resume playback from where it was.
+     * 
+     * **Note:**
+     * *If Spotify is already open and playing, this parameter will not*
+     * *have any effect*
      * @type {string}
      * @memberof SpotifyApiConfig
      */
@@ -53,7 +57,7 @@ export default interface SpotifyApiConfig {
 
     /**
      * Whether or not the auth dialog should be shown.
-     * Useful for debugging.
+     * Useful for debugging auth flows.
      *
      * @type {boolean}
      * @memberof SpotifyApiConfig
