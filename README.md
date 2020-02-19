@@ -140,6 +140,42 @@ packagingOptions {
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
 
+## Features
+
+The following table is here to show the support for Spotify Remote API functionality within this library.
+
+|Feature|iOS|Android|
+|:--|:-:|:-:|
+|Authentication|
+|`initialize`|[x]|[ ]|
+|`getSession`|[x]|[ ]|
+|`endSession`|[x]|[ ]|
+|Remote|
+|`isConnectedAsync`|[x]|[ ]|
+|`connect`|[x]|[ ]|
+|`playUri`|[x]|[ ]|
+|`playItem`|[x]|[ ]|
+|`playItemWithIndex`|[x]|[ ]|
+|`queueUri`|[x]|[ ]|
+|`seek`|[x]|[ ]|
+|`resume`|[x]|[ ]|
+|`pause`|[x]|[ ]|
+|`skipToNext`|[x]|[ ]|
+|`skipToPrevious`|[x]|[ ]|
+|`setShuffling`|[x]|[ ]|
+|`setRepeatMode`|[x]|[ ]|
+|`getPlayerState`|[x]|[ ]|
+|`getRootContentItems`|[x]|[ ]|
+|`getRecommendedContentItems`|[x]|[ ]|
+|`getChildrenOfItem`|[x]|[ ]|
+|`getContentItemForUri`|[x]|[ ]|
+|`getCrossfadeState`|[x]|[ ]|
+|Remote Events|
+|`playerStateChanged`|[x]|[ ]|
+|`remoteDisconnected`|[x]|[ ]|
+|`remoteConnected`|[x]|[ ]|
+
+
 ## Usage
 
 ### Example Application

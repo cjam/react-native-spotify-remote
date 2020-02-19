@@ -2416,6 +2416,9 @@ img {
 					<a href="spotifyapiconfig.html#scope" class="tsd-kind-icon">scope</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="spotifyapiconfig.html#showdialog" class="tsd-kind-icon">show<wbr>Dialog</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="spotifyapiconfig.html#tokenrefreshurl" class="tsd-kind-icon">token<wbr>RefreshURL</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -2431,6 +2434,9 @@ img {
 		</li>
 		<li class=" tsd-kind-interface tsd-is-not-exported">
 			<a href="spotifyremoteevents.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Events</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="spotifysession.html" class="tsd-kind-icon">Spotify<wbr>Session</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="track.html" class="tsd-kind-icon">Track</a>
@@ -2473,6 +2479,7 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#playuri" class="tsd-kind-icon">playURI</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#redirecturl" class="tsd-kind-icon">redirectURL</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#scope" class="tsd-kind-icon">scope</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#showdialog" class="tsd-kind-icon">show<wbr>Dialog</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#tokenrefreshurl" class="tsd-kind-icon">token<wbr>RefreshURL</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyapiconfig.html#tokenswapurl" class="tsd-kind-icon">token<wbr>SwapURL</a></li>
 						</ul>
@@ -2488,9 +2495,23 @@ img {
 				<div class="tsd-signature tsd-kind-icon">clientID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L4">ApiConfig.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L12">ApiConfig.ts:12</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Client Id of application registered with Spotify Api
+						see <a href="https://developer.spotify.com/dashboard/applications">https://developer.spotify.com/dashboard/applications</a></p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{string}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="playuri" class="tsd-anchor"></a>
@@ -2498,9 +2519,26 @@ img {
 				<div class="tsd-signature tsd-kind-icon">playURI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L8">ApiConfig.ts:8</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L48">ApiConfig.ts:48</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>URI of Spotify item to play upon authorization. <code>&quot;&quot;</code> will
+						attempt to resume playback from where it was.</p>
+					</div>
+					<p><strong>Note:</strong>
+						<em>If Spotify is already open and playing, this parameter will not</em>
+					<em>have any effect</em></p>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{string}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="redirecturl" class="tsd-anchor"></a>
@@ -2508,9 +2546,22 @@ img {
 				<div class="tsd-signature tsd-kind-icon">redirectURL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L5">ApiConfig.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L20">ApiConfig.ts:20</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The redirect url back to your application (i.e. myapp://spotify-login-callback )</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{string}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="scope" class="tsd-anchor"></a>
@@ -2518,9 +2569,47 @@ img {
 				<div class="tsd-signature tsd-kind-icon">scope<span class="tsd-signature-symbol">:</span> <a href="../enums/apiscope.html" class="tsd-signature-type">ApiScope</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L9">ApiConfig.ts:9</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L56">ApiConfig.ts:56</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Requested API Scopes, need to have AppRemoteControlScope
+						to control playback of app</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{ApiScope}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="showdialog" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> show<wbr>Dialog</h3>
+				<div class="tsd-signature tsd-kind-icon">show<wbr>Dialog<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L65">ApiConfig.ts:65</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether or not the auth dialog should be shown.
+						Useful for debugging auth flows.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{boolean}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="tokenrefreshurl" class="tsd-anchor"></a>
@@ -2528,9 +2617,22 @@ img {
 				<div class="tsd-signature tsd-kind-icon">token<wbr>RefreshURL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L7">ApiConfig.ts:7</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L36">ApiConfig.ts:36</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Endpoint on your server to refesh token</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{string}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="tokenswapurl" class="tsd-anchor"></a>
@@ -2538,9 +2640,22 @@ img {
 				<div class="tsd-signature tsd-kind-icon">token<wbr>SwapURL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L6">ApiConfig.ts:6</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L28">ApiConfig.ts:28</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Endpoint on your server to do token swap</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{string}</p>
+						</dd>
+						<dt>memberof</dt>
+						<dd><p>SpotifyApiConfig</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 		</section>
 		<footer class="with-border-bottom">

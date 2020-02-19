@@ -18,13 +18,9 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
 {
     BOOL _initialized;
     BOOL _isInitializing;
-    BOOL _isRemoteConnected;
     NSDictionary* _options;
     
     NSMutableArray<RNSpotifyRemotePromise*>* _sessionManagerCallbacks;
-    NSMutableArray<RNSpotifyRemotePromise*>* _appRemoteCallbacks;
-    NSMutableDictionary<NSString*,NSNumber*>* _eventSubscriptions;
-    NSDictionary<NSString*,RNSpotifyRemoteSubscriptionCallback*>* _eventSubscriptionCallbacks;
     
     SPTConfiguration* _apiConfiguration;
     SPTSessionManager* _sessionManager;
@@ -61,7 +57,6 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
         {
             _initialized = NO;
             _isInitializing = NO;
-            _isRemoteConnected = NO;
             _sessionManagerCallbacks = [NSMutableArray array];
             _apiConfiguration = nil;
             _sessionManager = nil;
@@ -70,9 +65,8 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
         dispatch_once(&once, ^{
             sharedInstance = self;
         });
-    }else{
-        NSLog(@"Returning shared instance");
     }
+    // Returning Shared Instance
     return sharedInstance;
 }
 
@@ -126,6 +120,43 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
 #pragma mark - React Native functions
 
 RCT_EXPORT_MODULE()
+
+RCT_EXPORT_METHOD(endSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
+{
+    // If the session is closed while initializing, then reject all of the pending call backs / promises
+    if(_isInitializing){
+        [RNSpotifyRemotePromise rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.SessionClosed]];
+    }
+    _isInitializing = NO;
+    _initialized = NO;
+    [_sessionManagerCallbacks removeAllObjects];
+    _sessionManager = nil;
+    resolve([NSNull null]);
+};
+
+RCT_EXPORT_METHOD(getSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
+{
+    // If we're initializing, then add a completion callback to the list of callbacks
+    if(_isInitializing){
+        [_sessionManagerCallbacks addObject:[RNSpotifyRemotePromise onResolve:^(SPTSession* session) {
+            resolve([RNSpotifyConvert SPTSession:session]);
+        } onReject:^(RNSpotifyRemoteError *error) {
+            [error reject:reject];
+        }]];
+    }
+    
+    @try{
+        if(_initialized && _sessionManager != nil){
+            resolve([RNSpotifyConvert SPTSession:_sessionManager.session]);
+        }else{
+            resolve([NSNull null]);
+        }
+    }
+    @catch( NSError * error ){
+        [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+    }
+};
+
 
 RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
@@ -194,6 +225,10 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
         _apiConfiguration.tokenRefreshURL = [NSURL URLWithString: options[@"tokenRefreshURL"]];
     }
     
+    if(options[@"playURI"] != nil){
+        _apiConfiguration.playURI = options[@"playURI"];
+    }
+    
     // Default Scope
     SPTScope scope = SPTAppRemoteControlScope | SPTUserFollowReadScope;
     if(options[@"scope"] != nil){
@@ -205,9 +240,11 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
     
     // Add our completion callback
     [_sessionManagerCallbacks addObject:completion];
-    
+
     // For debugging..
-//    _sessionManager.alwaysShowAuthorizationDialog = YES;
+    if(options[@"showDialog"] != nil){
+        _sessionManager.alwaysShowAuthorizationDialog = [options[@"showDialog"] boolValue];
+    }
     
     // Initialize the auth flow
     if (@available(iOS 11, *)) {

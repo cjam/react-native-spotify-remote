@@ -36,8 +36,10 @@ DEFINE_SPOTIFY_ERROR_CODE(BadResponse, @"Invalid response format")
 DEFINE_SPOTIFY_ERROR_CODE(PlayerNotReady, @"Player is not ready")
 DEFINE_SPOTIFY_ERROR_CODE(SessionExpired, @"Your login session has expired")
 DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
+DEFINE_SPOTIFY_ERROR_CODE(SessionClosed, @"Session has been closed")
 
 #undef DEFINE_SPOTIFY_ERROR_CODE
+
 
 @synthesize name = _name;
 @synthesize message = _message;

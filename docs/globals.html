@@ -2413,6 +2413,9 @@ img {
 			<a href="interfaces/spotifyremoteevents.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Events</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="interfaces/spotifysession.html" class="tsd-kind-icon">Spotify<wbr>Session</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="interfaces/track.html" class="tsd-kind-icon">Track</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -2466,6 +2469,9 @@ img {
 			<a href="#ios" id="ios" style="color: inherit; text-decoration: none;">
 				<h3>iOS</h3>
 			</a>
+			<blockquote>
+				<p>This library requires being built with <strong>XCode 11</strong> for reasons given <a href="https://github.com/spotify/ios-sdk/issues/179#issuecomment-581032275">here</a>.</p>
+			</blockquote>
 			<a href="#cocoapods-recommended" id="cocoapods-recommended" style="color: inherit; text-decoration: none;">
 				<h4>Cocoapods (Recommended)</h4>
 			</a>
@@ -2566,6 +2572,159 @@ packagingOptions {
 ```
 
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
+			<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+				<h2>Features</h2>
+			</a>
+			<p>The following table is here to show the support for Spotify Remote API functionality within this library.</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Feature</th>
+						<th align="center">iOS</th>
+						<th align="center">Android</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td align="left">Authentication</td>
+						<td align="center"></td>
+						<td align="center"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>initialize</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getSession</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>endSession</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left">Remote</td>
+						<td align="center"></td>
+						<td align="center"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>isConnectedAsync</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>connect</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>playUri</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>playItem</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>playItemWithIndex</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>queueUri</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>seek</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>resume</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>pause</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>skipToNext</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>skipToPrevious</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>setShuffling</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>setRepeatMode</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getPlayerState</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getRootContentItems</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getRecommendedContentItems</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getChildrenOfItem</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getContentItemForUri</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getCrossfadeState</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left">Remote Events</td>
+						<td align="center"></td>
+						<td align="center"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playerStateChanged</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>remoteDisconnected</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+					<tr>
+						<td align="left"><code>remoteConnected</code></td>
+						<td align="center">[x]</td>
+						<td align="center">[ ]</td>
+					</tr>
+			</tbody></table>
 			<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 				<h2>Usage</h2>
 			</a>
@@ -2653,6 +2812,7 @@ If you have issues linking the module, please check that gradle is updated to th
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyauth.html" class="tsd-kind-icon">Spotify<wbr>Auth</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyremoteapi.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Api</a></li>
 							<li class="tsd-kind-interface tsd-is-not-exported"><a href="interfaces/spotifyremoteevents.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Events</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/spotifysession.html" class="tsd-kind-icon">Spotify<wbr>Session</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/track.html" class="tsd-kind-icon">Track</a></li>
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/typedeventemitter.html" class="tsd-kind-icon">Typed<wbr>Event<wbr>Emitter</a></li>
 						</ul>
@@ -2695,7 +2855,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">Spotify<wbr>Auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;NativeModules.RNSpotifyRemoteAuth as SpotifyAuth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L41">SpotifyAuth.ts:41</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L58">SpotifyAuth.ts:58</a></li>
 					</ul>
 				</aside>
 			</section>

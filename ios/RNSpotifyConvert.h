@@ -9,6 +9,7 @@
 @interface RNSpotifyConvert : NSObject
 
 +(id)ID:(id)obj;
++(NSString*)Date:(NSDate*)date;
 +(id)RNSpotifyError:(RNSpotifyRemoteError*)error;
 +(id)NSError:(NSError*)error;
 +(id)SPTAppRemotePlayerState:(NSObject<SPTAppRemotePlayerState>*) state;
@@ -20,5 +21,6 @@
 +(id)SPTAppRemoteAlbum:(NSObject<SPTAppRemoteAlbum> *) album;
 +(id)SPTAppRemoteContentItem:(NSObject<SPTAppRemoteContentItem> *) item;
 +(id)SPTAppRemoteContentItems:(NSArray *) items;
++(id)SPTSession:(SPTSession *) session;
 
 @end
