@@ -3,6 +3,13 @@
 #import "RNSpotifyConvert.h"
 #import "NSArrayExtensions.h"
 
+
+@interface RNSpotifyConvert()
++(NSDateFormatter *) ISO_DATE_FORMATTER;
+@end
+
+
+
 @implementation RNSpotifyConvert
 
 +(id)ID:(id)obj
@@ -12,6 +19,25 @@
         return [NSNull null];
     }
     return obj;
+}
+
+
+static NSDateFormatter* _ISO_DATE_FORMATTER;
++(NSDateFormatter*) ISO_DATE_FORMATTER{
+    if(_ISO_DATE_FORMATTER == nil){
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        // setLocale importance https://developer.apple.com/library/archive/qa/qa1480/_index.html
+        [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+        [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+        _ISO_DATE_FORMATTER = dateFormatter;
+    }
+
+    return _ISO_DATE_FORMATTER;
+}
+
++(NSString*)Date:(NSDate *) date{
+    return [[self ISO_DATE_FORMATTER] stringFromDate:date];
 }
 
 +(id)RNSpotifyError:(RNSpotifyRemoteError*)error
@@ -151,6 +177,20 @@
          }
     ];
     return json;
+}
+
++(id)SPTSession:(SPTSession *)session{
+    if(session == nil){
+        return [NSNull null];
+    }
+    
+    return @{
+        @"accessToken":session.accessToken,
+        @"refreshToken":session.refreshToken,
+        @"scope":[NSNumber numberWithUnsignedInteger: session.scope],
+        @"expired":[NSNumber numberWithBool: session.expired],
+        @"expirationDate":[self Date:session.expirationDate]
+    };
 }
 
 

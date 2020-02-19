@@ -1,5 +1,6 @@
 import { NativeModules } from 'react-native';
 import SpotifyApiConfig from './ApiConfig';
+import SpotifySession from './SpotifySession';
 
 /**
  * Spotify Authorization Module
@@ -36,6 +37,22 @@ export interface SpotifyAuth {
      * @returns {Promise<string>} accessToken
      */
     initialize(config: SpotifyApiConfig): Promise<string>;
+
+    /**
+     * Ends the current Session and cleans up any resources
+     *
+     * @returns {Promise<void>}
+     * @memberof SpotifyAuth
+     */
+    endSession(): Promise<void>;
+
+    /**
+     * Returns the current session or `undefined` if a session hasn't been started
+     *
+     * @returns {Promise<SpotifySession>}
+     * @memberof SpotifyAuth
+     */
+    getSession(): Promise<SpotifySession | undefined>;
 }
 
 const SpotifyAuth = NativeModules.RNSpotifyRemoteAuth as SpotifyAuth;

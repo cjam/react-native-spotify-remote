@@ -195,6 +195,11 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_METHOD(disconnect:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
+    [self disconnect];
+    resolve(@YES);
+}
+
 RCT_EXPORT_METHOD(connect:(NSString*)accessToken resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     RNSpotifyRemotePromise<NSNumber*>* completion = [RNSpotifyRemotePromise onResolve:resolve onReject:^(RNSpotifyRemoteError *error) {
         [error reject:reject];
