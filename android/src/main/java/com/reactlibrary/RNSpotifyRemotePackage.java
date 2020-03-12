@@ -13,7 +13,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class RNSpotifyRemotePackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNSpotifyRemoteModule(reactContext));
+      return Arrays.<NativeModule>asList(new RNSpotifyRemoteAuthModule(reactContext), new RNSpotifyRemoteAppModule(reactContext));
     }
 
     // Deprecated from RN 0.47

@@ -28,6 +28,7 @@
     "rebuild": "yarn build && yarn docs",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && ./node_modules/.bin/tsc",
+    "postinstall": "npx jetify",
     "watch": "yarn build --watch",
     "docs": "typedoc --options typedoc.json --excludeExternals",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -43,12 +44,13 @@
     "react-native": "^0.53.3"
   },
   "dependencies": {
-    "react-native-events": "^1.0.9"
+    "react-native-events": "^1.0.15"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/react-native": "^0.57.0",
     "concurrently": "^5.0.2",
+    "jetifier": "^1.6.5",
     "typedoc": "^0.15.4",
     "typescript": "^3.7.3"
   }

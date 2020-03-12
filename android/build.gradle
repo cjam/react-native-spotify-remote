@@ -1,36 +1,49 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.1'
+        classpath 'com.android.tools.build:gradle:3.6.1'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 repositories {
-    mavenCentral()
+    google()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url "$rootDir/../node_modules/react-native/android"
+    }
+    jcenter()
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    implementation project(':spotify-app-remote-release-0.7.0')
+    implementation project(':spotify-auth-release-1.2.3')
+    implementation project(path: ':react-native-events')
+    implementation 'com.facebook.react:react-native:+'
 }
   

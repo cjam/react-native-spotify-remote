@@ -264,6 +264,11 @@ is-fullwidth-code-point@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
   integrity sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
 
+jetifier@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-1.6.5.tgz#ea87324a4230bef20a9651178ecab978ee54a8cb"
+  integrity sha512-T7yzBSu9PR+DqjYt+I0KVO1XTb1QhAfHnXV5Nd3xpbXM6Xg4e3vP60Q4qkNU8Fh6PHC2PivPUNN3rY7G2MxcDQ==
+
 jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
@@ -398,10 +403,10 @@ progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-react-native-events@^1.0.9:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/react-native-events/-/react-native-events-1.0.13.tgz#8d42a7707377d9a03b4de82f1808a7a988b403ff"
-  integrity sha512-ogLtW6SFdXQ+L2FRqOMm7DlBKI2XJuey8qlKY6rh0gi7hN69TCLtwnW+zW+Fn0ki/RfOVXKRHflfvV/miKpU+Q==
+react-native-events@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/react-native-events/-/react-native-events-1.0.15.tgz#d14b75087664ab5b1a8e14e85adda66a4cf328c3"
+  integrity sha512-YRRmiipOKzYUsMa5YPXQ6zp5UyUcvmhcWLBKWFL44BkB8Qap2IPJlv2L87+muE5VxezqGfDLAdCgef9pPVxzdQ==
   dependencies:
     events "^1.1.1"
 
