@@ -1,14 +1,19 @@
 
 package com.reactlibrary;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.module.annotations.ReactModule;
 import com.spotify.android.appremote.api.ConnectionParams;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 
-
+@ReactModule(name = "RNSpotifyRemoteAuth")
 public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
@@ -31,17 +36,21 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule {
                     .setRedirectUri(redirectUri)
                     .showAuthView(showDialog)
                     .build();
-    promise.resolve(null);
+    promise.resolve("token");
   }
 
   @ReactMethod
   public void getSession(Promise promise) {
-    promise.resolve(null);
+    WritableMap map = Arguments.createMap();
+    map.putString("accessToken", "token");
+    promise.resolve(map);
   }
 
   @ReactMethod
   public void endSession(Promise promise) {
-    promise.resolve(null);
+    WritableMap map = Arguments.createMap();
+    map.putString("accessToken", "token");
+    promise.resolve(map);
   }
 
   @Override

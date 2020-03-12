@@ -1,24 +1,47 @@
 
 package com.reactlibrary;
 
+import android.telecom.Call;
+import android.util.Log;
+
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.GsonBuildConfig;
+import com.lufinkey.react.eventemitter.RNEventEmitter;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 
+import com.lufinkey.react.eventemitter.RNEventConformer;
+
+import com.reactlibrary.RNSpotifyRemoteAuthModule;
+
 import com.spotify.protocol.client.CallResult;
+import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.CrossfadeState;
 import com.spotify.protocol.types.ListItem;
 import com.spotify.protocol.types.ListItems;
+import com.spotify.protocol.types.PlayerContext;
 import com.spotify.protocol.types.PlayerState;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
+import java.lang.reflect.Array;
+import java.util.Iterator;
+
+
+public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule implements RNEventConformer {
 
     private final ReactApplicationContext reactContext;
 
@@ -31,8 +54,33 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
         this.reactContext = reactContext;
     }
 
+    @Override
     @ReactMethod
-    public void connect(Promise _promise) {
+    public void __registerAsJSEventEmitter(int moduleId)
+    {
+        RNEventEmitter.registerEventEmitterModule(this.reactContext, moduleId, this);
+    }
+
+    @Override
+    public void onNativeEvent(String eventName, Object... args)
+    {
+        // Called when an event for this module is emitted from native code
+    }
+
+    @Override
+    public void onJSEvent(String eventName, Object... args)
+    {
+        // Called when an event for this module is emitted from javascript
+    }
+
+    @Override
+    public void onEvent(String eventName, Object... args)
+    {
+        // Called when any event for this module is emitted
+    }
+
+    @ReactMethod
+    public void connect(String s, Promise _promise) {
         final Promise promise = _promise;
         authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
         ConnectionParams connectionParams = authModule.mConnectionParams;
@@ -44,28 +92,54 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
                         mSpotifyAppRemote = spotifyAppRemote;
                         connected();
 
-                        sendEvent("remoteConnected", null);
+                        sendEvent("remoteConnected", Arguments.createMap());
                     }
 
                     public void onFailure(Throwable throwable) {
                         promise.reject(throwable);
-                        sendEvent("remoteDisconnected", null);
+                        sendEvent("remoteDisconnected", Arguments.createMap());
                     }
                 });
 
     }
 
     private void sendEvent(String eventMame, Object data) {
-        reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventMame, data);
+        RNEventEmitter.emitEvent(this.reactContext, this, eventMame, data);
+    }
+
+    private WritableMap convertPlayerState(PlayerState playerState) {
+        WritableMap map = Arguments.createMap();
+        WritableMap track = Arguments.createMap();
+
+        map.putBoolean("isPaused", playerState.isPaused);
+        map.putDouble("playbackPosition", (double) playerState.playbackPosition);
+
+        track.putDouble("duration", (double) playerState.track.duration);
+        track.putBoolean("isPodcast", playerState.track.isPodcast);
+        track.putBoolean("isEpisode", playerState.track.isEpisode);
+        track.putString("uri", playerState.track.uri);
+        track.putString("name", playerState.track.name);
+
+        WritableMap album = Arguments.createMap();
+        album.putString("name", playerState.track.album.name);
+        album.putString("uri", playerState.track.album.uri);
+        track.putMap("album", album);
+
+        WritableMap artist = Arguments.createMap();
+        artist.putString("name", playerState.track.artist.name);
+        artist.putString("uri", playerState.track.artist.uri);
+        track.putMap("artist", artist);
+
+        map.putMap("track", track);
+
+        return map;
     }
 
     private void connected() {
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
                 .setEventCallback(playerState -> {
-                    ReadableMap map = (ReadableMap)playerState;
+                    WritableMap map = convertPlayerState(playerState);
                     sendEvent("playerStateChanged", map);
                 });
     }
@@ -167,8 +241,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
             CallResult.ResultCallback<PlayerState> tResultCallback = new CallResult.ResultCallback<PlayerState>() {
                 @Override
                 public void onResult(PlayerState playerState) {
-                    ReadableMap map = (ReadableMap)playerState;
-                    promise.resolve(map);
+                    promise.resolve(convertPlayerState(playerState));
                 }
             };
             callResult.setResultCallback(tResultCallback);
