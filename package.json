@@ -28,7 +28,6 @@
     "rebuild": "yarn build && yarn docs",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && ./node_modules/.bin/tsc",
-    "postinstall": "npx jetify",
     "watch": "yarn build --watch",
     "docs": "typedoc --options typedoc.json --excludeExternals",
     "test": "echo \"Error: no test specified\" && exit 1",
