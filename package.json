@@ -41,7 +41,7 @@
     "xcode": "open example/ios/example.xcworkspace"
   },
   "peerDependencies": {
-    "react-native": "^0.53.3"
+    "react-native": "^0.61.5"
   },
   "dependencies": {
     "react-native-events": "^1.0.15"
