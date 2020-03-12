@@ -1,30 +1,20 @@
 
 package com.reactlibrary;
 
-import android.telecom.Call;
-
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.lufinkey.react.eventemitter.RNEventEmitter;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 
-import com.lufinkey.react.eventemitter.RNEventConformer;
-
-import com.reactlibrary.RNSpotifyRemoteAuthModule;
-
 import com.spotify.protocol.client.CallResult;
-import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.CrossfadeState;
 import com.spotify.protocol.types.ListItem;
 import com.spotify.protocol.types.ListItems;
-import com.spotify.protocol.types.PlayerContext;
 import com.spotify.protocol.types.PlayerState;
 
 
@@ -39,12 +29,12 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
     }
 
     @ReactMethod
     public void connect(Promise _promise) {
         final Promise promise = _promise;
+        authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
         ConnectionParams connectionParams = authModule.mConnectionParams;
         SpotifyAppRemote.connect(this.getReactApplicationContext(), connectionParams,
                 new Connector.ConnectionListener() {
