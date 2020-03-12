@@ -1,7 +1,11 @@
 
 package com.reactlibrary;
 
+import android.content.Intent;
+
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,12 +15,18 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.spotify.android.appremote.api.ConnectionParams;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
+import com.spotify.sdk.android.auth.AuthorizationClient;
+import com.spotify.sdk.android.auth.AuthorizationRequest;
+import com.spotify.sdk.android.auth.AuthorizationResponse;
+
 
 @ReactModule(name = "RNSpotifyRemoteAuth")
-public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule {
+public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
+  private static final int REQUEST_CODE = 1337;
   private final ReactApplicationContext reactContext;
+  private Promise authPromise;
+  private String mAccessToken;
 
   public ConnectionParams mConnectionParams;
 
@@ -31,26 +41,69 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule {
     String redirectUri = config.getString("redirectURL");
     boolean showDialog = config.getBoolean("showDialog");
 
-    mConnectionParams =
-            new ConnectionParams.Builder(clientId)
-                    .setRedirectUri(redirectUri)
-                    .showAuthView(showDialog)
-                    .build();
-    promise.resolve("token");
+    if (!showDialog) {
+      mConnectionParams =
+              new ConnectionParams.Builder(clientId)
+                      .setRedirectUri(redirectUri)
+                      .showAuthView(false)
+                      .build();
+      promise.resolve("token");
+    } else {
+      authPromise = promise;
+      AuthorizationRequest.Builder builder =
+              new AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.TOKEN, redirectUri);
+
+      builder.setScopes(new String[]{"streaming"});
+      AuthorizationRequest request = builder.build();
+
+      AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
+    }
   }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+      if (requestCode == REQUEST_CODE) {
+        AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
+
+        switch (response.getType()) {
+          // Response was successful and contains auth token
+          case TOKEN:
+            if (authPromise != null) {
+              String token = response.getAccessToken();
+              mAccessToken = token;
+              authPromise.resolve(token);
+            }
+            break;
+
+          // Auth flow returned an error
+          case ERROR:
+            if (authPromise != null) {
+              String code = response.getCode();
+              String error = response.getError();
+              authPromise.reject(code, error);
+            }
+            break;
+
+          // Most likely auth flow was cancelled
+          default:
+            if (authPromise != null) {
+              String code = "500";
+              String error = "Cancelled";
+              authPromise.reject(code, error);
+            }
+        }
+      }
+    }
 
   @ReactMethod
   public void getSession(Promise promise) {
+    new AuthorizationRequest.Builder()
     WritableMap map = Arguments.createMap();
-    map.putString("accessToken", "token");
+    map.putString("accessToken", mAccessToken);
     promise.resolve(map);
   }
 
   @ReactMethod
-  public void endSession(Promise promise) {
-    WritableMap map = Arguments.createMap();
-    map.putString("accessToken", "token");
-    promise.resolve(map);
+  public void endSession() {
   }
 
   @Override
