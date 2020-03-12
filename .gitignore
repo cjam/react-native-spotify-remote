@@ -13,7 +13,7 @@ npm-debug.log
 yarn-error.log
 
 
-dist/
+# dist/
 
 # Xcode
 #
