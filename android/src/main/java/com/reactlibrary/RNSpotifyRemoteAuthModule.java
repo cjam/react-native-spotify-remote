@@ -36,7 +36,6 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     super(reactContext);
     reactContext.addActivityEventListener(this);
     this.reactContext = reactContext;
-
   }
 
   @ReactMethod
@@ -59,24 +58,14 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     String redirectUri = config.getString("redirectURL");
     boolean showDialog = config.getBoolean("showDialog");
 
-    if (!showDialog) {
       mConnectionParams =
               new ConnectionParams.Builder(clientId)
                       .setRedirectUri(redirectUri)
-                      .showAuthView(false)
+                      .showAuthView(showDialog)
                       .build();
       promise.resolve("token");
-    } else {
-      authPromise = promise;
-      AuthorizationRequest.Builder builder =
-              new AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.TOKEN, redirectUri);
-
-      builder.setScopes(new String[]{"streaming"});
-      AuthorizationRequest request = builder.build();
-
-      AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
-    }
   }
+
   @Override
   public void onNewIntent(Intent intent) {
   }
@@ -115,40 +104,6 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
       }
     }
   }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if (requestCode == REQUEST_CODE) {
-        AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
-
-        switch (response.getType()) {
-          // Response was successful and contains auth token
-          case TOKEN:
-            if (authPromise != null) {
-              String token = response.getAccessToken();
-              mAccessToken = token;
-              authPromise.resolve(token);
-            }
-            break;
-
-          // Auth flow returned an error
-          case ERROR:
-            if (authPromise != null) {
-              String code = response.getCode();
-              String error = response.getError();
-              authPromise.reject(code, error);
-            }
-            break;
-
-          // Most likely auth flow was cancelled
-          default:
-            if (authPromise != null) {
-              String code = "500";
-              String error = "Cancelled";
-              authPromise.reject(code, error);
-            }
-        }
-      }
-    }
 
   @ReactMethod
   public void getSession(Promise promise) {
