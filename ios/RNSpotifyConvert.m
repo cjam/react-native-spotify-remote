@@ -129,9 +129,18 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
     if(artist == nil){
         return [NSNull null];
     }
+    NSString *artistName = @"";
+    if (artist.name != nil) {
+        artistName = artist.name;
+    }
+    NSString *artistUri = @"";
+    if (artist.URI != nil) {
+        artistUri = artist.URI;
+    }
+    
     return @{
-             @"name":artist.name,
-             @"uri":artist.URI
+             @"name":artistName,
+             @"uri":artistUri
     };
 }
 
@@ -139,9 +148,18 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
     if(album == nil){
         return [NSNull null];
     }
+    NSString *albumName = @"";
+    if (album.name != nil) {
+        albumName = album.name;
+    }
+    NSString *albumUri = @"";
+    if (album.URI != nil) {
+        albumUri = album.URI;
+    }
+
     return @{
-             @"name":album.name,
-             @"uri":album.URI
+             @"name":albumName,
+             @"uri":albumUri
     };
 }
 
