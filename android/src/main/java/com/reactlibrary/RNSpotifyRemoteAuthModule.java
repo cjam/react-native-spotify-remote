@@ -96,7 +96,6 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
 
   @ReactMethod
   public void getSession(Promise promise) {
-    new AuthorizationRequest.Builder()
     WritableMap map = Arguments.createMap();
     map.putString("accessToken", mAccessToken);
     promise.resolve(map);
