@@ -9,6 +9,7 @@
 #import "RNSpotifyRemotePromise.h"
 #import "RNSpotifyRemoteSubscriptionCallback.h"
 #import "RNSpotifyRemoteAuth.h"
+#import "Macros.h"
 #define SPOTIFY_API_BASE_URL @"https://api.spotify.com/"
 #define SPOTIFY_API_URL(endpoint) [NSURL URLWithString:NSString_concat(SPOTIFY_API_BASE_URL, endpoint)]
 
@@ -56,7 +57,7 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
     // end up with a different one when calling shared instance statically
     if(sharedInstance == nil){
         if(self = [super init]){
-            NSLog(@"RNSpotify Initialized");
+            DLog(@"RNSpotify Initialized");
             _isConnecting=NO;
             _appRemoteCallbacks = [NSMutableArray array];
             
@@ -81,9 +82,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
                   [self->_appRemote.playerAPI subscribeToPlayerState:^(id  _Nullable result, NSError * _Nullable error) {
                       // todo: figure out what to do if there is an error
                       if(error != nil){
-                          NSLog(@"Couldn't Subscribe to PlayerStateChanges");
+                          DLog(@"Couldn't Subscribe to PlayerStateChanges");
                       }else{
-                          NSLog(@"Subscribed to PlayerStateChanges");
+                          DLog(@"Subscribed to PlayerStateChanges");
                           onSuccess();
                       }
                   }];
@@ -95,9 +96,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
                   [self->_appRemote.playerAPI unsubscribeToPlayerState:^(id  _Nullable result, NSError * _Nullable error) {
                       // todo: figure out what to do if there is an error
                       if(error != nil){
-                          NSLog(@"Couldn't Unsubscribe from PlayerStateChanges");
+                          DLog(@"Couldn't Unsubscribe from PlayerStateChanges");
                       }else{
-                          NSLog(@"Unsubscribed to PlayerStateChanges");
+                          DLog(@"Unsubscribed to PlayerStateChanges");
                           onSuccess();
                       }
                   }];
@@ -108,7 +109,8 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 }
 
 - (void)initializeAppRemote:(NSString*)accessToken completionCallback:(RNSpotifyRemotePromise*)completion{
-    _appRemote = [[SPTAppRemote alloc] initWithConfiguration:[[RNSpotifyRemoteAuth sharedInstance] configuration] logLevel:SPTAppRemoteLogLevelDebug];
+    SPTAppRemoteLogLevel logLevel = IsDebug == 1 ? SPTAppRemoteLogLevelDebug : SPTAppRemoteLogLevelNone;
+    _appRemote = [[SPTAppRemote alloc] initWithConfiguration:[[RNSpotifyRemoteAuth sharedInstance] configuration] logLevel:logLevel];
     _appRemote.connectionParameters.accessToken = accessToken != nil ? accessToken : [[RNSpotifyRemoteAuth sharedInstance] accessToken];
     _appRemote.delegate = self;
     // Add our callback before we connect

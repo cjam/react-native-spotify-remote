@@ -57,8 +57,8 @@ To release a new version of the package:
 - Bump version number in [package.json](./package.json) using [Semantic Versioning](https://docs.npmjs.com/about-semantic-versioning)
 - Verify package contents `npm publish --dry-run`
 - Commit all changes (i.e. new docs etc)
-- Merge in changes
 - Update [`Change Log`](./CHANGELOG.md) with release version and date
+- Merge in changes
 - Tag master with `v<version_number>` 
 - `git checkout v<version_number>`
 - run `npm publish`
