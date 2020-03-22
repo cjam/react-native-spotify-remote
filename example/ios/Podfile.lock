@@ -221,7 +221,7 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - RNEventEmitter (1.0.15):
     - React
-  - RNSpotifyRemote (0.1.1):
+  - RNSpotifyRemote (0.2.0):
     - React-Core
   - Yoga (1.14.0)
 
@@ -348,9 +348,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNEventEmitter: db22b54ae7d9be0bd5725613f79a51e2bc364a93
-  RNSpotifyRemote: eba52447cad8aed35bea415152ddc89665064322
+  RNSpotifyRemote: 738d23bd453cbafd8b911ec7d142854a44b56501
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 16a4db5a96aa0f2a5e3475a07b8b2bc03455bbcd
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

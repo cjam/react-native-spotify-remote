@@ -5,11 +5,11 @@ import AppContext from '../AppContext';
 import { Alert } from 'react-native';
 
 const ConnectButton: React.SFC = () => {
-    const { isConnected,endSession, token, onError, remote } = useContext(AppContext)
+    const { isConnected, endSession, token, onError, remote } = useContext(AppContext)
 
     const handleClick = useCallback(() => {
         if (!isConnected && token != undefined) {
-            remote.connect(token).catch((e)=>{
+            remote.connect(token).catch((e) => {
                 // Usually if we can't connect, its because
                 // spotify has been backgrounded and we need to 
                 // reauth to bring it back

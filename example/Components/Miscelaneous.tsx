@@ -71,9 +71,10 @@ const Miscelaneous: React.SFC = () => {
                     :
                     (
                         <View style={{ display: 'flex', flexDirection: 'column', height: 220, justifyContent: 'space-around', borderColor: "gray", borderWidth: 1, padding: 5 }}>
-                            <Text>{item.title}</Text>
-                            <Text>{item.subtitle}</Text>
-                            <Text>{item.uri}</Text>
+                            <Text>title: {item.title}</Text>
+                            <Text>subtitle: {item.subtitle}</Text>
+                            <Text>uri: {item.uri}</Text>
+                            <Text>id: {item.id}</Text>
                             <Button disabled={item == undefined} onPress={() => playItem()}>
                                 <Text>Play {item.title}</Text>
                             </Button>
