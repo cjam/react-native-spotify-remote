@@ -130,8 +130,8 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         return [NSNull null];
     }
     return @{
-             @"name":artist.name,
-             @"uri":artist.URI
+        @"name":artist.name == nil ? @"" : artist.name,
+        @"uri":artist.URI == nil ? @"" : artist.URI
     };
 }
 
@@ -140,8 +140,8 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         return [NSNull null];
     }
     return @{
-             @"name":album.name,
-             @"uri":album.URI
+        @"name":album.name == nil ? @"" : album.name,
+        @"uri":album.URI == nil ? @"" : album.URI
     };
 }
 
