@@ -37,6 +37,8 @@ DEFINE_SPOTIFY_ERROR_CODE(PlayerNotReady, @"Player is not ready")
 DEFINE_SPOTIFY_ERROR_CODE(SessionExpired, @"Your login session has expired")
 DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
 DEFINE_SPOTIFY_ERROR_CODE(SessionClosed, @"Session has been closed")
+DEFINE_SPOTIFY_ERROR_CODE(AppRemoteDisconnected, @"App Remote is not connected")
+DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown response")
 
 #undef DEFINE_SPOTIFY_ERROR_CODE
 
