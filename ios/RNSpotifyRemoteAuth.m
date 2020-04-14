@@ -230,10 +230,7 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
     }
     
     // Default Scope
-    SPTScope scope = SPTAppRemoteControlScope | SPTUserFollowReadScope;
-    if(options[@"scope"] != nil){
-        scope = [RCTConvert NSUInteger:options[@"scope"]];
-    }
+    SPTScope scope = SPTAppRemoteControlScope | SPTUserReadPrivateScope;
     
     // Allocate our _sessionManager using our configuration
     _sessionManager = [SPTSessionManager sessionManagerWithConfiguration:_apiConfiguration delegate:self];

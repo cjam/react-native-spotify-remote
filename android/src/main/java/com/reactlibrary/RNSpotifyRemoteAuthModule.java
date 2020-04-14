@@ -46,7 +46,7 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     AuthorizationRequest.Builder builder =
             new AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.TOKEN, redirectUri);
 
-    builder.setScopes(new String[]{"streaming"});
+    builder.setScopes(new String[]{"streaming", "user-read-private"});
     AuthorizationRequest request = builder.build();
 
     AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
