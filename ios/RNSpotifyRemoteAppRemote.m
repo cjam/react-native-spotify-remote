@@ -9,6 +9,7 @@
 #import "RNSpotifyRemotePromise.h"
 #import "RNSpotifyRemoteSubscriptionCallback.h"
 #import "RNSpotifyRemoteAuth.h"
+#import "Macros.h"
 #define SPOTIFY_API_BASE_URL @"https://api.spotify.com/"
 #define SPOTIFY_API_URL(endpoint) [NSURL URLWithString:NSString_concat(SPOTIFY_API_BASE_URL, endpoint)]
 
@@ -56,7 +57,7 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
     // end up with a different one when calling shared instance statically
     if(sharedInstance == nil){
         if(self = [super init]){
-            NSLog(@"RNSpotify Initialized");
+            DLog(@"RNSpotify Initialized");
             _isConnecting=NO;
             _appRemoteCallbacks = [NSMutableArray array];
             
@@ -81,9 +82,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
                   [self->_appRemote.playerAPI subscribeToPlayerState:^(id  _Nullable result, NSError * _Nullable error) {
                       // todo: figure out what to do if there is an error
                       if(error != nil){
-                          NSLog(@"Couldn't Subscribe to PlayerStateChanges");
+                          DLog(@"Couldn't Subscribe to PlayerStateChanges");
                       }else{
-                          NSLog(@"Subscribed to PlayerStateChanges");
+                          DLog(@"Subscribed to PlayerStateChanges");
                           onSuccess();
                       }
                   }];
@@ -95,9 +96,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
                   [self->_appRemote.playerAPI unsubscribeToPlayerState:^(id  _Nullable result, NSError * _Nullable error) {
                       // todo: figure out what to do if there is an error
                       if(error != nil){
-                          NSLog(@"Couldn't Unsubscribe from PlayerStateChanges");
+                          DLog(@"Couldn't Unsubscribe from PlayerStateChanges");
                       }else{
-                          NSLog(@"Unsubscribed to PlayerStateChanges");
+                          DLog(@"Unsubscribed to PlayerStateChanges");
                           onSuccess();
                       }
                   }];
@@ -108,7 +109,8 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 }
 
 - (void)initializeAppRemote:(NSString*)accessToken completionCallback:(RNSpotifyRemotePromise*)completion{
-    _appRemote = [[SPTAppRemote alloc] initWithConfiguration:[[RNSpotifyRemoteAuth sharedInstance] configuration] logLevel:SPTAppRemoteLogLevelDebug];
+    SPTAppRemoteLogLevel logLevel = IsDebug == 1 ? SPTAppRemoteLogLevelDebug : SPTAppRemoteLogLevelNone;
+    _appRemote = [[SPTAppRemote alloc] initWithConfiguration:[[RNSpotifyRemoteAuth sharedInstance] configuration] logLevel:logLevel];
     _appRemote.connectionParameters.accessToken = accessToken != nil ? accessToken : [[RNSpotifyRemoteAuth sharedInstance] accessToken];
     _appRemote.delegate = self;
     // Add our callback before we connect
@@ -116,7 +118,6 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
     RCTExecuteOnMainQueue(^{
         [self->_appRemote connect];
     });
-//    [completion reject:[RNSpotifyError errorWithCodeObj:[RNSpotifyErrorCode NotImplemented]]];
 }
 
 + (instancetype)sharedInstance {
@@ -177,17 +178,41 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 
 // A few different methods require checking the current playback state before they do things
 // Since we are fetching it anyways, we can push out an event with the new state.
--(void)getPlayerStateInternal:(SPTAppRemoteCallback) callback{
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI getPlayerState:^(id _Nullable result, NSError * _Nullable error) {
-            if(error == nil && [result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
+-(void)getPlayerStateInternal:(void(^)(id<SPTAppRemotePlayerState>)) resolve reject:(RCTPromiseRejectBlock)reject{
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player getPlayerState:^(id _Nullable result, NSError * _Nullable error) {
+            if(error != nil){
+                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+            }else if( [result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
                 // Send a playerStateChanged event since we went and retrieved it anyways
                 [self sendEvent:EventNamePlayerStateChanged args:@[
                     [RNSpotifyConvert SPTAppRemotePlayerState:result]
                 ]];
+                resolve(result);
+            }else{
+                [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.UnknownResponse] reject:reject];
             }
-            callback(result,error);
         }];
+    } reject:reject];
+}
+
+-(void)usePlayerApi:(void(^)(id<SPTAppRemotePlayerAPI>))callback reject:(RCTPromiseRejectBlock)reject{
+    RCTExecuteOnMainQueue(^{
+        if( self->_appRemote == nil || self->_appRemote.playerAPI == nil){
+            [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.PlayerNotReady] reject:reject];
+        }else{
+            callback(self->_appRemote.playerAPI);
+        }
+    });
+}
+
+-(void)useContentApi:(void(^)(id<SPTAppRemoteContentAPI>))callback reject:(RCTPromiseRejectBlock)reject{
+    RCTExecuteOnMainQueue(^{
+        if( self->_appRemote == nil || self->_appRemote.contentAPI == nil){
+            [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.AppRemoteDisconnected] reject:reject];
+        }else{
+            callback(self->_appRemote.contentAPI);
+        }
     });
 }
 
@@ -226,23 +251,24 @@ RCT_EXPORT_METHOD(isConnectedAsync:(RCTPromiseResolveBlock)resolve reject:(RCTPr
 }
 
 RCT_EXPORT_METHOD(playUri:(NSString*)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI play:uri callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player play:uri callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(playItem:(NSDictionary*)item resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     RNSpotifyItem* spotifyItem = [RNSpotifyItem fromJSON:item];
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI playItem:spotifyItem callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player playItem:spotifyItem callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
+
 }
 
 RCT_EXPORT_METHOD(playItemWithIndex:(NSDictionary*)item skipToTrackIndex:(NSInteger)skipToTrackIndex resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     RNSpotifyItem* spotifyItem = [RNSpotifyItem fromJSON:item];
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI playItem:spotifyItem skipToTrackIndex:skipToTrackIndex callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player playItem:spotifyItem skipToTrackIndex:skipToTrackIndex callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(queueUri:(NSString*)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
@@ -250,103 +276,72 @@ RCT_EXPORT_METHOD(queueUri:(NSString*)uri resolve:(RCTPromiseResolveBlock)resolv
         [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.InvalidParameter message:@"Can only queue Spotify track uri's (i.e. spotify:track:<id> )"] reject:reject];
         return;
     }
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI enqueueTrackUri:uri callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player enqueueTrackUri:uri callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
+
 }
 
 RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self getPlayerStateInternal:^(id _Nullable result, NSError * _Nullable error) {
-            if(error != nil){
-                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-            }else{
-                if([result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
-                    NSObject<SPTAppRemotePlayerState>* state = result;
-                    if(state.isPaused){
-                        [self->_appRemote.playerAPI resume:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-                    }else{
-                        resolve([NSNull null]);
-                    }
-                }else{
-                    [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.BadResponse message:@"Couldn't parse returned player state"] reject:reject];
-                }
-            }
-        }];
-    });
+    [self getPlayerStateInternal:^(id<SPTAppRemotePlayerState> state) {
+        if(state.isPaused){
+            [self->_appRemote.playerAPI resume:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+        }else{
+            resolve([NSNull null]);
+        }
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(pause:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self getPlayerStateInternal:^(id _Nullable result, NSError * _Nullable error) {
-            if(error != nil){
-                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-            }else{
-                if([result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
-                    NSObject<SPTAppRemotePlayerState>* state = result;
-                    if(!state.isPaused){
-                        [self->_appRemote.playerAPI pause:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-                    }else{
-                        resolve([NSNull null]);
-                    }
-                }else{
-                    [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.BadResponse message:@"Couldn't parse returned player state"] reject:reject];
-                }
-            }
-        }];
-    });
+    [self getPlayerStateInternal:^(id<SPTAppRemotePlayerState> state) {
+        if(!state.isPaused){
+            [self->_appRemote.playerAPI pause:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+        }else{
+            resolve([NSNull null]);
+        }
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(skipToNext:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI skipToNext:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player skipToNext:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(skipToPrevious:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI skipToPrevious:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player skipToPrevious:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(seek:(NSInteger)position resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI seekToPosition:position callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player seekToPosition:position callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(setShuffling:(BOOL)shuffling resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI setShuffle:shuffling callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player setShuffle:shuffling callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(setRepeatMode: (NSInteger)repeatMode resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI setRepeatMode:repeatMode callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
-    });
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player setRepeatMode:repeatMode callback:[RNSpotifyRemoteAppRemote defaultSpotifyRemoteCallback:resolve reject:reject]];
+    } reject:reject];
 }
 
 
 RCT_EXPORT_METHOD(getPlayerState:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self getPlayerStateInternal:^(id _Nullable result, NSError * _Nullable error) {
-            if(error != nil){
-                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-            }else{
-                if([result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
-                    resolve([RNSpotifyConvert SPTAppRemotePlayerState:result]);
-                }else{
-                    [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.BadResponse message:@"Couldn't parse returned player state"] reject:reject];
-                }
-            }
-        }];
-    });
+    [self getPlayerStateInternal:^(id<SPTAppRemotePlayerState> state) {
+        resolve([RNSpotifyConvert SPTAppRemotePlayerState:state]);
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(getCrossfadeState:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        [self->_appRemote.playerAPI getCrossfadeState:^(id  _Nullable result, NSError * _Nullable error) {
+    [self usePlayerApi:^(id<SPTAppRemotePlayerAPI>player) {
+        [player getCrossfadeState:^(id  _Nullable result, NSError * _Nullable error) {
             if(error != nil){
                 [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
             }else{
@@ -357,7 +352,7 @@ RCT_EXPORT_METHOD(getCrossfadeState:(RCTPromiseResolveBlock)resolve reject:(RCTP
                 }
             }
         }];
-    });
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(getRootContentItems:(NSString* _Nullable)contentType resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
@@ -365,17 +360,15 @@ RCT_EXPORT_METHOD(getRootContentItems:(NSString* _Nullable)contentType resolve:(
         contentType = SPTAppRemoteContentTypeDefault;
     }
 
-    RCTExecuteOnMainQueue(^{
-        if(self->_appRemote != nil && self->_appRemote.contentAPI != nil){
-            [self->_appRemote.contentAPI fetchRootContentItemsForType: contentType callback:^(NSArray* _Nullable result, NSError * _Nullable error){
-                if(error != nil){
-                    [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-                }else{
-                    resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
-                }
-            }];
-        }
-    });
+    [self useContentApi:^(id<SPTAppRemoteContentAPI>contentApi) {
+        [contentApi fetchRootContentItemsForType: contentType callback:^(NSArray* _Nullable result, NSError * _Nullable error){
+            if(error != nil){
+                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+            }else{
+                resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
+            }
+        }];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(getRecommendedContentItems:(NSDictionary* _Nullable) options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
@@ -386,50 +379,43 @@ RCT_EXPORT_METHOD(getRecommendedContentItems:(NSDictionary* _Nullable) options r
     NSString* contentType = options[@"type"] != nil ? [RCTConvert NSString:options[@"type"]] : SPTAppRemoteContentTypeDefault;
     BOOL flatten = options[@"flatten"] != nil ? [RCTConvert BOOL:options[@"flatten"]] : TRUE;
     
-    RCTExecuteOnMainQueue(^{
-        if(self->_appRemote != nil && self->_appRemote.contentAPI != nil){
-            [self->_appRemote.contentAPI fetchRecommendedContentItemsForType:contentType flattenContainers:flatten
-                callback:^(NSArray* _Nullable result, NSError * _Nullable error){
-                   if(error != nil){
-                       [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-                   }else{
-                       resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
-                   }
-               }
-             ];
-        }
-    });
+    [self useContentApi:^(id<SPTAppRemoteContentAPI>contentApi) {
+        [contentApi fetchRecommendedContentItemsForType:contentType flattenContainers:flatten
+           callback:^(NSArray* _Nullable result, NSError * _Nullable error){
+              if(error != nil){
+                  [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+              }else{
+                  resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
+              }
+          }
+        ];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(getChildrenOfItem:(NSDictionary*)item resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     RNSpotifyItem* spotifyItem = [RNSpotifyItem fromJSON:item];
-    RCTExecuteOnMainQueue(^{
-        if(self->_appRemote != nil && self->_appRemote.contentAPI != nil){
-            [self->_appRemote.contentAPI fetchChildrenOfContentItem:spotifyItem callback:^(NSArray<SPTAppRemoteContentItem>* _Nullable result, NSError * _Nullable error){
-                if(error != nil){
-                    [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-                }else{
-                    resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
-                }
+    [self useContentApi:^(id<SPTAppRemoteContentAPI>contentApi) {
+        [contentApi fetchChildrenOfContentItem:spotifyItem callback:^(NSArray<SPTAppRemoteContentItem>* _Nullable result, NSError * _Nullable error){
+            if(error != nil){
+                [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+            }else{
+                resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
             }
-             ];
-        }
-    });
+        }];
+    } reject:reject];
 }
 
 RCT_EXPORT_METHOD(getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
-    RCTExecuteOnMainQueue(^{
-        if(self->_appRemote != nil && self->_appRemote.contentAPI != nil){
-            [self->_appRemote.contentAPI fetchContentItemForURI:uri callback:^(NSObject<SPTAppRemoteContentItem>* _Nullable result, NSError * _Nullable error){
-                    if(error != nil){
-                        [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
-                    }else{
-                        resolve([RNSpotifyConvert SPTAppRemoteContentItem:result]);
-                    }
+    [self useContentApi:^(id<SPTAppRemoteContentAPI>contentApi) {
+        [contentApi fetchContentItemForURI:uri callback:^(NSObject<SPTAppRemoteContentItem>* _Nullable result, NSError * _Nullable error){
+                if(error != nil){
+                    [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
+                }else{
+                    resolve([RNSpotifyConvert SPTAppRemoteContentItem:result]);
                 }
-            ];
-        }
-    });
+            }
+        ];
+    } reject:reject];
 }
 
 

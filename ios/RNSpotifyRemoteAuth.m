@@ -8,6 +8,7 @@
 #import "RNSpotifyRemoteError.h"
 #import "RNSpotifyRemotePromise.h"
 #import "RNSpotifyRemoteSubscriptionCallback.h"
+#import "Macros.h"
 #define SPOTIFY_API_BASE_URL @"https://api.spotify.com/"
 #define SPOTIFY_API_URL(endpoint) [NSURL URLWithString:NSString_concat(SPOTIFY_API_BASE_URL, endpoint)]
 
@@ -78,7 +79,7 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
     // we initialize?
     BOOL returnVal = NO;
     if(_sessionManager != nil){
-        NSLog(@"Setting application openURL and options on session manager");
+        DLog(@"Setting application openURL and options on session manager");
         NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:TRUE];
         NSURLQueryItem * errorDescription = [[[urlComponents queryItems] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", SPTAppRemoteErrorDescriptionKey]] firstObject];
         NSURLQueryItem * errorType = [[[urlComponents queryItems] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@",@"error"]] firstObject];
@@ -102,19 +103,19 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
 - (void)sessionManager:(SPTSessionManager *)manager didInitiateSession:(SPTSession *)session
 {
     [RNSpotifyRemotePromise resolveCompletions:_sessionManagerCallbacks result:session];
-    NSLog(@"Session Initiated");
+    DLog(@"Session Initiated");
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error
 {
     [RNSpotifyRemotePromise rejectCompletions:_sessionManagerCallbacks error:[RNSpotifyRemoteError errorWithNSError:error]];
-    NSLog(@"Session Manager Failed");
+    DLog(@"Session Manager Failed");
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didRenewSession:(SPTSession *)session
 {
     [RNSpotifyRemotePromise resolveCompletions:_sessionManagerCallbacks result:session];
-    NSLog(@"Session Renewed");
+    DLog(@"Session Renewed");
 }
 
 #pragma mark - React Native functions
