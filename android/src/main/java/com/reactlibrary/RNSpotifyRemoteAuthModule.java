@@ -3,16 +3,15 @@ package com.reactlibrary;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
@@ -20,6 +19,8 @@ import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
+
+import java.util.ArrayList;
 
 
 @ReactModule(name = "RNSpotifyRemoteAuth")
@@ -42,11 +43,13 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
   public void login(ReadableMap config, Promise promise) {
     String clientId = config.getString("clientID");
     String redirectUri = config.getString("redirectURL");
+    String[] scopes = convertScopes(config);
+
     authPromise = promise;
     AuthorizationRequest.Builder builder =
             new AuthorizationRequest.Builder(clientId, AuthorizationResponse.Type.TOKEN, redirectUri);
 
-    builder.setScopes(new String[]{"streaming", "user-read-private"});
+    builder.setScopes(scopes);
     AuthorizationRequest request = builder.build();
 
     AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
@@ -114,6 +117,19 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
 
   @ReactMethod
   public void endSession() {
+  }
+
+  public String[] convertScopes(ReadableMap config) {
+    ReadableArray arrayOfScopes = config.getArray("scopes");
+
+    ArrayList<String> scopesArrayList = new ArrayList<String>();
+
+    for (int i = 0; i < arrayOfScopes.size(); i++) {
+      String scope = arrayOfScopes.getString(i);
+      scopesArrayList.add(scope);
+    }
+
+    return scopesArrayList.toArray(new String[scopesArrayList.size()]);
   }
 
   @Override

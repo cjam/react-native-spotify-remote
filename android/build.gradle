@@ -44,7 +44,6 @@ repositories {
 dependencies {
     implementation project(':spotify-app-remote-release-0.7.0')
     implementation 'com.spotify.android:auth:1.2.3'
-    implementation "com.google.code.gson:gson:2.8.6"
     implementation project(path: ':react-native-events')
     implementation 'com.facebook.react:react-native:+'
 }
