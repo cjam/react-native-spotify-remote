@@ -40,9 +40,10 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
   }
 
   @ReactMethod
-  public void login(ReadableMap config, Promise promise) {
+  public void initialize(ReadableMap config, Promise promise) {
     String clientId = config.getString("clientID");
     String redirectUri = config.getString("redirectURL");
+    boolean showDialog = config.getBoolean("showDialog");
     String[] scopes = convertScopes(config);
 
     authPromise = promise;
@@ -53,20 +54,12 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     AuthorizationRequest request = builder.build();
 
     AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
-  }
 
-  @ReactMethod
-  public void initialize(ReadableMap config, Promise promise) {
-    String clientId = config.getString("clientID");
-    String redirectUri = config.getString("redirectURL");
-    boolean showDialog = config.getBoolean("showDialog");
-
-      mConnectionParams =
-              new ConnectionParams.Builder(clientId)
-                      .setRedirectUri(redirectUri)
-                      .showAuthView(showDialog)
-                      .build();
-      promise.resolve("token");
+    mConnectionParams =
+            new ConnectionParams.Builder(clientId)
+                    .setRedirectUri(redirectUri)
+                    .showAuthView(showDialog)
+                    .build();
   }
 
   @Override
