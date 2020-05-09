@@ -50,6 +50,7 @@ local.properties
 *.iml
 example/android/.project
 example/android/.settings
+*.aab
 
 # BUCK
 buck-out/
