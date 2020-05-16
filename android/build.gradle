@@ -80,6 +80,7 @@ dependencies {
     def externalLibs = fileTree(dir: "$projectDir/external", include: '**/*.aar').collect()
     println("Adding external libraries ${externalLibs}")
     implementation files(externalLibs)
+    implementation "com.google.code.gson:gson:2.8.5"  // needed by spotify-app-remote
     implementation project(path: ':react-native-events')  // From node_module
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'

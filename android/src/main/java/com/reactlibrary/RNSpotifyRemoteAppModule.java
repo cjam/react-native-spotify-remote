@@ -1,6 +1,10 @@
 
 package com.reactlibrary;
 
+import android.util.Log;
+
+import androidx.arch.core.util.Function;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -8,6 +12,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.module.annotations.ReactModule;
 import com.lufinkey.react.eventemitter.RNEventEmitter;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
@@ -16,111 +21,141 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.lufinkey.react.eventemitter.RNEventConformer;
 
 import com.spotify.protocol.client.CallResult;
-import com.spotify.protocol.types.CrossfadeState;
+import com.spotify.protocol.client.ErrorCallback;
 import com.spotify.protocol.types.ListItem;
-import com.spotify.protocol.types.ListItems;
-import com.spotify.protocol.types.PlayerState;
 
+import java.util.Stack;
+
+
+@ReactModule(name = "RNSpotifyRemoteAppRemote")
 public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule implements RNEventConformer {
+    private static final String LOG_TAG = "RNSpotifyAppRemote";
 
     private final ReactApplicationContext reactContext;
 
     private RNSpotifyRemoteAuthModule authModule;
     private SpotifyAppRemote mSpotifyAppRemote;
+    private Connector.ConnectionListener mSpotifyRemoteConnectionListener;
+    private Stack<Promise> mConnectPromises = new Stack<Promise>();
 
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        mSpotifyRemoteConnectionListener = new Connector.ConnectionListener() {
+
+            public void onConnected(SpotifyAppRemote spotifyAppRemote) {
+                mSpotifyAppRemote = spotifyAppRemote;
+                handleOnConnect();
+                while (!mConnectPromises.empty()) {
+                    Promise promise = mConnectPromises.pop();
+                    promise.resolve(true);
+                }
+                sendEvent("remoteConnected", null);
+            }
+
+            public void onFailure(Throwable throwable) {
+                while (!mConnectPromises.empty()) {
+                    Promise promise = mConnectPromises.pop();
+                    promise.reject(throwable);
+                }
+                sendEvent("remoteDisconnected", null);
+            }
+        };
     }
 
     @Override
     @ReactMethod
-    public void __registerAsJSEventEmitter(int moduleId)
-    {
+    public void __registerAsJSEventEmitter(int moduleId) {
         RNEventEmitter.registerEventEmitterModule(this.reactContext, moduleId, this);
     }
 
     @Override
-    public void onNativeEvent(String eventName, Object... args)
-    {
+    public void onNativeEvent(String eventName, Object... args) {
         // Called when an event for this module is emitted from native code
     }
 
     @Override
-    public void onJSEvent(String eventName, Object... args)
-    {
+    public void onJSEvent(String eventName, Object... args) {
         // Called when an event for this module is emitted from javascript
     }
 
     @Override
-    public void onEvent(String eventName, Object... args)
-    {
+    public void onEvent(String eventName, Object... args) {
         // Called when any event for this module is emitted
-    }
-
-    @ReactMethod
-    public void connect(String s, Promise _promise) {
-        final Promise promise = _promise;
-        authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
-        ConnectionParams connectionParams = authModule.mConnectionParams;
-        SpotifyAppRemote.connect(this.getReactApplicationContext(), connectionParams,
-                new Connector.ConnectionListener() {
-
-                    public void onConnected(SpotifyAppRemote spotifyAppRemote) {
-                        promise.resolve(true);
-                        mSpotifyAppRemote = spotifyAppRemote;
-                        connected();
-
-                        sendEvent("remoteConnected", Arguments.createMap());
-                    }
-
-                    public void onFailure(Throwable throwable) {
-                        promise.reject(throwable);
-                        sendEvent("remoteDisconnected", Arguments.createMap());
-                    }
-                });
-
     }
 
     private void sendEvent(String eventMame, Object data) {
         RNEventEmitter.emitEvent(this.reactContext, this, eventMame, data);
     }
 
-    private WritableMap convertPlayerState(PlayerState playerState) {
-        WritableMap map = Arguments.createMap();
-        WritableMap track = Arguments.createMap();
-
-        map.putBoolean("isPaused", playerState.isPaused);
-        map.putDouble("playbackPosition", (double) playerState.playbackPosition);
-
-        track.putDouble("duration", (double) playerState.track.duration);
-        track.putBoolean("isPodcast", playerState.track.isPodcast);
-        track.putBoolean("isEpisode", playerState.track.isEpisode);
-        track.putString("uri", playerState.track.uri);
-        track.putString("name", playerState.track.name);
-
-        WritableMap album = Arguments.createMap();
-        album.putString("name", playerState.track.album.name);
-        album.putString("uri", playerState.track.album.uri);
-        track.putMap("album", album);
-
-        WritableMap artist = Arguments.createMap();
-        artist.putString("name", playerState.track.artist.name);
-        artist.putString("uri", playerState.track.artist.uri);
-        track.putMap("artist", artist);
-
-        map.putMap("track", track);
-
-        return map;
-    }
-
-    private void connected() {
+    private void handleOnConnect() {
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
                 .setEventCallback(playerState -> {
-                    WritableMap map = convertPlayerState(playerState);
+                    WritableMap map = Convert.toMap(playerState);
                     sendEvent("playerStateChanged", map);
                 });
+    }
+
+    private <T> void executeAppRemoteCall(Function<SpotifyAppRemote, CallResult<T>> apiCall, CallResult.ResultCallback<T> resultCallback, ErrorCallback errorCallback) {
+        if (mSpotifyAppRemote == null) {
+            errorCallback.onError(new Error("Spotify App Remote not connected"));
+        } else {
+            apiCall.apply(mSpotifyAppRemote)
+                    .setResultCallback(resultCallback)
+                    .setErrorCallback(errorCallback);
+        }
+    }
+
+    private void getPlayerStateInternal(CallResult.ResultCallback<ReadableMap> resultCallback, ErrorCallback errorCallback) {
+        if (mSpotifyAppRemote == null) {
+            errorCallback.onError(new Error("Spotify App Remote not connected"));
+        } else {
+            mSpotifyAppRemote.getPlayerApi().getPlayerState()
+                    .setResultCallback(playerState -> {
+                        sendEvent("playerStateChanged", Convert.toMap(playerState));
+                        resultCallback.onResult(Convert.toMap(playerState));
+                    })
+                    .setErrorCallback(errorCallback);
+        }
+    }
+
+    @ReactMethod
+    public void connect(String token, Promise promise) {
+        // todo: looks like the android remote handles it's own auth (since it doesn't have a token)
+        // todo: argument.  Can probably improve the experience for those who don't need a token
+        // todo: and just want to connect the remote
+        authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
+        Error notAuthError = new Error("Auth module has not been authorized.");
+        if (authModule == null) {
+            promise.reject(notAuthError);
+            return;
+        }
+        ConnectionParams.Builder paramsBuilder = authModule.getConnectionParamsBuilder();
+        if (paramsBuilder == null) {
+            promise.reject(notAuthError);
+            return;
+        }
+
+        // If we're already connecting then just push the promise onto stack to handle
+        // when connected
+        if (mConnectPromises.empty()) {
+            mConnectPromises.push(promise);
+            ConnectionParams connectionParams = paramsBuilder.build();
+            SpotifyAppRemote.connect(this.getReactApplicationContext(), connectionParams,
+                    mSpotifyRemoteConnectionListener);
+        } else {
+            mConnectPromises.push(promise);
+        }
+    }
+
+    @ReactMethod
+    public void disconnect(Promise promise) {
+        if (mSpotifyAppRemote != null) {
+            SpotifyAppRemote.disconnect(mSpotifyAppRemote);
+            sendEvent("remoteDisconnected", null);
+        }
+        promise.resolve(null);
     }
 
     @ReactMethod
@@ -134,156 +169,171 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     }
 
     @ReactMethod
-    public void playUri(String uri) {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().play(uri);
-        }
+    public void playUri(String uri, Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().play(uri),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void playItem(ReadableMap map) {
-        if (mSpotifyAppRemote != null) {
-            ListItem item = (ListItem)map;
-            mSpotifyAppRemote.getContentApi().playContentItem(item);
-        }
+    public void playItem(ReadableMap map, Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getContentApi().playContentItem(Convert.toItem(map)),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void playItemWithIndex(ReadableMap map, int index) {
-        if (mSpotifyAppRemote != null) {
-            ListItem item = (ListItem)map;
-            mSpotifyAppRemote.getPlayerApi().skipToIndex(item.uri, index);
-        }
+    public void playItemWithIndex(ReadableMap map, int index, Promise promise) {
+        executeAppRemoteCall(
+                api -> {
+                    ListItem item = Convert.toItem(map);
+                    return api.getPlayerApi().skipToIndex(item.uri, index);
+                },
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void queueUri(String uri) {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().queue(uri);
+    public void queueUri(String uri, Promise promise) {
+        if (!uri.startsWith("spotify:track:")) {
+            promise.reject(new Error("Can only queue Spotify track uri's (i.e. spotify:track:<id>)"));
         }
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().queue(uri),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void seek(float ms) {
-        if (mSpotifyAppRemote != null) {
-            long positionMs = (long)ms;
-            mSpotifyAppRemote.getPlayerApi().seekTo(positionMs);
-        }
+    public void seek(float ms, Promise promise) {
+        long positionMs = (long) ms;
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().seekTo(positionMs),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void resume() {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().resume();
-        }
+    public void resume(Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().resume(),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void pause() {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-        }
+    public void pause(Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().pause(),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void skipToNext() {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().skipNext();
-        }
+    public void skipToNext(Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().skipNext(),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void skipToPrevious() {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().skipPrevious();
-        }
+    public void skipToPrevious(Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().skipPrevious(),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void setShuffling(boolean isShuffling) {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().setShuffle(isShuffling);
-        }
+    public void setShuffling(boolean isShuffling, Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().setShuffle((isShuffling)),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
-    public void setRepeatMode(int repeatMode) {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi().setRepeat(repeatMode);
-        }
+    public void setRepeatMode(int repeatMode, Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().setRepeat((repeatMode)),
+                empty -> promise.resolve(null),
+                err -> promise.reject(err)
+        );
     }
 
     @ReactMethod
     public void getPlayerState(final Promise promise) {
-        if (mSpotifyAppRemote != null) {
-            CallResult<PlayerState> callResult = mSpotifyAppRemote.getPlayerApi().getPlayerState();
-            CallResult.ResultCallback<PlayerState> tResultCallback = new CallResult.ResultCallback<PlayerState>() {
-                @Override
-                public void onResult(PlayerState playerState) {
-                    promise.resolve(convertPlayerState(playerState));
+        this.getPlayerStateInternal(
+                playerState -> {
+                    promise.resolve(playerState);
+                },
+                error -> {
+                    promise.reject(error);
                 }
-            };
-            callResult.setResultCallback(tResultCallback);
-        }
+        );
     }
 
     @ReactMethod
-    public void getRecommendedContentItems(String type, Promise _promise) {
-        final Promise promise = _promise;
-        if (mSpotifyAppRemote != null) {
-            CallResult<ListItems> callResult = mSpotifyAppRemote.getContentApi().getRecommendedContentItems(type);
-            CallResult.ResultCallback<ListItems> tResultCallback = new CallResult.ResultCallback<ListItems>() {
-                @Override
-                public void onResult(ListItems listItems) {
-                    ReadableMap map = (ReadableMap)listItems;
-                    promise.resolve(map);
-                }
-            };
-            callResult.setResultCallback(tResultCallback);
-        }
+    public void getRecommendedContentItems(ReadableMap options, Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getContentApi().getRecommendedContentItems(options.getString("type")),
+                listItems -> {
+                    promise.resolve(Convert.toArray(listItems));
+                },
+                error -> promise.reject(error)
+        );
     }
 
     @ReactMethod
-    public void getChildrenOfItem(ReadableMap map, int perpage, int offset,  Promise _promise) {
-        final Promise promise = _promise;
-        if (mSpotifyAppRemote != null) {
-            ListItem listItem = (ListItem)map;
-            CallResult<ListItems> callResult = mSpotifyAppRemote.getContentApi().getChildrenOfItem(listItem, perpage, offset);
-            CallResult.ResultCallback<ListItems> tResultCallback = new CallResult.ResultCallback<ListItems>() {
-                @Override
-                public void onResult(ListItems listItems) {
-                    ReadableMap map = (ReadableMap)listItems;
-                    promise.resolve(map);
-                }
-            };
-            callResult.setResultCallback(tResultCallback);
-        }
+    public void getChildrenOfItem(ReadableMap itemMap, ReadableMap options, Promise promise) {
+        executeAppRemoteCall(
+                api -> {
+                    int perPage = options.getInt("perPage");
+                    int offset = options.getInt("offset");
+                    ListItem listItem = Convert.toItem(itemMap);
+                    return api.getContentApi().getChildrenOfItem(listItem, perPage, offset);
+                },
+                listItems -> {
+                    promise.resolve(Convert.toArray(listItems));
+                },
+                error -> promise.reject(error)
+        );
     }
 
     @ReactMethod
-    public void getCrossfadeState(Promise _promise) {
-        final Promise promise = _promise;
-        if (mSpotifyAppRemote != null) {
-            CallResult<CrossfadeState> callResult = mSpotifyAppRemote.getPlayerApi().getCrossfadeState();
-            CallResult.ResultCallback<CrossfadeState> tResultCallback = new CallResult.ResultCallback<CrossfadeState>() {
-                @Override
-                public void onResult(CrossfadeState crossfadeState) {
-                    ReadableMap map = (ReadableMap)crossfadeState;
-                    promise.resolve(map);
-                }
-            };
-            callResult.setResultCallback(tResultCallback);
-        }
+    public void getCrossfadeState(Promise promise) {
+        executeAppRemoteCall(
+                api -> api.getPlayerApi().getCrossfadeState(),
+                crossfadeState -> {
+                    promise.resolve(Convert.toMap(crossfadeState));
+                },
+                error -> promise.reject(error)
+        );
     }
 
     @ReactMethod
-    public void getRootContentItems() {
-        // not implemented yet
+    public void getRootContentItems(String type, Promise promise) {
+        Log.w(LOG_TAG, "getRootContentItems is not Implemented in Spotify Android SDK, returning []");
+        promise.resolve(Arguments.createArray());
     }
 
     @ReactMethod
-    public void getContentItemForUri() {
-        // not implemented yet
+    public void getContentItemForUri(String uri, Promise promise) {
+        Log.w(LOG_TAG, "getContentItemForUri is not Implemented in Spotify Android SDK, returning null");
+        promise.resolve(null);
     }
 
     @Override
