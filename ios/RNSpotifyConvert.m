@@ -78,7 +78,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         @"track": [RNSpotifyConvert SPTAppRemoteTrack:state.track],
         @"playbackPosition": [NSNumber numberWithInteger:state.playbackPosition],
         @"playbackSpeed": [NSNumber numberWithFloat:state.playbackSpeed],
-        @"paused": [NSNumber numberWithBool:state.isPaused],
+        @"isPaused": [NSNumber numberWithBool:state.isPaused],
         @"playbackRestrictions": [RNSpotifyConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
         @"playbackOptions": [RNSpotifyConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
     };
@@ -95,6 +95,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
          @"canRepeatTrack": [NSNumber numberWithBool:restrictions.canRepeatTrack],
          @"canRepeatContext": [NSNumber numberWithBool:restrictions.canRepeatContext],
          @"canToggleShuffle": [NSNumber numberWithBool:restrictions.canToggleShuffle],
+         @"canSeek":[NSNumber numberWithBool:restrictions.canSeek]
      };
 }
 
