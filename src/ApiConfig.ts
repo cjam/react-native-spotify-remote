@@ -53,7 +53,7 @@ export default interface SpotifyApiConfig {
      * @type {ApiScope}
      * @memberof SpotifyApiConfig
      */
-    scope?:ApiScope;
+    scopes?:ApiScope[];
 
     /**
      * Whether or not the auth dialog should be shown.

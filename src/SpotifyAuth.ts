@@ -1,6 +1,7 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import SpotifyApiConfig from './ApiConfig';
 import SpotifySession from './SpotifySession';
+import { getiOSScopeFromScopes } from './ApiScope';
 
 /**
  * Spotify Authorization Module
@@ -35,8 +36,18 @@ export interface SpotifyAuth {
      *
      * @param {SpotifyApiConfig} config
      * @returns {Promise<string>} accessToken
+     * @deprecated Use `authorize` instead, will be removed in future release
      */
     initialize(config: SpotifyApiConfig): Promise<string>;
+
+    /**
+     * Authorizes with Spotify returning a SpotifySession object if successful
+     *
+     * @param {SpotifyApiConfig} config
+     * @returns {Promise<SpotifySession>}
+     * @memberof SpotifyAuth
+     */
+    authorize(config: SpotifyApiConfig): Promise<SpotifySession>;
 
     /**
      * Ends the current Session and cleans up any resources
@@ -56,4 +67,28 @@ export interface SpotifyAuth {
 }
 
 const SpotifyAuth = NativeModules.RNSpotifyRemoteAuth as SpotifyAuth;
+
+// Augment the iOS implementation of authorize to convert the Android style scopes
+// to flags
+if (Platform.OS === "ios") {
+    const iosAuthorize = NativeModules.RNSpotifyRemoteAuth.authorize;
+    SpotifyAuth.authorize = (config: SpotifyApiConfig) => {
+        const iosConfig = {
+            ...config,
+            scopes: getiOSScopeFromScopes(config.scopes)
+        }
+        return iosAuthorize(iosConfig);
+    }
+}
+
+
+// todo: remove in future release
+// Here for backwards compatability
+SpotifyAuth.initialize = async (config: SpotifyApiConfig) => {
+    const session = await SpotifyAuth.authorize(config);
+    return session.accessToken;
+}
+
+
+
 export default SpotifyAuth;

@@ -6,7 +6,7 @@ export default interface PlayerState {
     track: Track;
     playbackPosition: any;
     playbackSpeed: any;
-    paused: boolean;
+    isPaused: boolean;
     playbackRestrictions: PlaybackRestrictions;
     playbackOptions: PlaybackOptions;
 }
