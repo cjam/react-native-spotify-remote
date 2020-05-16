@@ -18,7 +18,7 @@ const AppLayout: React.SFC = () => {
       {token ?
         <>
           <ConnectButton />
-          <Tabs initialPage={2}>
+          <Tabs initialPage={0}>
               <Tab heading="Now Playing" tabStyle={{ padding: 10 }}>
                 <TransportControls />
               </Tab>

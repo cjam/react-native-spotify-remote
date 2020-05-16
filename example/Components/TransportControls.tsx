@@ -24,12 +24,19 @@ export function displayDuration(durationMs: number) {
 const TransportControls: React.SFC = () => {
     const {
         playerState: {
-            paused = false,
+            isPaused = false,
             playbackOptions: {
                 isShuffling = false,
                 repeatMode = RepeatMode.Off
             } = {},
             playbackPosition = 0,
+            playbackRestrictions:{
+                canRepeatContext = true,
+                canRepeatTrack = true,
+                canSkipNext = true,
+                canSkipPrevious = true,
+                canToggleShuffle = true
+            } = {},
             track: {
                 duration = 0,
                 name = "",
@@ -52,7 +59,7 @@ const TransportControls: React.SFC = () => {
         }
     ];
     // Put play/pause into the middle of the array
-    buttons.splice(buttons.length / 2, 0, paused ?
+    buttons.splice(buttons.length / 2, 0, isPaused ?
         {
             content: <Icon name="play"/>,
             action: async () => await remote.resume()
@@ -118,13 +125,17 @@ const TransportControls: React.SFC = () => {
                         justifyContent: "space-between",
                         height: 50
                     }}>
-                        <Switch value={isShuffling} onValueChange={(val) => {
+                        <Switch
+                         disabled={!canToggleShuffle}
+                         value={isShuffling} 
+                         onValueChange={(val) => {
                             remote.setShuffling(val)
                         }}
                         />
                         <Text>Shuffle</Text>
                     </View>
                     <Button
+                        disabled={!canRepeatContext && !canRepeatTrack}
                         onPress={() => {
                             const newMode = (repeatMode + 1) % 3;
                             remote.setRepeatMode(newMode);
@@ -144,10 +155,10 @@ const TransportControls: React.SFC = () => {
                 onPress={() => {
                     remote.getPlayerState().then((pstate) => {
                         Toast.show({
-                            text: pstate.paused ? "Spotify Paused" : `Currently playing "${pstate.track.name}"`,
+                            text: pstate.isPaused ? "Spotify Paused" : `Currently playing "${pstate.track.name}"`,
                             position: "top",
                             duration: 2000,
-                            type: "success"
+                            type: "warning",
                         });
                     });
                 }}
