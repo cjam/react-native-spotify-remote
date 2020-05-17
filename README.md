@@ -85,6 +85,11 @@ Modifications are needed for the `AppDelegate.m`:
 @end
 ```
 
+### Android
+
+This project has been configured to support autolinking in `react-native` > 0.60.  However, if you need to you can most likely call `react-native link` to link it.  If you need to manually set your project up, the [Example](./example) project is there as an example of what is needed to make this library work.  
+
+In addition to linking the library into your project, you will also need to add the following code to your 
 <!-- 
 #### Android
 
@@ -147,33 +152,34 @@ The following table is here to show the support for Spotify Remote API functiona
 |Feature|iOS|Android|
 |:--|:-:|:-:|
 |Authentication|
-|`initialize`|[x]|[ ]|
-|`getSession`|[x]|[ ]|
-|`endSession`|[x]|[ ]|
+|`authorize`					|✅|✅|
+|`getSession`					|✅|✅|
+|`endSession`					|✅|✅|
 |Remote|
-|`isConnectedAsync`|[x]|[ ]|
-|`connect`|[x]|[ ]|
-|`playUri`|[x]|[ ]|
-|`playItem`|[x]|[ ]|
-|`playItemWithIndex`|[x]|[ ]|
-|`queueUri`|[x]|[ ]|
-|`seek`|[x]|[ ]|
-|`resume`|[x]|[ ]|
-|`pause`|[x]|[ ]|
-|`skipToNext`|[x]|[ ]|
-|`skipToPrevious`|[x]|[ ]|
-|`setShuffling`|[x]|[ ]|
-|`setRepeatMode`|[x]|[ ]|
-|`getPlayerState`|[x]|[ ]|
-|`getRootContentItems`|[x]|[ ]|
-|`getRecommendedContentItems`|[x]|[ ]|
-|`getChildrenOfItem`|[x]|[ ]|
-|`getContentItemForUri`|[x]|[ ]|
-|`getCrossfadeState`|[x]|[ ]|
+|`isConnectedAsync`				|✅|✅|
+|`connect`						|✅|✅|
+|`disconnect`					|✅|✅|
+|`playUri`						|✅|✅|
+|`playItem`						|✅|✅|
+|`playItemWithIndex`			|✅|✅|
+|`queueUri`						|✅|✅|
+|`seek`							|✅|✅|
+|`resume`						|✅|✅|
+|`pause`						|✅|✅|
+|`skipToNext`					|✅|✅|
+|`skipToPrevious`				|✅|✅|
+|`setShuffling`					|✅|✅|
+|`setRepeatMode`				|✅|✅|
+|`getPlayerState`				|✅|✅|
+|`getRootContentItems`			|✅|❌|
+|`getRecommendedContentItems`	|✅|✅|
+|`getChildrenOfItem`			|✅|✅|
+|`getContentItemForUri`			|✅|❌|
+|`getCrossfadeState`			|✅|✅|
 |Remote Events|
-|`playerStateChanged`|[x]|[ ]|
-|`remoteDisconnected`|[x]|[ ]|
-|`remoteConnected`|[x]|[ ]|
+|`playerStateChanged`			|✅|❌|
+|`remoteDisconnected`			|✅|✅|
+|`remoteConnected`				|✅|✅|
 
 
 ## Usage
