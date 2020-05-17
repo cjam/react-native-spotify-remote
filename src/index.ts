@@ -9,6 +9,9 @@ export { default as Album } from './Album';
 export { default as ContentType } from './ContentType';
 export { default as ContentItem } from './ContentItem';
 export { default as CrossfadeState } from './CrossfadeState';
+export {default as SpotifySession} from'./SpotifySession';
+export {default as GetChildrenItemsOptions} from './GetChildrenItemsOptions';
+export {default as PlaybackOptions} from './PlaybackOptions';
 export { SpotifyAuth } from './SpotifyAuth';
 export { SpotifyRemoteApi } from './SpotifyRemote';
 
