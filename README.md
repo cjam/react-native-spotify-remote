@@ -1,15 +1,53 @@
 
 # Spotify App Remote for React Native
 
-A react native module for the Spotify Remote SDK.
+[![npm version](https://badge.fury.io/js/react-native-spotify-remote.svg)](https://badge.fury.io/js/react-native-spotify-remote)
 
->## ⚠️ Work In Progress ⚠️
-
->## Currently Only Implemented for iOS 
+A react native module for the Spotify Remote SDK ( [iOS](https://github.com/spotify/ios-sdk/) | [Android](https://github.com/spotify/android-sdk/) )
 
 - [Documentation](https://cjam.github.io/react-native-spotify-remote/index.html)
 - [Change Log](./CHANGELOG.md)
 - [Contributing](./CONTRIBUTING.md)
+
+## Supported Features
+
+An [Example](./example) project was developed to exercise and test all functionality within this library.  If you are curious about how to use something, or need to compare your application setup to something that works, check there first.
+
+## Features
+
+The following table shows the platform support for various Spotify Remote API functionality within this library.
+
+|Feature|iOS|Android||
+|:--|:-:|:-:|-:|
+|Authentication|
+|`authorize`					|✅|✅||
+|`getSession`					|✅|✅||
+|`endSession`					|✅|✅||
+|Remote|
+|`isConnectedAsync`				|✅|✅||
+|`connect`						|✅|✅||
+|`disconnect`					|✅|✅||
+|`playUri`						|✅|✅||
+|`playItem`						|✅|✅||
+|`playItemWithIndex`			|✅|✅||
+|`queueUri`						|✅|✅||
+|`seek`							|✅|✅||
+|`resume`						|✅|✅||
+|`pause`						|✅|✅||
+|`skipToNext`					|✅|✅||
+|`skipToPrevious`				|✅|✅||
+|`setShuffling`					|✅|✅||
+|`setRepeatMode`				|✅|✅||
+|`getPlayerState`				|✅|✅||
+|`getRootContentItems`			|✅|❌|Not available in Android SDK|
+|`getRecommendedContentItems`	|✅|✅||
+|`getChildrenOfItem`			|✅|✅||
+|`getContentItemForUri`			|✅|❌|Not available in Android SDK|
+|`getCrossfadeState`			|✅|✅||
+|Remote Events|
+|`playerStateChanged`			|✅|✅||
+|`remoteDisconnected`			|✅|✅||
+|`remoteConnected`				|✅|✅||
 
 ## Install
 
@@ -24,6 +62,8 @@ npm install --save react-native-spotify-remote
 ```
 
 ## Linking
+
+As of React Native `> 0.61`, auto linking should work for both iOS and Android.  There shouldn't be any modifications necessary and it *Should* work out of the box.  The one caveat, is that `react-native-events` needs to be linked as it doesn't yet support auto linking.  If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
 
 ### iOS
 
@@ -85,102 +125,34 @@ Modifications are needed for the `AppDelegate.m`:
 @end
 ```
 
-<!-- 
-#### Android
+### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+If you need to link your project manually, here are some things you'll need to do.
+
+1. Open up `android/app/src/main/java/[...]/MainApplication.java`
   - Add `import com.reactlibrary.RNSpotifyRemotePackage;` to the imports at the top of the file
   - Add `new RNSpotifyRemotePackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
-  	include ':react-native-spotify-remote'
-  	project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-spotify-remote/android')
+	include ':react-native-spotify-remote'
+	project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-spotify-remote/android')
+
+	include ':react-native-events'
+	project(':react-native-events').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-events/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-spotify-remote')
+    implementation project(':react-native-spotify-remote')
+    implementation project(':react-native-events')
   	```
 
-Edit `android/build.gradle` and add `flatDir`
-
-```
-...
-allprojects {
-	repositories {
-		mavenLocal()
-		jcenter()
-		maven {
-			// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-			url "$rootDir/../node_modules/react-native/android"
-		}
-		flatDir {
-			dirs project(':react-native-spotify-remote').file('libs'), 'libs'
-		}
-	}
-}
-...
-```
-
-Edit `android/app/build.gradle` and add `packagingOptions`
-
-```
-...
-buildTypes {
-    release {
-        minifyEnabled enableProguardInReleaseBuilds
-        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-    }
-}
-packagingOptions {
-    pickFirst 'lib/armeabi-v7a/libgnustl_shared.so'
-    pickFirst 'lib/x86/libgnustl_shared.so'
-}
-...
-```
-
 If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
-
-## Features
-
-The following table is here to show the support for Spotify Remote API functionality within this library.
-
-|Feature|iOS|Android|
-|:--|:-:|:-:|
-|Authentication|
-|`initialize`|[x]|[ ]|
-|`getSession`|[x]|[ ]|
-|`endSession`|[x]|[ ]|
-|Remote|
-|`isConnectedAsync`|[x]|[ ]|
-|`connect`|[x]|[ ]|
-|`playUri`|[x]|[ ]|
-|`playItem`|[x]|[ ]|
-|`playItemWithIndex`|[x]|[ ]|
-|`queueUri`|[x]|[ ]|
-|`seek`|[x]|[ ]|
-|`resume`|[x]|[ ]|
-|`pause`|[x]|[ ]|
-|`skipToNext`|[x]|[ ]|
-|`skipToPrevious`|[x]|[ ]|
-|`setShuffling`|[x]|[ ]|
-|`setRepeatMode`|[x]|[ ]|
-|`getPlayerState`|[x]|[ ]|
-|`getRootContentItems`|[x]|[ ]|
-|`getRecommendedContentItems`|[x]|[ ]|
-|`getChildrenOfItem`|[x]|[ ]|
-|`getContentItemForUri`|[x]|[ ]|
-|`getCrossfadeState`|[x]|[ ]|
-|Remote Events|
-|`playerStateChanged`|[x]|[ ]|
-|`remoteDisconnected`|[x]|[ ]|
-|`remoteConnected`|[x]|[ ]|
-
 
 ## Usage
 
 ### Example Application
 
-This repo contains an [Example App](./example/Readme.md) which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they're pretty cool) and is using a few of the remote API calls.  (Will be looking to show use of all of the api calls in the near future).
+This repo contains an [Example App](./example/Readme.md) which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they're pretty cool) and exercises all of the remote API calls.
 
 ### In Code
 
@@ -202,15 +174,15 @@ const spotifyConfig: ApiConfig = {
 	redirectURL: "SPOTIFY_REDIRECT_URL",
 	tokenRefreshURL: "SPOTIFY_TOKEN_REFRESH_URL",
 	tokenSwapURL: "SPOTIFY_TOKEN_SWAP_URL",
-	scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
+	scopes: [ApiScope.AppRemoteControlScope, ApiScope.UserFollowReadScope]
 }
 
 // Initialize the library and connect the Remote
 // then play an epic song
 async function playEpicSong(){
 	try{
-		const token = await SpotifyAuth.initialize(spotifyConfig);
-		await SpotifyRemote.connect(token);
+		const session = await SpotifyAuth.authorize(spotifyConfig);
+		await SpotifyRemote.connect(session.token);
 		await remote.playUri("spotify:track:6IA8E2Q5ttcpbuahIejO74");
     await remote.seek(58000);
 	}catch(err){
@@ -235,6 +207,25 @@ Nothing has been special to deal with Spotify *Free* Users but this module _shou
 
 Please do not open issues about getting the module to work unless you have tried using both the example app and the example token swap server. Please make sure you have tried running on the latest react-native version before submitting a bug.
 
-## Acknowledgements
+## Contributors
 
-Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration & coding patterns for this package.
+Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration and some useful patterns for this package.
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/cjam"><img src="https://avatars2.githubusercontent.com/u/1000288?v=4" width="100px;" alt=""/><br /><sub><b>Colter McQuay</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=cjam" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/lufinkey"><img src="https://avatars3.githubusercontent.com/u/7820113?v=4" width="100px;" alt=""/><br /><sub><b>Luis Finke</b></sub></a><br /><a href="#ideas-lufinkey" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/YozhikM"><img src="https://avatars0.githubusercontent.com/u/27273025?v=4" width="100px;" alt=""/><br /><sub><b>Stanislav</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=YozhikM" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->

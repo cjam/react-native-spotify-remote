@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
+### Changed
+ - `ApiConfig.scope` to `ApiConfig.scopes` which is now of type `ApiScope[]` and also aligns to the web api scopes
+ - `ApiScope` enum values are now same as web api instead of bit flags
+ - `PlayerState.paused` -> `PlayerState.isPaused` to align with Spotify's iOS/Android sdk's
+
+### Added
+ - Android Support! Big thanks to @YozhikM for the initial work on this
+ - `PlaybackRestrictions.canSeek`
+ - `SpotifyRemote.getChildrenOfItem` now has optional `options:GetChildrenItemsOptions` for android paging
+ - `SpotifyAuth.authorize` to replace `SpotifyAuth.initialize` which will now return a session object instead of just a token
+
+### Deprecated
+- `SpotifyAuth.initialize` in favor of `SpotifyAuth.authorize`
+
+### Removed
+
 
 ## [0.2.2] - 2020-03-22
 ### Changed

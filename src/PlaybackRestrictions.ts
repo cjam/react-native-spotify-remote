@@ -4,5 +4,6 @@ export default interface PlaybackRestrictions {
     canRepeatTrack: boolean;
     canRepeatContext: boolean;
     canToggleShuffle: boolean;
+    canSeek:boolean;
 }
 

@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import RNEvents from 'react-native-events';
 import TypedEventEmitter from './TypedEventEmitter';
 import RepeatMode from './RepeatMode';
@@ -7,6 +7,7 @@ import ContentItem from './ContentItem';
 import CrossfadeState from './CrossfadeState';
 import RecommendedContentOptions from './RecommendedContentOptions';
 import ContentType from './ContentType';
+import GetChildrenItemsOptions, { DEFAULT_GET_CHILDREN_OPTIONS } from './GetChildrenItemsOptions';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -197,7 +198,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     getPlayerState(): Promise<PlayerState>;
 
     /**
-     * Retrieves the root content items for a given type.
+     * Retrieves the root content items for a given type. (iOS only)
      *
      * @param {ContentType} [type]
      * @returns {Promise<ContentItem[]>}
@@ -217,21 +218,22 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     /**
      * Gets the children of a given item
      *
-     * @param {ContentItem} item
+     * @param {(Pick<ContentItem, 'uri' | 'id'>)} item
+     * @param {GetChildrenItemsOptions} [options]
      * @returns {Promise<ContentItem[]>}
      * @memberof SpotifyRemoteApi
      */
-    getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>): Promise<ContentItem[]>;
+    getChildrenOfItem(item: Pick<ContentItem, 'uri' | 'id'>, options?: GetChildrenItemsOptions): Promise<ContentItem[]>;
 
 
     /**
-     * Gets a ContentItem from a uri
+     * Gets a ContentItem from a uri (iOS only)
      *
      * @param {string} uri
      * @returns {Promise<ContentItem>}
      * @memberof SpotifyRemoteApi
      */
-    getContentItemForUri(uri: string): Promise<ContentItem>;
+    getContentItemForUri(uri: string): Promise<ContentItem | undefined>;
 
     /**
      * Retrieves the current crossfade state of the player.
@@ -258,6 +260,37 @@ SpotifyRemote.setPlaying = (playing: boolean) => {
 }
 
 
+// Augment the android module to warn on unimplemented methods
+if (Platform.OS === "android") {
+
+    SpotifyRemote.getContentItemForUri = async (uri: string) => {
+        console.warn("getContentItemForUri is not implemented in Spotify's Android SDK");
+        return undefined;
+    }
+
+    SpotifyRemote.getRootContentItems = async (type: ContentType) => {
+        console.warn("getRootContentItems is not implemented in Spotify's Android SDK");
+        return [];
+    }
+
+    
+    const androidGetItemOfChildren = SpotifyRemote.getChildrenOfItem;
+    SpotifyRemote.getChildrenOfItem = async (item: ContentItem, options) => {
+        return androidGetItemOfChildren(item, {
+            ...DEFAULT_GET_CHILDREN_OPTIONS,
+            ...options
+        });
+    }
+
+}
+
+// Augment the iOS module to handle differences
+if (Platform.OS === "ios") {
+    const iosGetChildrenOfItem = SpotifyRemote.getChildrenOfItem;
+    SpotifyRemote.getChildrenOfItem = async (item: ContentItem, options) => {
+        return iosGetChildrenOfItem(item);
+    }
+}
 
 
 

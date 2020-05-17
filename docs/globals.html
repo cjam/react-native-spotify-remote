@@ -2389,6 +2389,9 @@ img {
 			<a href="interfaces/crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="interfaces/getchildrenitemsoptions.html" class="tsd-kind-icon">Get<wbr>Children<wbr>Items<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="interfaces/playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2433,6 +2436,15 @@ img {
 		<li class=" tsd-kind-variable">
 			<a href="globals.html#remote" class="tsd-kind-icon">remote</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="globals.html#getiosscopefromscopes" class="tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes</a>
+		</li>
+		<li class=" tsd-kind-object-literal tsd-is-not-exported">
+			<a href="globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a>
+		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="globals.html#default_get_children_options" class="tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -2441,22 +2453,205 @@ img {
 			<a href="#spotify-app-remote-for-react-native" id="spotify-app-remote-for-react-native" style="color: inherit; text-decoration: none;">
 				<h1>Spotify App Remote for React Native</h1>
 			</a>
-			<p>A react native module for the Spotify Remote SDK.</p>
-			<blockquote>
-				<a href="#⚠️-work-in-progress-⚠️" id="⚠️-work-in-progress-⚠️" style="color: inherit; text-decoration: none;">
-					<h2>⚠️ Work In Progress ⚠️</h2>
-				</a>
-			</blockquote>
-			<blockquote>
-				<a href="#currently-only-implemented-for-ios" id="currently-only-implemented-for-ios" style="color: inherit; text-decoration: none;">
-					<h2>Currently Only Implemented for iOS</h2>
-				</a>
-			</blockquote>
+			<p><a href="https://badge.fury.io/js/react-native-spotify-remote"><img src="https://badge.fury.io/js/react-native-spotify-remote.svg" alt="npm version"></a></p>
+			<p>A react native module for the Spotify Remote SDK ( <a href="https://github.com/spotify/ios-sdk/">iOS</a> | <a href="https://github.com/spotify/android-sdk/">Android</a> )</p>
 			<ul>
 				<li><a href="https://cjam.github.io/react-native-spotify-remote/index.html">Documentation</a></li>
 				<li><a href="./CHANGELOG.md">Change Log</a></li>
 				<li><a href="./CONTRIBUTING.md">Contributing</a></li>
 			</ul>
+			<a href="#supported-features" id="supported-features" style="color: inherit; text-decoration: none;">
+				<h2>Supported Features</h2>
+			</a>
+			<p>An <a href="./example">Example</a> project was developed to exercise and test all functionality within this library.  If you are curious about how to use something, or need to compare your application setup to something that works, check there first.</p>
+			<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+				<h2>Features</h2>
+			</a>
+			<p>The following table shows the platform support for various Spotify Remote API functionality within this library.</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Feature</th>
+						<th align="center">iOS</th>
+						<th align="center">Android</th>
+						<th align="right"></th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td align="left">Authentication</td>
+						<td align="center"></td>
+						<td align="center"></td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>authorize</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>getSession</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>endSession</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left">Remote</td>
+						<td align="center"></td>
+						<td align="center"></td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>isConnectedAsync</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>connect</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>disconnect</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playUri</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playItem</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playItemWithIndex</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>queueUri</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>seek</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>resume</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>pause</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>skipToNext</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>skipToPrevious</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>setShuffling</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>setRepeatMode</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>getPlayerState</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>getRootContentItems</code></td>
+						<td align="center">✅</td>
+						<td align="center">❌</td>
+						<td align="right">Not available in Android SDK</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getRecommendedContentItems</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>getChildrenOfItem</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>getContentItemForUri</code></td>
+						<td align="center">✅</td>
+						<td align="center">❌</td>
+						<td align="right">Not available in Android SDK</td>
+					</tr>
+					<tr>
+						<td align="left"><code>getCrossfadeState</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left">Remote Events</td>
+						<td align="center"></td>
+						<td align="center"></td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playerStateChanged</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>remoteDisconnected</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>remoteConnected</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+			</tbody></table>
 			<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 				<h2>Install</h2>
 			</a>
@@ -2466,6 +2661,7 @@ img {
 			<a href="#linking" id="linking" style="color: inherit; text-decoration: none;">
 				<h2>Linking</h2>
 			</a>
+			<p>As of React Native <code>&gt; 0.61</code>, auto linking should work for both iOS and Android.  There shouldn&#39;t be any modifications necessary and it <em>Should</em> work out of the box.  The one caveat, is that <code>react-native-events</code> needs to be linked as it doesn&#39;t yet support auto linking.  If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.</p>
 			<a href="#ios" id="ios" style="color: inherit; text-decoration: none;">
 				<h3>iOS</h3>
 			</a>
@@ -2518,220 +2714,35 @@ img {
 }
 
 @end</code></pre>
-			<!--
-#### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNSpotifyRemotePackage;` to the imports at the top of the file
-  - Add `new RNSpotifyRemotePackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-      ```
-      include ':react-native-spotify-remote'
-      project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir,     '../node_modules/react-native-spotify-remote/android')
-      ```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-      ```
-      compile project(':react-native-spotify-remote')
-      ```
-
-Edit `android/build.gradle` and add `flatDir`
-
-```
-...
-allprojects {
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
-        }
-        flatDir {
-            dirs project(':react-native-spotify-remote').file('libs'), 'libs'
-        }
-    }
-}
-...
-```
-
-Edit `android/app/build.gradle` and add `packagingOptions`
-
-```
-...
-buildTypes {
-    release {
-        minifyEnabled enableProguardInReleaseBuilds
-        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-    }
-}
-packagingOptions {
-    pickFirst 'lib/armeabi-v7a/libgnustl_shared.so'
-    pickFirst 'lib/x86/libgnustl_shared.so'
-}
-...
-```
-
-If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
-			<a href="#features" id="features" style="color: inherit; text-decoration: none;">
-				<h2>Features</h2>
+			<a href="#android" id="android" style="color: inherit; text-decoration: none;">
+				<h3>Android</h3>
 			</a>
-			<p>The following table is here to show the support for Spotify Remote API functionality within this library.</p>
-			<table>
-				<thead>
-					<tr>
-						<th align="left">Feature</th>
-						<th align="center">iOS</th>
-						<th align="center">Android</th>
-					</tr>
-				</thead>
-				<tbody><tr>
-						<td align="left">Authentication</td>
-						<td align="center"></td>
-						<td align="center"></td>
-					</tr>
-					<tr>
-						<td align="left"><code>initialize</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getSession</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>endSession</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left">Remote</td>
-						<td align="center"></td>
-						<td align="center"></td>
-					</tr>
-					<tr>
-						<td align="left"><code>isConnectedAsync</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>connect</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>playUri</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>playItem</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>playItemWithIndex</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>queueUri</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>seek</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>resume</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>pause</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>skipToNext</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>skipToPrevious</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>setShuffling</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>setRepeatMode</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getPlayerState</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getRootContentItems</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getRecommendedContentItems</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getChildrenOfItem</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getContentItemForUri</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>getCrossfadeState</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left">Remote Events</td>
-						<td align="center"></td>
-						<td align="center"></td>
-					</tr>
-					<tr>
-						<td align="left"><code>playerStateChanged</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>remoteDisconnected</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-					<tr>
-						<td align="left"><code>remoteConnected</code></td>
-						<td align="center">[x]</td>
-						<td align="center">[ ]</td>
-					</tr>
-			</tbody></table>
+			<p>If you need to link your project manually, here are some things you&#39;ll need to do.</p>
+			<ol>
+				<li><p>Open up <code>android/app/src/main/java/[...]/MainApplication.java</code></p>
+					<ul>
+						<li>Add <code>import com.reactlibrary.RNSpotifyRemotePackage;</code> to the imports at the top of the file</li>
+						<li>Add <code>new RNSpotifyRemotePackage()</code> to the list returned by the <code>getPackages()</code> method</li>
+					</ul>
+				</li>
+				<li><p>Append the following lines to <code>android/settings.gradle</code>:</p>
+					<pre><code> <span class="hljs-keyword">include</span> ':react-native-spotify-remote'
+ project(':react-native-spotify-remote').projectDir = <span class="hljs-keyword">new</span> <span class="hljs-constructor">File(<span class="hljs-params">rootProject</span>.<span class="hljs-params">projectDir</span>, '..<span class="hljs-operator">/</span><span class="hljs-params">node_modules</span><span class="hljs-operator">/</span><span class="hljs-params">react</span>-<span class="hljs-params">native</span>-<span class="hljs-params">spotify</span>-<span class="hljs-params">remote</span><span class="hljs-operator">/</span><span class="hljs-params">android</span>')</span>
+
+ <span class="hljs-keyword">include</span> ':react-native-events'
+ project(':react-native-events').projectDir = <span class="hljs-keyword">new</span> <span class="hljs-constructor">File(<span class="hljs-params">rootProject</span>.<span class="hljs-params">projectDir</span>, '..<span class="hljs-operator">/</span><span class="hljs-params">node_modules</span><span class="hljs-operator">/</span><span class="hljs-params">react</span>-<span class="hljs-params">native</span>-<span class="hljs-params">events</span><span class="hljs-operator">/</span><span class="hljs-params">android</span>')</span></code></pre></li>
+				<li><p>Insert the following lines inside the dependencies block in <code>android/app/build.gradle</code>:</p>
+					<pre><code> <span class="hljs-variable">implementation</span> <span class="hljs-function"><span class="hljs-title">project</span>(<span class="hljs-string">':react-native-spotify-remote'</span>)</span>
+ <span class="hljs-variable">implementation</span> <span class="hljs-function"><span class="hljs-title">project</span>(<span class="hljs-string">':react-native-events'</span>)</span></code></pre></li>
+			</ol>
+			<p>If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. --&gt;</p>
 			<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 				<h2>Usage</h2>
 			</a>
 			<a href="#example-application" id="example-application" style="color: inherit; text-decoration: none;">
 				<h3>Example Application</h3>
 			</a>
-			<p>This repo contains an <a href="./example/Readme.md">Example App</a> which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they&#39;re pretty cool) and is using a few of the remote API calls.  (Will be looking to show use of all of the api calls in the near future).</p>
+			<p>This repo contains an <a href="./example/Readme.md">Example App</a> which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they&#39;re pretty cool) and exercises all of the remote API calls.</p>
 			<a href="#in-code" id="in-code" style="color: inherit; text-decoration: none;">
 				<h3>In Code</h3>
 			</a>
@@ -2750,15 +2761,15 @@ If you have issues linking the module, please check that gradle is updated to th
     redirectURL: <span class="hljs-string">"SPOTIFY_REDIRECT_URL"</span>,
     tokenRefreshURL: <span class="hljs-string">"SPOTIFY_TOKEN_REFRESH_URL"</span>,
     tokenSwapURL: <span class="hljs-string">"SPOTIFY_TOKEN_SWAP_URL"</span>,
-    scope: ApiScope.AppRemoteControlScope | ApiScope.UserFollowReadScope
+    scopes: [ApiScope.AppRemoteControlScope, ApiScope.UserFollowReadScope]
 }
 
 <span class="hljs-comment">// Initialize the library and connect the Remote</span>
 <span class="hljs-comment">// then play an epic song</span>
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">playEpicSong</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">try</span>{
-        <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">await</span> SpotifyAuth.initialize(spotifyConfig);
-        <span class="hljs-keyword">await</span> SpotifyRemote.connect(token);
+        <span class="hljs-keyword">const</span> session = <span class="hljs-keyword">await</span> SpotifyAuth.authorize(spotifyConfig);
+        <span class="hljs-keyword">await</span> SpotifyRemote.connect(session.token);
         <span class="hljs-keyword">await</span> remote.playUri(<span class="hljs-string">"spotify:track:6IA8E2Q5ttcpbuahIejO74"</span>);
     <span class="hljs-keyword">await</span> remote.seek(<span class="hljs-number">58000</span>);
     }<span class="hljs-keyword">catch</span>(err){
@@ -2781,10 +2792,26 @@ If you have issues linking the module, please check that gradle is updated to th
 				<h2>Opening Issues</h2>
 			</a>
 			<p>Please do not open issues about getting the module to work unless you have tried using both the example app and the example token swap server. Please make sure you have tried running on the latest react-native version before submitting a bug.</p>
-			<a href="#acknowledgements" id="acknowledgements" style="color: inherit; text-decoration: none;">
-				<h2>Acknowledgements</h2>
+			<a href="#contributors" id="contributors" style="color: inherit; text-decoration: none;">
+				<h2>Contributors</h2>
 			</a>
-			<p>Big thanks to <a href="https://github.com/lufinkey">@lufinkey</a> and all of the great work that he has done in the <a href="https://github.com/lufinkey/react-native-spotify">react-native-spotify</a> repo which was the original source of inspiration &amp; coding patterns for this package.</p>
+			<p>Big thanks to <a href="https://github.com/lufinkey">@lufinkey</a> and all of the great work that he has done in the <a href="https://github.com/lufinkey/react-native-spotify">react-native-spotify</a> repo which was the original source of inspiration and some useful patterns for this package.</p>
+			<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+			<p><a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" alt="All Contributors"></a></p>
+			<!-- ALL-CONTRIBUTORS-BADGE:END -->
+			<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+			<!-- prettier-ignore-start -->
+			<!-- markdownlint-disable -->
+			<table>
+				<tr>
+					<td align="center"><a href="https://github.com/cjam"><img src="https://avatars2.githubusercontent.com/u/1000288?v=4" width="100px;" alt=""/><br /><sub><b>Colter McQuay</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=cjam" title="Code">💻</a></td>
+					<td align="center"><a href="https://github.com/lufinkey"><img src="https://avatars3.githubusercontent.com/u/7820113?v=4" width="100px;" alt=""/><br /><sub><b>Luis Finke</b></sub></a><br /><a href="#ideas-lufinkey" title="Ideas, Planning, & Feedback">🤔</a></td>
+					<td align="center"><a href="https://github.com/YozhikM"><img src="https://avatars0.githubusercontent.com/u/27273025?v=4" width="100px;" alt=""/><br /><sub><b>Stanislav</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=YozhikM" title="Code">💻</a></td>
+				</tr>
+			</table>
+			<!-- markdownlint-enable -->
+			<!-- prettier-ignore-end -->
+			<!-- ALL-CONTRIBUTORS-LIST:END -->
 		</div>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
@@ -2804,6 +2831,7 @@ If you have issues linking the module, please check that gradle is updated to th
 							<li class="tsd-kind-interface"><a href="interfaces/artist.html" class="tsd-kind-icon">Artist</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/contentitem.html" class="tsd-kind-icon">Content<wbr>Item</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/getchildrenitemsoptions.html" class="tsd-kind-icon">Get<wbr>Children<wbr>Items<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackrestrictions.html" class="tsd-kind-icon">Playback<wbr>Restrictions</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playerstate.html" class="tsd-kind-icon">Player<wbr>State</a></li>
@@ -2831,6 +2859,19 @@ If you have issues linking the module, please check that gradle is updated to th
 							<li class="tsd-kind-variable"><a href="globals.html#remote" class="tsd-kind-icon">remote</a></li>
 						</ul>
 					</section>
+					<section class="tsd-index-section ">
+						<h3>Functions</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-function"><a href="globals.html#getiosscopefromscopes" class="tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Object literals</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-object-literal tsd-is-not-exported"><a href="globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a></li>
+							<li class="tsd-kind-object-literal"><a href="globals.html#default_get_children_options" class="tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</a></li>
+						</ul>
+					</section>
 				</div>
 			</section>
 		</section>
@@ -2855,7 +2896,7 @@ If you have issues linking the module, please check that gradle is updated to th
 				<div class="tsd-signature tsd-kind-icon">Spotify<wbr>Auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type">SpotifyAuth</a><span class="tsd-signature-symbol"> =&nbsp;NativeModules.RNSpotifyRemoteAuth as SpotifyAuth</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L58">SpotifyAuth.ts:58</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L69">SpotifyAuth.ts:69</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2890,6 +2931,112 @@ If you have issues linking the module, please check that gradle is updated to th
 						<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {remote} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-spotify-remote'</span></code></pre>
 					</div>
 				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Functions</h2>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="getiosscopefromscopes" class="tsd-anchor"></a>
+				<h3>getiOSScope<wbr>From<wbr>Scopes</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes<span class="tsd-signature-symbol">(</span>scopes<span class="tsd-signature-symbol">?: </span><a href="enums/apiscope.html" class="tsd-signature-type">ApiScope</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L130">ApiScope.ts:130</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Internal method used for converting array of ApiScopes to iOS bit flag based value</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>export</dt>
+								<dd></dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> scopes: <a href="enums/apiscope.html" class="tsd-signature-type">ApiScope</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Object literals</h2>
+			<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-is-not-exported">
+				<a name="apiscopeflagvalues" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> Api<wbr>Scope<wbr>Flag<wbr>Values</h3>
+				<div class="tsd-signature tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L100">ApiScope.ts:100</a></li>
+					</ul>
+				</aside>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+					<a name="apiscopeflagvalues.__computed" class="tsd-anchor"></a>
+					<h3>__computed</h3>
+					<div class="tsd-signature tsd-kind-icon">__computed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 &lt;&lt; 18</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L101">ApiScope.ts:101</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L102">ApiScope.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L103">ApiScope.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L104">ApiScope.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L105">ApiScope.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L106">ApiScope.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L107">ApiScope.ts:107</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L108">ApiScope.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L109">ApiScope.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L110">ApiScope.ts:110</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L111">ApiScope.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L112">ApiScope.ts:112</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L113">ApiScope.ts:113</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L114">ApiScope.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L115">ApiScope.ts:115</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L116">ApiScope.ts:116</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L117">ApiScope.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L118">ApiScope.ts:118</a></li>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiScope.ts#L119">ApiScope.ts:119</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-object-literal">
+				<a name="default_get_children_options" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</h3>
+				<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/GetChildrenItemsOptions.ts#L28">GetChildrenItemsOptions.ts:28</a></li>
+					</ul>
+				</aside>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="default_get_children_options.offset" class="tsd-anchor"></a>
+					<h3>offset</h3>
+					<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/GetChildrenItemsOptions.ts#L30">GetChildrenItemsOptions.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="default_get_children_options.perpage" class="tsd-anchor"></a>
+					<h3>per<wbr>Page</h3>
+					<div class="tsd-signature tsd-kind-icon">per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;20</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/GetChildrenItemsOptions.ts#L29">GetChildrenItemsOptions.ts:29</a></li>
+						</ul>
+					</aside>
+				</section>
 			</section>
 		</section>
 		<footer class="with-border-bottom">

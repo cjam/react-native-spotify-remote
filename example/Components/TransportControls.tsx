@@ -1,5 +1,5 @@
 import React, { useState, useContext, useCallback } from 'react';
-import { View, Button, Text, Toast, Switch, Segment } from 'native-base';
+import { View, Button, Text, Toast, Switch, Segment, Icon } from 'native-base';
 import styles from '../styles';
 import AppContext from '../AppContext';
 import { RepeatMode } from 'react-native-spotify-remote';
@@ -24,12 +24,19 @@ export function displayDuration(durationMs: number) {
 const TransportControls: React.SFC = () => {
     const {
         playerState: {
-            paused = false,
+            isPaused = false,
             playbackOptions: {
                 isShuffling = false,
                 repeatMode = RepeatMode.Off
             } = {},
             playbackPosition = 0,
+            playbackRestrictions:{
+                canRepeatContext = true,
+                canRepeatTrack = true,
+                canSkipNext = true,
+                canSkipPrevious = true,
+                canToggleShuffle = true
+            } = {},
             track: {
                 duration = 0,
                 name = "",
@@ -43,23 +50,23 @@ const TransportControls: React.SFC = () => {
     } = useContext(AppContext);
     const buttons = [
         {
-            name: '⏮',
+            content: <Icon name="md-skip-backward"/>,
             action: async () => await remote.skipToPrevious(),
         },
         {
-            name: '⏭',
+            content: <Icon name="md-skip-forward"/>,
             action: async () => await remote.skipToNext(),
         }
     ];
     // Put play/pause into the middle of the array
-    buttons.splice(buttons.length / 2, 0, paused ?
+    buttons.splice(buttons.length / 2, 0, isPaused ?
         {
-            name: "▶️",
+            content: <Icon name="play"/>,
             action: async () => await remote.resume()
         }
         :
         {
-            name: "⏸",
+            content: <Icon name="pause"/>,
             action: async () => await remote.pause()
         }
     );
@@ -87,7 +94,7 @@ const TransportControls: React.SFC = () => {
 
             <View>
                 <Segment>
-                    {buttons.map(({ name, action }, index) => (
+                    {buttons.map(({ content, action }, index) => (
                         <Button
                             key={`${index}`}
                             onPress={() => action().catch(onError)}
@@ -97,9 +104,11 @@ const TransportControls: React.SFC = () => {
                                 height: 60,
                                 backgroundColor: "#FFF",
                                 borderLeftWidth: index === 0 ? 1 : 0,
+                                display:'flex',
+                                justifyContent:'center'
                             }}
                         >
-                            <Text style={{ fontSize: 40, textAlign: "center", width: "100%" }}>{name}</Text>
+                            {content}
                         </Button>
                     ))}
                 </Segment>
@@ -116,13 +125,17 @@ const TransportControls: React.SFC = () => {
                         justifyContent: "space-between",
                         height: 50
                     }}>
-                        <Switch value={isShuffling} onValueChange={(val) => {
+                        <Switch
+                         disabled={!canToggleShuffle}
+                         value={isShuffling} 
+                         onValueChange={(val) => {
                             remote.setShuffling(val)
                         }}
                         />
                         <Text>Shuffle</Text>
                     </View>
                     <Button
+                        disabled={!canRepeatContext && !canRepeatTrack}
                         onPress={() => {
                             const newMode = (repeatMode + 1) % 3;
                             remote.setRepeatMode(newMode);
@@ -142,10 +155,10 @@ const TransportControls: React.SFC = () => {
                 onPress={() => {
                     remote.getPlayerState().then((pstate) => {
                         Toast.show({
-                            text: pstate.paused ? "Spotify Paused" : `Currently playing "${pstate.track.name}"`,
+                            text: pstate.isPaused ? "Spotify Paused" : `Currently playing "${pstate.track.name}"`,
                             position: "top",
                             duration: 2000,
-                            type: "success"
+                            type: "warning",
                         });
                     });
                 }}

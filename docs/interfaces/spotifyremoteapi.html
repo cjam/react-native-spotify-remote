@@ -2389,6 +2389,9 @@ img {
 			<a href="crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="getchildrenitemsoptions.html" class="tsd-kind-icon">Get<wbr>Children<wbr>Items<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2543,6 +2546,15 @@ img {
 		<li class=" tsd-kind-variable">
 			<a href="../globals.html#remote" class="tsd-kind-icon">remote</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#getiosscopefromscopes" class="tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes</a>
+		</li>
+		<li class=" tsd-kind-object-literal tsd-is-not-exported">
+			<a href="../globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a>
+		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="../globals.html#default_get_children_options" class="tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -2689,7 +2701,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L85">SpotifyRemote.ts:85</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L86">SpotifyRemote.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2722,7 +2734,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L93">SpotifyRemote.ts:93</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L94">SpotifyRemote.ts:94</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2800,13 +2812,13 @@ img {
 				<a name="getchildrenofitem" class="tsd-anchor"></a>
 				<h3>get<wbr>Children<wbr>OfItem</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Children<wbr>OfItem<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"uri"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"id"</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Children<wbr>OfItem<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"uri"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"id"</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="getchildrenitemsoptions.html" class="tsd-signature-type">GetChildrenItemsOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L224">SpotifyRemote.ts:224</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L226">SpotifyRemote.ts:226</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2824,6 +2836,9 @@ img {
 							<li>
 								<h5>item: <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"uri"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"id"</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="getchildrenitemsoptions.html" class="tsd-signature-type">GetChildrenItemsOptions</a></h5>
+							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
@@ -2833,18 +2848,18 @@ img {
 				<a name="getcontentitemforuri" class="tsd-anchor"></a>
 				<h3>get<wbr>Content<wbr>Item<wbr>For<wbr>Uri</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Content<wbr>Item<wbr>For<wbr>Uri<span class="tsd-signature-symbol">(</span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Content<wbr>Item<wbr>For<wbr>Uri<span class="tsd-signature-symbol">(</span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L234">SpotifyRemote.ts:234</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L236">SpotifyRemote.ts:236</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Gets a ContentItem from a uri</p>
+								<p>Gets a ContentItem from a uri (iOS only)</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>memberof</dt>
@@ -2858,7 +2873,7 @@ img {
 								<h5>uri: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="contentitem.html" class="tsd-signature-type">ContentItem</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -2872,7 +2887,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L242">SpotifyRemote.ts:242</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L244">SpotifyRemote.ts:244</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2917,7 +2932,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L197">SpotifyRemote.ts:197</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L198">SpotifyRemote.ts:198</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2944,7 +2959,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L215">SpotifyRemote.ts:215</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L216">SpotifyRemote.ts:216</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2977,12 +2992,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L206">SpotifyRemote.ts:206</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L207">SpotifyRemote.ts:207</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Retrieves the root content items for a given type.</p>
+								<p>Retrieves the root content items for a given type. (iOS only)</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>memberof</dt>
@@ -3010,7 +3025,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L76">SpotifyRemote.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L77">SpotifyRemote.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3268,7 +3283,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L155">SpotifyRemote.ts:155</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L156">SpotifyRemote.ts:156</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3295,7 +3310,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L111">SpotifyRemote.ts:111</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L112">SpotifyRemote.ts:112</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3328,7 +3343,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L121">SpotifyRemote.ts:121</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L122">SpotifyRemote.ts:122</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3370,7 +3385,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L102">SpotifyRemote.ts:102</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L103">SpotifyRemote.ts:103</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3506,7 +3521,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L130">SpotifyRemote.ts:130</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L131">SpotifyRemote.ts:131</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3669,7 +3684,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L147">SpotifyRemote.ts:147</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L148">SpotifyRemote.ts:148</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3696,7 +3711,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L139">SpotifyRemote.ts:139</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L140">SpotifyRemote.ts:140</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3757,7 +3772,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Inherited from SpotifyRemoteApiExtensions.setPlaying</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L58">SpotifyRemote.ts:58</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L59">SpotifyRemote.ts:59</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3790,7 +3805,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L189">SpotifyRemote.ts:189</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L190">SpotifyRemote.ts:190</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3823,7 +3838,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L180">SpotifyRemote.ts:180</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L181">SpotifyRemote.ts:181</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3856,7 +3871,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L163">SpotifyRemote.ts:163</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L164">SpotifyRemote.ts:164</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3883,7 +3898,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L171">SpotifyRemote.ts:171</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L172">SpotifyRemote.ts:172</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

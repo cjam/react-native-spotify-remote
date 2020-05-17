@@ -27,7 +27,7 @@ export default interface SpotifySession {
     expirationDate: string;
 
     /**
-     * The scope granted.
+     * The scope granted.  **(iOS Only)**
      *
      * @type {ApiScope}
      * @memberof SpotifySession

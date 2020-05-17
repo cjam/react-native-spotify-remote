@@ -1,0 +1,42 @@
+{
+  "projectName": "react-native-spotify-remote",
+  "projectOwner": "cjam",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "cjam",
+      "name": "Colter McQuay",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1000288?v=4",
+      "profile": "https://github.com/cjam",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lufinkey",
+      "name": "Luis Finke",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7820113?v=4",
+      "profile": "https://github.com/lufinkey",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "YozhikM",
+      "name": "Stanislav",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/27273025?v=4",
+      "profile": "https://github.com/YozhikM",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

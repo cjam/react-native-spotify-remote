@@ -73,7 +73,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             .on("playerStateChanged", this.onPlayerStateChanged);
 
         auth.getSession().then((session) => {
-            if (session != undefined) {
+            if (session != undefined && session.accessToken != undefined) {
                 this.setState((state) => ({ ...state, token: session.accessToken }))
                 remote.connect(session.accessToken)
                     .then(() => this.setState((state) => ({
@@ -120,7 +120,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
 
     private endSession() {
         auth.endSession().then(() => {
-            remote.disconnect().then(()=>{
+            remote.disconnect().then(() => {
                 this.setState({ isConnected: false, token: undefined });
             });
         });
@@ -132,7 +132,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             redirectURL: SPOTIFY_REDIRECT_URL,
             tokenRefreshURL: SPOTIFY_TOKEN_REFRESH_URL,
             tokenSwapURL: SPOTIFY_TOKEN_SWAP_URL,
-            scope: ApiScope.AppRemoteControlScope, // Can add more scopes here as flags i.e. Scope1 | Scope2,
+            scopes: [ApiScope.AppRemoteControlScope],
             playURI,
             showDialog
         };

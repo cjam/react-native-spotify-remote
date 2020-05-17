@@ -159,7 +159,7 @@ RCT_EXPORT_METHOD(getSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseR
 };
 
 
-RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(authorize:(NSDictionary*)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     // Wrap our promise callbacks in a completion
     RNSpotifyRemotePromise<NSString*>* completion = [RNSpotifyRemotePromise<NSString*> onResolve:^(NSString *result) {
@@ -204,7 +204,7 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
       onResolve:^(SPTSession* session) {
           self->_isInitializing = NO;
           self->_initialized = YES;
-          [completion resolve:session.accessToken];
+          [completion resolve:[RNSpotifyConvert SPTSession:session]];
       }
       onReject:^(RNSpotifyRemoteError *error) {
           self->_isInitializing=NO;
@@ -231,9 +231,9 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary*)options resolve:(RCTPromiseResolveBl
     }
     
     // Default Scope
-    SPTScope scope = SPTAppRemoteControlScope | SPTUserFollowReadScope;
-    if(options[@"scope"] != nil){
-        scope = [RCTConvert NSUInteger:options[@"scope"]];
+    SPTScope scope = SPTAppRemoteControlScope | SPTUserReadPrivateScope;
+    if(options[@"scopes"] != nil){
+        scope = [RCTConvert NSUInteger:options[@"scopes"]];
     }
     
     // Allocate our _sessionManager using our configuration

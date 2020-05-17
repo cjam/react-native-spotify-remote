@@ -2389,6 +2389,9 @@ img {
 			<a href="crossfadestate.html" class="tsd-kind-icon">Crossfade<wbr>State</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="getchildrenitemsoptions.html" class="tsd-kind-icon">Get<wbr>Children<wbr>Items<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2406,6 +2409,9 @@ img {
 		<li class="current tsd-kind-interface">
 			<a href="spotifyauth.html" class="tsd-kind-icon">Spotify<wbr>Auth</a>
 			<ul>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="spotifyauth.html#authorize" class="tsd-kind-icon">authorize</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyauth.html#endsession" class="tsd-kind-icon">end<wbr>Session</a>
 				</li>
@@ -2443,6 +2449,15 @@ img {
 		</li>
 		<li class=" tsd-kind-variable">
 			<a href="../globals.html#remote" class="tsd-kind-icon">remote</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#getiosscopefromscopes" class="tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes</a>
+		</li>
+		<li class=" tsd-kind-object-literal tsd-is-not-exported">
+			<a href="../globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a>
+		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="../globals.html#default_get_children_options" class="tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</a>
 		</li>
 	</ul>
 </nav>
@@ -2488,6 +2503,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#authorize" class="tsd-kind-icon">authorize</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#endsession" class="tsd-kind-icon">end<wbr>Session</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#getsession" class="tsd-kind-icon">get<wbr>Session</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyauth.html#initialize" class="tsd-kind-icon">initialize</a></li>
@@ -2499,6 +2515,39 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="authorize" class="tsd-anchor"></a>
+				<h3>authorize</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">authorize<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="spotifyapiconfig.html" class="tsd-signature-type">SpotifyApiConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifysession.html" class="tsd-signature-type">SpotifySession</a><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L50">SpotifyAuth.ts:50</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Authorizes with Spotify returning a SpotifySession object if successful</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>SpotifyAuth</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>config: <a href="spotifyapiconfig.html" class="tsd-signature-type">SpotifyApiConfig</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifysession.html" class="tsd-signature-type">SpotifySession</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="endsession" class="tsd-anchor"></a>
 				<h3>end<wbr>Session</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -2508,7 +2557,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L47">SpotifyAuth.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L58">SpotifyAuth.ts:58</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2535,7 +2584,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L55">SpotifyAuth.ts:55</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L66">SpotifyAuth.ts:66</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2562,7 +2611,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L39">SpotifyAuth.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyAuth.ts#L41">SpotifyAuth.ts:41</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2570,6 +2619,11 @@ img {
 								<p>Initializes a Session with Spotify and returns an accessToken
 								that can be used for interacting with other services</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>deprecated</dt>
+								<dd><p>Use <code>authorize</code> instead, will be removed in future release</p>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">

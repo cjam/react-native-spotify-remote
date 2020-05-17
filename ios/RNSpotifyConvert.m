@@ -78,7 +78,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         @"track": [RNSpotifyConvert SPTAppRemoteTrack:state.track],
         @"playbackPosition": [NSNumber numberWithInteger:state.playbackPosition],
         @"playbackSpeed": [NSNumber numberWithFloat:state.playbackSpeed],
-        @"paused": [NSNumber numberWithBool:state.isPaused],
+        @"isPaused": [NSNumber numberWithBool:state.isPaused],
         @"playbackRestrictions": [RNSpotifyConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
         @"playbackOptions": [RNSpotifyConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
     };
@@ -95,6 +95,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
          @"canRepeatTrack": [NSNumber numberWithBool:restrictions.canRepeatTrack],
          @"canRepeatContext": [NSNumber numberWithBool:restrictions.canRepeatContext],
          @"canToggleShuffle": [NSNumber numberWithBool:restrictions.canToggleShuffle],
+         @"canSeek":[NSNumber numberWithBool:restrictions.canSeek]
      };
 }
 
@@ -129,6 +130,15 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
     if(artist == nil){
         return [NSNull null];
     }
+    NSString *artistName = @"";
+    if (artist.name != nil) {
+        artistName = artist.name;
+    }
+    NSString *artistUri = @"";
+    if (artist.URI != nil) {
+        artistUri = artist.URI;
+    }
+    
     return @{
         @"name":artist.name == nil ? @"" : artist.name,
         @"uri":artist.URI == nil ? @"" : artist.URI
@@ -139,6 +149,15 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
     if(album == nil){
         return [NSNull null];
     }
+    NSString *albumName = @"";
+    if (album.name != nil) {
+        albumName = album.name;
+    }
+    NSString *albumUri = @"";
+    if (album.URI != nil) {
+        albumUri = album.URI;
+    }
+
     return @{
         @"name":album.name == nil ? @"" : album.name,
         @"uri":album.URI == nil ? @"" : album.URI

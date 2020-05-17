@@ -38,6 +38,8 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
+android/.project
+android/.settings
 /android/gradle/
 gradlew
 gradlew.bat
@@ -46,6 +48,9 @@ build/
 .gradle
 local.properties
 *.iml
+example/android/.project
+example/android/.settings
+*.aab
 
 # BUCK
 buck-out/

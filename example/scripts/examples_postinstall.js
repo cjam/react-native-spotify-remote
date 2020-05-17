@@ -91,7 +91,7 @@
   };
 
   // Main start sweeping process
-  (() => {
+  const main = () => {
     // Read out dir of example project
     const exampleDir = process.cwd();
 
@@ -108,4 +108,6 @@
 
     const npmIgnorePath = path.resolve(__dirname, '../../.npmignore');
     removeLibraryNpmIgnorePaths(npmIgnorePath, libraryNodeModulesPath);
-  })();
+  }
+  
+  // main();
