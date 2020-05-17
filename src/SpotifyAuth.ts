@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import SpotifyApiConfig from './ApiConfig';
+import SpotifyApiConfig, { API_CONFIG_DEFAULTS } from './ApiConfig';
 import SpotifySession from './SpotifySession';
 import { getiOSScopeFromScopes } from './ApiScope';
 
@@ -74,10 +74,22 @@ if (Platform.OS === "ios") {
     const iosAuthorize = NativeModules.RNSpotifyRemoteAuth.authorize;
     SpotifyAuth.authorize = (config: SpotifyApiConfig) => {
         const iosConfig = {
+            ...API_CONFIG_DEFAULTS,
             ...config,
             scopes: getiOSScopeFromScopes(config.scopes)
         }
         return iosAuthorize(iosConfig);
+    }
+}
+
+if(Platform.OS === "android"){
+    const androidAuthorize = NativeModules.RNSpotifyRemoteAuth.authorize;
+    SpotifyAuth.authorize = (config: SpotifyApiConfig) => {
+        const mergedConfig = {
+            ...API_CONFIG_DEFAULTS,
+            ...config,
+        }
+        return androidAuthorize(mergedConfig);
     }
 }
 

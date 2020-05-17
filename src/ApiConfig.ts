@@ -64,3 +64,8 @@ export default interface SpotifyApiConfig {
      */
     showDialog?:boolean;
 }
+
+export const API_CONFIG_DEFAULTS :Partial<SpotifyApiConfig> = {
+    showDialog:false,
+    scopes:[]
+}

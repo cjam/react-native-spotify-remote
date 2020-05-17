@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
+
+## [0.3.2] - 2020-05-17
+### Fixed
+- added some defaults for ApiConfig
+
+### Added
+- More documentation around setting up android project
+
+## [0.3.1] - 2020-05-17 (pre-release)
+### Fixed
+- added some additional exports to `index.ts` to support missing typings
+
+## [0.3.0] - 2020-05-16 (pre-release)
 ### Changed
  - `ApiConfig.scope` to `ApiConfig.scopes` which is now of type `ApiScope[]` and also aligns to the web api scopes
  - `ApiScope` enum values are now same as web api instead of bit flags
@@ -17,8 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 - `SpotifyAuth.initialize` in favor of `SpotifyAuth.authorize`
-
-### Removed
 
 
 ## [0.2.2] - 2020-03-22

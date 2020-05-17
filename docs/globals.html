@@ -2439,6 +2439,9 @@ img {
 		<li class=" tsd-kind-function">
 			<a href="globals.html#getiosscopefromscopes" class="tsd-kind-icon">getiOSScope<wbr>From<wbr>Scopes</a>
 		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="globals.html#api_config_defaults" class="tsd-kind-icon">API_<wbr>CONFIG_<wbr>DEFAULTS</a>
+		</li>
 		<li class=" tsd-kind-object-literal tsd-is-not-exported">
 			<a href="globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a>
 		</li>
@@ -2717,12 +2720,27 @@ img {
 			<a href="#android" id="android" style="color: inherit; text-decoration: none;">
 				<h3>Android</h3>
 			</a>
-			<p>If you need to link your project manually, here are some things you&#39;ll need to do.</p>
+			<p>If you need to link your project manually, here are some things you&#39;ll need to do.  </p>
+			<blockquote>
+				<a href="#codereact-native-eventscode-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" id="codereact-native-eventscode-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" style="color: inherit; text-decoration: none;">
+					<h3><code>react-native-events</code> does not support autolinking at this point and will need to be manually linked into your application</h3>
+				</a>
+			</blockquote>
 			<ol>
 				<li><p>Open up <code>android/app/src/main/java/[...]/MainApplication.java</code></p>
 					<ul>
-						<li>Add <code>import com.reactlibrary.RNSpotifyRemotePackage;</code> to the imports at the top of the file</li>
-						<li>Add <code>new RNSpotifyRemotePackage()</code> to the list returned by the <code>getPackages()</code> method</li>
+						<li>Add the following imports to the top of the file<pre><code><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">com</span><span class="hljs-selector-class">.reactlibrary</span><span class="hljs-selector-class">.RNSpotifyRemotePackage</span>;
+<span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">com</span><span class="hljs-selector-class">.lufinkey</span><span class="hljs-selector-class">.react</span><span class="hljs-selector-class">.eventemitter</span><span class="hljs-selector-class">.RNEventEmitterPackage</span>;</code></pre></li>
+						<li>Add to the list returned by <code>getPackages()</code> for example:<pre><code class="language-java">   <span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">protected</span> List&lt;ReactPackage&gt; <span class="hljs-title">getPackages</span><span class="hljs-params">()</span> </span>{
+     <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"UnnecessaryLocalVariable"</span>)
+     List&lt;ReactPackage&gt; packages = <span class="hljs-keyword">new</span> PackageList(<span class="hljs-keyword">this</span>).getPackages();
+     <span class="hljs-comment">// Packages that cannot be autolinked yet can be added manually here, for example:</span>
+      packages.add(<span class="hljs-keyword">new</span> RNEventEmitterPackage());
+      packages.add(<span class="hljs-keyword">new</span> RNSpotifyRemotePackage());
+     <span class="hljs-keyword">return</span> packages;
+   }</code></pre>
+						</li>
 					</ul>
 				</li>
 				<li><p>Append the following lines to <code>android/settings.gradle</code>:</p>
@@ -2734,8 +2752,30 @@ img {
 				<li><p>Insert the following lines inside the dependencies block in <code>android/app/build.gradle</code>:</p>
 					<pre><code> <span class="hljs-variable">implementation</span> <span class="hljs-function"><span class="hljs-title">project</span>(<span class="hljs-string">':react-native-spotify-remote'</span>)</span>
  <span class="hljs-variable">implementation</span> <span class="hljs-function"><span class="hljs-title">project</span>(<span class="hljs-string">':react-native-events'</span>)</span></code></pre></li>
+				<li><p>As per the <a href="https://developer.spotify.com/documentation/android/guides/android-authentication/">Spotify Android SDK Docs</a> Insert the following lines into <code>android/app/src/AndroidManifest.xml</code></p>
+				</li>
 			</ol>
-			<p>If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. --&gt;</p>
+			<pre><code class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
+            <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
+            <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.spotify.sdk.android.authentication.AuthCallbackActivity"</span>
+            <span class="hljs-attr">android:theme</span>=<span class="hljs-string">"@android:style/Theme.Translucent.NoTitleBar"</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.VIEW"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.DEFAULT"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.BROWSABLE"</span>/&gt;</span>
+
+                <span class="hljs-tag">&lt;<span class="hljs-name">data</span>
+                    <span class="hljs-attr">android:scheme</span>=<span class="hljs-string">"&lt;YOUR_APPLICATION_SCHEME&gt;"</span>
+                    <span class="hljs-attr">android:host</span>=<span class="hljs-string">"&lt;YOUR_APPLICATION_CALLBACK&gt;"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
+            <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.spotify.sdk.android.authentication.LoginActivity"</span>
+            <span class="hljs-attr">android:theme</span>=<span class="hljs-string">"@android:style/Theme.Translucent.NoTitleBar"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span></code></pre>
+			<p>If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced.</p>
 			<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 				<h2>Usage</h2>
 			</a>
@@ -2868,6 +2908,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Object literals</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-object-literal"><a href="globals.html#api_config_defaults" class="tsd-kind-icon">API_<wbr>CONFIG_<wbr>DEFAULTS</a></li>
 							<li class="tsd-kind-object-literal tsd-is-not-exported"><a href="globals.html#apiscopeflagvalues" class="tsd-kind-icon">Api<wbr>Scope<wbr>Flag<wbr>Values</a></li>
 							<li class="tsd-kind-object-literal"><a href="globals.html#default_get_children_options" class="tsd-kind-icon">DEFAULT_<wbr>GET_<wbr>CHILDREN_<wbr>OPTIONS</a></li>
 						</ul>
@@ -2970,6 +3011,36 @@ img {
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Object literals</h2>
+			<section class="tsd-panel tsd-member tsd-kind-object-literal">
+				<a name="api_config_defaults" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> API_<wbr>CONFIG_<wbr>DEFAULTS</h3>
+				<div class="tsd-signature tsd-kind-icon">API_<wbr>CONFIG_<wbr>DEFAULTS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L68">ApiConfig.ts:68</a></li>
+					</ul>
+				</aside>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="api_config_defaults.scopes" class="tsd-anchor"></a>
+					<h3>scopes</h3>
+					<div class="tsd-signature tsd-kind-icon">scopes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L70">ApiConfig.ts:70</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="api_config_defaults.showdialog" class="tsd-anchor"></a>
+					<h3>show<wbr>Dialog</h3>
+					<div class="tsd-signature tsd-kind-icon">show<wbr>Dialog<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/ApiConfig.ts#L69">ApiConfig.ts:69</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-is-not-exported">
 				<a name="apiscopeflagvalues" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> Api<wbr>Scope<wbr>Flag<wbr>Values</h3>

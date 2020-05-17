@@ -127,11 +127,29 @@ Modifications are needed for the `AppDelegate.m`:
 
 ### Android
 
-If you need to link your project manually, here are some things you'll need to do.
+If you need to link your project manually, here are some things you'll need to do.  
+
+> ### `react-native-events` does not support autolinking at this point and will need to be manually linked into your application
 
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
-  - Add `import com.reactlibrary.RNSpotifyRemotePackage;` to the imports at the top of the file
-  - Add `new RNSpotifyRemotePackage()` to the list returned by the `getPackages()` method
+  - Add the following imports to the top of the file
+  ```
+  import com.reactlibrary.RNSpotifyRemotePackage;
+  import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
+  ``` 
+  - Add to the list returned by `getPackages()` for example:
+  ```java
+        @Override
+        protected List<ReactPackage> getPackages() {
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          // Packages that cannot be autolinked yet can be added manually here, for example:
+           packages.add(new RNEventEmitterPackage());
+		   packages.add(new RNSpotifyRemotePackage());
+          return packages;
+        }
+  ```
+
 2. Append the following lines to `android/settings.gradle`:
   	```
 	include ':react-native-spotify-remote'
@@ -145,8 +163,32 @@ If you need to link your project manually, here are some things you'll need to d
     implementation project(':react-native-spotify-remote')
     implementation project(':react-native-events')
   	```
+4. As per the [Spotify Android SDK Docs](https://developer.spotify.com/documentation/android/guides/android-authentication/) Insert the following lines into `android/app/src/AndroidManifest.xml`
 
-If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced. -->
+```xml
+      <activity
+            android:exported="true"
+            android:name="com.spotify.sdk.android.authentication.AuthCallbackActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:scheme="<YOUR_APPLICATION_SCHEME>"
+                    android:host="<YOUR_APPLICATION_CALLBACK>"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+```
+
+If you have issues linking the module, please check that gradle is updated to the latest version and that your project is synced.
 
 ## Usage
 
