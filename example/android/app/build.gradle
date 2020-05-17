@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example"
+        applicationId "com.react.native.spotify.remote.example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
