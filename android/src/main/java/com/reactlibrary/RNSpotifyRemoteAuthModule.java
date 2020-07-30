@@ -45,6 +45,7 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     public void authorize(ReadableMap config, Promise promise) {
         mConfig = config;
         String clientId = mConfig.getString("clientID");
+        String responseType = mConfig.getString("responseType");
         String redirectUri = mConfig.getString("redirectURL");
         Boolean showDialog = mConfig.getBoolean("showDialog");
         String[] scopes = convertScopes(mConfig);
@@ -54,11 +55,25 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
                 .showAuthView(showDialog);
 
         authPromise = promise;
-        AuthorizationRequest.Builder builder = new AuthorizationRequest.Builder(
-                clientId,
-                AuthorizationResponse.Type.TOKEN,
-                redirectUri
-        );
+
+        AuthorizationRequest.Builder builder
+        switch(responseType){
+            case TOKEN:
+            builder = new AuthorizationRequest.Builder(
+                    clientId,
+                    AuthorizationResponse.Type.TOKEN,
+                    redirectUri
+            );
+            break;
+
+            case CODE:
+            builder = new AuthorizationRequest.Builder(
+                    clientId,
+                    AuthorizationResponse.Type.CODE,
+                    redirectUri
+            );
+            break;
+        }
         builder.setScopes(scopes);
         AuthorizationRequest request = builder.build();
         AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
@@ -78,6 +93,14 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
                 case TOKEN:
                     if (authPromise != null) {
                         String token = response.getAccessToken();
+                        mAuthResponse = response;
+                        authPromise.resolve(Convert.toMap(response, 'TOKEN'));
+                    }
+                    break;
+
+                    ase CODE:
+                    if (authPromise != null) {
+                        String token = response.getCode();
                         mAuthResponse = response;
                         authPromise.resolve(Convert.toMap(response));
                     }
