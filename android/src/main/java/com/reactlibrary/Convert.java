@@ -27,7 +27,16 @@ public class Convert {
             WritableMap map = Arguments.createMap();
             Calendar expirationDate = Calendar.getInstance();
             expirationDate.add(Calendar.SECOND,response.getExpiresIn());
-            map.putString("accessToken", response.getAccessToken());
+
+            switch (response.getType()) {
+                case TOKEN:
+                    map.putString("accessToken", response.getAccessToken());
+                    break;
+            
+                case CODE:
+                    map.putString("code", response.getCode());
+                    break;
+            }
             map.putString("expirationDate", expirationDate.toString());
             map.putBoolean("expired",Calendar.getInstance().after(expirationDate));
             return map;
