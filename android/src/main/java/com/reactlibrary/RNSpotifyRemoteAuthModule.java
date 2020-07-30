@@ -56,7 +56,7 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
 
         authPromise = promise;
 
-        AuthorizationRequest.Builder builder
+        AuthorizationRequest.Builder builder;
         switch(responseType){
             case TOKEN:
             builder = new AuthorizationRequest.Builder(
