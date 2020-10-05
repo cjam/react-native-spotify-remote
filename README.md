@@ -224,7 +224,7 @@ const spotifyConfig: ApiConfig = {
 async function playEpicSong(){
 	try{
 		const session = await SpotifyAuth.authorize(spotifyConfig);
-		await SpotifyRemote.connect(session.token);
+		await SpotifyRemote.connect(session.accessToken);
 		await remote.playUri("spotify:track:6IA8E2Q5ttcpbuahIejO74");
     await remote.seek(58000);
 	}catch(err){
