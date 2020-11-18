@@ -65,6 +65,8 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
                         promise.reject(new Error("Spotify connection failed: user is not authorized."));
                     } else if (throwable instanceof CouldNotFindSpotifyApp) {
                         promise.reject(new Error("Spotify connection failed: could not find the Spotify app, it may need to be installed."));
+                    } else {
+                        promise.reject(throwable);   
                     }
                 }
                 sendEvent("remoteDisconnected", null);
