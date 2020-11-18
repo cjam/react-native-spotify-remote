@@ -17,6 +17,9 @@ import com.lufinkey.react.eventemitter.RNEventEmitter;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
+import com.spotify.android.appremote.api.error.CouldNotFindSpotifyApp;
+import com.spotify.android.appremote.api.error.NotLoggedInException;
+import com.spotify.android.appremote.api.error.UserNotAuthorizedException;
 
 import com.lufinkey.react.eventemitter.RNEventConformer;
 
@@ -56,7 +59,15 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
             public void onFailure(Throwable throwable) {
                 while (!mConnectPromises.empty()) {
                     Promise promise = mConnectPromises.pop();
-                    promise.reject(throwable);
+                    if (throwable instanceof NotLoggedInException) {
+                        promise.reject(new Error("Spotify connection failed: user is not logged in."));
+                    } else if (throwable instanceof UserNotAuthorizedException) {
+                        promise.reject(new Error("Spotify connection failed: user is not authorized."));
+                    } else if (throwable instanceof CouldNotFindSpotifyApp) {
+                        promise.reject(new Error("Spotify connection failed: could not find the Spotify app, it may need to be installed."));
+                    } else {
+                        promise.reject(throwable);   
+                    }
                 }
                 sendEvent("remoteDisconnected", null);
             }
