@@ -17,9 +17,9 @@ import com.lufinkey.react.eventemitter.RNEventEmitter;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.error.CouldNotFindSpotifyApp;
-import com.spotify.protocol.error.NotLoggedInException;
-import com.spotify.protocol.error.UserNotAuthorizedException;
+import com.spotify.android.appremote.api.error.CouldNotFindSpotifyApp;
+import com.spotify.android.appremote.api.error.NotLoggedInException;
+import com.spotify.android.appremote.api.error.UserNotAuthorizedException;
 
 import com.lufinkey.react.eventemitter.RNEventConformer;
 
