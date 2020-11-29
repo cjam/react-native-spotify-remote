@@ -30,6 +30,8 @@ SPOTIFY_TOKEN_REFRESH_URL="http://{MACHINE_IP_ADDRESS}:3000/refresh"
 SPOTIFY_TOKEN_SWAP_URL="http://{MACHINE_IP_ADDRESS}:3000/swap"
 ```
 
+> NOTE: If the changes to the environment variables aren't showing up in the app try and run `yarn start --reset-cache` to reset the packager cache
+
 > Note 1: The last two entries define the auth server endpoints.  You can run the [example auth server](../example-server/README.md) for this purpose.
 
 > Note 2: The `SPOTIFY_REDIRECT_URI` needs to be both registered with your app on the Spotify Dashboard and also needs to be supported by your app.  Instructions for doing this can be found on the [Spotify iOS Quickstart](https://developer.spotify.com/documentation/ios/quick-start/#setup-the-ios-sdk) in the **► Configure Info.plist** section

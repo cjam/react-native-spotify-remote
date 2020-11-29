@@ -39,6 +39,7 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
 DEFINE_SPOTIFY_ERROR_CODE(SessionClosed, @"Session has been closed")
 DEFINE_SPOTIFY_ERROR_CODE(AppRemoteDisconnected, @"App Remote is not connected")
 DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown response")
+DEFINE_SPOTIFY_ERROR_CODE(SpotifyNotInstalled, @"Spotify does not appear to be installed")
 
 #undef DEFINE_SPOTIFY_ERROR_CODE
 
@@ -63,7 +64,7 @@ DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown respons
 
 -(NSString*)code
 {
-    return [NSString stringWithFormat:@"RNS%@", _name];
+    return [NSString stringWithFormat:@"RNSR%@", _name];
 }
 
 -(NSDictionary*)reactObject
@@ -154,7 +155,11 @@ DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown respons
         if([_error.domain isEqualToString:@"com.spotify.sdk.login"])
         {
             _code = [self.class getSDKErrorCode:_error.code];
-        }else if([_error.domain isEqualToString:@"com.spotify.ios-sdk.playback"])
+        }else if([_error.domain isEqualToString:@"com.spotify.app-remote"])
+        {
+            _code = [self.class getRemoteSDKErrorCode:_error.code];
+        }
+        else if([_error.domain isEqualToString:@"com.spotify.ios-sdk.playback"])
         {
             _code = [self.class getSDKErrorCode:_error.code];
         }
@@ -174,6 +179,12 @@ DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown respons
             if(errMessage != nil){
                 [messageParts addObject:errMessage];
             }
+            
+            NSString* errRecovery = [underlyingError localizedRecoverySuggestion];
+            if(errRecovery != nil){
+                [messageParts addObject:errRecovery];
+            }
+            
             underlyingError = underlyingError.userInfo[@"NSUnderlyingError"];
         }
         
