@@ -254,7 +254,7 @@ Please do not open issues about getting the module to work unless you have tried
 Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration and some useful patterns for this package.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -265,6 +265,8 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
     <td align="center"><a href="https://github.com/cjam"><img src="https://avatars2.githubusercontent.com/u/1000288?v=4" width="100px;" alt=""/><br /><sub><b>Colter McQuay</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=cjam" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/lufinkey"><img src="https://avatars3.githubusercontent.com/u/7820113?v=4" width="100px;" alt=""/><br /><sub><b>Luis Finke</b></sub></a><br /><a href="#ideas-lufinkey" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/YozhikM"><img src="https://avatars0.githubusercontent.com/u/27273025?v=4" width="100px;" alt=""/><br /><sub><b>Stanislav</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=YozhikM" title="Code">💻</a></td>
+    <td align="center"><a href="https://djwillcaine.com"><img src="https://avatars3.githubusercontent.com/u/5376687?v=4" width="100px;" alt=""/><br /><sub><b>Will Caine</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=djwillcaine" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.estuderevisapp.com/"><img src="https://avatars0.githubusercontent.com/u/7197169?v=4" width="100px;" alt=""/><br /><sub><b>Everaldo Rosa de Souza Junior</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=juniorklawa" title="Code">💻</a></td>
   </tr>
 </table>
 

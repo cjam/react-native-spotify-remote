@@ -36,6 +36,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "djwillcaine",
+      "name": "Will Caine",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5376687?v=4",
+      "profile": "https://djwillcaine.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "juniorklawa",
+      "name": "Everaldo Rosa de Souza Junior",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7197169?v=4",
+      "profile": "http://www.estuderevisapp.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
