@@ -11,8 +11,11 @@ Which came from https://facebook.github.io/react-native/blog/2018/05/07/using-ty
 
 ## Getting Started
 
-### 0: Install Dependencies
-Run `yarn install` in this directory.
+### 0: Install Dependencies & Build Library
+
+1. Run `yarn install` in this directory.
+
+2. Run `yarn install && yarn build` in the [root directory](../) (`../`) to generate the library's `dist` folder.
 
 ### 1: ENV File
 
