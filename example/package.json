@@ -15,9 +15,9 @@
     "@react-native-community/slider": "^2.0.8",
     "luxon": "^1.21.3",
     "native-base": "^2.13.12",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
-    "react-native-spotify-remote": "link:../"
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-spotify-remote": "file:.."
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -34,7 +34,7 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "patch-package": "^6.2.2",
     "react-native-dotenv": "^0.2.0",
-    "react-test-renderer": "16.11.0",
+    "react-test-renderer": "16.13.1",
     "typescript": "^3.7.3"
   },
   "jest": {

@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
+## [0.3.3] - 2020-12-13
+### Fixed
+- Updated Peer Dependency on React Native to `>=0.60` [Issue #80](https://github.com/cjam/react-native-spotify-remote/issues/80)
+### Added
+- Better error messages on connection failures  [Issue #65](https://github.com/cjam/react-native-spotify-remote/issues/65)
+    - iOS now checks to see if Spotify is installed
+- License file
+### Updated
+- Example app to RN 63.4
+
 ## [0.3.2] - 2020-05-17
 ### Fixed
 - added some defaults for ApiConfig

@@ -24,7 +24,7 @@ interface AuthOptions {
 }
 
 interface AppContextState {
-    error?: string;
+    error?: Error & { code?: any };
     playerState?: PlayerState;
     token?: string;
     isConnected?: boolean;
@@ -90,7 +90,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
     }
 
     private onError(error: Error) {
-        this.setState((state) => ({ ...state, error: error.message }))
+        this.setState((state) => ({ ...state, error }))
     }
 
     private clearError() {
@@ -126,7 +126,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
         });
     }
 
-    private authenticate({ playURI, showDialog = false }: AuthOptions = {}) {
+    private async authenticate({ playURI, showDialog = false }: AuthOptions = {}) {
         const config: ApiConfig = {
             clientID: SPOTIFY_CLIENT_ID,
             redirectURL: SPOTIFY_REDIRECT_URL,
@@ -137,24 +137,24 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             showDialog
         };
 
-        // Go and check if things are connected
-        remote.isConnectedAsync().then(isConnected => {
+        try {
+            // Go and check if things are connected
+            const isConnected = await remote.isConnectedAsync()
             this.setState((state) => ({
                 ...state,
                 isConnected
             }));
-        });
 
-        // Initialize the session
-        auth.initialize(config).then(newToken => {
-            // Automatically connect when authenticating
-            remote.connect(newToken);
+            // Initialize the session
+            const { accessToken } = await auth.authorize(config);
             this.setState((state) => ({
                 ...state,
-                token: newToken
+                token: accessToken
             }));
-        }).catch(this.onError);
-
+            await remote.connect(accessToken);
+        } catch (err) {
+            this.onError(err);
+        }
     }
 
     render() {

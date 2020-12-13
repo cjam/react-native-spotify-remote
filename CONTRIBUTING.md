@@ -63,5 +63,16 @@ To release a new version of the package:
 - `git checkout v<version_number>`
 - run `npm publish`
 
+### Adding Contributors
 
+This repo uses the [all contributors cli](https://allcontributors.org/docs/en/cli/usage) to maintain contributor lists in the readme.
 
+- Finding missing ones can be done via
+
+`yarn all-contributors check`
+
+- Add contributor
+`yarn all-contributors add`
+
+- Generate Readme
+`yarn all-contributors generate`
