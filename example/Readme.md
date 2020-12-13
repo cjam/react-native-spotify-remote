@@ -11,8 +11,13 @@ Which came from https://facebook.github.io/react-native/blog/2018/05/07/using-ty
 
 ## Getting Started
 
-### 0: Install Dependencies
-Run `yarn install` in this directory.
+### 0: Install Dependencies & Build Library
+
+1. Run `yarn install` in this directory.
+
+2. Install Pods by running: `cd ios && pod install && cd ..`
+
+3. Run `yarn install && yarn build` in the [root directory](../) (`../`) to generate the library's `dist` folder.
 
 ### 1: ENV File
 
@@ -21,8 +26,8 @@ I've also added `react-native-dotenv` for easier configuration.  In order to con
 ```env
 SPOTIFY_CLIENT_ID="client_id_from_spotify_dashboard"
 SPOTIFY_REDIRECT_URL="redirect_uri_registered_in_spotify_dashboard"
-SPOTIFY_TOKEN_REFRESH_URL="http://{MACHINE_IP_ADDRESS}:3001/refresh"
-SPOTIFY_TOKEN_SWAP_URL="http://{MACHINE_IP_ADDRESS}:3001/swap"
+SPOTIFY_TOKEN_REFRESH_URL="http://{MACHINE_IP_ADDRESS}:3000/refresh"
+SPOTIFY_TOKEN_SWAP_URL="http://{MACHINE_IP_ADDRESS}:3000/swap"
 ```
 
 > Note 1: The last two entries define the auth server endpoints.  You can run the [example auth server](../example-server/README.md) for this purpose.
