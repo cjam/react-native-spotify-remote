@@ -201,8 +201,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     public void playItemWithIndex(ReadableMap map, int index, Promise promise) {
         executeAppRemoteCall(
                 api -> {
-                    ListItem item = Convert.toItem(map);
-                    return api.getPlayerApi().skipToIndex(item.uri, index);
+                    return api.getPlayerApi().skipToIndex(map.getString("uri"), index);
                 },
                 empty -> promise.resolve(null),
                 err -> promise.reject(err)
