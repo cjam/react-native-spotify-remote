@@ -3,7 +3,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTConvert.h>
 #import <SpotifyiOS.h>
-#import "RNSpotifyConvert.h"
+#import "RNSpotifyRemoteConvert.h"
 #import "RNSpotifyItem.h"
 #import "RNSpotifyRemoteError.h"
 #import "RNSpotifyRemotePromise.h"
@@ -140,7 +140,7 @@ RCT_EXPORT_METHOD(getSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseR
     // If we're initializing, then add a completion callback to the list of callbacks
     if(_isInitializing){
         [_sessionManagerCallbacks addObject:[RNSpotifyRemotePromise onResolve:^(SPTSession* session) {
-            resolve([RNSpotifyConvert SPTSession:session]);
+            resolve([RNSpotifyRemoteConvert SPTSession:session]);
         } onReject:^(RNSpotifyRemoteError *error) {
             [error reject:reject];
         }]];
@@ -148,7 +148,7 @@ RCT_EXPORT_METHOD(getSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseR
     
     @try{
         if(_initialized && _sessionManager != nil){
-            resolve([RNSpotifyConvert SPTSession:_sessionManager.session]);
+            resolve([RNSpotifyRemoteConvert SPTSession:_sessionManager.session]);
         }else{
             resolve([NSNull null]);
         }
@@ -204,7 +204,7 @@ RCT_EXPORT_METHOD(authorize:(NSDictionary*)options resolve:(RCTPromiseResolveBlo
       onResolve:^(SPTSession* session) {
           self->_isInitializing = NO;
           self->_initialized = YES;
-          [completion resolve:[RNSpotifyConvert SPTSession:session]];
+          [completion resolve:[RNSpotifyRemoteConvert SPTSession:session]];
       }
       onReject:^(RNSpotifyRemoteError *error) {
           self->_isInitializing=NO;

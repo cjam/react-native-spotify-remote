@@ -3,7 +3,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTConvert.h>
 #import <SpotifyiOS.h>
-#import "RNSpotifyConvert.h"
+#import "RNSpotifyRemoteConvert.h"
 #import "RNSpotifyItem.h"
 #import "RNSpotifyRemoteError.h"
 #import "RNSpotifyRemotePromise.h"
@@ -136,7 +136,7 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 
 - (void)playerStateDidChange:(nonnull id<SPTAppRemotePlayerState>)playerState {
     [self sendEvent:EventNamePlayerStateChanged args:@[
-        [RNSpotifyConvert SPTAppRemotePlayerState:playerState]
+        [RNSpotifyRemoteConvert SPTAppRemotePlayerState:playerState]
         ]
     ];
 }
@@ -191,7 +191,7 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
             }else if( [result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
                 // Send a playerStateChanged event since we went and retrieved it anyways
                 [self sendEvent:EventNamePlayerStateChanged args:@[
-                    [RNSpotifyConvert SPTAppRemotePlayerState:result]
+                    [RNSpotifyRemoteConvert SPTAppRemotePlayerState:result]
                 ]];
                 resolve(result);
             }else{
@@ -340,7 +340,7 @@ RCT_EXPORT_METHOD(setRepeatMode: (NSInteger)repeatMode resolve:(RCTPromiseResolv
 
 RCT_EXPORT_METHOD(getPlayerState:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     [self getPlayerStateInternal:^(id<SPTAppRemotePlayerState> state) {
-        resolve([RNSpotifyConvert SPTAppRemotePlayerState:state]);
+        resolve([RNSpotifyRemoteConvert SPTAppRemotePlayerState:state]);
     } reject:reject];
 }
 
@@ -351,7 +351,7 @@ RCT_EXPORT_METHOD(getCrossfadeState:(RCTPromiseResolveBlock)resolve reject:(RCTP
                 [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
             }else{
                 if([result conformsToProtocol:@protocol(SPTAppRemoteCrossfadeState)]){
-                    resolve([RNSpotifyConvert SPTAppRemoteCrossfadeState:result]);
+                    resolve([RNSpotifyRemoteConvert SPTAppRemoteCrossfadeState:result]);
                 }else{
                     [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.BadResponse message:@"Couldn't parse returned crossfade state"] reject:reject];
                 }
@@ -370,7 +370,7 @@ RCT_EXPORT_METHOD(getRootContentItems:(NSString* _Nullable)contentType resolve:(
             if(error != nil){
                 [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
             }else{
-                resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
+                resolve([RNSpotifyRemoteConvert SPTAppRemoteContentItems:result]);
             }
         }];
     } reject:reject];
@@ -390,7 +390,7 @@ RCT_EXPORT_METHOD(getRecommendedContentItems:(NSDictionary* _Nullable) options r
               if(error != nil){
                   [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
               }else{
-                  resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
+                  resolve([RNSpotifyRemoteConvert SPTAppRemoteContentItems:result]);
               }
           }
         ];
@@ -404,7 +404,7 @@ RCT_EXPORT_METHOD(getChildrenOfItem:(NSDictionary*)item resolve:(RCTPromiseResol
             if(error != nil){
                 [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
             }else{
-                resolve([RNSpotifyConvert SPTAppRemoteContentItems:result]);
+                resolve([RNSpotifyRemoteConvert SPTAppRemoteContentItems:result]);
             }
         }];
     } reject:reject];
@@ -416,7 +416,7 @@ RCT_EXPORT_METHOD(getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolv
                 if(error != nil){
                     [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
                 }else{
-                    resolve([RNSpotifyConvert SPTAppRemoteContentItem:result]);
+                    resolve([RNSpotifyRemoteConvert SPTAppRemoteContentItem:result]);
                 }
             }
         ];
