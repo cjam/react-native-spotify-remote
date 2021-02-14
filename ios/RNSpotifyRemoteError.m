@@ -39,7 +39,7 @@ DEFINE_SPOTIFY_ERROR_CODE(InvalidParameter, @"Invalid Parameter Value")
 DEFINE_SPOTIFY_ERROR_CODE(SessionClosed, @"Session has been closed")
 DEFINE_SPOTIFY_ERROR_CODE(AppRemoteDisconnected, @"App Remote is not connected")
 DEFINE_SPOTIFY_ERROR_CODE(UnknownResponse, @"Spotify returned an unknown response")
-DEFINE_SPOTIFY_ERROR_CODE(SpotifyNotInstalled, @"Spotify does not appear to be installed")
+DEFINE_SPOTIFY_ERROR_CODE(SpotifyNotInstalled, @"Spotify does not appear to be installed. Note: You must whitelist the 'spotify' URL scheme in your info.plist.")
 
 #undef DEFINE_SPOTIFY_ERROR_CODE
 

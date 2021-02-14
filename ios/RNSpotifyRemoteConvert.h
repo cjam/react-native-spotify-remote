@@ -1,8 +1,5 @@
 
 #import <Foundation/Foundation.h>
-//#import <SpotifyAuthentication/SpotifyAuthentication.h>
-//#import <SpotifyMetadata/SpotifyMetadata.h>
-//#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import <SpotifyiOS.h>
 #import "RNSpotifyRemoteError.h"
 

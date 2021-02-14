@@ -16,7 +16,7 @@
 -(void)authorize:(NSDictionary*)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 -(void)endSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 -(void)getSession:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
-
+-(BOOL)isSpotifyInstalled;
 
 -(SPTConfiguration*) configuration;
 -(NSString*) accessToken;

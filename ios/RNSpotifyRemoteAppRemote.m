@@ -150,12 +150,12 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 }
 
 - (void)appRemote:(nonnull SPTAppRemote *)appRemote didFailConnectionAttemptWithError:(nullable NSError *)error {
-        // Check if spotify is installed
-        if(![RCTSharedApplication() canOpenURL:[NSURL URLWithString:@"spotify://https://open.spotify.com/track/2FhN2KhUvT91Q3Er4v9Qpd?si=6TZmH5MTRpqozJmvRUD_4Q"]] ){
-             [RNSpotifyRemotePromise rejectCompletions:_appRemoteCallbacks error:[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.SpotifyNotInstalled ]];
-        }else{
+    // Check if spotify is installed
+    if(![RNSpotifyRemoteAuth.sharedInstance isSpotifyInstalled]){
+        [RNSpotifyRemotePromise rejectCompletions:_appRemoteCallbacks error:[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.SpotifyNotInstalled ]];
+    }else{
             [RNSpotifyRemotePromise rejectCompletions:_appRemoteCallbacks error:[RNSpotifyRemoteError errorWithNSError:error]];
-        };
+    };
 }
 
 - (void)appRemoteDidEstablishConnection:(nonnull SPTAppRemote *)connectedRemote {
