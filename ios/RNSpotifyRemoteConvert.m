@@ -1,16 +1,16 @@
 
 #import <React/RCTConvert.h>
-#import "RNSpotifyConvert.h"
+#import "RNSpotifyRemoteConvert.h"
 #import "NSArrayExtensions.h"
 
 
-@interface RNSpotifyConvert()
+@interface RNSpotifyRemoteConvert()
 +(NSDateFormatter *) ISO_DATE_FORMATTER;
 @end
 
 
 
-@implementation RNSpotifyConvert
+@implementation RNSpotifyRemoteConvert
 
 +(id)ID:(id)obj
 {
@@ -75,12 +75,12 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         return [NSNull null];
     }
     return @{
-        @"track": [RNSpotifyConvert SPTAppRemoteTrack:state.track],
+        @"track": [RNSpotifyRemoteConvert SPTAppRemoteTrack:state.track],
         @"playbackPosition": [NSNumber numberWithInteger:state.playbackPosition],
         @"playbackSpeed": [NSNumber numberWithFloat:state.playbackSpeed],
         @"isPaused": [NSNumber numberWithBool:state.isPaused],
-        @"playbackRestrictions": [RNSpotifyConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
-        @"playbackOptions": [RNSpotifyConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
+        @"playbackRestrictions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
+        @"playbackOptions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
     };
 }
 
@@ -118,8 +118,8 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
              @"name": track.name,
              @"uri":track.URI,
              @"duration":[NSNumber numberWithUnsignedInteger:track.duration],
-             @"artist":[RNSpotifyConvert SPTAppRemoteArtist:track.artist],
-             @"album":[RNSpotifyConvert SPTAppRemoteAlbum:track.album],
+             @"artist":[RNSpotifyRemoteConvert SPTAppRemoteArtist:track.artist],
+             @"album":[RNSpotifyRemoteConvert SPTAppRemoteAlbum:track.album],
              @"saved":[NSNumber numberWithBool:track.saved],
              @"episode":[NSNumber numberWithBool:track.episode],
              @"podcast":[NSNumber numberWithBool:track.podcast],
@@ -178,7 +178,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
              @"availableOffline":[NSNumber numberWithBool:item.availableOffline],
              @"playable":[NSNumber numberWithBool:item.playable],
              @"container":[NSNumber numberWithBool:item.container],
-             @"children":[RNSpotifyConvert SPTAppRemoteContentItems:item.children]
+             @"children":[RNSpotifyRemoteConvert SPTAppRemoteContentItems:item.children]
     };
 }
 
@@ -192,7 +192,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
     NSArray* json = [
         [items filteredArrayUsingPredicate: conformsPredicate]
          map:^id(id object) {
-             return [RNSpotifyConvert SPTAppRemoteContentItem:object];
+             return [RNSpotifyRemoteConvert SPTAppRemoteContentItem:object];
          }
     ];
     return json;

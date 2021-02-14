@@ -6,7 +6,7 @@
 #import <SpotifyiOS.h>
 #import "RNSpotifyRemoteError.h"
 
-@interface RNSpotifyConvert : NSObject
+@interface RNSpotifyRemoteConvert : NSObject
 
 +(id)ID:(id)obj;
 +(NSString*)Date:(NSDate*)date;

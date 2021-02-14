@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D64EA9822183767C001B053B /* RNSpotifyRemoteAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */; };
 		D658F0DF2164059C004649AB /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D658F0DE2164059C004649AB /* SpotifyiOS.framework */; };
-		D67AF66E216D18E900859404 /* RNSpotifyConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */; };
+		D67AF66E216D18E900859404 /* RNSpotifyRemoteConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = A00A83BC1FB5188A00394AF0 /* RNSpotifyRemoteConvert.m */; };
 		D67AF673216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */; };
 		D67AF675216EC14700859404 /* RNSpotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF674216EC14700859404 /* RNSpotifyItem.m */; };
 		D67AF679216F9D8C00859404 /* NSArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF678216F9D8C00859404 /* NSArrayExtensions.m */; };
@@ -33,8 +33,8 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNSpotifyRemote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSpotifyRemote.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2592D73B223391B100AE6186 /* RNSpotifyRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemote.h; sourceTree = "<group>"; };
-		A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyConvert.m; sourceTree = "<group>"; };
-		A00A83BD1FB5188A00394AF0 /* RNSpotifyConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSpotifyConvert.h; sourceTree = "<group>"; };
+		A00A83BC1FB5188A00394AF0 /* RNSpotifyRemoteConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteConvert.m; sourceTree = "<group>"; };
+		A00A83BD1FB5188A00394AF0 /* RNSpotifyRemoteConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteConvert.h; sourceTree = "<group>"; };
 		A0C233702036800A0063A745 /* RNSpotifyRemotePromise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemotePromise.h; sourceTree = "<group>"; };
 		A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemotePromise.m; sourceTree = "<group>"; };
 		D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteAuth.m; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 				D6F24BC221665F4A00D58B82 /* RNSpotifyRemoteError.m */,
 				A0C233702036800A0063A745 /* RNSpotifyRemotePromise.h */,
 				A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */,
-				A00A83BD1FB5188A00394AF0 /* RNSpotifyConvert.h */,
-				A00A83BC1FB5188A00394AF0 /* RNSpotifyConvert.m */,
+				A00A83BD1FB5188A00394AF0 /* RNSpotifyRemoteConvert.h */,
+				A00A83BC1FB5188A00394AF0 /* RNSpotifyRemoteConvert.m */,
 				A0A434191FAE254F0073DAB9 /* Frameworks */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
@@ -163,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67AF66E216D18E900859404 /* RNSpotifyConvert.m in Sources */,
+				D67AF66E216D18E900859404 /* RNSpotifyRemoteConvert.m in Sources */,
 				D6F24BD5216685B000D58B82 /* RNSpotifyRemotePromise.m in Sources */,
 				D64EA9822183767C001B053B /* RNSpotifyRemoteAuth.m in Sources */,
 				D6F24B8421653FAC00D58B82 /* RNSpotifyRemoteAppRemote.m in Sources */,
