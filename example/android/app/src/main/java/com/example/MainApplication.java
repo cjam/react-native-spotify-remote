@@ -8,6 +8,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
+import com.reactlibrary.RNSpotifyRemotePackage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -23,11 +24,15 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-           packages.add(new RNEventEmitterPackage());
-          return packages;
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+
+            // To allow for easier development, add manually.
+            // Not necessary in the wild as it will be autolinked
+            packages.add(new RNSpotifyRemotePackage());
+
+            // Packages that cannot be autolinked yet can be added manually here:
+            packages.add(new RNEventEmitterPackage());
+            return packages;
         }
 
         @Override

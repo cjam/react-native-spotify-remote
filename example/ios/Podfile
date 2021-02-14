@@ -1,6 +1,7 @@
 platform :ios, '10.0'
 
 node_modules_path = '../node_modules'
+root_node_modules_path = '../../node_modules'
 require_relative "#{node_modules_path}/react-native/scripts/react_native_pods"
 require_relative "#{node_modules_path}/@react-native-community/cli-platform-ios/native_modules"
 
@@ -9,8 +10,10 @@ target 'example' do
   
   use_react_native!(:path => config["reactNativePath"])
   
+  # Want to install the pod from the source directory so we can change it while developing
+  pod 'RNSpotifyRemote', :path => "../../"
   # RNEventEmitter doesn't seem to support the auto detection, manually specifying instead
-  pod 'RNEventEmitter', :path => "#{node_modules_path}/react-native-events"
+  pod 'RNEventEmitter', :path => "#{root_node_modules_path}/react-native-events"
 
   # Enables Flipper.
   #
