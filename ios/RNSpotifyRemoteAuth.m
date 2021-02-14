@@ -71,6 +71,10 @@ static RNSpotifyRemoteAuth *sharedInstance = nil;
     return sharedInstance;
 }
 
+-(BOOL)isSpotifyInstalled{
+    return _sessionManager != nil && _sessionManager.spotifyAppInstalled;
+}
+
 #pragma mark URL handling
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
