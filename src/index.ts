@@ -12,8 +12,11 @@ export { default as CrossfadeState } from './CrossfadeState';
 export { default as SpotifySession } from './SpotifySession';
 export { default as GetChildrenItemsOptions } from './GetChildrenItemsOptions';
 export { default as PlaybackOptions } from './PlaybackOptions';
+export { default as PlaybackRestrictions } from "./PlaybackRestrictions";
+export { default as RecommendedContentOptions } from "./RecommendedContentOptions";
+
 export { SpotifyAuth } from './SpotifyAuth';
-export { SpotifyRemoteApi } from './SpotifyRemote';
+export { SpotifyRemoteApi, SpotifyRemoteEvents } from './SpotifyRemote';
 
 // Modules
 import { default as _auth } from './SpotifyAuth';

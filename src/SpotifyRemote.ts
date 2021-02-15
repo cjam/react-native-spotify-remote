@@ -14,7 +14,7 @@ import GetChildrenItemsOptions, { DEFAULT_GET_CHILDREN_OPTIONS } from './GetChil
  *
  * @interface SpotifyRemoteEvents
  */
-interface SpotifyRemoteEvents {
+export interface SpotifyRemoteEvents {
 
     /**
      * Fired when the state of the Spotify Player changes
@@ -273,7 +273,7 @@ if (Platform.OS === "android") {
         return [];
     }
 
-    
+
     const androidGetItemOfChildren = SpotifyRemote.getChildrenOfItem;
     SpotifyRemote.getChildrenOfItem = async (item: ContentItem, options) => {
         return androidGetItemOfChildren(item, {

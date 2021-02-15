@@ -1,7 +1,8 @@
 {
-    "mode":"file",
-    "out":"docs",
-    "ignoreCompilerErrors":true,
+    "out": "docs",
+    "entryPoints": [
+        "./src/index.ts"
+    ],
     "theme": "minimal",
     "gitRevision": "master"
 }
