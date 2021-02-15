@@ -34,13 +34,7 @@ From repo root run `yarn example`
 
 #### Updating `react-native-spotify-remote` in Example
 
-If you're doing work on the `react-native-spotify-remote` package (i.e. modifying the api or Typescript), you'll need to update the package that is installed in the example app before using your changes.  
-
-From `example/` run `yarn update-package`
-
-This will build the package and reinstall it in the example app.
-
-> NOTE: When doing this, it's very likely that you will need to restart the `example` packager/server.
+Changes in the `react-native-spotify-remote` package (i.e. modifying the api or Typescript) should be automatically reloaded within the example app.
 
 ### Updating Spotify iOS SDK
 
