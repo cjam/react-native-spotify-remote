@@ -30,8 +30,8 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "source": "src/index",
-  "react-native": "src/index",
+  "source": "dist/index",
+  "react-native": "dist/index",
   "scripts": {
     "rebuild": "yarn build && yarn docs",
     "clean": "rm -rf ./dist",
