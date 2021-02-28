@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
+## [0.3.5] - 2021-02-27
+### Fixed
+- Fix for [Issue #100](https://github.com/cjam/react-native-spotify-remote/issues/100)
+
 ## [0.3.4] - 2021-02-15
 ### Fixed 
 - Renamed `RNSpotifyConvert` -> `RNSpotifyRemoteConvert` to fix [Issue #94](https://github.com/cjam/react-native-spotify-remote/issues/94) ([IbrahimCanKALYA](https://github.com/IbrahimCanKALYA))
