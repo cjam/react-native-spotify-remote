@@ -11,6 +11,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments; /* Works in RN >= 0.62 */
 import com.facebook.react.module.annotations.ReactModule;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.sdk.android.auth.AuthorizationClient;
@@ -47,6 +49,7 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
         String clientId = mConfig.getString("clientID");
         String redirectUri = mConfig.getString("redirectURL");
         Boolean showDialog = mConfig.getBoolean("showDialog");
+        String token = mConfig.getString("skipAuthAccessToken");
         String[] scopes = convertScopes(mConfig);
 
         mConnectionParamsBuilder = new ConnectionParams.Builder(clientId)
@@ -54,14 +57,20 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
                 .showAuthView(showDialog);
 
         authPromise = promise;
-        AuthorizationRequest.Builder builder = new AuthorizationRequest.Builder(
-                clientId,
-                AuthorizationResponse.Type.TOKEN,
-                redirectUri
-        );
-        builder.setScopes(scopes);
-        AuthorizationRequest request = builder.build();
-        AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
+        if (token == null) {
+            AuthorizationRequest.Builder builder = new AuthorizationRequest.Builder(
+                    clientId,
+                    AuthorizationResponse.Type.TOKEN,
+                    redirectUri
+            );
+            builder.setScopes(scopes);
+            AuthorizationRequest request = builder.build();
+            AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
+        } else {
+            WritableMap map = Arguments.createMap();
+            map.putString("accessToken", token);
+            authPromise.resolve(map);
+        }
     }
 
     @Override
