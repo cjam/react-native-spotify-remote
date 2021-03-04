@@ -130,26 +130,11 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
                     .setErrorCallback(errorCallback);
         }
     }
-    @ReactMethod
-    public void connectWithoutAuth(String token, String clientId, String redirectUri, Promise promise) {
-        ConnectionParams.Builder paramsBuilder = new ConnectionParams.Builder(clientId)
-                .setRedirectUri(redirectUri);
-        // With this method, users must be preauthorized to use the scope as we cannot display it
 
-        if (mConnectPromises.empty()) {
-            mConnectPromises.push(promise);
-            ConnectionParams connectionParams = paramsBuilder.build();
-            SpotifyAppRemote.connect(this.getReactApplicationContext(), connectionParams,
-                    mSpotifyRemoteConnectionListener);
-        } else {
-            mConnectPromises.push(promise);
-        }
-    }
     @ReactMethod
     public void connect(String token, Promise promise) {
-        // todo: looks like the android remote handles it's own auth (since it doesn't have a token)
-        // todo: argument.  Can probably improve the experience for those who don't need a token
-        // todo: and just want to connect the remote
+        // NOTE: The 'token' parameter is not used, and it's main purpose is to keep a
+        // consistent function parameter across the iOS and android implementations
         authModule = reactContext.getNativeModule(RNSpotifyRemoteAuthModule.class);
         Error notAuthError = new Error("Auth module has not been authorized.");
         if (authModule == null) {
