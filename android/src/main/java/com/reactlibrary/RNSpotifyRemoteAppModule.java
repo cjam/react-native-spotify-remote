@@ -130,7 +130,21 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
                     .setErrorCallback(errorCallback);
         }
     }
+    @ReactMethod
+    public void connectWithoutAuth(String token, String clientId, String redirectUri, Promise promise) {
+        ConnectionParams.Builder paramsBuilder = new ConnectionParams.Builder(clientId)
+                .setRedirectUri(redirectUri);
+        // With this method, users must be preauthorized to use the scope as we cannot display it
 
+        if (mConnectPromises.empty()) {
+            mConnectPromises.push(promise);
+            ConnectionParams connectionParams = paramsBuilder.build();
+            SpotifyAppRemote.connect(this.getReactApplicationContext(), connectionParams,
+                    mSpotifyRemoteConnectionListener);
+        } else {
+            mConnectPromises.push(promise);
+        }
+    }
     @ReactMethod
     public void connect(String token, Promise promise) {
         // todo: looks like the android remote handles it's own auth (since it doesn't have a token)
