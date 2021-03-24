@@ -225,8 +225,8 @@ async function playEpicSong(){
 	try{
 		const session = await SpotifyAuth.authorize(spotifyConfig);
 		await SpotifyRemote.connect(session.accessToken);
-		await remote.playUri("spotify:track:6IA8E2Q5ttcpbuahIejO74");
-    await remote.seek(58000);
+		await SpotifyRemote.playUri("spotify:track:6IA8E2Q5ttcpbuahIejO74");
+                await SpotifyRemote.seek(58000);
 	}catch(err){
 		console.error("Couldn't authorize with or connect to Spotify",err);
 	}   
