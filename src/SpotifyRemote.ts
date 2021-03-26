@@ -3,6 +3,7 @@ import RNEvents from 'react-native-events';
 import TypedEventEmitter from './TypedEventEmitter';
 import RepeatMode from './RepeatMode';
 import PlayerState from './PlayerState';
+import PlayerContext from './PlayerContext';
 import ContentItem from './ContentItem';
 import CrossfadeState from './CrossfadeState';
 import RecommendedContentOptions from './RecommendedContentOptions';
@@ -23,6 +24,14 @@ export interface SpotifyRemoteEvents {
      * @memberof SpotifyRemoteEvents
      */
     "playerStateChanged": PlayerState;
+
+    /**
+     * Fires when the context of the Spotify Player changes
+     * 
+     * @type {PlayerContext}
+     * @memberof SpotifyRemoteEvents
+     */
+    "playerContextChanged": PlayerContext;
 
 
     /**

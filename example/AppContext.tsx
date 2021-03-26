@@ -6,6 +6,7 @@ import {
     ApiScope,
     SpotifyRemoteApi,
     PlayerState,
+    PlayerContext,
     RepeatMode,
     ContentItem,
     SpotifyAuth
@@ -64,13 +65,15 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
         this.onConnected = this.onConnected.bind(this);
         this.onDisconnected = this.onDisconnected.bind(this);
         this.onPlayerStateChanged = this.onPlayerStateChanged.bind(this);
+        this.onPlayerContextChanged = this.onPlayerContextChanged.bind(this);
         this.endSession = this.endSession.bind(this);
     }
 
     componentDidMount() {
         remote.on("remoteConnected", this.onConnected)
             .on("remoteDisconnected", this.onDisconnected)
-            .on("playerStateChanged", this.onPlayerStateChanged);
+            .on("playerStateChanged", this.onPlayerStateChanged)
+            .on("playerContextChanged", this.onPlayerContextChanged);
 
         auth.getSession().then((session) => {
             if (session != undefined && session.accessToken != undefined) {
@@ -115,7 +118,14 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
         this.setState((state) => ({
             ...state,
             playerState
-        }))
+        }));
+    };
+
+    private onPlayerContextChanged(playerContext: PlayerContext) {
+        this.setState((state) => ({
+            ...state,
+            playerContext
+        }));
     };
 
     private endSession() {

@@ -14,6 +14,7 @@ import com.spotify.protocol.types.ListItems;
 import com.spotify.protocol.types.PlayerOptions;
 import com.spotify.protocol.types.PlayerRestrictions;
 import com.spotify.protocol.types.PlayerState;
+import com.spotify.protocol.types.PlayerContext;
 import com.spotify.protocol.types.Track;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
@@ -138,6 +139,16 @@ public class Convert {
         map.putMap("playbackOptions", Convert.toMap(playerState.playbackOptions));
         map.putMap("playbackRestrictions", Convert.toMap(playerState.playbackRestrictions));
         map.putMap("track", Convert.toMap(playerState.track));
+
+        return map;
+    }
+
+
+    public static ReadableMap toMap(PlayerContext playerContext) {
+        WritableMap map = Arguments.createMap();
+
+        map.putString("title", playerContext.title);
+        map.putString("uri", playerContext.uri);
 
         return map;
     }
