@@ -14,6 +14,7 @@
 #define SPOTIFY_API_URL(endpoint) [NSURL URLWithString:NSString_concat(SPOTIFY_API_BASE_URL, endpoint)]
 
 static NSString * const EventNamePlayerStateChanged = @"playerStateChanged";
+static NSString * const EventNamePlayerContextChanged = @"playerContextChanged";
 static NSString * const EventNameRemoteDisconnected = @"remoteDisconnected";
 static NSString * const EventNameRemoteConnected = @"remoteConnected";
 
@@ -135,10 +136,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
 #pragma mark - SPTAppRemotePlayerStateDelegate implementation
 
 - (void)playerStateDidChange:(nonnull id<SPTAppRemotePlayerState>)playerState {
-    [self sendEvent:EventNamePlayerStateChanged args:@[
-        [RNSpotifyRemoteConvert SPTAppRemotePlayerState:playerState]
-        ]
-    ];
+    NSDictionary *state = [RNSpotifyRemoteConvert SPTAppRemotePlayerState:playerState];
+    [self sendEvent:EventNamePlayerStateChanged args:@[state[@"state"]]];
+    [self sendEvent:EventNamePlayerContextChanged args:@[state[@"context"]]];
 }
 
 #pragma mark - SPTAppRemoteDelegate implementation
@@ -190,9 +190,9 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
                 [[RNSpotifyRemoteError errorWithNSError:error] reject:reject];
             }else if( [result conformsToProtocol:@protocol(SPTAppRemotePlayerState)]){
                 // Send a playerStateChanged event since we went and retrieved it anyways
-                [self sendEvent:EventNamePlayerStateChanged args:@[
-                    [RNSpotifyRemoteConvert SPTAppRemotePlayerState:result]
-                ]];
+                NSDictionary *state = [RNSpotifyRemoteConvert SPTAppRemotePlayerState:result];
+                [self sendEvent:EventNamePlayerStateChanged args:@[state[@"state"]]];
+                [self sendEvent:EventNamePlayerContextChanged args:@[state[@"context"]]];
                 resolve(result);
             }else{
                 [[RNSpotifyRemoteError errorWithCodeObj:RNSpotifyRemoteErrorCode.UnknownResponse] reject:reject];
@@ -340,7 +340,7 @@ RCT_EXPORT_METHOD(setRepeatMode: (NSInteger)repeatMode resolve:(RCTPromiseResolv
 
 RCT_EXPORT_METHOD(getPlayerState:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject){
     [self getPlayerStateInternal:^(id<SPTAppRemotePlayerState> state) {
-        resolve([RNSpotifyRemoteConvert SPTAppRemotePlayerState:state]);
+        resolve([RNSpotifyRemoteConvert SPTAppRemotePlayerState:state][@"state"]);
     } reject:reject];
 }
 

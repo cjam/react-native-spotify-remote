@@ -75,12 +75,18 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
         return [NSNull null];
     }
     return @{
-        @"track": [RNSpotifyRemoteConvert SPTAppRemoteTrack:state.track],
-        @"playbackPosition": [NSNumber numberWithInteger:state.playbackPosition],
-        @"playbackSpeed": [NSNumber numberWithFloat:state.playbackSpeed],
-        @"isPaused": [NSNumber numberWithBool:state.isPaused],
-        @"playbackRestrictions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
-        @"playbackOptions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
+        @"state": @{
+            @"track": [RNSpotifyRemoteConvert SPTAppRemoteTrack:state.track],
+            @"playbackPosition": [NSNumber numberWithInteger:state.playbackPosition],
+            @"playbackSpeed": [NSNumber numberWithFloat:state.playbackSpeed],
+            @"isPaused": [NSNumber numberWithBool:state.isPaused],
+            @"playbackRestrictions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackRestrictions:state.playbackRestrictions],
+            @"playbackOptions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
+        },
+        @"context": @{
+            @"title": state.contextTitle,
+            @"uri": state.contextURI
+        }
     };
 }
 

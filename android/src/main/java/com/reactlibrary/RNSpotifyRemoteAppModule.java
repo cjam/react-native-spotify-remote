@@ -40,6 +40,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     private SpotifyAppRemote mSpotifyAppRemote;
     private Connector.ConnectionListener mSpotifyRemoteConnectionListener;
     private Stack<Promise> mConnectPromises = new Stack<Promise>();
+    private ReadableMap mPlayerContext;
 
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -98,8 +99,14 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     private void sendEvent(String eventMame, Object data) {
         RNEventEmitter.emitEvent(this.reactContext, this, eventMame, data);
     }
-
+    
     private void handleOnConnect() {
+        mSpotifyAppRemote.getPlayerApi()
+                .subscribeToPlayerContext()
+                .setEventCallback(playerContext -> {
+                    ReadableMap map = Convert.toMap(playerContext);
+                    sendEvent("playerContextChanged", map);
+                });
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
                 .setEventCallback(playerState -> {
@@ -124,8 +131,9 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
         } else {
             mSpotifyAppRemote.getPlayerApi().getPlayerState()
                     .setResultCallback(playerState -> {
-                        sendEvent("playerStateChanged", Convert.toMap(playerState));
-                        resultCallback.onResult(Convert.toMap(playerState));
+                        WritableMap map = Convert.toMap(playerState);
+                        sendEvent("playerStateChanged", map);
+                        resultCallback.onResult(map);
                     })
                     .setErrorCallback(errorCallback);
         }
