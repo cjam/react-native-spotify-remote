@@ -179,7 +179,7 @@ RCT_EXPORT_METHOD(authorize:(NSDictionary*)options resolve:(RCTPromiseResolveBlo
     
     if(_initialized && [_sessionManager session]!= nil && [_sessionManager session].isExpired == NO)
     {
-        [completion resolve:[_sessionManager session].accessToken];
+        [completion resolve:[RNSpotifyRemoteConvert SPTSession:_sessionManager.session]];
         return;
     }
     _isInitializing = YES;
