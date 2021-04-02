@@ -21,6 +21,7 @@ interface AuthOptions {
     playURI?: string;
     showDialog?: boolean;
     autoConnect?: boolean;
+    authType?: ApiConfig["authType"]
 }
 
 interface AppContextState {
@@ -126,7 +127,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
         });
     }
 
-    private async authenticate({ playURI, showDialog = false }: AuthOptions = {}) {
+    private async authenticate({ playURI, showDialog = false, authType }: AuthOptions = {}) {
         const config: ApiConfig = {
             clientID: SPOTIFY_CLIENT_ID,
             redirectURL: SPOTIFY_REDIRECT_URL,
@@ -134,7 +135,8 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             tokenSwapURL: SPOTIFY_TOKEN_SWAP_URL,
             scopes: [ApiScope.AppRemoteControlScope],
             playURI,
-            showDialog
+            showDialog,
+            authType
         };
 
         try {
@@ -146,12 +148,13 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             }));
 
             // Initialize the session
-            const { accessToken } = await auth.authorize(config);
+            const { accessToken, code } = await auth.authorize(config);
+            const token = code || accessToken;
             this.setState((state) => ({
                 ...state,
-                token: accessToken
+                token
             }));
-            await remote.connect(accessToken);
+            await remote.connect(token);
         } catch (err) {
             this.onError(err);
         }
