@@ -45,10 +45,12 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
     public void authorize(ReadableMap config, Promise promise) {
         mConfig = config;
         String clientId = mConfig.getString("clientID");
-        String responseType = mConfig.getString("responseType");
         String redirectUri = mConfig.getString("redirectURL");
         Boolean showDialog = mConfig.getBoolean("showDialog");
         String[] scopes = convertScopes(mConfig);
+        AuthorizationResponse.Type responseType = mConfig.hasKey("authType") ?
+                AuthorizationResponse.Type.valueOf(mConfig.getString("authType"))
+                : AuthorizationResponse.Type.TOKEN;
 
         mConnectionParamsBuilder = new ConnectionParams.Builder(clientId)
                 .setRedirectUri(redirectUri)
@@ -56,24 +58,11 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
 
         authPromise = promise;
 
-        AuthorizationRequest.Builder builder;
-        switch(responseType){
-            case TOKEN:
-            builder = new AuthorizationRequest.Builder(
-                    clientId,
-                    AuthorizationResponse.Type.TOKEN,
-                    redirectUri
-            );
-            break;
-
-            case CODE:
-            builder = new AuthorizationRequest.Builder(
-                    clientId,
-                    AuthorizationResponse.Type.CODE,
-                    redirectUri
-            );
-            break;
-        }
+        AuthorizationRequest.Builder builder = new AuthorizationRequest.Builder(
+                clientId,
+                responseType,
+                redirectUri
+        );
         builder.setScopes(scopes);
         AuthorizationRequest request = builder.build();
         AuthorizationClient.openLoginActivity(getCurrentActivity(), REQUEST_CODE, request);
@@ -89,18 +78,10 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
             AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
 
             switch (response.getType()) {
-                // Response was successful and contains auth token
+                // Response was successful and contains auth token/code
                 case TOKEN:
+                case CODE:
                     if (authPromise != null) {
-                        String token = response.getAccessToken();
-                        mAuthResponse = response;
-                        authPromise.resolve(Convert.toMap(response, 'TOKEN'));
-                    }
-                    break;
-
-                    ase CODE:
-                    if (authPromise != null) {
-                        String token = response.getCode();
                         mAuthResponse = response;
                         authPromise.resolve(Convert.toMap(response));
                     }
