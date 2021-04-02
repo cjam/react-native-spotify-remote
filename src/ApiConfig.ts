@@ -64,13 +64,13 @@ export default interface SpotifyApiConfig {
   showDialog?: boolean;
 
   /**
-   * Choose the response type CODE or TOKEN.
+   * (Android) Choose the response type CODE or TOKEN.
    * Useful to determine if you need a on time login or a longterm login.
    *
    * @type {'TOKEN' | 'CODE'}
    * @memberof SpotifyApiConfig
    */
-  responseType?: 'TOKEN' | 'CODE';
+  authType?: 'TOKEN' | 'CODE';
 }
 
 export const API_CONFIG_DEFAULTS: Partial<SpotifyApiConfig> = {
