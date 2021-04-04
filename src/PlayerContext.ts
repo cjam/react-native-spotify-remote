@@ -1,4 +1,4 @@
 export default interface PlayerContext {
-    title: String;
-    uri: String;
+    title: string;
+    uri: string;
 }
