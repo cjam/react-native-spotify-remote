@@ -40,7 +40,6 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     private SpotifyAppRemote mSpotifyAppRemote;
     private Connector.ConnectionListener mSpotifyRemoteConnectionListener;
     private Stack<Promise> mConnectPromises = new Stack<Promise>();
-    private ReadableMap mPlayerContext;
 
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
