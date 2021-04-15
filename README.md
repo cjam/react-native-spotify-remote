@@ -19,11 +19,11 @@ The following table shows the platform support for various Spotify Remote API fu
 
 |Feature|iOS|Android||
 |:--|:-:|:-:|-:|
-|Authentication|
+|**Authentication**|
 |`authorize`					|✅|✅||
 |`getSession`					|✅|✅||
 |`endSession`					|✅|✅||
-|Remote|
+|**Remote**|
 |`isConnectedAsync`				|✅|✅||
 |`connect`						|✅|✅||
 |`disconnect`					|✅|✅||
@@ -44,8 +44,9 @@ The following table shows the platform support for various Spotify Remote API fu
 |`getChildrenOfItem`			|✅|✅||
 |`getContentItemForUri`			|✅|❌|Not available in Android SDK|
 |`getCrossfadeState`			|✅|✅||
-|Remote Events|
+|**Remote Events**|
 |`playerStateChanged`			|✅|✅||
+|`playerContextChanged`			|✅|✅||
 |`remoteDisconnected`			|✅|✅||
 |`remoteConnected`				|✅|✅||
 
