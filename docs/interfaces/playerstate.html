@@ -2710,6 +2710,9 @@ img {
 		<li class=" tsd-kind-interface">
 			<a href="playbackrestrictions.html" class="tsd-kind-icon">Playback<wbr>Restrictions</a>
 		</li>
+		<li class=" tsd-kind-interface">
+			<a href="playercontext.html" class="tsd-kind-icon">Player<wbr>Context</a>
+		</li>
 		<li class="current tsd-kind-interface">
 			<a href="playerstate.html" class="tsd-kind-icon">Player<wbr>State</a>
 			<ul>
@@ -2764,6 +2767,20 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>The state of the player in Spotify</p>
+				</div>
+				<dl class="tsd-comment-tags">
+					<dt>export</dt>
+					<dd></dd>
+					<dt>interface</dt>
+					<dd><p>PlayerState</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2798,9 +2815,19 @@ img {
 				<div class="tsd-signature tsd-kind-icon">is<wbr>Paused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L9">PlayerState.ts:9</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L44">PlayerState.ts:44</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the player is Paused</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="playbackoptions" class="tsd-anchor"></a>
@@ -2808,19 +2835,39 @@ img {
 				<div class="tsd-signature tsd-kind-icon">playback<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="playbackoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">PlaybackOptions</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L11">PlayerState.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L61">PlayerState.ts:61</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current Playback options</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="playbackposition" class="tsd-anchor"></a>
 				<h3>playback<wbr>Position</h3>
-				<div class="tsd-signature tsd-kind-icon">playback<wbr>Position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+				<div class="tsd-signature tsd-kind-icon">playback<wbr>Position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L7">PlayerState.ts:7</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L28">PlayerState.ts:28</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current playback position in ms</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="playbackrestrictions" class="tsd-anchor"></a>
@@ -2828,9 +2875,19 @@ img {
 				<div class="tsd-signature tsd-kind-icon">playback<wbr>Restrictions<span class="tsd-signature-symbol">:</span> <a href="playbackrestrictions.html" class="tsd-signature-type" data-tsd-kind="Interface">PlaybackRestrictions</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L10">PlayerState.ts:10</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L52">PlayerState.ts:52</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Any playback restrictions for the current user account</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="playbackspeed" class="tsd-anchor"></a>
@@ -2838,9 +2895,19 @@ img {
 				<div class="tsd-signature tsd-kind-icon">playback<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L8">PlayerState.ts:8</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L36">PlayerState.ts:36</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Playback speed (podcasts)</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="track" class="tsd-anchor"></a>
@@ -2848,9 +2915,19 @@ img {
 				<div class="tsd-signature tsd-kind-icon">track<span class="tsd-signature-symbol">:</span> <a href="track.html" class="tsd-signature-type" data-tsd-kind="Interface">Track</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L6">PlayerState.ts:6</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/PlayerState.ts#L20">PlayerState.ts:20</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The Current Track</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>memberof</dt>
+						<dd><p>PlayerState</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 		</section>
 		<footer class="with-border-bottom">

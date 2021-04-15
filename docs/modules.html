@@ -2711,6 +2711,9 @@ img {
 			<a href="interfaces/playbackrestrictions.html" class="tsd-kind-icon">Playback<wbr>Restrictions</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="interfaces/playercontext.html" class="tsd-kind-icon">Player<wbr>Context</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="interfaces/playerstate.html" class="tsd-kind-icon">Player<wbr>State</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2773,7 +2776,7 @@ img {
 					</tr>
 				</thead>
 				<tbody><tr>
-						<td align="left">Authentication</td>
+						<td align="left"><strong>Authentication</strong></td>
 						<td align="center"></td>
 						<td align="center"></td>
 						<td align="right"></td>
@@ -2797,7 +2800,7 @@ img {
 						<td align="right"></td>
 					</tr>
 					<tr>
-						<td align="left">Remote</td>
+						<td align="left"><strong>Remote</strong></td>
 						<td align="center"></td>
 						<td align="center"></td>
 						<td align="right"></td>
@@ -2923,13 +2926,19 @@ img {
 						<td align="right"></td>
 					</tr>
 					<tr>
-						<td align="left">Remote Events</td>
+						<td align="left"><strong>Remote Events</strong></td>
 						<td align="center"></td>
 						<td align="center"></td>
 						<td align="right"></td>
 					</tr>
 					<tr>
 						<td align="left"><code>playerStateChanged</code></td>
+						<td align="center">✅</td>
+						<td align="center">✅</td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td align="left"><code>playerContextChanged</code></td>
 						<td align="center">✅</td>
 						<td align="center">✅</td>
 						<td align="right"></td>
@@ -3115,8 +3124,8 @@ img {
 <span style="color: #000000">    </span><span style="color: #AF00DB">try</span><span style="color: #000000">{</span>
 <span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">session</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyAuth</span><span style="color: #000000">.</span><span style="color: #795E26">authorize</span><span style="color: #000000">(</span><span style="color: #001080">spotifyConfig</span><span style="color: #000000">);</span>
 <span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">(</span><span style="color: #001080">session</span><span style="color: #000000">.</span><span style="color: #001080">accessToken</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">remote</span><span style="color: #000000">.</span><span style="color: #795E26">playUri</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;spotify:track:6IA8E2Q5ttcpbuahIejO74&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">remote</span><span style="color: #000000">.</span><span style="color: #795E26">seek</span><span style="color: #000000">(</span><span style="color: #098658">58000</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">playUri</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;spotify:track:6IA8E2Q5ttcpbuahIejO74&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">                </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">seek</span><span style="color: #000000">(</span><span style="color: #098658">58000</span><span style="color: #000000">);</span>
 <span style="color: #000000">    }</span><span style="color: #AF00DB">catch</span><span style="color: #000000">(</span><span style="color: #001080">err</span><span style="color: #000000">){</span>
 <span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Couldn&#039;t authorize with or connect to Spotify&quot;</span><span style="color: #000000">,</span><span style="color: #001080">err</span><span style="color: #000000">);</span>
 <span style="color: #000000">    }   </span>
@@ -3184,6 +3193,7 @@ img {
 							<li class="tsd-kind-interface"><a href="interfaces/getchildrenitemsoptions.html" class="tsd-kind-icon">Get<wbr>Children<wbr>Items<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackoptions.html" class="tsd-kind-icon">Playback<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playbackrestrictions.html" class="tsd-kind-icon">Playback<wbr>Restrictions</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/playercontext.html" class="tsd-kind-icon">Player<wbr>Context</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/playerstate.html" class="tsd-kind-icon">Player<wbr>State</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/recommendedcontentoptions.html" class="tsd-kind-icon">Recommended<wbr>Content<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/spotifyauth.html" class="tsd-kind-icon">Spotify<wbr>Auth</a></li>
@@ -3230,7 +3240,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyauth.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyAuth</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L31">index.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L32">index.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3247,7 +3257,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">remote<span class="tsd-signature-symbol">:</span> <a href="interfaces/spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L39">index.ts:39</a></li>
+						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/index.ts#L40">index.ts:40</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
