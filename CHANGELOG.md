@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
+## [0.3.6] - 2021-04-15
+### Added
+- `playerContextChanged` events to iOS & Android [#118](https://github.com/cjam/react-native-spotify-remote/pull/118)
+- CODE flow for Android Authentication [#121](https://github.com/cjam/react-native-spotify-remote/pull/121)
+### Fixed
+- Fix iOS returning access token instead of session object when re-authing [#112](https://github.com/cjam/react-native-spotify-remote/pull/112)
+- Readme error in example code https://github.com/cjam/react-native-spotify-remote/pull/115
 
 ## [0.3.5] - 2021-02-27
 ### Fixed

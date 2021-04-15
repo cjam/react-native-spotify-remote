@@ -12,7 +12,6 @@
 /android/external/SpotifySDK/app-remote-lib/img
 /android/external/SpotifySDK/auth-lib/docs
 /android/external/SpotifySDK/*.*
-/src/
 gradlew
 gradlew.bat
 build/
