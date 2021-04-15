@@ -158,8 +158,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
             }));
 
             // Initialize the session
-            const { accessToken, code } = await auth.authorize(config);
-            const token = code || accessToken;
+            const { accessToken: token } = await auth.authorize(config);
             this.setState((state) => ({
                 ...state,
                 token
