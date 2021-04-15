@@ -34,7 +34,7 @@ public class Convert {
                     break;
             
                 case CODE:
-                    map.putString("code", response.getCode());
+                    map.putString("accessToken", response.getCode());
                     break;
             }
             map.putString("expirationDate", expirationDate.toString());

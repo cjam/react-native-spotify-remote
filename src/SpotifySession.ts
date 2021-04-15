@@ -4,20 +4,12 @@ export default interface SpotifySession {
 
     /**
      * The access token of the authenticated user.
+     * > On Android this will be either the access token or the code depending on the `SpotifyApiConfig.AuthType`
      *
      * @type {string}
      * @memberof SpotifySession
      */
     accessToken: string;
-
-
-    /**
-     * (Android) The access code returned when using the CODE auth type
-     *
-     * @type {string}
-     * @memberof SpotifySession
-     */
-    code?: string;
 
     /**
      * The refresh token.
