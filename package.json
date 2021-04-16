@@ -26,7 +26,8 @@
     "music",
     "audio",
     "remote",
-    "mobile"
+    "mobile", 
+    "player" 
   ],
   "main": "dist/index",
   "module": "dist/index",
