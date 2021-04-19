@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7] - 2021-04-19
+
 ### Fixed
 
 - Reference error for javascript projects [#127](https://github.com/cjam/react-native-spotify-remote/issues/127)
