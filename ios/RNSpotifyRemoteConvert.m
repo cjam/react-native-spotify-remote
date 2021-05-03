@@ -84,7 +84,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
             @"playbackOptions": [RNSpotifyRemoteConvert SPTAppRemotePlaybackOptions:state.playbackOptions]
         },
         @"context": @{
-            @"title": state.contextTitle,
+            @"title": state.contextTitle ? state.contextTitle : @"",
             @"uri": state.contextURI
         }
     };
