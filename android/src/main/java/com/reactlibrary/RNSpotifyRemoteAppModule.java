@@ -131,7 +131,8 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
             mSpotifyAppRemote.getPlayerApi().getPlayerState()
                     .setResultCallback(playerState -> {
                         WritableMap map = Convert.toMap(playerState);
-                        sendEvent("playerStateChanged", map);
+                        WritableMap eventMap = Convert.toMap(playerState);
+                        sendEvent("playerStateChanged", eventMap);
                         resultCallback.onResult(map);
                     })
                     .setErrorCallback(errorCallback);
