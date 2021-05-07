@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.8] - 2021-05-07
+
 ### Fixed
 
 - nil context title crash on iOS [#133](https://github.com/cjam/react-native-spotify-remote/pull/133) (thanks @srfaytkn!)
