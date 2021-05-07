@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- nil context title crash on iOS [#133](https://github.com/cjam/react-native-spotify-remote/pull/133) (thanks @srfaytkn!)
+- getPlayerState 'Map already consumed' error [#133](https://github.com/cjam/react-native-spotify-remote/pull/133) (thanks @srfaytkn!)
+
 ## [0.3.7] - 2021-04-19
 
 ### Fixed

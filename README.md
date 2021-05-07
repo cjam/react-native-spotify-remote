@@ -255,7 +255,7 @@ Please do not open issues about getting the module to work unless you have tried
 Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration and some useful patterns for this package.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -269,6 +269,11 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
     <td align="center"><a href="https://djwillcaine.com"><img src="https://avatars3.githubusercontent.com/u/5376687?v=4" width="100px;" alt=""/><br /><sub><b>Will Caine</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=djwillcaine" title="Code">💻</a></td>
     <td align="center"><a href="http://www.estuderevisapp.com/"><img src="https://avatars0.githubusercontent.com/u/7197169?v=4" width="100px;" alt=""/><br /><sub><b>Everaldo Rosa de Souza Junior</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=juniorklawa" title="Code">💻</a></td>
     <td align="center"><a href="http://www.cankalya.com"><img src="https://avatars.githubusercontent.com/u/33005883?v=4" width="100px;" alt=""/><br /><sub><b>İbrahim Can KALYA</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=IbrahimCanKALYA" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/uptotec"><img src="https://avatars.githubusercontent.com/u/38630967?v=4" width="100px;" alt=""/><br /><sub><b>Mahmoud Ashraf Mahmoud</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=uptotec" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://linkedin.com/in/serafettinaytekin"><img src="https://avatars.githubusercontent.com/u/19591219?v=4" width="100px;" alt=""/><br /><sub><b>Şerafettin Aytekin</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=srfaytkn" title="Code">💻</a></td>
+    <td align="center"><a href="http://reteps.github.io"><img src="https://avatars.githubusercontent.com/u/13869303?v=4" width="100px;" alt=""/><br /><sub><b>Peter Stenger</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=reteps" title="Code">💻</a></td>
   </tr>
 </table>
 

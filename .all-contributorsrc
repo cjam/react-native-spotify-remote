@@ -63,6 +63,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "uptotec",
+      "name": "Mahmoud Ashraf Mahmoud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38630967?v=4",
+      "profile": "https://github.com/uptotec",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "srfaytkn",
+      "name": "Şerafettin Aytekin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19591219?v=4",
+      "profile": "https://linkedin.com/in/serafettinaytekin",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "reteps",
+      "name": "Peter Stenger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13869303?v=4",
+      "profile": "http://reteps.github.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
