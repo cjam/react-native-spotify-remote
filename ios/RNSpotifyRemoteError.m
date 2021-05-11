@@ -96,6 +96,11 @@ DEFINE_SPOTIFY_ERROR_CODE(SpotifyNotInstalled, @"Spotify does not appear to be i
 
 -(id)initWithCode:(NSString*)code message:(NSString*)message
 {
+    if(code == nil || code.length == 0)
+    {
+        code = @"";
+    }
+
     if(self = [super init])
     {
         _error = nil;
