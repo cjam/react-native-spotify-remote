@@ -69,7 +69,7 @@
   },
   "release-it": {
     "hooks": {
-      "before:init": [
+      "before:git": [
         "npm run rebuild"
       ]
     },
