@@ -90,6 +90,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "reinhardholl",
+      "name": "Reinhard Höll",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4051986?v=4",
+      "profile": "https://github.com/reinhardholl",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
