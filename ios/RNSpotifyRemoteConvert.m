@@ -205,7 +205,7 @@ static NSDateFormatter* _ISO_DATE_FORMATTER;
 }
 
 +(id)SPTSession:(SPTSession *)session{
-    if(session == nil){
+    if(session == nil || session.accessToken == nil || session.refreshToken == nil){
         return [NSNull null];
     }
     
