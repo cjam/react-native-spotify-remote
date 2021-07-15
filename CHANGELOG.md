@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- More robust handling of session object on iOS [#146](https://github.com/cjam/react-native-spotify-remote/pull/146) (thanks @gustavoggs)
+
 ## [0.3.9] - 2021-05-17
 
 - Fix crash when returned auth code was null [#138](https://github.com/cjam/react-native-spotify-remote/issues/138) (thanks @reinhardholl)

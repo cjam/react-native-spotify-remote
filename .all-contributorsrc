@@ -100,6 +100,16 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "gustavoggs",
+      "name": "Gustavo Graña",
+      "avatar_url": "https://avatars.githubusercontent.com/u/793491?v=4",
+      "profile": "https://github.com/gustavoggs",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
