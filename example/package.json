@@ -14,7 +14,7 @@
     "luxon": "^1.21.3",
     "native-base": "^2.13.12",
     "react": "16.13.1",
-    "react-native": "0.63.4"
+    "react-native": "0.64.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
