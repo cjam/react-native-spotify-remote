@@ -9,8 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- More robust handling of session object on iOS [#146](https://github.com/cjam/react-native-spotify-remote/pull/146) (thanks @gustavoggs)
 - Fix example project podfile to build in XCode 12.5
+
+## [0.3.10] - 2021-05-15
+
+- More robust handling of session object on iOS [#146](https://github.com/cjam/react-native-spotify-remote/pull/146) (thanks @gustavoggs)
 
 ## [0.3.9] - 2021-05-17
 
