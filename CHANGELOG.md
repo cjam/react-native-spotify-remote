@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Update
+
+- Update Spotify SDKs (thanks Hoang)
+  - Update Android SDK to [v7.0.0-appremote_v1.2.3-auth](https://github.com/spotify/android-sdk/releases/tag/v7.0.0-appremote_v1.2.3-auth)
+  - Update iOS SDK to [v1.2.2](https://github.com/spotify/ios-sdk/releases/tag/v1.2.2)
+
 ### Fixed
 
+- Fix Does not work when targeting Android SDK v30 (React Native 0.65+) #161 (thanks Hoang)
+- Fix "missing SpotifyiOS.h" in example #78 #63 (thanks @dylancom)
 - Fix example project podfile to build in XCode 12.5
 
 ## [0.3.10] - 2021-05-15

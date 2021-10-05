@@ -110,6 +110,24 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "dylancom",
+      "name": "Dylan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12894112?v=4",
+      "profile": "https://www.companjenapps.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "hoang",
+      "name": "Hoang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170571?v=4",
+      "profile": "https://github.com/hoang",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

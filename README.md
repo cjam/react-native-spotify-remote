@@ -255,7 +255,7 @@ Please do not open issues about getting the module to work unless you have tried
 Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration and some useful patterns for this package.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -276,6 +276,8 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
     <td align="center"><a href="http://reteps.github.io"><img src="https://avatars.githubusercontent.com/u/13869303?v=4" width="100px;" alt=""/><br /><sub><b>Peter Stenger</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=reteps" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/reinhardholl"><img src="https://avatars.githubusercontent.com/u/4051986?v=4" width="100px;" alt=""/><br /><sub><b>Reinhard Höll</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Areinhardholl" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=reinhardholl" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/gustavoggs"><img src="https://avatars.githubusercontent.com/u/793491?v=4" width="100px;" alt=""/><br /><sub><b>Gustavo Graña</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Agustavoggs" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=gustavoggs" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.companjenapps.com"><img src="https://avatars.githubusercontent.com/u/12894112?v=4" width="100px;" alt=""/><br /><sub><b>Dylan</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=dylancom" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/hoang"><img src="https://avatars.githubusercontent.com/u/170571?v=4" width="100px;" alt=""/><br /><sub><b>Hoang</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=hoang" title="Code">💻</a></td>
   </tr>
 </table>
 
