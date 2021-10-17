@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Update
+
+- Update Spotify SDKS (again)
+- Update [Readme](./README) with SDK Version Badges
+- Update [Contributing Guide](./CONTRIBUTING)
+- Add Dependabot configuration
+
 ## [0.3.11-0] - 2021-10-13
 
 ### Update
