@@ -67,7 +67,7 @@ To release a new version of the package:
 - Make sure the _Unreleased_ section in [Changelog](./CHANGELOG) has been updated with changes
 - Update any contributors (see below for adding contributors)
 - Make sure all changes have been committed
-- run `yarn release-it` and follow instructions
+- run `npm release` and follow instructions
 
 ### Adding Contributors
 
