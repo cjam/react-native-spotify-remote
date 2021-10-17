@@ -2752,6 +2752,9 @@ img {
 				<h1>Spotify App Remote for React Native</h1>
 			</a>
 			<p><a href="https://badge.fury.io/js/react-native-spotify-remote"><img src="https://badge.fury.io/js/react-native-spotify-remote.svg" alt="npm version"></a></p>
+			<p><a href="https://github.com/spotify/ios-sdk/commit/f9a7d53967de5ea633845c2387b7fc8f90b96265"><img src="https://img.shields.io/badge/Spotify%20iOS%20SDK-v1.2.2-brightgreen" alt="Spotify iOS SDK Version"></a></p>
+			<p><a href="https://github.com/spotify/android-sdk/commit/cfd6b68a47440a7db8afac1983d92d324a1c0015"><img src="https://img.shields.io/badge/Spotify%20Android%20App%20Remote%20SDK-v0.7.2-brightgreen" alt="Spotify Android App Remote Version"></a></p>
+			<p><a href="https://github.com/spotify/android-sdk/commit/cfd6b68a47440a7db8afac1983d92d324a1c0015"><img src="https://img.shields.io/badge/Spotify%20Android%20Auth%20SDK-v1.2.3-brightgreen" alt="Spotify Android Auth Version"></a></p>
 			<p>A react native module for the Spotify Remote SDK ( <a href="https://github.com/spotify/ios-sdk/">iOS</a> | <a href="https://github.com/spotify/android-sdk/">Android</a> )</p>
 			<ul>
 				<li><a href="https://cjam.github.io/react-native-spotify-remote/index.html">Documentation</a></li>
@@ -2761,7 +2764,7 @@ img {
 			<a href="#supported-features" id="supported-features" style="color: inherit; text-decoration: none;">
 				<h2>Supported Features</h2>
 			</a>
-			<p>An <a href="./example">Example</a> project was developed to exercise and test all functionality within this library.  If you are curious about how to use something, or need to compare your application setup to something that works, check there first.</p>
+			<p>An <a href="./example">Example</a> project was developed to exercise and test all functionality within this library. If you are curious about how to use something, or need to compare your application setup to something that works, check there first.</p>
 			<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 				<h2>Features</h2>
 			</a>
@@ -2967,7 +2970,7 @@ img {
 			<a href="#linking" id="linking" style="color: inherit; text-decoration: none;">
 				<h2>Linking</h2>
 			</a>
-			<p>As of React Native <code>&gt; 0.61</code>, auto linking should work for both iOS and Android.  There shouldn&#39;t be any modifications necessary and it <em>Should</em> work out of the box.  The one caveat, is that <code>react-native-events</code> needs to be linked as it doesn&#39;t yet support auto linking.  If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.</p>
+			<p>As of React Native <code>&gt; 0.61</code>, auto linking should work for both iOS and Android. There shouldn&#39;t be any modifications necessary and it <em>Should</em> work out of the box. The one caveat, is that <code>react-native-events</code> needs to be linked as it doesn&#39;t yet support auto linking. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.</p>
 			<a href="#ios" id="ios" style="color: inherit; text-decoration: none;">
 				<h3>iOS</h3>
 			</a>
@@ -2977,18 +2980,18 @@ img {
 			<a href="#cocoapods-recommended" id="cocoapods-recommended" style="color: inherit; text-decoration: none;">
 				<h4>Cocoapods (Recommended)</h4>
 			</a>
-			<p>By far the easiest way to integrate into your project.  In your <code>ios/PodFile</code> add the following lines to your projects target:</p>
+			<p>By far the easiest way to integrate into your project. In your <code>ios/PodFile</code> add the following lines to your projects target:</p>
 			<pre><code class="language-rb">    pod &#39;RNEventEmitter&#39;, :path =&gt; &quot;../node_modules/react-native-events&quot;
     pod &#39;RNSpotifyRemote&#39;, :path =&gt; &#39;../node_modules/react-native-spotify-remote&#39;
 </code></pre>
 			<p>See the <a href="./example/ios/PodFile"><code>Example App PodFile</code></a> for a full example.</p>
-			<p>I have only tested this against RN &gt; 0.60 in the example app.  So if you have issues with a RN version &lt; 0.60 that might be a place to start troubleshooting.</p>
+			<p>I have only tested this against RN &gt; 0.60 in the example app. So if you have issues with a RN version &lt; 0.60 that might be a place to start troubleshooting.</p>
 			<a href="#manual" id="manual" style="color: inherit; text-decoration: none;">
 				<h4>Manual</h4>
 			</a>
 			<p>Manual linking is needed for projects that don&#39;t use Cocoapods.</p>
 			<ol>
-				<li>Manually add the frameworks from <code>node_modules/react-native-spotify-remote/ios/external/SpotifySDK</code> to <em>Linked Frameworks and Libraries</em> in your project settings. </li>
+				<li>Manually add the frameworks from <code>node_modules/react-native-spotify-remote/ios/external/SpotifySDK</code> to <em>Linked Frameworks and Libraries</em> in your project settings.</li>
 			</ol>
 			<p><img src=".screenshots/ios-add-framework.png" alt="iOS Framework Search paths">;</p>
 			<ol start="2">
@@ -2998,7 +3001,7 @@ img {
 			<a href="#troubleshooting" id="troubleshooting" style="color: inherit; text-decoration: none;">
 				<h5>Troubleshooting</h5>
 			</a>
-			<p><code>&#39;React/RCTConvert.h&#39; file not found</code> might be due to a build dependency issue where <code>RNSpotifyRemote</code> is being built <em>before</em> <code>React</code>.  Try adding <code>React</code> as an explicit dependency of the <code>RNSpotifyRemote</code> target/project in XCode.  Otherwise, Cocoapods should solve this for you.</p>
+			<p><code>&#39;React/RCTConvert.h&#39; file not found</code> might be due to a build dependency issue where <code>RNSpotifyRemote</code> is being built <em>before</em> <code>React</code>. Try adding <code>React</code> as an explicit dependency of the <code>RNSpotifyRemote</code> target/project in XCode. Otherwise, Cocoapods should solve this for you.</p>
 			<a href="#auth-callback" id="auth-callback" style="color: inherit; text-decoration: none;">
 				<h2>Auth Callback</h2>
 			</a>
@@ -3025,7 +3028,7 @@ img {
 			<a href="#android" id="android" style="color: inherit; text-decoration: none;">
 				<h3>Android</h3>
 			</a>
-			<p>If you need to link your project manually, here are some things you&#39;ll need to do.  </p>
+			<p>If you need to link your project manually, here are some things you&#39;ll need to do.</p>
 			<blockquote>
 				<a href="#react-native-events-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" id="react-native-events-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" style="color: inherit; text-decoration: none;">
 					<h3><code>react-native-events</code> does not support autolinking at this point and will need to be manually linked into your application</h3>
@@ -3035,34 +3038,36 @@ img {
 				<li>Open up <code>android/app/src/main/java/[...]/MainApplication.java</code></li>
 			</ol>
 			<ul>
-				<li>Add the following imports to the top of the file<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">com</span><span style="color: #000000">.</span><span style="color: #001080">reactlibrary</span><span style="color: #000000">.</span><span style="color: #001080">RNSpotifyRemotePackage</span><span style="color: #000000">;</span>
+				<li>Add the following imports to the top of the file</li>
+			</ul>
+			<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">com</span><span style="color: #000000">.</span><span style="color: #001080">reactlibrary</span><span style="color: #000000">.</span><span style="color: #001080">RNSpotifyRemotePackage</span><span style="color: #000000">;</span>
 <span style="color: #001080">import</span><span style="color: #000000"> </span><span style="color: #001080">com</span><span style="color: #000000">.</span><span style="color: #001080">lufinkey</span><span style="color: #000000">.</span><span style="color: #001080">react</span><span style="color: #000000">.</span><span style="color: #001080">eventemitter</span><span style="color: #000000">.</span><span style="color: #001080">RNEventEmitterPackage</span><span style="color: #000000">;</span>
 </code></pre>
-				</li>
-				<li>Add to the list returned by <code>getPackages()</code> for example:<pre><code class="language-java"><span style="color: #000000">    @</span><span style="color: #267F99">Override</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">protected</span><span style="color: #000000"> </span><span style="color: #267F99">List</span><span style="color: #000000">&lt;ReactPackage&gt; </span><span style="color: #795E26">getPackages</span><span style="color: #000000">() {</span>
-<span style="color: #000000">      @</span><span style="color: #267F99">SuppressWarnings</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;UnnecessaryLocalVariable&quot;</span><span style="color: #000000">)</span>
-<span style="color: #000000">      </span><span style="color: #267F99">List</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ReactPackage</span><span style="color: #000000">&gt; </span><span style="color: #001080">packages</span><span style="color: #000000"> = </span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">PackageList</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">).</span><span style="color: #795E26">getPackages</span><span style="color: #000000">();</span>
-<span style="color: #000000">      </span><span style="color: #008000">// Packages that cannot be autolinked yet can be added manually here, for example:</span>
-<span style="color: #000000">       </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNEventEmitterPackage</span><span style="color: #000000">());</span>
-<span style="color: #000000">       </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNSpotifyRemotePackage</span><span style="color: #000000">());</span>
-<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> packages;</span>
-<span style="color: #000000">    }</span>
-</code></pre>
-				</li>
+			<ul>
+				<li>Add to the list returned by <code>getPackages()</code> for example:</li>
 			</ul>
+			<pre><code class="language-java"><span style="color: #000000">      @</span><span style="color: #267F99">Override</span>
+<span style="color: #000000">      </span><span style="color: #0000FF">protected</span><span style="color: #000000"> </span><span style="color: #267F99">List</span><span style="color: #000000">&lt;ReactPackage&gt; </span><span style="color: #795E26">getPackages</span><span style="color: #000000">() {</span>
+<span style="color: #000000">        @</span><span style="color: #267F99">SuppressWarnings</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;UnnecessaryLocalVariable&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        </span><span style="color: #267F99">List</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ReactPackage</span><span style="color: #000000">&gt; </span><span style="color: #001080">packages</span><span style="color: #000000"> = </span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">PackageList</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">).</span><span style="color: #795E26">getPackages</span><span style="color: #000000">();</span>
+<span style="color: #000000">        </span><span style="color: #008000">// Packages that cannot be autolinked yet can be added manually here, for example:</span>
+<span style="color: #000000">         </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNEventEmitterPackage</span><span style="color: #000000">());</span>
+<span style="color: #000000">           </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNSpotifyRemotePackage</span><span style="color: #000000">());</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> packages;</span>
+<span style="color: #000000">      }</span>
+</code></pre>
 			<ol start="2">
 				<li><p>Append the following lines to <code>android/settings.gradle</code>:</p>
-					<pre><code><span style="color: #000000"> </span><span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span>
-<span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-spotify-remote/android&#039;</span><span style="color: #000000">)</span>
+					<pre><code><span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span>
+<span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-spotify-remote/android&#039;</span><span style="color: #000000">)</span>
 
-<span style="color: #000000"> </span><span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-events&#039;</span>
-<span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-events/android&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-events&#039;</span>
+<span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-events/android&#039;</span><span style="color: #000000">)</span>
 </code></pre>
 				</li>
 				<li><p>Insert the following lines inside the dependencies block in <code>android/app/build.gradle</code>:</p>
-					<pre><code><span style="color: #000000"> </span><span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">)</span>
-<span style="color: #000000"> </span><span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">)</span>
+					<pre><code><span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">)</span>
 </code></pre>
 				</li>
 				<li><p>As per the <a href="https://developer.spotify.com/documentation/android/guides/android-authentication/">Spotify Android SDK Docs</a> Insert the following lines into <code>android/app/src/AndroidManifest.xml</code></p>
@@ -3096,39 +3101,39 @@ img {
 			<a href="#example-application" id="example-application" style="color: inherit; text-decoration: none;">
 				<h3>Example Application</h3>
 			</a>
-			<p>This repo contains an <a href="./example/Readme.md">Example App</a> which should be the quickest and easiest way to get up and running to try things out.  It is using React Hooks (cuz they&#39;re pretty cool) and exercises all of the remote API calls.</p>
+			<p>This repo contains an <a href="./example/Readme.md">Example App</a> which should be the quickest and easiest way to get up and running to try things out. It is using React Hooks (cuz they&#39;re pretty cool) and exercises all of the remote API calls.</p>
 			<a href="#in-code" id="in-code" style="color: inherit; text-decoration: none;">
 				<h3>In Code</h3>
 			</a>
-			<p>Again, I recommend looking at the example app.  If you specifically want to see some code that actually does stuff take a look at the <a href="./example/App.tsx">App.tsx</a>.</p>
+			<p>Again, I recommend looking at the example app. If you specifically want to see some code that actually does stuff take a look at the <a href="./example/App.tsx">App.tsx</a>.</p>
 			<p>Here&#39;s how you would use this library with Typescript (though the same mostly applies to Javascript) and the <code>async</code>/<code>await</code> syntax for promises (Just cuz I like em).</p>
-			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span>
-<span style="color: #000000">    </span><span style="color: #001080">auth</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyAuth</span><span style="color: #000000">, </span>
-<span style="color: #000000">    </span><span style="color: #001080">remote</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">, </span>
-<span style="color: #000000">    </span><span style="color: #001080">ApiScope</span><span style="color: #000000">, </span>
-<span style="color: #000000">    </span><span style="color: #001080">ApiConfig</span>
-<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react-native-spotify-remote&#039;</span><span style="color: #000000">;</span>
+			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">auth</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyAuth</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">remote</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ApiScope</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ApiConfig</span><span style="color: #000000">,</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;react-native-spotify-remote&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// Api Config object, replace with your own applications client id and urls</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">spotifyConfig</span><span style="color: #000000">: </span><span style="color: #267F99">ApiConfig</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">clientID:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_CLIENT_ID&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">redirectURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_REDIRECT_URL&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">tokenRefreshURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_TOKEN_REFRESH_URL&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">tokenSwapURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_TOKEN_SWAP_URL&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">scopes:</span><span style="color: #000000"> [</span><span style="color: #001080">ApiScope</span><span style="color: #000000">.</span><span style="color: #001080">AppRemoteControlScope</span><span style="color: #000000">, </span><span style="color: #001080">ApiScope</span><span style="color: #000000">.</span><span style="color: #001080">UserFollowReadScope</span><span style="color: #000000">]</span>
-<span style="color: #000000">}</span>
+<span style="color: #000000">  </span><span style="color: #001080">clientID:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_CLIENT_ID&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">redirectURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_REDIRECT_URL&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">tokenRefreshURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_TOKEN_REFRESH_URL&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">tokenSwapURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;SPOTIFY_TOKEN_SWAP_URL&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">scopes:</span><span style="color: #000000"> [</span><span style="color: #001080">ApiScope</span><span style="color: #000000">.</span><span style="color: #001080">AppRemoteControlScope</span><span style="color: #000000">, </span><span style="color: #001080">ApiScope</span><span style="color: #000000">.</span><span style="color: #001080">UserFollowReadScope</span><span style="color: #000000">],</span>
+<span style="color: #000000">};</span>
 
 <span style="color: #008000">// Initialize the library and connect the Remote</span>
 <span style="color: #008000">// then play an epic song</span>
-<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">playEpicSong</span><span style="color: #000000">(){</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">try</span><span style="color: #000000">{</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">session</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyAuth</span><span style="color: #000000">.</span><span style="color: #795E26">authorize</span><span style="color: #000000">(</span><span style="color: #001080">spotifyConfig</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">(</span><span style="color: #001080">session</span><span style="color: #000000">.</span><span style="color: #001080">accessToken</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">playUri</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;spotify:track:6IA8E2Q5ttcpbuahIejO74&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">                </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">seek</span><span style="color: #000000">(</span><span style="color: #098658">58000</span><span style="color: #000000">);</span>
-<span style="color: #000000">    }</span><span style="color: #AF00DB">catch</span><span style="color: #000000">(</span><span style="color: #001080">err</span><span style="color: #000000">){</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Couldn&#039;t authorize with or connect to Spotify&quot;</span><span style="color: #000000">,</span><span style="color: #001080">err</span><span style="color: #000000">);</span>
-<span style="color: #000000">    }   </span>
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">playEpicSong</span><span style="color: #000000">() {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">session</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyAuth</span><span style="color: #000000">.</span><span style="color: #795E26">authorize</span><span style="color: #000000">(</span><span style="color: #001080">spotifyConfig</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">(</span><span style="color: #001080">session</span><span style="color: #000000">.</span><span style="color: #001080">accessToken</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">playUri</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;spotify:track:6IA8E2Q5ttcpbuahIejO74&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">SpotifyRemote</span><span style="color: #000000">.</span><span style="color: #795E26">seek</span><span style="color: #000000">(</span><span style="color: #098658">58000</span><span style="color: #000000">);</span>
+<span style="color: #000000">  } </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> (</span><span style="color: #001080">err</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Couldn&#039;t authorize with or connect to Spotify&quot;</span><span style="color: #000000">, </span><span style="color: #001080">err</span><span style="color: #000000">);</span>
+<span style="color: #000000">  }</span>
 <span style="color: #000000">}</span>
 </code></pre>
 			<a href="#token-swap-amp-refresh" id="token-swap-amp-refresh" style="color: inherit; text-decoration: none;">
@@ -3137,7 +3142,7 @@ img {
 			<blockquote>
 				<p>A server must be running for with endpoints that allow Spotify to authenticate your app.</p>
 			</blockquote>
-			<p>In order to support the OAuth flow, you need to have a server to support the calls for token <code>swap</code> and <code>refresh</code>.  I have included  the same server setup defined in the <a href="https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh">react-native-spotify</a> repo as it does exactly what you need.</p>
+			<p>In order to support the OAuth flow, you need to have a server to support the calls for token <code>swap</code> and <code>refresh</code>. I have included the same server setup defined in the <a href="https://github.com/lufinkey/react-native-spotify#token-swap-and-refresh">react-native-spotify</a> repo as it does exactly what you need.</p>
 			<p>See the <a href="./example-server/README.md">Server Readme</a> for further instructions.</p>
 			<a href="#additional-notes" id="additional-notes" style="color: inherit; text-decoration: none;">
 				<h2>Additional notes</h2>
