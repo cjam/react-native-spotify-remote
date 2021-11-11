@@ -20,3 +20,4 @@ gradlew.bat
 .idea
 local.properties
 *.iml
+yarn-error.log
