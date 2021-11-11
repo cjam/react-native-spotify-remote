@@ -67,6 +67,12 @@ or
 npm install --save react-native-spotify-remote
 ```
 
+> **Android 11 and Above**
+>
+> Add the following to your Android Manifest:
+>
+> `<queries> <package android:name="com.spotify.music" /> </queries>`
+
 ## Linking
 
 As of React Native `> 0.61`, auto linking should work for both iOS and Android. There shouldn't be any modifications necessary and it _Should_ work out of the box. The one caveat, is that `react-native-events` needs to be linked as it doesn't yet support auto linking. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
