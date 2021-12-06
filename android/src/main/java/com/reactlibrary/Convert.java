@@ -132,7 +132,7 @@ public class Convert {
         map.putBoolean("canRepeatTrack", restrictions.canRepeatTrack);
         map.putBoolean("canSeek", restrictions.canSeek);
         map.putBoolean("canSkipNext", restrictions.canSkipNext);
-        map.putBoolean("canSkipPrev", restrictions.canSkipPrev);
+        map.putBoolean("canSkipPrevious", restrictions.canSkipPrev);
         map.putBoolean("canToggleShuffle", restrictions.canToggleShuffle);
 
         return map;
