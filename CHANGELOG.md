@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fix
+- Update react-native-events (Fix [#173](https://github.com/cjam/react-native-spotify-remote/issues/173))
+- Fix PlayerRestrictions key name ([#172](https://github.com/cjam/react-native-spotify-remote/issues/172))
 
 ## [0.3.11-2] - 2021-11-11
 ### Documentation
