@@ -54,7 +54,7 @@
     "react-native": ">=0.60"
   },
   "dependencies": {
-    "react-native-events": "^1.0.20"
+    "react-native-events": "^1.0.21"
   },
   "devDependencies": {
     "@release-it/keep-a-changelog": "^2.2.2",
