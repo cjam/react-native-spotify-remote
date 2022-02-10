@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fix
+
+- Remove unused maven plugin (fix build error on react-native 0.67) (#177)
+
 ## [0.3.11-4] - 2022-02-10
 
 ### Update
