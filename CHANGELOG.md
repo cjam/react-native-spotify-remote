@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.11-4] - 2022-02-10
+
 ### Update
 
 - update legacy double-quoted import for `react-native` (#175)
