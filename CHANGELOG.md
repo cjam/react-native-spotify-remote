@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Update
+
+- update legacy double-quoted import for `react-native` (#175)
+- update `react-native-events` to `^1.0.21` (#174)
+
 ## [0.3.11-3] - 2021-12-19
 ### Fix
 - Update react-native-events (Fix [#173](https://github.com/cjam/react-native-spotify-remote/issues/173))
