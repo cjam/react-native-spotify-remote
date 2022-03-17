@@ -302,3 +302,8 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+## Projects using this library
+
+Checkout existing [Projects](./PROJECTS.md) that are using this library.
