@@ -1,14 +1,13 @@
-import { NativeModules, Platform } from 'react-native';
-import RNEvents from 'react-native-events';
-import TypedEventEmitter from './TypedEventEmitter';
-import RepeatMode from './RepeatMode';
-import PlayerState from './PlayerState';
-import PlayerContext from './PlayerContext';
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import ContentItem from './ContentItem';
-import CrossfadeState from './CrossfadeState';
-import RecommendedContentOptions from './RecommendedContentOptions';
 import ContentType from './ContentType';
+import CrossfadeState from './CrossfadeState';
 import GetChildrenItemsOptions, { DEFAULT_GET_CHILDREN_OPTIONS } from './GetChildrenItemsOptions';
+import PlayerContext from './PlayerContext';
+import PlayerState from './PlayerState';
+import RecommendedContentOptions from './RecommendedContentOptions';
+import RepeatMode from './RepeatMode';
+import TypedEventEmitter from './TypedEventEmitter';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -76,7 +75,11 @@ interface SpotifyRemoteApiExtensions {
  * @export
  * @interface SpotifyRemoteApi
  */
-export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>, SpotifyRemoteApiExtensions {
+export interface SpotifyRemoteApi extends SpotifyRemoteApiExtensions {
+    /**
+     * React Native NativeEventEmitter
+     */
+    events: TypedEventEmitter<SpotifyRemoteEvents>,
     /**
      * Asynchronous call to get whether or not the Spotify Remote is connected
      *
@@ -257,10 +260,7 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
  * @ignore
  */
 const SpotifyRemote = NativeModules.RNSpotifyRemoteAppRemote as SpotifyRemoteApi;
-RNEvents.register(SpotifyRemote);
-RNEvents.conform(SpotifyRemote);
 
-// Example of Javascript only api method
 SpotifyRemote.setPlaying = (playing: boolean) => {
     // todo: Will want to likely check the state of playing somewhere?
     // Perhaps this can be done in native land so that we don't need to
@@ -301,46 +301,8 @@ if (Platform.OS === "ios") {
     }
 }
 
+SpotifyRemote.events = new NativeEventEmitter(NativeModules.RNSpotifyRemoteAppRemote);
 
-
-/**
- * @ignore
- * The events produced by the eventEmitter implementation around 
- * when new event listeners are added and removed
- */
-const metaEvents = {
-    newListener: 'newListener',
-    removeListener: 'removeListener'
-};
-
-
-/**
-* @ignore
-* Want to ignore the metaEvents when sending our subscription events
-*/
-const ignoredEvents = Object.keys(metaEvents);
-
-/**  
- * @ignore
- * The following allows us to lazily subscribe to events instead of having a single
- * subscription all the time regardless which is less efficient
-*/
-(SpotifyRemote as any).on(metaEvents.newListener, (type: string) => {
-    if (ignoredEvents.indexOf(type) === -1) {
-        const listenerCount = SpotifyRemote.listenerCount(type as any);
-        // If this is the first listener, send an eventSubscribed event
-        if (listenerCount == 0) {
-            RNEvents.emitNativeEvent(SpotifyRemote, "eventSubscribed", type);
-        }
-    }
-}).on(metaEvents.removeListener, (type: string) => {
-    if (ignoredEvents.indexOf(type) === -1) {
-        const listenerCount = SpotifyRemote.listenerCount(type as any);
-        if (listenerCount == 0) {
-            RNEvents.emitNativeEvent(SpotifyRemote, "eventUnsubscribed", type);
-        }
-    }
-});
 
 /**
  * @ignore

@@ -12,8 +12,6 @@ target 'example' do
   
   # Want to install the pod from the source directory so we can change it while developing
   pod 'RNSpotifyRemote', :path => "../../"
-  # RNEventEmitter doesn't seem to support the auto detection, manually specifying instead
-  pod 'RNEventEmitter', :path => "#{root_node_modules_path}/react-native-events"
 
   # Enables Flipper.
   #

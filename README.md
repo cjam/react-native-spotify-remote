@@ -75,7 +75,7 @@ npm install --save react-native-spotify-remote
 
 ## Linking
 
-As of React Native `> 0.61`, auto linking should work for both iOS and Android. There shouldn't be any modifications necessary and it _Should_ work out of the box. The one caveat, is that `react-native-events` needs to be linked as it doesn't yet support auto linking. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
+As of React Native `> 0.61`, auto linking should work for both iOS and Android. There shouldn't be any modifications necessary and it _Should_ work out of the box. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
 
 ### iOS
 
@@ -86,7 +86,6 @@ As of React Native `> 0.61`, auto linking should work for both iOS and Android. 
 By far the easiest way to integrate into your project. In your `ios/PodFile` add the following lines to your projects target:
 
 ```rb
-	pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
 	pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
 ```
 
@@ -139,15 +138,12 @@ Modifications are needed for the `AppDelegate.m`:
 
 If you need to link your project manually, here are some things you'll need to do.
 
-> ### `react-native-events` does not support autolinking at this point and will need to be manually linked into your application
-
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
 
 - Add the following imports to the top of the file
 
 ```
 import com.reactlibrary.RNSpotifyRemotePackage;
-import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
 ```
 
 - Add to the list returned by `getPackages()` for example:
@@ -158,7 +154,6 @@ import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
         @SuppressWarnings("UnnecessaryLocalVariable")
         List<ReactPackage> packages = new PackageList(this).getPackages();
         // Packages that cannot be autolinked yet can be added manually here, for example:
-         packages.add(new RNEventEmitterPackage());
 		   packages.add(new RNSpotifyRemotePackage());
         return packages;
       }
@@ -169,15 +164,11 @@ import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
    ```
    include ':react-native-spotify-remote'
    project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-spotify-remote/android')
-
-   include ':react-native-events'
-   project(':react-native-events').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-events/android')
    ```
 
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
    ```
    implementation project(':react-native-spotify-remote')
-   implementation project(':react-native-events')
    ```
 4. As per the [Spotify Android SDK Docs](https://developer.spotify.com/documentation/android/guides/android-authentication/) Insert the following lines into `android/app/src/AndroidManifest.xml`
 
@@ -302,7 +293,6 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
 
 ## Projects using this library
 
