@@ -472,7 +472,6 @@ RCT_EXPORT_METHOD(getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolv
 
 -(void)sendEvent:(NSString*)event args:(NSArray*)args
 {
-    // FIXME: Only send events if anyone is listening
     [self sendEventWithName:@event body:@args];
 }
 
