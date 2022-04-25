@@ -48,6 +48,10 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
     };
 }
 
+- (NSArray<NSString *> *)supportedEvents {
+    return @[EventNamePlayerStateChanged, EventNamePlayerContextChanged, EventNameRemoteDisconnected, EventNameRemoteConnected];
+}
+
 #pragma mark Singleton Methods
 
 -(id)init
