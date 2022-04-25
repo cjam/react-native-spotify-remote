@@ -25,7 +25,12 @@ import com.spotify.protocol.client.CallResult;
 import com.spotify.protocol.client.ErrorCallback;
 import com.spotify.protocol.types.ListItem;
 
+import com.spotify.protocol.client.Subscription;
+import com.spotify.protocol.types.PlayerContext;
+import com.spotify.protocol.types.PlayerState;
+
 import java.util.Stack;
+import java.util.HashMap;
 
 
 @ReactModule(name = "RNSpotifyRemoteAppRemote")
@@ -38,6 +43,11 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     private SpotifyAppRemote mSpotifyAppRemote;
     private Connector.ConnectionListener mSpotifyRemoteConnectionListener;
     private Stack<Promise> mConnectPromises = new Stack<Promise>();
+
+    private Subscription<PlayerContext>	mPlayerContextSubscription;
+    private Subscription<PlayerState> mPlayerStateSubscription;
+
+    private HashMap<String, Boolean> subscriptionHasListeners = new HashMap<String, Boolean>();
 
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -83,28 +93,53 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void addListener(String eventName) {
     // Set up any upstream listeners or background tasks as necessary
-    // See handleOnConnect()
+        subscriptionHasListeners.put(eventName, true);
+        handleOnConnect();
     }
 
     @ReactMethod
     public void removeListeners(Integer count) {
     // Remove upstream listeners, stop unnecessary background tasks
-    // See handleOnConnect()
+    // TODO: We need to find a way to determine the eventName here to unsubscribe
+        handleOnConnect();
     }
     
     private void handleOnConnect() {
-        mSpotifyAppRemote.getPlayerApi()
-                .subscribeToPlayerContext()
-                .setEventCallback(playerContext -> {
-                    ReadableMap map = Convert.toMap(playerContext);
-                    sendEvent(reactContext, "playerContextChanged", map);
-                });
-        mSpotifyAppRemote.getPlayerApi()
-                .subscribeToPlayerState()
-                .setEventCallback(playerState -> {
-                    WritableMap map = Convert.toMap(playerState);
-                    sendEvent(reactContext, "playerStateChanged", map);
-                });
+        if (mSpotifyAppRemote == null) return;
+
+        if (subscriptionHasListeners.get("playerContextChanged")) {
+            if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
+                return; // already subscribed
+            }
+            mPlayerContextSubscription = mSpotifyAppRemote.getPlayerApi()
+                    .subscribeToPlayerContext()
+                    .setEventCallback(playerContext -> {
+                        ReadableMap map = Convert.toMap(playerContext);
+                        sendEvent(reactContext, "playerContextChanged", map);
+                    });
+        } else {
+            if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
+                mPlayerContextSubscription.cancel();
+                mPlayerContextSubscription = null;
+            }
+        }
+
+        if (subscriptionHasListeners.get("playerStateChanged")) {
+            if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
+                return; // already subscribed
+            }
+            mPlayerStateSubscription = mSpotifyAppRemote.getPlayerApi()
+                    .subscribeToPlayerState()
+                    .setEventCallback(playerContext -> {
+                        ReadableMap map = Convert.toMap(playerContext);
+                        sendEvent(reactContext, "playerStateChanged", map);
+                    });
+        } else {
+            if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
+                mPlayerStateSubscription.cancel();
+                mPlayerStateSubscription = null;
+            }
+        }
     }
 
     private <T> void executeAppRemoteCall(Function<SpotifyAppRemote, CallResult<T>> apiCall, CallResult.ResultCallback<T> resultCallback, ErrorCallback errorCallback) {
