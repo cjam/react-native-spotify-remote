@@ -105,6 +105,9 @@ public class Convert {
     }
 
     public static ReadableMap toMap(Track track) {
+        if (track == null) {
+            return null;
+        }
         WritableMap map = Arguments.createMap();
 
         map.putDouble("duration", (double) track.duration);
