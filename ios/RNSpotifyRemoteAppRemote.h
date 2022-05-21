@@ -37,6 +37,8 @@
 -(void)getChildrenOfItem:(NSDictionary*)item resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 -(void)getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 
-
+// Internal events API
+-(void)eventStartObserving:(NSString *)eventType;
+-(void)eventStopObserving:(NSString *)eventType;
 
 @end

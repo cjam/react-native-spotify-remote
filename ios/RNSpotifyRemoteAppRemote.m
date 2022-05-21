@@ -460,24 +460,24 @@ RCT_EXPORT_METHOD(getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolv
 // Will be called when this module's first listener is added.
 -(void)startObserving {
     // Set up any upstream listeners or background tasks as necessary
-    [_eventSubscriptions setValue:@YES forKey:EventNamePlayerStateChanged];
-    [_eventSubscriptions setValue:@YES forKey:EventNamePlayerContextChanged];
-    [_eventSubscriptions setValue:@YES forKey:EventNameRemoteDisconnected];
-    [_eventSubscriptions setValue:@YES forKey:EventNameRemoteConnected];
-    [self handleEventSubscriptions];
 }
 
 // Will be called when this module's last listener is removed, or on dealloc.
 -(void)stopObserving {
     // Remove upstream listeners, stop unnecessary background tasks
-    [_eventSubscriptions setValue:@NO forKey:EventNamePlayerStateChanged];
-    [_eventSubscriptions setValue:@NO forKey:EventNamePlayerContextChanged];
-    [_eventSubscriptions setValue:@NO forKey:EventNameRemoteDisconnected];
-    [_eventSubscriptions setValue:@NO forKey:EventNameRemoteConnected];
+}
+
+RCT_EXPORT_METHOD(eventStartObserving:(NSString *)eventType)
+{
+    [_eventSubscriptions setValue:@YES forKey:eventType];
     [self handleEventSubscriptions];
 }
 
-
+RCT_EXPORT_METHOD(eventStopObserving:(NSString *)eventType)
+{
+    [_eventSubscriptions setValue:@NO forKey:eventType];
+    [self handleEventSubscriptions];
+}
 
 
 -(void)sendEvent:(NSString*)event args:(NSArray*)args

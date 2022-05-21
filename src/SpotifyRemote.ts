@@ -289,6 +289,9 @@ const SpotifyRemote: SpotifyRemoteApi = {
     // Listeners
     addListener(eventType, listener) {
         const sub = nativeEventEmitter.addListener(eventType, listener);
+        if (this.listenerCount(eventType) === 0) {
+            nativeModule.eventStartObserving(eventType);
+        }
         eventListeners.add(sub);
         return this;
     },
@@ -302,6 +305,9 @@ const SpotifyRemote: SpotifyRemoteApi = {
                 eventListeners.delete(eventListener);
             }
         });
+        if (this.listenerCount(eventType) === 0) {
+            nativeModule.eventStopObserving(eventType);
+        }
         return this;
     },
     removeAllListeners(eventType) {

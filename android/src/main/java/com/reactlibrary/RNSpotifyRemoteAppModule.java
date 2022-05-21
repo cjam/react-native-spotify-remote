@@ -95,14 +95,24 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void addListener(String eventName) {
         // Set up any upstream listeners or background tasks as necessary
-        subscriptionHasListeners.put(eventName, true);
-        handleEventSubscriptions();
     }
 
     @ReactMethod
     public void removeListeners(Integer count) {
         // Remove upstream listeners, stop unnecessary background tasks
-        // TODO: We need to find a way to determine the eventName here to unsubscribe
+    }
+
+    @ReactMethod
+    public void eventStartObserving(String eventName) {
+        // Will be called when the event first listener is added.
+        subscriptionHasListeners.put(eventName, true);
+        handleEventSubscriptions();
+    }
+
+    @ReactMethod
+    public void eventStopObserving(String eventName) {
+        // Will be called when the event last listener is removed.
+        subscriptionHasListeners.put(eventName, false);
         handleEventSubscriptions();
     }
 
