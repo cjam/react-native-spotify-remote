@@ -59,12 +59,12 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
 
             public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                 mSpotifyAppRemote = spotifyAppRemote;
-                handleOnConnect();
+                handleEventSubscriptions();
                 while (!mConnectPromises.empty()) {
                     Promise promise = mConnectPromises.pop();
                     promise.resolve(true);
                 }
-                sendEvent(reactContext, EventNameRemoteConnected, null);
+                sendEvent(EventNameRemoteConnected, null);
             }
 
             public void onFailure(Throwable throwable) {
@@ -80,13 +80,12 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
                         promise.reject(throwable); 
                     }
                 }
-                sendEvent(reactContext, EventNameRemoteDisconnected, null);
+                sendEvent(EventNameRemoteDisconnected, null);
             }
         };
     }
 
-    private void sendEvent(ReactApplicationContext reactContext,
-            String eventName,
+    private void sendEvent(String eventName,
             Object params) {
         reactContext
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
@@ -97,17 +96,17 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     public void addListener(String eventName) {
         // Set up any upstream listeners or background tasks as necessary
         subscriptionHasListeners.put(eventName, true);
-        handleOnConnect();
+        handleEventSubscriptions();
     }
 
     @ReactMethod
     public void removeListeners(Integer count) {
         // Remove upstream listeners, stop unnecessary background tasks
         // TODO: We need to find a way to determine the eventName here to unsubscribe
-        handleOnConnect();
+        handleEventSubscriptions();
     }
 
-    private void handleOnConnect() {
+    private void handleEventSubscriptions() {
         if (mSpotifyAppRemote == null)
             return;
 
@@ -122,7 +121,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
                     .subscribeToPlayerContext()
                     .setEventCallback(playerContext -> {
                         ReadableMap map = Convert.toMap(playerContext);
-                        sendEvent(reactContext, EventNamePlayerContextChanged, map);
+                        sendEvent(EventNamePlayerContextChanged, map);
                     });
         } else {
             if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
@@ -139,7 +138,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
                     .subscribeToPlayerState()
                     .setEventCallback(playerContext -> {
                         ReadableMap map = Convert.toMap(playerContext);
-                        sendEvent(reactContext, EventNamePlayerStateChanged, map);
+                        sendEvent(EventNamePlayerStateChanged, map);
                     });
         } else {
             if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
@@ -167,7 +166,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
                     .setResultCallback(playerState -> {
                         WritableMap map = Convert.toMap(playerState);
                         WritableMap eventMap = Convert.toMap(playerState);
-                        sendEvent(reactContext, "playerStateChanged", eventMap);
+                        sendEvent(EventNamePlayerStateChanged, eventMap);
                         resultCallback.onResult(map);
                     })
                     .setErrorCallback(errorCallback);
@@ -221,7 +220,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     public void disconnect(Promise promise) {
         if (mSpotifyAppRemote != null) {
             SpotifyAppRemote.disconnect(mSpotifyAppRemote);
-            sendEvent(reactContext, EventNameRemoteDisconnected, null);
+            sendEvent(EventNameRemoteDisconnected, null);
         }
         promise.resolve(null);
     }
