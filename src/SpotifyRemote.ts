@@ -1,4 +1,4 @@
-import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import { EmitterSubscription, NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import ContentItem from './ContentItem';
 import ContentType from './ContentType';
 import CrossfadeState from './CrossfadeState';
@@ -75,11 +75,7 @@ interface SpotifyRemoteApiExtensions {
  * @export
  * @interface SpotifyRemoteApi
  */
-export interface SpotifyRemoteApi extends SpotifyRemoteApiExtensions {
-    /**
-     * React Native NativeEventEmitter
-     */
-    events: TypedEventEmitter<SpotifyRemoteEvents>,
+export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>, SpotifyRemoteApiExtensions {
     /**
      * Asynchronous call to get whether or not the Spotify Remote is connected
      *
@@ -256,17 +252,88 @@ export interface SpotifyRemoteApi extends SpotifyRemoteApiExtensions {
     getCrossfadeState(): Promise<CrossfadeState>;
 }
 
-/**
- * @ignore
- */
-const SpotifyRemote = NativeModules.RNSpotifyRemoteAppRemote as SpotifyRemoteApi;
+const nativeModule = NativeModules.RNSpotifyRemoteAppRemote;
 
-SpotifyRemote.setPlaying = (playing: boolean) => {
-    // todo: Will want to likely check the state of playing somewhere?
-    // Perhaps this can be done in native land so that we don't need to
-    // worry about it here
-    return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
-}
+const nativeEventEmitter = new NativeEventEmitter(nativeModule);
+const eventListeners = new Set<EmitterSubscription>();
+
+const SpotifyRemote: SpotifyRemoteApi = {
+    // Native APIs
+    connect: nativeModule.connect.bind(nativeModule),
+    disconnect: nativeModule.disconnect.bind(nativeModule),
+    getChildrenOfItem: nativeModule.getChildrenOfItem.bind(nativeModule),
+    getContentItemForUri: nativeModule.getContentItemForUri.bind(nativeModule),
+    getCrossfadeState: nativeModule.getCrossfadeState.bind(nativeModule),
+    getPlayerState: nativeModule.getPlayerState.bind(nativeModule),
+    getRecommendedContentItems:
+        nativeModule.getRecommendedContentItems.bind(nativeModule),
+    getRootContentItems: nativeModule.getRootContentItems.bind(nativeModule),
+    isConnectedAsync: nativeModule.isConnectedAsync.bind(nativeModule),
+    pause: nativeModule.pause.bind(nativeModule),
+    playItem: nativeModule.playItem.bind(nativeModule),
+    playItemWithIndex: nativeModule.playItemWithIndex.bind(nativeModule),
+    playUri: nativeModule.playUri.bind(nativeModule),
+    queueUri: nativeModule.queueUri.bind(nativeModule),
+    resume: nativeModule.resume.bind(nativeModule),
+    seek: nativeModule.seek.bind(nativeModule),
+    setRepeatMode: nativeModule.setRepeatMode.bind(nativeModule),
+    setShuffling: nativeModule.setShuffling.bind(nativeModule),
+    skipToNext: nativeModule.skipToNext.bind(nativeModule),
+    skipToPrevious: nativeModule.skipToPrevious.bind(nativeModule),
+    setPlaying: (playing: boolean) => {
+        // todo: Will want to likely check the state of playing somewhere?
+        // Perhaps this can be done in native land so that we don't need to
+        // worry about it here
+        return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
+    },
+    // Listeners
+    addListener(eventType, listener) {
+        const sub = nativeEventEmitter.addListener(eventType, listener);
+        eventListeners.add(sub);
+        return this;
+    },
+    removeListener(eventType, listener) {
+        eventListeners.forEach((eventListener) => {
+            if (
+                eventListener.eventType === eventType &&
+                (!listener || eventListener.caller === listener)
+            ) {
+                eventListener.remove();
+                eventListeners.delete(eventListener);
+            }
+        });
+        return this;
+    },
+    removeAllListeners(eventType) {
+        if (eventType) {
+            this.removeListener(eventType);
+            return this;
+        }
+        this.removeListener("playerContextChanged");
+        this.removeListener("playerStateChanged");
+        this.removeListener("remoteConnected");
+        this.removeListener("remoteDisconnected");
+        return this;
+    },
+    emit(eventType, ...args) {
+        nativeEventEmitter.emit(eventType, ...args);
+        return true;
+    },
+    listenerCount(eventType) {
+        let count = 0;
+        eventListeners.forEach((eventListener) => {
+            if (eventListener.eventType === eventType) count += 1;
+        });
+        return count;
+    },
+    on(...args) {
+        return this.addListener(...args);
+    },
+    off(...args) {
+        return this.removeListener(...args);
+    },
+};
+
 
 
 // Augment the android module to warn on unimplemented methods
@@ -301,10 +368,4 @@ if (Platform.OS === "ios") {
     }
 }
 
-SpotifyRemote.events = new NativeEventEmitter(NativeModules.RNSpotifyRemoteAppRemote);
-
-
-/**
- * @ignore
- */
 export default SpotifyRemote;
