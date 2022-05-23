@@ -1,14 +1,22 @@
 import React from 'react';
 import {
+    auth,
+    remote,
+    ApiConfig,
+    ApiScope,
+    SpotifyRemoteApi,
+    PlayerState,
+    PlayerContext,
+    RepeatMode,
+    ContentItem,
+    SpotifyAuth
+} from 'react-native-spotify-remote';
+import {
     SPOTIFY_CLIENT_ID,
     SPOTIFY_REDIRECT_URL,
     SPOTIFY_TOKEN_REFRESH_URL,
     SPOTIFY_TOKEN_SWAP_URL
 } from 'react-native-dotenv';
-import {
-    ApiConfig,
-    ApiScope, auth, PlayerContext, PlayerState, remote, SpotifyAuth, SpotifyRemoteApi
-} from 'react-native-spotify-remote';
 
 interface AuthOptions {
     playURI?: string;
@@ -63,10 +71,10 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
     }
 
     componentDidMount() {
-        remote.events.addListener("remoteConnected", this.onConnected)
-        remote.events.addListener("remoteDisconnected", this.onDisconnected)
-        remote.events.addListener("playerStateChanged", this.onPlayerStateChanged)
-        remote.events.addListener("playerContextChanged", this.onPlayerContextChanged);
+        remote.on("remoteConnected", this.onConnected)
+            .on("remoteDisconnected", this.onDisconnected)
+            .on("playerStateChanged", this.onPlayerStateChanged)
+            .on("playerContextChanged", this.onPlayerContextChanged);
 
         auth.getSession().then((session) => {
             if (session != undefined && session.accessToken != undefined) {
@@ -82,7 +90,7 @@ class AppContextProvider extends React.Component<{}, AppContextState> {
     }
 
     componentWillUnmount() {
-        remote.events.removeAllListeners();
+        remote.removeAllListeners();
     }
 
     private onError(error: Error) {
