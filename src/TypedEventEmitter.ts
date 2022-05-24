@@ -11,6 +11,7 @@ export default interface TypedEventEmitter<T> {
     removeListener<K extends keyof T>(event: K, listener?: (v: T[K]) => void): this;
     removeAllListeners<K extends keyof T>(event?: K): this;
     emit<K extends keyof T>(event: K, args: T[K]): boolean;
+    eventNames(): Array<keyof T>;
     listenerCount<K extends keyof T>(type: K): number;
     on<K extends keyof T>(name: K, listener: (v: T[K]) => void): this;
     off<K extends keyof T>(event: K, listener: (v: T[K]) => void): this;

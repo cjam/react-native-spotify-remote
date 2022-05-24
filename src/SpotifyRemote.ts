@@ -255,7 +255,15 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
 const nativeModule = NativeModules.RNSpotifyRemoteAppRemote;
 
 const nativeEventEmitter = new NativeEventEmitter(nativeModule);
-const eventListeners = new Set<EmitterSubscription>();
+const eventListeners: Record<
+    keyof SpotifyRemoteEvents,
+    Set<EmitterSubscription>
+> = {
+    playerContextChanged: new Set(),
+    playerStateChanged: new Set(),
+    remoteConnected: new Set(),
+    remoteDisconnected: new Set(),
+};
 
 const SpotifyRemote: SpotifyRemoteApi = {
     // Native APIs
@@ -292,17 +300,14 @@ const SpotifyRemote: SpotifyRemoteApi = {
         if (this.listenerCount(eventType) === 0) {
             nativeModule.eventStartObserving(eventType);
         }
-        eventListeners.add(sub);
+        eventListeners[eventType].add(sub);
         return this;
     },
     removeListener(eventType, listener) {
-        eventListeners.forEach((eventListener) => {
-            if (
-                eventListener.eventType === eventType &&
-                (!listener || eventListener.caller === listener)
-            ) {
+        eventListeners[eventType].forEach((eventListener) => {
+            if (!listener || eventListener.caller === listener) {
                 eventListener.remove();
-                eventListeners.delete(eventListener);
+                eventListeners[eventType].delete(eventListener);
             }
         });
         if (this.listenerCount(eventType) === 0) {
@@ -311,14 +316,8 @@ const SpotifyRemote: SpotifyRemoteApi = {
         return this;
     },
     removeAllListeners(eventType) {
-        if (eventType) {
-            this.removeListener(eventType);
-            return this;
-        }
-        this.removeListener("playerContextChanged");
-        this.removeListener("playerStateChanged");
-        this.removeListener("remoteConnected");
-        this.removeListener("remoteDisconnected");
+        const eventsToRemove = eventType ? [eventType] : this.eventNames();
+        eventsToRemove.forEach((eventType) => this.removeListener(eventType));
         return this;
     },
     emit(eventType, ...args) {
@@ -326,17 +325,21 @@ const SpotifyRemote: SpotifyRemoteApi = {
         return true;
     },
     listenerCount(eventType) {
-        let count = 0;
-        eventListeners.forEach((eventListener) => {
-            if (eventListener.eventType === eventType) count += 1;
-        });
-        return count;
+        return eventListeners[eventType].size;
     },
     on(...args) {
         return this.addListener(...args);
     },
     off(...args) {
         return this.removeListener(...args);
+    },
+    eventNames() {
+        return [
+            'playerContextChanged',
+            'playerStateChanged',
+            'remoteConnected',
+            'remoteDisconnected',
+        ];
     },
 };
 
