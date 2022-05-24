@@ -2725,14 +2725,20 @@ img {
 		<li class="current tsd-kind-interface">
 			<a href="spotifyremoteapi.html" class="tsd-kind-icon">Spotify<wbr>Remote<wbr>Api</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="spotifyremoteapi.html#events" class="tsd-kind-icon">events</a>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#connect" class="tsd-kind-icon">connect</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#disconnect" class="tsd-kind-icon">disconnect</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#emit" class="tsd-kind-icon">emit</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="spotifyremoteapi.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#getchildrenofitem" class="tsd-kind-icon">get<wbr>Children<wbr>OfItem</a>
@@ -2755,6 +2761,15 @@ img {
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#isconnectedasync" class="tsd-kind-icon">is<wbr>Connected<wbr>Async</a>
 				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#listenercount" class="tsd-kind-icon">listener<wbr>Count</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#off" class="tsd-kind-icon">off</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#on" class="tsd-kind-icon">on</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#pause" class="tsd-kind-icon">pause</a>
 				</li>
@@ -2769,6 +2784,12 @@ img {
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#queueuri" class="tsd-kind-icon">queue<wbr>Uri</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#removealllisteners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="spotifyremoteapi.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="spotifyremoteapi.html#resume" class="tsd-kind-icon">resume</a>
@@ -2834,6 +2855,9 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
+					<span class="tsd-signature-type">TypedEventEmitter</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">&gt;</span>
+				</li>
+				<li>
 					<span class="tsd-signature-type">SpotifyRemoteApiExtensions</span>
 					<ul class="tsd-hierarchy">
 						<li>
@@ -2848,16 +2872,13 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Properties</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyremoteapi.html#events" class="tsd-kind-icon">events</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#connect" class="tsd-kind-icon">connect</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#disconnect" class="tsd-kind-icon">disconnect</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#emit" class="tsd-kind-icon">emit</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#getchildrenofitem" class="tsd-kind-icon">get<wbr>Children<wbr>OfItem</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#getcontentitemforuri" class="tsd-kind-icon">get<wbr>Content<wbr>Item<wbr>For<wbr>Uri</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#getcrossfadestate" class="tsd-kind-icon">get<wbr>Crossfade<wbr>State</a></li>
@@ -2865,11 +2886,16 @@ img {
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#getrecommendedcontentitems" class="tsd-kind-icon">get<wbr>Recommended<wbr>Content<wbr>Items</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#getrootcontentitems" class="tsd-kind-icon">get<wbr>Root<wbr>Content<wbr>Items</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#isconnectedasync" class="tsd-kind-icon">is<wbr>Connected<wbr>Async</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#listenercount" class="tsd-kind-icon">listener<wbr>Count</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#off" class="tsd-kind-icon">off</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#on" class="tsd-kind-icon">on</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#pause" class="tsd-kind-icon">pause</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#playitem" class="tsd-kind-icon">play<wbr>Item</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#playitemwithindex" class="tsd-kind-icon">play<wbr>Item<wbr>With<wbr>Index</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#playuri" class="tsd-kind-icon">play<wbr>Uri</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#queueuri" class="tsd-kind-icon">queue<wbr>Uri</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#removealllisteners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="spotifyremoteapi.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#resume" class="tsd-kind-icon">resume</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#seek" class="tsd-kind-icon">seek</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="spotifyremoteapi.html#setplaying" class="tsd-kind-icon">set<wbr>Playing</a></li>
@@ -2883,25 +2909,57 @@ img {
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="events" class="tsd-anchor"></a>
-				<h3>events</h3>
-				<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">&lt;</span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">&gt;</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L82">SpotifyRemote.ts:82</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>React Native NativeEventEmitter</p>
-					</div>
-				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="addlistener" class="tsd-anchor"></a>
+				<h3>add<wbr>Listener</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">add<wbr>Listener&lt;K&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L10">TypedEventEmitter.ts:10</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">K</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>v: <a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="connect" class="tsd-anchor"></a>
 				<h3>connect</h3>
@@ -2912,7 +2970,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L98">SpotifyRemote.ts:98</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L94">SpotifyRemote.ts:94</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2945,7 +3003,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L106">SpotifyRemote.ts:106</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L102">SpotifyRemote.ts:102</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2962,6 +3020,55 @@ img {
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="emit" class="tsd-anchor"></a>
+				<h3>emit</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">emit&lt;K&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, args<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L13">TypedEventEmitter.ts:13</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">K</span></h5>
+							</li>
+							<li>
+								<h5>args: <a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="eventnames" class="tsd-anchor"></a>
+				<h3>event<wbr>Names</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">event<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L14">TypedEventEmitter.ts:14</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="getchildrenofitem" class="tsd-anchor"></a>
 				<h3>get<wbr>Children<wbr>OfItem</h3>
@@ -2972,7 +3079,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L238">SpotifyRemote.ts:238</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L234">SpotifyRemote.ts:234</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3008,7 +3115,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L248">SpotifyRemote.ts:248</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L244">SpotifyRemote.ts:244</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3041,7 +3148,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L256">SpotifyRemote.ts:256</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L252">SpotifyRemote.ts:252</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3068,7 +3175,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L210">SpotifyRemote.ts:210</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L206">SpotifyRemote.ts:206</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3095,7 +3202,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L228">SpotifyRemote.ts:228</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L224">SpotifyRemote.ts:224</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3128,7 +3235,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L219">SpotifyRemote.ts:219</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L215">SpotifyRemote.ts:215</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3161,7 +3268,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L89">SpotifyRemote.ts:89</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L85">SpotifyRemote.ts:85</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3178,6 +3285,135 @@ img {
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="listenercount" class="tsd-anchor"></a>
+				<h3>listener<wbr>Count</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">listener<wbr>Count&lt;K&gt;<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L15">TypedEventEmitter.ts:15</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>type: <span class="tsd-signature-type">K</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="off" class="tsd-anchor"></a>
+				<h3>off</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">off&lt;K&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L17">TypedEventEmitter.ts:17</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">K</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>v: <a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="on" class="tsd-anchor"></a>
+				<h3>on</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">on&lt;K&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L16">TypedEventEmitter.ts:16</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>name: <span class="tsd-signature-type">K</span></h5>
+							</li>
+							<li>
+								<h5>listener: <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>v: <a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="pause" class="tsd-anchor"></a>
 				<h3>pause</h3>
@@ -3188,7 +3424,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L168">SpotifyRemote.ts:168</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L164">SpotifyRemote.ts:164</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3215,7 +3451,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L124">SpotifyRemote.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L120">SpotifyRemote.ts:120</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3248,7 +3484,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L134">SpotifyRemote.ts:134</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L130">SpotifyRemote.ts:130</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3290,7 +3526,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L115">SpotifyRemote.ts:115</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L111">SpotifyRemote.ts:111</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3324,7 +3560,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L143">SpotifyRemote.ts:143</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L139">SpotifyRemote.ts:139</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3348,6 +3584,85 @@ img {
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="removealllisteners" class="tsd-anchor"></a>
+				<h3>remove<wbr>All<wbr>Listeners</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">remove<wbr>All<wbr>Listeners&lt;K&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L12">TypedEventEmitter.ts:12</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <span class="tsd-signature-type">K</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="removelistener" class="tsd-anchor"></a>
+				<h3>remove<wbr>Listener</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener&lt;K&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, listener<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/TypedEventEmitter.ts#L11">TypedEventEmitter.ts:11</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;playerStateChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;playerContextChanged&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteDisconnected&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remoteConnected&quot;</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <span class="tsd-signature-type">K</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> listener: <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>v: <a href="spotifyremoteevents.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteEvents</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="spotifyremoteapi.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyRemoteApi</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="resume" class="tsd-anchor"></a>
 				<h3>resume</h3>
@@ -3358,7 +3673,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L160">SpotifyRemote.ts:160</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L156">SpotifyRemote.ts:156</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3385,7 +3700,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L152">SpotifyRemote.ts:152</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L148">SpotifyRemote.ts:148</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3454,7 +3769,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L202">SpotifyRemote.ts:202</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L198">SpotifyRemote.ts:198</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3487,7 +3802,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L193">SpotifyRemote.ts:193</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L189">SpotifyRemote.ts:189</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3520,7 +3835,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L176">SpotifyRemote.ts:176</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L172">SpotifyRemote.ts:172</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3547,7 +3862,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L184">SpotifyRemote.ts:184</a></li>
+								<li>Defined in <a href="https://github.com/cjam/react-native-spotify-remote/blob/master/src/SpotifyRemote.ts#L180">SpotifyRemote.ts:180</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
