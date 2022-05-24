@@ -288,11 +288,11 @@ const SpotifyRemote: SpotifyRemoteApi = {
     setShuffling: nativeModule.setShuffling.bind(nativeModule),
     skipToNext: nativeModule.skipToNext.bind(nativeModule),
     skipToPrevious: nativeModule.skipToPrevious.bind(nativeModule),
-    setPlaying: (playing: boolean) => {
+    setPlaying(playing: boolean) {
         // todo: Will want to likely check the state of playing somewhere?
         // Perhaps this can be done in native land so that we don't need to
         // worry about it here
-        return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
+        return playing ? this.resume() : this.pause();
     },
     // Listeners
     addListener(eventType, listener) {
