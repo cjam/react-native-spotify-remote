@@ -305,7 +305,7 @@ const SpotifyRemote: SpotifyRemoteApi = {
     },
     removeListener(eventType, listener) {
         eventListeners[eventType].forEach((eventListener) => {
-            if (!listener || eventListener.caller === listener) {
+            if (!listener || eventListener.listener === listener) {
                 eventListener.remove();
                 eventListeners[eventType].delete(eventListener);
             }
