@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.11-6] - 2022-06-04
+
 ### Fix
 - Android null check to fix [#191](https://github.com/cjam/react-native-spotify-remote/issues/191) (Thanks @pretorh)
 
