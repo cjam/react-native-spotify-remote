@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Refactor
+
+- feat: use react-native NativeEventEmitter (#189)
+
 ## [0.3.11-6] - 2022-06-04
 
 ### Fix
+
 - Android null check to fix [#191](https://github.com/cjam/react-native-spotify-remote/issues/191) (Thanks @pretorh)
 
 ## [0.3.11-5] - 2022-02-10
@@ -26,15 +31,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update `react-native-events` to `^1.0.21` (#174)
 
 ## [0.3.11-3] - 2021-12-19
+
 ### Fix
+
 - Update react-native-events (Fix [#173](https://github.com/cjam/react-native-spotify-remote/issues/173))
 - Fix PlayerRestrictions key name ([#172](https://github.com/cjam/react-native-spotify-remote/issues/172))
 
 ## [0.3.11-2] - 2021-11-11
+
 ### Documentation
+
 - Add note for Android 11 setup
 
 ### Chore
+
 - Fix build scripts, add back the postpack script
 - update `.npmignore`
 
