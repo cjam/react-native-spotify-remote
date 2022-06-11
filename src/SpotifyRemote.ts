@@ -301,28 +301,32 @@ const SpotifyRemote: SpotifyRemoteApi = {
             nativeModule.eventStartObserving(eventType);
         }
         eventListeners[eventType].add(sub);
-        return this;
+        const _remove = sub.remove;
+        // rewrite sub.remove so we can add stopObserving API
+        sub.remove = () => {
+            _remove.call(sub);
+            eventListeners[eventType].delete(sub);
+            if (this.listenerCount(eventType) === 0) {
+                nativeModule.eventStopObserving(eventType);
+            }
+        };
+        return sub;
     },
     removeListener(eventType, listener) {
         eventListeners[eventType].forEach((eventListener) => {
-            if (!listener || eventListener.listener === listener) {
-                eventListener.remove();
-                eventListeners[eventType].delete(eventListener);
-            }
+            if (eventListener.listener === listener) eventListener.remove();
         });
-        if (this.listenerCount(eventType) === 0) {
-            nativeModule.eventStopObserving(eventType);
-        }
-        return this;
     },
     removeAllListeners(eventType) {
         const eventsToRemove = eventType ? [eventType] : this.eventNames();
-        eventsToRemove.forEach((eventType) => this.removeListener(eventType));
-        return this;
+        for (const eventToRemove of eventsToRemove) {
+            eventListeners[eventToRemove].forEach((eventListener) => {
+                eventListener.remove();
+            });
+        }
     },
     emit(eventType, ...args) {
-        nativeEventEmitter.emit(eventType, ...args);
-        return true;
+        return nativeEventEmitter.emit(eventType, ...args);
     },
     listenerCount(eventType) {
         return eventListeners[eventType].size;
