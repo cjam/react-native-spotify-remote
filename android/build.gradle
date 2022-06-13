@@ -69,7 +69,6 @@ dependencies {
     implementation (name: "spotify-auth-release-1.2.3", ext: "aar")
     implementation (name: "spotify-app-remote-release-0.7.2", ext: "aar")
     implementation "com.google.code.gson:gson:2.8.5"  // needed by spotify-app-remote
-    implementation project(path: ':react-native-events')  // From node_module
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }

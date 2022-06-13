@@ -75,7 +75,7 @@ npm install --save react-native-spotify-remote
 
 ## Linking
 
-As of React Native `> 0.61`, auto linking should work for both iOS and Android. There shouldn't be any modifications necessary and it _Should_ work out of the box. The one caveat, is that `react-native-events` needs to be linked as it doesn't yet support auto linking. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
+As of React Native `> 0.61`, auto linking should work for both iOS and Android. There shouldn't be any modifications necessary and it _Should_ work out of the box. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.
 
 ### iOS
 
@@ -86,7 +86,6 @@ As of React Native `> 0.61`, auto linking should work for both iOS and Android. 
 By far the easiest way to integrate into your project. In your `ios/PodFile` add the following lines to your projects target:
 
 ```rb
-	pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
 	pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
 ```
 
@@ -139,15 +138,12 @@ Modifications are needed for the `AppDelegate.m`:
 
 If you need to link your project manually, here are some things you'll need to do.
 
-> ### `react-native-events` does not support autolinking at this point and will need to be manually linked into your application
-
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
 
 - Add the following imports to the top of the file
 
 ```
 import com.reactlibrary.RNSpotifyRemotePackage;
-import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
 ```
 
 - Add to the list returned by `getPackages()` for example:
@@ -158,7 +154,6 @@ import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
         @SuppressWarnings("UnnecessaryLocalVariable")
         List<ReactPackage> packages = new PackageList(this).getPackages();
         // Packages that cannot be autolinked yet can be added manually here, for example:
-         packages.add(new RNEventEmitterPackage());
 		   packages.add(new RNSpotifyRemotePackage());
         return packages;
       }
@@ -169,15 +164,11 @@ import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
    ```
    include ':react-native-spotify-remote'
    project(':react-native-spotify-remote').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-spotify-remote/android')
-
-   include ':react-native-events'
-   project(':react-native-events').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-events/android')
    ```
 
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
    ```
    implementation project(':react-native-spotify-remote')
-   implementation project(':react-native-events')
    ```
 4. As per the [Spotify Android SDK Docs](https://developer.spotify.com/documentation/android/guides/android-authentication/) Insert the following lines into `android/app/src/AndroidManifest.xml`
 
@@ -270,7 +261,7 @@ Please do not open issues about getting the module to work unless you have tried
 Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work that he has done in the [react-native-spotify](https://github.com/lufinkey/react-native-spotify) repo which was the original source of inspiration and some useful patterns for this package.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -292,7 +283,7 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
     <td align="center"><a href="https://github.com/reinhardholl"><img src="https://avatars.githubusercontent.com/u/4051986?v=4" width="100px;" alt=""/><br /><sub><b>Reinhard Höll</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Areinhardholl" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=reinhardholl" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/gustavoggs"><img src="https://avatars.githubusercontent.com/u/793491?v=4" width="100px;" alt=""/><br /><sub><b>Gustavo Graña</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Agustavoggs" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=gustavoggs" title="Code">💻</a></td>
     <td align="center"><a href="https://www.companjenapps.com"><img src="https://avatars.githubusercontent.com/u/12894112?v=4" width="100px;" alt=""/><br /><sub><b>Dylan</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=dylancom" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/hoang"><img src="https://avatars.githubusercontent.com/u/170571?v=4" width="100px;" alt=""/><br /><sub><b>Hoang</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=hoang" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/hoangvvo"><img src="https://avatars.githubusercontent.com/u/40987398?v=4" width="100px;" alt=""/><br /><sub><b>Hoang</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=hoangvvo" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/pretorh"><img src="https://avatars.githubusercontent.com/u/4050990?v=4" width="100px;" alt=""/><br /><sub><b>Hendri Pretorius</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Apretorh" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=pretorh" title="Code">💻</a></td>
   </tr>
 </table>
@@ -300,7 +291,6 @@ Big thanks to [@lufinkey](https://github.com/lufinkey) and all of the great work
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
 
 ## Projects using this library
 

@@ -1,4 +1,3 @@
-
 package com.reactlibrary;
 
 import android.util.Log;
@@ -13,7 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
-import com.lufinkey.react.eventemitter.RNEventEmitter;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
@@ -21,17 +20,19 @@ import com.spotify.android.appremote.api.error.CouldNotFindSpotifyApp;
 import com.spotify.android.appremote.api.error.NotLoggedInException;
 import com.spotify.android.appremote.api.error.UserNotAuthorizedException;
 
-import com.lufinkey.react.eventemitter.RNEventConformer;
-
 import com.spotify.protocol.client.CallResult;
 import com.spotify.protocol.client.ErrorCallback;
 import com.spotify.protocol.types.ListItem;
 
-import java.util.Stack;
+import com.spotify.protocol.client.Subscription;
+import com.spotify.protocol.types.PlayerContext;
+import com.spotify.protocol.types.PlayerState;
 
+import java.util.Stack;
+import java.util.HashMap;
 
 @ReactModule(name = "RNSpotifyRemoteAppRemote")
-public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule implements RNEventConformer {
+public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
     private static final String LOG_TAG = "RNSpotifyAppRemote";
 
     private final ReactApplicationContext reactContext;
@@ -41,6 +42,16 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     private Connector.ConnectionListener mSpotifyRemoteConnectionListener;
     private Stack<Promise> mConnectPromises = new Stack<Promise>();
 
+    private Subscription<PlayerContext> mPlayerContextSubscription;
+    private Subscription<PlayerState> mPlayerStateSubscription;
+
+    public static final String EventNamePlayerStateChanged = "playerStateChanged";
+    public static final String EventNamePlayerContextChanged = "playerContextChanged";
+    public static final String EventNameRemoteDisconnected = "remoteDisconnected";
+    public static final String EventNameRemoteConnected = "remoteConnected";
+
+    private HashMap<String, Boolean> subscriptionHasListeners = new HashMap<String, Boolean>();
+
     public RNSpotifyRemoteAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -48,12 +59,12 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
 
             public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                 mSpotifyAppRemote = spotifyAppRemote;
-                handleOnConnect();
+                handleEventSubscriptions();
                 while (!mConnectPromises.empty()) {
                     Promise promise = mConnectPromises.pop();
                     promise.resolve(true);
                 }
-                sendEvent("remoteConnected", null);
+                sendEvent(EventNameRemoteConnected, null);
             }
 
             public void onFailure(Throwable throwable) {
@@ -66,52 +77,85 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
                     } else if (throwable instanceof CouldNotFindSpotifyApp) {
                         promise.reject(new Error("Spotify connection failed: could not find the Spotify app, it may need to be installed."));
                     } else {
-                        promise.reject(throwable);   
+                        promise.reject(throwable); 
                     }
                 }
-                sendEvent("remoteDisconnected", null);
+                sendEvent(EventNameRemoteDisconnected, null);
             }
         };
     }
 
-    @Override
+    private void sendEvent(String eventName,
+            Object params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
+    }
+
     @ReactMethod
-    public void __registerAsJSEventEmitter(int moduleId) {
-        RNEventEmitter.registerEventEmitterModule(this.reactContext, moduleId, this);
+    public void addListener(String eventName) {
+        // Set up any upstream listeners or background tasks as necessary
     }
 
-    @Override
-    public void onNativeEvent(String eventName, Object... args) {
-        // Called when an event for this module is emitted from native code
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Remove upstream listeners, stop unnecessary background tasks
     }
 
-    @Override
-    public void onJSEvent(String eventName, Object... args) {
-        // Called when an event for this module is emitted from javascript
+    @ReactMethod
+    public void eventStartObserving(String eventName) {
+        // Will be called when the event first listener is added.
+        subscriptionHasListeners.put(eventName, true);
+        handleEventSubscriptions();
     }
 
-    @Override
-    public void onEvent(String eventName, Object... args) {
-        // Called when any event for this module is emitted
+    @ReactMethod
+    public void eventStopObserving(String eventName) {
+        // Will be called when the event last listener is removed.
+        subscriptionHasListeners.put(eventName, false);
+        handleEventSubscriptions();
     }
 
-    private void sendEvent(String eventMame, Object data) {
-        RNEventEmitter.emitEvent(this.reactContext, this, eventMame, data);
-    }
-    
-    private void handleOnConnect() {
-        mSpotifyAppRemote.getPlayerApi()
-                .subscribeToPlayerContext()
-                .setEventCallback(playerContext -> {
-                    ReadableMap map = Convert.toMap(playerContext);
-                    sendEvent("playerContextChanged", map);
-                });
-        mSpotifyAppRemote.getPlayerApi()
-                .subscribeToPlayerState()
-                .setEventCallback(playerState -> {
-                    WritableMap map = Convert.toMap(playerState);
-                    sendEvent("playerStateChanged", map);
-                });
+    private void handleEventSubscriptions() {
+        if (mSpotifyAppRemote == null)
+            return;
+
+        Boolean hasContextListeners = subscriptionHasListeners.get(EventNamePlayerContextChanged);
+        Boolean hasPlayerStateListeners = subscriptionHasListeners.get(EventNamePlayerContextChanged);
+
+        if (hasContextListeners != null && hasContextListeners) {
+            if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
+                return; // already subscribed
+            }
+            mPlayerContextSubscription = mSpotifyAppRemote.getPlayerApi()
+                    .subscribeToPlayerContext()
+                    .setEventCallback(playerContext -> {
+                        ReadableMap map = Convert.toMap(playerContext);
+                        sendEvent(EventNamePlayerContextChanged, map);
+                    });
+        } else {
+            if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
+                mPlayerContextSubscription.cancel();
+                mPlayerContextSubscription = null;
+            }
+        }
+
+        if (hasPlayerStateListeners != null && hasPlayerStateListeners) {
+            if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
+                return; // already subscribed
+            }
+            mPlayerStateSubscription = mSpotifyAppRemote.getPlayerApi()
+                    .subscribeToPlayerState()
+                    .setEventCallback(playerContext -> {
+                        ReadableMap map = Convert.toMap(playerContext);
+                        sendEvent(EventNamePlayerStateChanged, map);
+                    });
+        } else {
+            if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
+                mPlayerStateSubscription.cancel();
+                mPlayerStateSubscription = null;
+            }
+        }
     }
 
     private <T> void executeAppRemoteCall(Function<SpotifyAppRemote, CallResult<T>> apiCall, CallResult.ResultCallback<T> resultCallback, ErrorCallback errorCallback) {
@@ -132,7 +176,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
                     .setResultCallback(playerState -> {
                         WritableMap map = Convert.toMap(playerState);
                         WritableMap eventMap = Convert.toMap(playerState);
-                        sendEvent("playerStateChanged", eventMap);
+                        sendEvent(EventNamePlayerStateChanged, eventMap);
                         resultCallback.onResult(map);
                     })
                     .setErrorCallback(errorCallback);
@@ -186,7 +230,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule impleme
     public void disconnect(Promise promise) {
         if (mSpotifyAppRemote != null) {
             SpotifyAppRemote.disconnect(mSpotifyAppRemote);
-            sendEvent("remoteDisconnected", null);
+            sendEvent(EventNameRemoteDisconnected, null);
         }
         promise.resolve(null);
     }

@@ -2975,7 +2975,7 @@ img {
 			<a href="#linking" id="linking" style="color: inherit; text-decoration: none;">
 				<h2>Linking</h2>
 			</a>
-			<p>As of React Native <code>&gt; 0.61</code>, auto linking should work for both iOS and Android. There shouldn&#39;t be any modifications necessary and it <em>Should</em> work out of the box. The one caveat, is that <code>react-native-events</code> needs to be linked as it doesn&#39;t yet support auto linking. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.</p>
+			<p>As of React Native <code>&gt; 0.61</code>, auto linking should work for both iOS and Android. There shouldn&#39;t be any modifications necessary and it <em>Should</em> work out of the box. If you do run into issues or are using an older version of React Native, the following sections should help get you up and running.</p>
 			<a href="#ios" id="ios" style="color: inherit; text-decoration: none;">
 				<h3>iOS</h3>
 			</a>
@@ -2986,8 +2986,7 @@ img {
 				<h4>Cocoapods (Recommended)</h4>
 			</a>
 			<p>By far the easiest way to integrate into your project. In your <code>ios/PodFile</code> add the following lines to your projects target:</p>
-			<pre><code class="language-rb">    pod &#39;RNEventEmitter&#39;, :path =&gt; &quot;../node_modules/react-native-events&quot;
-    pod &#39;RNSpotifyRemote&#39;, :path =&gt; &#39;../node_modules/react-native-spotify-remote&#39;
+			<pre><code class="language-rb">    pod &#39;RNSpotifyRemote&#39;, :path =&gt; &#39;../node_modules/react-native-spotify-remote&#39;
 </code></pre>
 			<p>See the <a href="./example/ios/PodFile"><code>Example App PodFile</code></a> for a full example.</p>
 			<p>I have only tested this against RN &gt; 0.60 in the example app. So if you have issues with a RN version &lt; 0.60 that might be a place to start troubleshooting.</p>
@@ -3034,11 +3033,6 @@ img {
 				<h3>Android</h3>
 			</a>
 			<p>If you need to link your project manually, here are some things you&#39;ll need to do.</p>
-			<blockquote>
-				<a href="#react-native-events-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" id="react-native-events-does-not-support-autolinking-at-this-point-and-will-need-to-be-manually-linked-into-your-application" style="color: inherit; text-decoration: none;">
-					<h3><code>react-native-events</code> does not support autolinking at this point and will need to be manually linked into your application</h3>
-				</a>
-			</blockquote>
 			<ol>
 				<li>Open up <code>android/app/src/main/java/[...]/MainApplication.java</code></li>
 			</ol>
@@ -3046,7 +3040,6 @@ img {
 				<li>Add the following imports to the top of the file</li>
 			</ul>
 			<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">com</span><span style="color: #000000">.</span><span style="color: #001080">reactlibrary</span><span style="color: #000000">.</span><span style="color: #001080">RNSpotifyRemotePackage</span><span style="color: #000000">;</span>
-<span style="color: #001080">import</span><span style="color: #000000"> </span><span style="color: #001080">com</span><span style="color: #000000">.</span><span style="color: #001080">lufinkey</span><span style="color: #000000">.</span><span style="color: #001080">react</span><span style="color: #000000">.</span><span style="color: #001080">eventemitter</span><span style="color: #000000">.</span><span style="color: #001080">RNEventEmitterPackage</span><span style="color: #000000">;</span>
 </code></pre>
 			<ul>
 				<li>Add to the list returned by <code>getPackages()</code> for example:</li>
@@ -3056,7 +3049,6 @@ img {
 <span style="color: #000000">        @</span><span style="color: #267F99">SuppressWarnings</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;UnnecessaryLocalVariable&quot;</span><span style="color: #000000">)</span>
 <span style="color: #000000">        </span><span style="color: #267F99">List</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ReactPackage</span><span style="color: #000000">&gt; </span><span style="color: #001080">packages</span><span style="color: #000000"> = </span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">PackageList</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">).</span><span style="color: #795E26">getPackages</span><span style="color: #000000">();</span>
 <span style="color: #000000">        </span><span style="color: #008000">// Packages that cannot be autolinked yet can be added manually here, for example:</span>
-<span style="color: #000000">         </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNEventEmitterPackage</span><span style="color: #000000">());</span>
 <span style="color: #000000">           </span><span style="color: #001080">packages</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #AF00DB">new</span><span style="color: #000000"> </span><span style="color: #795E26">RNSpotifyRemotePackage</span><span style="color: #000000">());</span>
 <span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> packages;</span>
 <span style="color: #000000">      }</span>
@@ -3065,14 +3057,10 @@ img {
 				<li><p>Append the following lines to <code>android/settings.gradle</code>:</p>
 					<pre><code><span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span>
 <span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-spotify-remote/android&#039;</span><span style="color: #000000">)</span>
-
-<span style="color: #001080">include</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;:react-native-events&#039;</span>
-<span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">).</span><span style="color: #001080">projectDir</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">File</span><span style="color: #000000">(</span><span style="color: #001080">rootProject</span><span style="color: #000000">.</span><span style="color: #001080">projectDir</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;../node_modules/react-native-events/android&#039;</span><span style="color: #000000">)</span>
 </code></pre>
 				</li>
 				<li><p>Insert the following lines inside the dependencies block in <code>android/app/build.gradle</code>:</p>
 					<pre><code><span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-spotify-remote&#039;</span><span style="color: #000000">)</span>
-<span style="color: #001080">implementation</span><span style="color: #000000"> </span><span style="color: #795E26">project</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;:react-native-events&#039;</span><span style="color: #000000">)</span>
 </code></pre>
 				</li>
 				<li><p>As per the <a href="https://developer.spotify.com/documentation/android/guides/android-authentication/">Spotify Android SDK Docs</a> Insert the following lines into <code>android/app/src/AndroidManifest.xml</code></p>
@@ -3183,7 +3171,7 @@ img {
 					<td align="center"><a href="https://github.com/reinhardholl"><img src="https://avatars.githubusercontent.com/u/4051986?v=4" width="100px;" alt=""/><br /><sub><b>Reinhard Höll</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Areinhardholl" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=reinhardholl" title="Code">💻</a></td>
 					<td align="center"><a href="https://github.com/gustavoggs"><img src="https://avatars.githubusercontent.com/u/793491?v=4" width="100px;" alt=""/><br /><sub><b>Gustavo Graña</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Agustavoggs" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=gustavoggs" title="Code">💻</a></td>
 					<td align="center"><a href="https://www.companjenapps.com"><img src="https://avatars.githubusercontent.com/u/12894112?v=4" width="100px;" alt=""/><br /><sub><b>Dylan</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=dylancom" title="Code">💻</a></td>
-					<td align="center"><a href="https://github.com/hoang"><img src="https://avatars.githubusercontent.com/u/170571?v=4" width="100px;" alt=""/><br /><sub><b>Hoang</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=hoang" title="Code">💻</a></td>
+					<td align="center"><a href="https://github.com/hoangvvo"><img src="https://avatars.githubusercontent.com/u/40987398?v=4" width="100px;" alt=""/><br /><sub><b>Hoang</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/commits?author=hoangvvo" title="Code">💻</a></td>
 					<td align="center"><a href="https://github.com/pretorh"><img src="https://avatars.githubusercontent.com/u/4050990?v=4" width="100px;" alt=""/><br /><sub><b>Hendri Pretorius</b></sub></a><br /><a href="https://github.com/cjam/react-native-spotify-remote/issues?q=author%3Apretorh" title="Bug reports">🐛</a> <a href="https://github.com/cjam/react-native-spotify-remote/commits?author=pretorh" title="Code">💻</a></td>
 				</tr>
 			</table>

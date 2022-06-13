@@ -1,14 +1,13 @@
-import { NativeModules, Platform } from 'react-native';
-import RNEvents from 'react-native-events';
-import TypedEventEmitter from './TypedEventEmitter';
-import RepeatMode from './RepeatMode';
-import PlayerState from './PlayerState';
-import PlayerContext from './PlayerContext';
+import { EmitterSubscription, NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import ContentItem from './ContentItem';
-import CrossfadeState from './CrossfadeState';
-import RecommendedContentOptions from './RecommendedContentOptions';
 import ContentType from './ContentType';
+import CrossfadeState from './CrossfadeState';
 import GetChildrenItemsOptions, { DEFAULT_GET_CHILDREN_OPTIONS } from './GetChildrenItemsOptions';
+import PlayerContext from './PlayerContext';
+import PlayerState from './PlayerState';
+import RecommendedContentOptions from './RecommendedContentOptions';
+import RepeatMode from './RepeatMode';
+import TypedEventEmitter from './TypedEventEmitter';
 
 /**
  * Events supported by the [[SpotifyRemoteApi]]
@@ -253,20 +252,101 @@ export interface SpotifyRemoteApi extends TypedEventEmitter<SpotifyRemoteEvents>
     getCrossfadeState(): Promise<CrossfadeState>;
 }
 
-/**
- * @ignore
- */
-const SpotifyRemote = NativeModules.RNSpotifyRemoteAppRemote as SpotifyRemoteApi;
-RNEvents.register(SpotifyRemote);
-RNEvents.conform(SpotifyRemote);
+const nativeModule = NativeModules.RNSpotifyRemoteAppRemote;
 
-// Example of Javascript only api method
-SpotifyRemote.setPlaying = (playing: boolean) => {
-    // todo: Will want to likely check the state of playing somewhere?
-    // Perhaps this can be done in native land so that we don't need to
-    // worry about it here
-    return playing ? SpotifyRemote.resume() : SpotifyRemote.pause();
-}
+const nativeEventEmitter = new NativeEventEmitter(nativeModule);
+const eventListeners: Record<
+    keyof SpotifyRemoteEvents,
+    Set<EmitterSubscription>
+> = {
+    playerContextChanged: new Set(),
+    playerStateChanged: new Set(),
+    remoteConnected: new Set(),
+    remoteDisconnected: new Set(),
+};
+
+const SpotifyRemote: SpotifyRemoteApi = {
+    // Native APIs
+    connect: nativeModule.connect.bind(nativeModule),
+    disconnect: nativeModule.disconnect.bind(nativeModule),
+    getChildrenOfItem: nativeModule.getChildrenOfItem.bind(nativeModule),
+    getContentItemForUri: nativeModule.getContentItemForUri.bind(nativeModule),
+    getCrossfadeState: nativeModule.getCrossfadeState.bind(nativeModule),
+    getPlayerState: nativeModule.getPlayerState.bind(nativeModule),
+    getRecommendedContentItems:
+        nativeModule.getRecommendedContentItems.bind(nativeModule),
+    getRootContentItems: nativeModule.getRootContentItems.bind(nativeModule),
+    isConnectedAsync: nativeModule.isConnectedAsync.bind(nativeModule),
+    pause: nativeModule.pause.bind(nativeModule),
+    playItem: nativeModule.playItem.bind(nativeModule),
+    playItemWithIndex: nativeModule.playItemWithIndex.bind(nativeModule),
+    playUri: nativeModule.playUri.bind(nativeModule),
+    queueUri: nativeModule.queueUri.bind(nativeModule),
+    resume: nativeModule.resume.bind(nativeModule),
+    seek: nativeModule.seek.bind(nativeModule),
+    setRepeatMode: nativeModule.setRepeatMode.bind(nativeModule),
+    setShuffling: nativeModule.setShuffling.bind(nativeModule),
+    skipToNext: nativeModule.skipToNext.bind(nativeModule),
+    skipToPrevious: nativeModule.skipToPrevious.bind(nativeModule),
+    setPlaying(playing: boolean) {
+        // todo: Will want to likely check the state of playing somewhere?
+        // Perhaps this can be done in native land so that we don't need to
+        // worry about it here
+        return playing ? this.resume() : this.pause();
+    },
+    // Listeners
+    addListener(eventType, listener) {
+        const sub = nativeEventEmitter.addListener(eventType, listener);
+        if (this.listenerCount(eventType) === 0) {
+            nativeModule.eventStartObserving(eventType);
+        }
+        eventListeners[eventType].add(sub);
+        const _remove = sub.remove;
+        // rewrite sub.remove so we can add stopObserving API
+        sub.remove = () => {
+            _remove.call(sub);
+            eventListeners[eventType].delete(sub);
+            if (this.listenerCount(eventType) === 0) {
+                nativeModule.eventStopObserving(eventType);
+            }
+        };
+        return sub;
+    },
+    removeListener(eventType, listener) {
+        eventListeners[eventType].forEach((eventListener) => {
+            if (eventListener.listener === listener) eventListener.remove();
+        });
+    },
+    removeAllListeners(eventType) {
+        const eventsToRemove = eventType ? [eventType] : this.eventNames();
+        for (const eventToRemove of eventsToRemove) {
+            eventListeners[eventToRemove].forEach((eventListener) => {
+                eventListener.remove();
+            });
+        }
+    },
+    emit(eventType, ...args) {
+        return nativeEventEmitter.emit(eventType, ...args);
+    },
+    listenerCount(eventType) {
+        return eventListeners[eventType].size;
+    },
+    on(...args) {
+        return this.addListener(...args);
+    },
+    off(...args) {
+        return this.removeListener(...args);
+    },
+    eventNames() {
+        return [
+            'playerContextChanged',
+            'playerStateChanged',
+            'remoteConnected',
+            'remoteDisconnected',
+        ];
+    },
+};
+
 
 
 // Augment the android module to warn on unimplemented methods
@@ -301,48 +381,4 @@ if (Platform.OS === "ios") {
     }
 }
 
-
-
-/**
- * @ignore
- * The events produced by the eventEmitter implementation around 
- * when new event listeners are added and removed
- */
-const metaEvents = {
-    newListener: 'newListener',
-    removeListener: 'removeListener'
-};
-
-
-/**
-* @ignore
-* Want to ignore the metaEvents when sending our subscription events
-*/
-const ignoredEvents = Object.keys(metaEvents);
-
-/**  
- * @ignore
- * The following allows us to lazily subscribe to events instead of having a single
- * subscription all the time regardless which is less efficient
-*/
-(SpotifyRemote as any).on(metaEvents.newListener, (type: string) => {
-    if (ignoredEvents.indexOf(type) === -1) {
-        const listenerCount = SpotifyRemote.listenerCount(type as any);
-        // If this is the first listener, send an eventSubscribed event
-        if (listenerCount == 0) {
-            RNEvents.emitNativeEvent(SpotifyRemote, "eventSubscribed", type);
-        }
-    }
-}).on(metaEvents.removeListener, (type: string) => {
-    if (ignoredEvents.indexOf(type) === -1) {
-        const listenerCount = SpotifyRemote.listenerCount(type as any);
-        if (listenerCount == 0) {
-            RNEvents.emitNativeEvent(SpotifyRemote, "eventUnsubscribed", type);
-        }
-    }
-});
-
-/**
- * @ignore
- */
 export default SpotifyRemote;

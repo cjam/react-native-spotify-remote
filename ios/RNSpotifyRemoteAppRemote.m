@@ -48,6 +48,10 @@ static RNSpotifyRemoteAppRemote *sharedInstance = nil;
     };
 }
 
+- (NSArray<NSString *> *)supportedEvents {
+    return @[EventNamePlayerStateChanged, EventNamePlayerContextChanged, EventNameRemoteDisconnected, EventNameRemoteConnected];
+}
+
 #pragma mark Singleton Methods
 
 -(id)init
@@ -453,32 +457,32 @@ RCT_EXPORT_METHOD(getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolv
     }];
 }
 
-#pragma mark - RNEventConformer Implementation
-
-RCT_EXPORT_METHOD(__registerAsJSEventEmitter:(int)moduleId)
-{
-    [RNEventEmitter registerEventEmitterModule:self withID:moduleId bridge:_bridge];
+// Will be called when this module's first listener is added.
+-(void)startObserving {
+    // Set up any upstream listeners or background tasks as necessary
 }
+
+// Will be called when this module's last listener is removed, or on dealloc.
+-(void)stopObserving {
+    // Remove upstream listeners, stop unnecessary background tasks
+}
+
+RCT_EXPORT_METHOD(eventStartObserving:(NSString *)eventType)
+{
+    [_eventSubscriptions setValue:@YES forKey:eventType];
+    [self handleEventSubscriptions];
+}
+
+RCT_EXPORT_METHOD(eventStopObserving:(NSString *)eventType)
+{
+    [_eventSubscriptions setValue:@NO forKey:eventType];
+    [self handleEventSubscriptions];
+}
+
 
 -(void)sendEvent:(NSString*)event args:(NSArray*)args
 {
-    [RNEventEmitter emitEvent:event withParams:args module:self bridge:_bridge];
-}
-
--(void)onJSEvent:(NSString*)eventName params:(NSArray*)params{
-    if([eventName isEqualToString:@"eventSubscribed"]){
-        NSString * eventType = params[0];
-        if(eventType != nil){
-            [_eventSubscriptions setValue:@YES forKey:eventType];
-        }
-        [self handleEventSubscriptions];
-    }else if([eventName isEqualToString:@"eventUnsubscribed"]){
-        NSString * eventType = params[0];
-        if(eventType != nil){
-            [_eventSubscriptions setValue:@NO forKey:eventType];
-        }
-        [self handleEventSubscriptions];
-    }
+    [self sendEventWithName:@event body:@args];
 }
 
 @end

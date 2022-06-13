@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "es5", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+    "target": "ES2017", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
     "module": "commonjs", /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */
     "lib": [
-      "es5"
+      "ES2017"
     ], /* Specify library files to be included in the compilation:  */
     "jsx": "react",
     "skipLibCheck": true,
@@ -22,7 +22,6 @@
     "allowSyntheticDefaultImports": true, /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     /* Source Map Options */
     "sourceRoot": "./src", /* Specify the location where debugger should locate TypeScript files instead of source locations. */
-    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */
   },
   "include": [
     "src/**/*"

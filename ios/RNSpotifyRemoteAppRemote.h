@@ -1,17 +1,7 @@
-#import <UIKit/UIKit.h>
-#if __has_include("RCTBridgeModule.h")
-#import "RCTBridgeModule.h"
-#else
 #import <React/RCTBridgeModule.h>
-#endif
+#import <React/RCTEventEmitter.h>
 
-#if __has_include("RNEventEmitter.h")
-#import "RNEventEmitter.h"
-#else
-#import <RNEventEmitter/RNEventEmitter.h>
-#endif
-
-@interface RNSpotifyRemoteAppRemote : NSObject <RCTBridgeModule, RNEventConformer>
+@interface RNSpotifyRemoteAppRemote : RCTEventEmitter <RCTBridgeModule>
 
 //// isInitialized
 //-(id)isInitialized;
@@ -47,6 +37,8 @@
 -(void)getChildrenOfItem:(NSDictionary*)item resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 -(void)getContentItemForUri:(NSString *)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 
-
+// Internal events API
+-(void)eventStartObserving:(NSString *)eventType;
+-(void)eventStopObserving:(NSString *)eventType;
 
 @end
