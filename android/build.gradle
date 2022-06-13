@@ -59,14 +59,15 @@ repositories {
     google()
     mavenCentral()
     jcenter()
+    flatDir {
+        dirs 'external/SpotifySDK/app-remote-lib'
+        dirs 'external/SpotifySDK/auth-lib'
+    }
 }
 
-
-
 dependencies {
-    def externalLibs = fileTree(dir: "$projectDir/external", include: '**/*.aar').collect()
-    println("Adding external libraries ${externalLibs}")
-    implementation files(externalLibs)
+    implementation (name: "spotify-auth-release-1.2.3", ext: "aar")
+    implementation (name: "spotify-app-remote-release-0.7.2", ext: "aar")
     implementation "com.google.code.gson:gson:2.8.5"  // needed by spotify-app-remote
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
