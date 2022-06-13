@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fix
+
+- Update gradle to direct include aar files to fix [#194](https://github.com/cjam/react-native-spotify-remote/issues/194) 
+
 ## [0.3.11-6] - 2022-06-04
 
 ### Fix
