@@ -482,7 +482,7 @@ RCT_EXPORT_METHOD(eventStopObserving:(NSString *)eventType)
 
 -(void)sendEvent:(NSString*)event args:(NSArray*)args
 {
-    [self sendEventWithName:@event body:@args];
+    [self sendEventWithName:event body:args];
 }
 
 @end
