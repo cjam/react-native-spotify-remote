@@ -48,6 +48,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['external']
+        }
+    }
 }
 
 repositories {
@@ -59,15 +64,11 @@ repositories {
     google()
     mavenCentral()
     jcenter()
-    flatDir {
-        dirs 'external/SpotifySDK/app-remote-lib'
-        dirs 'external/SpotifySDK/auth-lib'
-    }
 }
 
 dependencies {
-    implementation (name: "spotify-auth-release-1.2.3", ext: "aar")
-    implementation (name: "spotify-app-remote-release-0.7.2", ext: "aar")
+    implementation (files("external/SpotifySDK/auth-lib/spotify-auth-release-1.2.3.aar"))
+    implementation (files("external/SpotifySDK/app-remote-lib/spotify-app-remote-release-0.7.2.aar"))
     implementation "com.google.code.gson:gson:2.8.5"  // needed by spotify-app-remote
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
