@@ -120,8 +120,6 @@ public class RNSpotifyRemoteAuthModule extends ReactContextBaseJavaModule implem
         mConnectionParamsBuilder = null;
         mConfig = null;
 
-        AuthorizationClient.clearCookies(this.getReactApplicationContext());
-
         RNSpotifyRemoteAppModule remoteModule = reactContext.getNativeModule(RNSpotifyRemoteAppModule.class);
         if (remoteModule != null) {
             remoteModule.disconnect(promise);
