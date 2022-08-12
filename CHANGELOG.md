@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Update
+
+- Upgrade Android Auth library to 2.0.1
+
 ### Gradle Change
 
 - Updated gradle to import sdks using sourceSets 
