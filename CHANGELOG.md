@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Update
 
-- Upgrade Android Auth library to 2.0.1
+- Upgrade Android Auth library to 2.0.2
 
 ### Gradle Change
 
