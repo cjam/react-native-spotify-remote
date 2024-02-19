@@ -121,7 +121,7 @@ public class RNSpotifyRemoteAppModule extends ReactContextBaseJavaModule {
             return;
 
         Boolean hasContextListeners = subscriptionHasListeners.get(EventNamePlayerContextChanged);
-        Boolean hasPlayerStateListeners = subscriptionHasListeners.get(EventNamePlayerContextChanged);
+        Boolean hasPlayerStateListeners = subscriptionHasListeners.get(EventNamePlayerStateChanged);
 
         if (hasContextListeners != null && hasContextListeners) {
             if (mPlayerContextSubscription != null && !mPlayerContextSubscription.isCanceled()) {
