@@ -67,9 +67,11 @@ repositories {
 }
 
 dependencies {
-    implementation (files("external/SpotifySDK/auth-lib/spotify-auth-release-1.2.3.aar"))
+    implementation "com.spotify.android:auth:2.0.2"
     implementation (files("external/SpotifySDK/app-remote-lib/spotify-app-remote-release-0.7.2.aar"))
-    implementation "com.google.code.gson:gson:2.8.5"  // needed by spotify-app-remote
+    implementation "com.google.code.gson:gson:2.8.9"  // needed by spotify-app-remote
+    implementation "androidx.browser:browser:1.4.0"
+
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }

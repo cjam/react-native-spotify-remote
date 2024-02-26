@@ -147,6 +147,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wwdrew",
+      "name": "Drew Miller",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49833875?v=4",
+      "profile": "https://github.com/wwdrew",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7
