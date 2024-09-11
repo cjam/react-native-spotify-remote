@@ -2,7 +2,7 @@
 #import "RNSpotifyRemoteAuth.h"
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTConvert.h>
-#import <SpotifyiOS.h>
+@import SpotifyiOS;
 #import "RNSpotifyRemoteConvert.h"
 #import "RNSpotifyItem.h"
 #import "RNSpotifyRemoteError.h"
@@ -255,19 +255,7 @@ RCT_EXPORT_METHOD(authorize:(NSDictionary*)options resolve:(RCTPromiseResolveBlo
     if (@available(iOS 11, *)) {
         RCTExecuteOnMainQueue(^{
             // Use this on iOS 11 and above to take advantage of SFAuthenticationSession
-            [ self->_sessionManager
-                 initiateSessionWithScope:scope
-                 options:SPTDefaultAuthorizationOption
-            ];
-        });
-    } else {
-        RCTExecuteOnMainQueue(^{
-            // Use this on iOS versions < 11 to use SFSafariViewController
-            [ self->_sessionManager
-                initiateSessionWithScope:scope
-                options:SPTDefaultAuthorizationOption
-                presentingViewController:[UIApplication sharedApplication].keyWindow.rootViewController
-            ];
+            [ self->_sessionManager initiateSessionWithScope:scope options:SPTDefaultAuthorizationOption campaign:NULL];
         });
     }
 }

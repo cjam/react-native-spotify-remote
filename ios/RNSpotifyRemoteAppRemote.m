@@ -2,7 +2,7 @@
 #import "RNSpotifyRemoteAppRemote.h"
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTConvert.h>
-#import <SpotifyiOS.h>
+@import SpotifyiOS;
 #import "RNSpotifyRemoteConvert.h"
 #import "RNSpotifyItem.h"
 #import "RNSpotifyRemoteError.h"

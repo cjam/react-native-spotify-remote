@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import <SpotifyiOS.h>
+@import SpotifyiOS;
 #import "RNSpotifyRemoteError.h"
 
 @interface RNSpotifyRemoteConvert : NSObject

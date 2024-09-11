@@ -7,7 +7,7 @@
 //
 
 #import "RNSpotifyRemoteError.h"
-#import <SpotifyiOS.h>
+@import SpotifyiOS;
 
 
 @interface RNSpotifyRemoteErrorCode()
