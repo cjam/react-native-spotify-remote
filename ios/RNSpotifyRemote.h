@@ -1,15 +1,13 @@
 //
-//  RNSpotifyRemoteLib.h
+//  RNSpotifyRemote.h
 //  RNSpotifyRemote
 //
-//  Created by Colter McQuay on 2019-03-08.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Umbrella header for the RNSpotifyRemote module
 //
 
-#ifndef RNSpotifyRemoteLib_h
-#define RNSpotifyRemoteLib_h
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-#import "RNSpotifyRemoteAuth.h"
-#import "RNSpotifyRemoteAppRemote.h"
-
-#endif /* RNSpotifyRemoteLib_h */
+// This is the main header that will be used by React Native
+// The Swift classes will be automatically made available through the generated
+// RNSpotifyRemote-Swift.h header
