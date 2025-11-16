@@ -1,0 +1,41 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  quick-check:
+    name: Quick TypeScript Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build TypeScript
+        run: yarn build
+
+      - name: Generate documentation
+        run: yarn docs
+
+      - name: Check for TypeScript errors
+        run: npx tsc --noEmit
+
+      - name: Upload TypeScript build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: typescript-dist
+          path: dist/
+          retention-days: 3

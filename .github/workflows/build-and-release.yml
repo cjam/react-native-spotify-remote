@@ -1,0 +1,192 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Create a release'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: false
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Initialize git submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule status
+
+      - name: Build TypeScript
+        run: yarn build
+
+      - name: Generate documentation
+        run: yarn docs
+
+      - name: Build Android library
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Install CocoaPods dependencies
+        working-directory: example/ios
+        run: |
+          gem install cocoapods
+          pod install
+
+      - name: Build iOS library
+        working-directory: example/ios
+        run: |
+          xcodebuild -workspace example.xcworkspace \
+            -scheme example \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            build \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            docs/
+            android/build/
+          retention-days: 7
+
+      - name: Check for uncommitted changes
+        run: |
+          if [[ -n $(git status -s) ]]; then
+            echo "Uncommitted changes detected:"
+            git status -s
+            exit 1
+          fi
+
+  release:
+    name: Create Release
+    runs-on: macos-latest
+    needs: build
+    if: |
+      github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.release == 'true')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Initialize git submodules
+        run: git submodule update --init --recursive
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Build library
+        run: yarn rebuild
+
+      - name: Run release-it
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/v* ]]; then
+            # Tag-based release
+            yarn release --ci --no-increment --no-git
+          else
+            # Manual workflow dispatch release
+            yarn release --ci
+          fi
+
+  publish-npm:
+    name: Publish to npm
+    runs-on: macos-latest
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Initialize git submodules
+        run: git submodule update --init --recursive
+
+      - name: Build library
+        run: yarn rebuild
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Run prepack script to prepare iOS SDK
+          yarn prepack
+          # Publish to npm
+          npm publish
+          # Run postpack to restore submodules
+          yarn postpack
