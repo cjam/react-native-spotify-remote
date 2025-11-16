@@ -1,0 +1,31 @@
+# Gradle files
+.gradle/
+build/
+local.properties
+
+# IntelliJ IDEA / Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild
+.cxx/
+
+# NDK
+obj/
+
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Generated files
+bin/
+gen/
+out/

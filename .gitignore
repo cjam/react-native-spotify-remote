@@ -40,10 +40,6 @@ project.xcworkspace
 #
 android/.project
 android/.settings
-/android/gradle/
-gradlew
-gradlew.bat
-build/
 .idea
 .gradle
 local.properties
